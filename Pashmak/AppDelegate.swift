@@ -8,6 +8,8 @@
 
 import UIKit
 import UserNotifications
+import Hero
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    preparePush(application)
+    
+    DispatchQueue.main.async {
+//      self.preparePush(application)
+      self.prepareHero()
+      self.prepareIQKeyboard()
+    }
+    
+    
     return true
   }
 
@@ -42,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
-  private func preparePush(_ application: UIApplication) {
+  func preparePush(_ application: UIApplication = .shared) {
     let notifCenter = UNUserNotificationCenter.current()
     let userNotificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
     
@@ -58,6 +67,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
     }
   }
+  
+  private func prepareIQKeyboard() {
+    IQKeyboardManager.shared.enable = true
+    IQKeyboardManager.shared.enableAutoToolbar = true
+    IQKeyboardManager.shared.placeholderFont = UIFont.farsiFont(.light, size: 14.0)
+    IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    IQKeyboardManager.shared.keyboardDistanceFromTextField = 24.0
+  }
+  
+  private func prepareHero() {
+    Hero.shared.containerColor = UIColor.Pashmak.Grey
+  }
 
 }
 
@@ -66,6 +87,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     
     let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+    Settings.current.update(pushToken: token)
     print("Token: [\(token)]")
     
   }

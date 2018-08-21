@@ -6,9 +6,18 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="IRANYekanLightMobile(FaNum).ttf">
+            <string>IRANYekanMobileFaNum-Light</string>
+        </array>
+        <array key="IRANYekanMobileBold(FaNum).ttf">
+            <string>IRANYekanMobileFaNum-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="hvV-GC-s4y">
@@ -17,32 +26,16 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="avc-BM-6bZ">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="gl7-9H-Xuo"/>
+                        <segue destination="5Np-Et-PdQ" kind="relationship" relationship="rootViewController" id="cQa-un-zug"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnX-iN-sgg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-492" y="164"/>
-        </scene>
-        <!--Splash View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="SplashViewController" customModule="Pashmak" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="vdF-5E-MNU"/>
-                    <connections>
-                        <segue destination="3o2-wD-Pfh" kind="show" identifier="Login" id="LqO-4L-Qfa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="566" y="165"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="oLp-cW-NCi">
@@ -51,13 +44,144 @@
                     <view key="view" contentMode="scaleToFill" id="oJ4-Wu-cRz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Ak6-I7-2F8">
+                                <rect key="frame" x="157" y="44" width="61" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="7A2-kZ-4dq"/>
+                                    <constraint firstAttribute="width" constant="61" id="dVl-5F-YC3"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="pshmkIcon"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YCg-Bw-Jtl" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="32" y="168" width="311" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="XJV-Tr-Vgp"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="ASCIICapableNumberPad" keyboardAppearance="alert" textContentType="tel"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kti-TB-J3U" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="32" y="235" width="311" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2H5-Sa-FwY"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" keyboardAppearance="alert" secureTextEntry="YES" textContentType="password"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEN-fy-NQf" customClass="Button" customModule="Material">
+                                <rect key="frame" x="87.5" y="599" width="200" height="44"/>
+                                <color key="backgroundColor" name="ButtonDeactive"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="IOV-Eg-jRe"/>
+                                    <constraint firstAttribute="width" constant="200" id="mHi-oY-QGc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="IRANYekanMobileFaNum-Bold" family="IRANYekanMobile(FaNum)" pointSize="17"/>
+                                <state key="normal" title="ورود">
+                                    <color key="titleColor" name="TextDeactive"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextButtonTapped:" destination="3o2-wD-Pfh" eventType="touchUpInside" id="Nna-gy-yIN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="Grey"/>
+                        <constraints>
+                            <constraint firstItem="WEN-fy-NQf" firstAttribute="centerX" secondItem="oJ4-Wu-cRz" secondAttribute="centerX" id="5Pm-Wi-QF2"/>
+                            <constraint firstItem="kti-TB-J3U" firstAttribute="leading" secondItem="YCg-Bw-Jtl" secondAttribute="leading" id="BWN-J2-uXG"/>
+                            <constraint firstItem="YCg-Bw-Jtl" firstAttribute="top" secondItem="Ak6-I7-2F8" secondAttribute="bottom" constant="24" id="Lcv-6R-VHl"/>
+                            <constraint firstItem="Ak6-I7-2F8" firstAttribute="centerX" secondItem="oJ4-Wu-cRz" secondAttribute="centerX" id="awo-iR-XfN"/>
+                            <constraint firstItem="Ak6-I7-2F8" firstAttribute="top" secondItem="oJ4-Wu-cRz" secondAttribute="top" constant="44" id="c0D-Rz-Lea"/>
+                            <constraint firstItem="0Oy-1A-wJy" firstAttribute="trailing" secondItem="YCg-Bw-Jtl" secondAttribute="trailing" constant="32" id="eu5-OU-aGQ"/>
+                            <constraint firstItem="kti-TB-J3U" firstAttribute="top" secondItem="YCg-Bw-Jtl" secondAttribute="bottom" constant="27" id="hL1-H5-a5T"/>
+                            <constraint firstAttribute="bottom" secondItem="WEN-fy-NQf" secondAttribute="bottom" constant="24" id="uQj-Zn-aim"/>
+                            <constraint firstItem="kti-TB-J3U" firstAttribute="trailing" secondItem="YCg-Bw-Jtl" secondAttribute="trailing" id="vfw-Ao-KUw"/>
+                            <constraint firstItem="YCg-Bw-Jtl" firstAttribute="leading" secondItem="0Oy-1A-wJy" secondAttribute="leading" constant="32" id="yIW-yS-DCb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="0Oy-1A-wJy"/>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="nextButton" destination="WEN-fy-NQf" id="mBA-xN-kHz"/>
+                        <outlet property="passwordTextField" destination="kti-TB-J3U" id="5iN-M6-THb"/>
+                        <outlet property="userNameTextField" destination="YCg-Bw-Jtl" id="rIy-gW-6nP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xib-go-fCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1540" y="163"/>
         </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="znB-0j-boa">
+            <objects>
+                <viewController id="5Np-Et-PdQ" customClass="SplashViewController" customModule="Pashmak" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="64T-jq-bhn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashIcon" translatesAutoresizingMaskIntoConstraints="NO" id="QfE-Mh-jnX">
+                                <rect key="frame" x="157" y="233.5" width="61" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="8Id-aa-rd7"/>
+                                    <constraint firstAttribute="width" constant="61" id="xRC-d7-bv7"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="pshmkIcon"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="پول وده…. پول زوووور وده!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDk-6N-XuO">
+                                <rect key="frame" x="16" y="349.5" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="mnQ-jQ-WbR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="IRANYekanMobileFaNum-Light" family="IRANYekanMobile(FaNum)" pointSize="17"/>
+                                <color key="textColor" name="DarkText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="Grey"/>
+                        <constraints>
+                            <constraint firstItem="DDk-6N-XuO" firstAttribute="leading" secondItem="0i7-q1-A3E" secondAttribute="leading" constant="16" id="581-hC-Fc5"/>
+                            <constraint firstItem="DDk-6N-XuO" firstAttribute="top" secondItem="QfE-Mh-jnX" secondAttribute="bottom" constant="16" id="8z1-x8-NKZ"/>
+                            <constraint firstItem="0i7-q1-A3E" firstAttribute="trailing" secondItem="DDk-6N-XuO" secondAttribute="trailing" constant="16" id="Mrt-11-dQJ"/>
+                            <constraint firstItem="QfE-Mh-jnX" firstAttribute="centerX" secondItem="64T-jq-bhn" secondAttribute="centerX" id="a92-fw-xJr"/>
+                            <constraint firstItem="QfE-Mh-jnX" firstAttribute="centerY" secondItem="64T-jq-bhn" secondAttribute="centerY" constant="-50" id="j6i-ZO-Qiw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0i7-q1-A3E"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="QaC-2c-W2u"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="attributionLabel" destination="DDk-6N-XuO" id="0cp-JC-ib8"/>
+                        <segue destination="3o2-wD-Pfh" kind="show" identifier="Login" id="9Q9-9G-map"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Zn-TG-jeg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="551" y="163"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="splashIcon" width="61" height="100.5"/>
+        <namedColor name="ButtonDeactive">
+            <color red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DarkText">
+            <color red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Grey">
+            <color red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextDeactive">
+            <color red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

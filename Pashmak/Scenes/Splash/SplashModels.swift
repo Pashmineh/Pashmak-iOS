@@ -14,5 +14,23 @@ import UIKit
 
 enum Splash
 {
-  
+  enum GoNext {
+    enum Destination {
+      case login
+      case home
+    }
+    
+    struct Request {
+      
+    }
+    
+    struct Response {
+      let destination: Destination
+    }
+    
+    struct ViewModel {
+      let destination: Destination
+    }
+  }
+
 }

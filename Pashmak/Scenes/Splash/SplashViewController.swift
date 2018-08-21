@@ -11,17 +11,19 @@
 //
 
 import UIKit
+import Hero
+import Async
 
 protocol SplashDisplayLogic: class
 {
-  
+  func displayGoNext(viewModel: Splash.GoNext.ViewModel)
 }
 
 class SplashViewController: UIViewController
 {
   var interactor: SplashBusinessLogic?
   var router: (NSObjectProtocol & SplashRoutingLogic & SplashDataPassing)?
-
+  
   // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -65,16 +67,61 @@ class SplashViewController: UIViewController
   }
   
   // MARK: View lifecycle
+  @IBOutlet weak var attributionLabel: UILabel!
   
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    
+    prepareUI()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    showAttribution()
+  }
+  
+  private func prepareUI() {
+   self.hero.isEnabled = true
+    prepareAttribution()
+  }
+  
+  private func prepareAttribution() {
+    guard let label = attributionLabel else { return }
+    label.alpha = 0
+    label.transform = CGAffineTransform(translationX: 0, y: 12.0)
+  }
+  
+  private func showAttribution() {
+    guard let label = attributionLabel else { return }
+    UIView.animate(withDuration: 0.3, delay: 0.5, options: [], animations: { [weak label] in
+    
+      label?.alpha = 1.0
+      label?.transform = .identity
+      
+    }) { (_) in
+      Async.main(after: 1.0) {[weak self] in
+        guard let self = self else { return }
+        self.goNext()
+        
+      }
+    }
+  }
+  
+  private func goNext() {
+    let request = Splash.GoNext.Request()
+    interactor?.goNext(request: request)
+  }
   
 }
 
 extension SplashViewController: SplashDisplayLogic {
-  
+  func displayGoNext(viewModel: Splash.GoNext.ViewModel) {
+    let destination = viewModel.destination
+    switch destination{
+    case .login:
+      self.router?.routeToLogin(segue: nil)
+    case .home:
+      return
+    }
+  }
 }
