@@ -1,0 +1,33 @@
+//
+//  UIFont+Fars.swift
+//  Pashmak
+//
+//  Created by Mohammad Porooshani on 8/21/18.
+//  Copyright © 2018 Mohammad Porooshani. All rights reserved.
+//
+
+import UIKit
+
+enum FarsiFontWeight {
+  case regular
+  case light
+  case bold
+  
+  fileprivate var fontName: String {
+    switch self {
+    case .regular:
+      return "IRANYekanMobileFaNum"
+    case .light:
+      return "IRANYekanMobileFaNum-Light"
+    case .bold:
+      return "IRANYekanMobileFaNum-Bold"
+    }
+  }
+  
+}
+
+extension UIFont {
+  static func farsiFont(_ weight: FarsiFontWeight = .regular, size: CGFloat) -> UIFont {
+    return UIFont(name: weight.fontName, size: size) ?? UIFont.systemFont(ofSize: size)
+  }
+}

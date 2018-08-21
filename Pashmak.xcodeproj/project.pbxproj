@@ -22,6 +22,10 @@
 		84FC6CC9212BCA6B00B4A56A /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CC3212BCA6B00B4A56A /* SplashRouter.swift */; };
 		84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CC4212BCA6B00B4A56A /* SplashViewController.swift */; };
 		84FC6CCD212BCAE900B4A56A /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CCC212BCAE900B4A56A /* Storyboards.swift */; };
+		95BC006C212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95BC0069212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf */; };
+		95BC006D212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95BC006A212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf */; };
+		95BC006E212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95BC006B212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf */; };
+		95BC0071212C972D001B4375 /* UIFont+Farsi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC0070212C972D001B4375 /* UIFont+Farsi.swift */; };
 		B9C4F36664FCB1879880E8F6 /* Pods_Pashmak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFA9CA212BF347077B20F7A /* Pods_Pashmak.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +49,10 @@
 		84FC6CC3212BCA6B00B4A56A /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		84FC6CC4212BCA6B00B4A56A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		84FC6CCC212BCAE900B4A56A /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
+		95BC0069212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IRANYekanLightMobile(FaNum).ttf"; sourceTree = "<group>"; };
+		95BC006A212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IRANYekanMobileBold(FaNum).ttf"; sourceTree = "<group>"; };
+		95BC006B212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IRANYekanRegularMobile(FaNum).ttf"; sourceTree = "<group>"; };
+		95BC0070212C972D001B4375 /* UIFont+Farsi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Farsi.swift"; sourceTree = "<group>"; };
 		AE6A3058FCA96458D47D8BCA /* Pods-Pashmak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pashmak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pashmak/Pods-Pashmak.debug.xcconfig"; sourceTree = "<group>"; };
 		DEFA9CA212BF347077B20F7A /* Pods_Pashmak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pashmak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,8 +107,10 @@
 		843FB336212AD7CD0047A734 /* Pashmak */ = {
 			isa = PBXGroup;
 			children = (
-				84FC6CB1212BCA1800B4A56A /* Storyboards */,
 				84FC6CB0212BCA0800B4A56A /* Scenes */,
+				84FC6CB1212BCA1800B4A56A /* Storyboards */,
+				95BC006F212C9705001B4375 /* Extensions */,
+				95BC0068212C96D8001B4375 /* Supporting Files */,
 				843FB349212AD7EC0047A734 /* Pashmak.entitlements */,
 				843FB337212AD7CD0047A734 /* AppDelegate.swift */,
 				843FB33E212AD7CE0047A734 /* Assets.xcassets */,
@@ -152,6 +162,24 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
+		95BC0068212C96D8001B4375 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				95BC0069212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf */,
+				95BC006A212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf */,
+				95BC006B212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		95BC006F212C9705001B4375 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				95BC0070212C972D001B4375 /* UIFont+Farsi.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -186,6 +214,7 @@
 				TargetAttributes = {
 					843FB333212AD7CD0047A734 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -221,7 +250,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				843FB342212AD7CE0047A734 /* LaunchScreen.storyboard in Resources */,
+				95BC006E212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf in Resources */,
+				95BC006C212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf in Resources */,
 				843FB33F212AD7CE0047A734 /* Assets.xcassets in Resources */,
+				95BC006D212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf in Resources */,
 				843FB33D212AD7CD0047A734 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +353,7 @@
 				84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */,
 				84FC6CBA212BCA4100B4A56A /* LoginModels.swift in Sources */,
 				84FC6CB9212BCA4100B4A56A /* LoginInteractor.swift in Sources */,
+				95BC0071212C972D001B4375 /* UIFont+Farsi.swift in Sources */,
 				84FC6CBC212BCA4100B4A56A /* LoginRouter.swift in Sources */,
 				84FC6CC7212BCA6B00B4A56A /* SplashModels.swift in Sources */,
 				843FB338212AD7CD0047A734 /* AppDelegate.swift in Sources */,
@@ -480,8 +513,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pashmak.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -500,8 +533,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pashmak.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
