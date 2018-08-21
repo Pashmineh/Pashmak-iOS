@@ -12,9 +12,11 @@
 		843FB33D212AD7CD0047A734 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33B212AD7CD0047A734 /* Main.storyboard */; };
 		843FB33F212AD7CE0047A734 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33E212AD7CE0047A734 /* Assets.xcassets */; };
 		843FB342212AD7CE0047A734 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843FB340212AD7CE0047A734 /* LaunchScreen.storyboard */; };
+		B9C4F36664FCB1879880E8F6 /* Pods_Pashmak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFA9CA212BF347077B20F7A /* Pods_Pashmak.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45DCB8EDB27B3D6DB39A7A59 /* Pods-Pashmak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pashmak.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pashmak/Pods-Pashmak.release.xcconfig"; sourceTree = "<group>"; };
 		843FB334212AD7CD0047A734 /* Pashmak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pashmak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843FB337212AD7CD0047A734 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843FB339212AD7CD0047A734 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,6 +25,8 @@
 		843FB341212AD7CE0047A734 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		843FB343212AD7CE0047A734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		843FB349212AD7EC0047A734 /* Pashmak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pashmak.entitlements; sourceTree = "<group>"; };
+		AE6A3058FCA96458D47D8BCA /* Pods-Pashmak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pashmak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pashmak/Pods-Pashmak.debug.xcconfig"; sourceTree = "<group>"; };
+		DEFA9CA212BF347077B20F7A /* Pods_Pashmak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pashmak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,17 +34,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9C4F36664FCB1879880E8F6 /* Pods_Pashmak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A09C6BCE36BC3520376F467 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AE6A3058FCA96458D47D8BCA /* Pods-Pashmak.debug.xcconfig */,
+				45DCB8EDB27B3D6DB39A7A59 /* Pods-Pashmak.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5DA8E952374365C5FD93F32B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DEFA9CA212BF347077B20F7A /* Pods_Pashmak.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		843FB32B212AD7CD0047A734 = {
 			isa = PBXGroup;
 			children = (
 				843FB336212AD7CD0047A734 /* Pashmak */,
 				843FB335212AD7CD0047A734 /* Products */,
+				3A09C6BCE36BC3520376F467 /* Pods */,
+				5DA8E952374365C5FD93F32B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,9 +97,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 843FB346212AD7CE0047A734 /* Build configuration list for PBXNativeTarget "Pashmak" */;
 			buildPhases = (
+				FB5F5C7609CDF3DED5348C71 /* [CP] Check Pods Manifest.lock */,
 				843FB330212AD7CD0047A734 /* Sources */,
 				843FB331212AD7CD0047A734 /* Frameworks */,
 				843FB332212AD7CD0047A734 /* Resources */,
+				8F3D115ED6A95ADCA54BA9DC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -139,6 +165,87 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8F3D115ED6A95ADCA54BA9DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pashmak/Pods-Pashmak-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AsyncSwift/Async.framework",
+				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
+				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
+				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/KUIActionSheet/KUIActionSheet.framework",
+				"${BUILT_PRODUCTS_DIR}/KVNProgress/KVNProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
+				"${BUILT_PRODUCTS_DIR}/Log/Log.framework",
+				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
+				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SecureNSUserDefaults/SecureNSUserDefaults.framework",
+				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/VisualEffectView/VisualEffectView.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Async.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaSecurity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KUIActionSheet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KVNProgress.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Log.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SecureNSUserDefaults.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VisualEffectView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pashmak/Pods-Pashmak-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB5F5C7609CDF3DED5348C71 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pashmak-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		843FB330212AD7CD0047A734 /* Sources */ = {
@@ -288,16 +395,14 @@
 		};
 		843FB347212AD7CE0047A734 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE6A3058FCA96458D47D8BCA /* Pods-Pashmak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pashmak/Pashmak.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QE63XWGL5N;
 				INFOPLIST_FILE = Pashmak/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pashmak.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -307,16 +412,14 @@
 		};
 		843FB348212AD7CE0047A734 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45DCB8EDB27B3D6DB39A7A59 /* Pods-Pashmak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pashmak/Pashmak.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QE63XWGL5N;
 				INFOPLIST_FILE = Pashmak/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pashmak.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
