@@ -11,10 +11,11 @@
 //
 
 import UIKit
+import Regex
 
 protocol LoginBusinessLogic
 {
-  
+  func verify(request: Login.Verify.Request)
 }
 
 protocol LoginDataStore
@@ -25,5 +26,45 @@ protocol LoginDataStore
 class LoginInteractor: LoginBusinessLogic, LoginDataStore
 {
   var presenter: LoginPresentationLogic?
+  
+  func verify(request: Login.Verify.Request) {
+    let phone = request.phone
+    let nationalID = request.nationalID
+    let phoneIsValid = verifyPhone(phone: phone)
+    let nationalIDIsValid = verifyNationalID(nationalID: nationalID)
+    
+    let response: Login.Verify.Response = Login.Verify.Response(phoneIsValid: phoneIsValid, nationalIdIsValid: nationalIDIsValid)
+    presenter?.presentVerify(response: response)
+  }
+  
+  private func verifyPhone(phone: String) -> Bool {
+    
+    return Regex.KD.phoneNumber.matches(phone)
+    
+  }
+  
+  private func verifyNationalID(nationalID: String) -> Bool {
+    
+    guard Regex.KD.nationalID.matches(nationalID) else {
+      return false
+    }
+    
+    var chars = Array(nationalID.compactMap({ Int("\($0)")}))
+    
+    let controlDigit = chars.removeFirst()
+    
+    var acc = 0
+    for i in 1...9 {
+      acc += ((i + 1) * chars[i-1])
+    }
+    
+    var res = acc % 11
+    
+    if res > 1 {
+      res = 11 - res
+    }
+    
+    return res == controlDigit
+  }
   
 }

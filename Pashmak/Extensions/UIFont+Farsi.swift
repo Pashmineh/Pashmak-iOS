@@ -16,11 +16,11 @@ enum FarsiFontWeight {
   fileprivate var fontName: String {
     switch self {
     case .regular:
-      return "IRANYekanMobileFaNum"
+      return "IRANSansDNFaNum"
     case .light:
-      return "IRANYekanMobileFaNum-Light"
+      return "IRANSansDNFaNum-Light"
     case .bold:
-      return "IRANYekanMobileFaNum-Bold"
+      return "IRANSansDNFaNum-Bold"
     }
   }
   

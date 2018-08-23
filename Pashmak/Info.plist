@@ -24,9 +24,9 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>IRANYekanLightMobile(FaNum).ttf</string>
-		<string>IRANYekanMobileBold(FaNum).ttf</string>
-		<string>IRANYekanRegularMobile(FaNum).ttf</string>
+		<string>IRANSansDN_Fa_Num.ttf</string>
+		<string>IRANSansDN_FaNum_Light.ttf</string>
+		<string>IRANSansDN_FaNum-Bold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

@@ -22,15 +22,16 @@
 		84FC6CC9212BCA6B00B4A56A /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CC3212BCA6B00B4A56A /* SplashRouter.swift */; };
 		84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CC4212BCA6B00B4A56A /* SplashViewController.swift */; };
 		84FC6CCD212BCAE900B4A56A /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CCC212BCAE900B4A56A /* Storyboards.swift */; };
-		95BC006C212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95BC0069212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf */; };
-		95BC006D212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95BC006A212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf */; };
-		95BC006E212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95BC006B212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf */; };
+		9578F39F212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39C212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf */; };
+		9578F3A0212F446700A667E9 /* IRANSansDN_Fa_Num.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39D212F446700A667E9 /* IRANSansDN_Fa_Num.ttf */; };
+		9578F3A1212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39E212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf */; };
 		95BC0071212C972D001B4375 /* UIFont+Farsi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC0070212C972D001B4375 /* UIFont+Farsi.swift */; };
 		95BC0073212CA400001B4375 /* UIColor+Hue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC0072212CA400001B4375 /* UIColor+Hue.swift */; };
 		95BC0077212CA57B001B4375 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC0076212CA57B001B4375 /* RealmProvider.swift */; };
 		95BC007C212CA7B0001B4375 /* String+sha512.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC007A212CA7B0001B4375 /* String+sha512.swift */; };
 		95BC007D212CA7B0001B4375 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC007B212CA7B0001B4375 /* Path.swift */; };
 		95BC0080212CA96A001B4375 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC007F212CA96A001B4375 /* Settings.swift */; };
+		95C0DCA4212D722B00A01C4F /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C0DCA3212D722B00A01C4F /* Regex.swift */; };
 		B9C4F36664FCB1879880E8F6 /* Pods_Pashmak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFA9CA212BF347077B20F7A /* Pods_Pashmak.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,9 +55,9 @@
 		84FC6CC3212BCA6B00B4A56A /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		84FC6CC4212BCA6B00B4A56A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		84FC6CCC212BCAE900B4A56A /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
-		95BC0069212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IRANYekanLightMobile(FaNum).ttf"; sourceTree = "<group>"; };
-		95BC006A212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IRANYekanMobileBold(FaNum).ttf"; sourceTree = "<group>"; };
-		95BC006B212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IRANYekanRegularMobile(FaNum).ttf"; sourceTree = "<group>"; };
+		9578F39C212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansDN_FaNum_Light.ttf; sourceTree = "<group>"; };
+		9578F39D212F446700A667E9 /* IRANSansDN_Fa_Num.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansDN_Fa_Num.ttf; sourceTree = "<group>"; };
+		9578F39E212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IRANSansDN_FaNum-Bold.ttf"; sourceTree = "<group>"; };
 		95BC0070212C972D001B4375 /* UIFont+Farsi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Farsi.swift"; sourceTree = "<group>"; };
 		95BC0072212CA400001B4375 /* UIColor+Hue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hue.swift"; sourceTree = "<group>"; };
 		95BC0076212CA57B001B4375 /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		95BC007B212CA7B0001B4375 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		95BC007E212CA8BC001B4375 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = Pashmak/BridgingHeader.h; sourceTree = "<group>"; };
 		95BC007F212CA96A001B4375 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		95C0DCA3212D722B00A01C4F /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		AE6A3058FCA96458D47D8BCA /* Pods-Pashmak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pashmak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pashmak/Pods-Pashmak.debug.xcconfig"; sourceTree = "<group>"; };
 		DEFA9CA212BF347077B20F7A /* Pods_Pashmak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pashmak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -178,9 +180,9 @@
 		95BC0068212C96D8001B4375 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				95BC0069212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf */,
-				95BC006A212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf */,
-				95BC006B212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf */,
+				9578F39D212F446700A667E9 /* IRANSansDN_Fa_Num.ttf */,
+				9578F39C212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf */,
+				9578F39E212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -192,6 +194,7 @@
 				95BC007A212CA7B0001B4375 /* String+sha512.swift */,
 				95BC0070212C972D001B4375 /* UIFont+Farsi.swift */,
 				95BC0072212CA400001B4375 /* UIColor+Hue.swift */,
+				95C0DCA3212D722B00A01C4F /* Regex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -282,11 +285,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9578F39F212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf in Resources */,
 				843FB342212AD7CE0047A734 /* LaunchScreen.storyboard in Resources */,
-				95BC006E212C96D8001B4375 /* IRANYekanRegularMobile(FaNum).ttf in Resources */,
-				95BC006C212C96D8001B4375 /* IRANYekanLightMobile(FaNum).ttf in Resources */,
+				9578F3A1212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf in Resources */,
 				843FB33F212AD7CE0047A734 /* Assets.xcassets in Resources */,
-				95BC006D212C96D8001B4375 /* IRANYekanMobileBold(FaNum).ttf in Resources */,
+				9578F3A0212F446700A667E9 /* IRANSansDN_Fa_Num.ttf in Resources */,
 				843FB33D212AD7CD0047A734 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,6 +321,7 @@
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SecureNSUserDefaults/SecureNSUserDefaults.framework",
 				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -343,6 +347,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SecureNSUserDefaults.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -392,6 +397,7 @@
 				84FC6CB9212BCA4100B4A56A /* LoginInteractor.swift in Sources */,
 				95BC0071212C972D001B4375 /* UIFont+Farsi.swift in Sources */,
 				84FC6CBC212BCA4100B4A56A /* LoginRouter.swift in Sources */,
+				95C0DCA4212D722B00A01C4F /* Regex.swift in Sources */,
 				84FC6CC7212BCA6B00B4A56A /* SplashModels.swift in Sources */,
 				843FB338212AD7CD0047A734 /* AppDelegate.swift in Sources */,
 				84FC6CC9212BCA6B00B4A56A /* SplashRouter.swift in Sources */,
