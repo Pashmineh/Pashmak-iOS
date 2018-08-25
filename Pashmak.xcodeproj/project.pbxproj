@@ -16,6 +16,7 @@
 		845CB26E21312A34001957B3 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB26D21312A34001957B3 /* UIButton+Extensions.swift */; };
 		845CB27021312A5D001957B3 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB26F21312A5D001957B3 /* Date+Extensions.swift */; };
 		845CB27221312A7C001957B3 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB27121312A7C001957B3 /* UIView+Animations.swift */; };
+		845CB27521313246001957B3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB27421313246001957B3 /* LocationManager.swift */; };
 		845E3FF0213103A80025477A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E3FEF213103A80025477A /* Network.swift */; };
 		845E3FF2213103DB0025477A /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E3FF1213103DB0025477A /* APIError.swift */; };
 		845E3FF4213103F10025477A /* HTTPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E3FF3213103F10025477A /* HTTPConstants.swift */; };
@@ -66,6 +67,7 @@
 		845CB26D21312A34001957B3 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		845CB26F21312A5D001957B3 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		845CB27121312A7C001957B3 /* UIView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
+		845CB27421313246001957B3 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		845E3FEF213103A80025477A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		845E3FF1213103DB0025477A /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		845E3FF3213103F10025477A /* HTTPConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPConstants.swift; sourceTree = "<group>"; };
@@ -175,6 +177,14 @@
 				845CB269213129E6001957B3 /* BiometricAuthentication.swift */,
 			);
 			path = LocalAuthentication;
+			sourceTree = "<group>";
+		};
+		845CB27321313231001957B3 /* LocationService */ = {
+			isa = PBXGroup;
+			children = (
+				845CB27421313246001957B3 /* LocationManager.swift */,
+			);
+			path = LocationService;
 			sourceTree = "<group>";
 		};
 		845E3FED213103840025477A /* Network */ = {
@@ -292,6 +302,7 @@
 		95BC0074212CA55B001B4375 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				845CB27321313231001957B3 /* LocationService */,
 				845CB268213129D2001957B3 /* LocalAuthentication */,
 				845E3FED213103840025477A /* Network */,
 			);
@@ -511,6 +522,7 @@
 				845E4006213105080025477A /* JSONTypes.swift in Sources */,
 				845E3FF2213103DB0025477A /* APIError.swift in Sources */,
 				845E4004213104DC0025477A /* Log.swift in Sources */,
+				845CB27521313246001957B3 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

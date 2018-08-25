@@ -54,5 +54,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
+	<key>NSLocationUsageDescription</key>
+	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
 </dict>
 </plist>

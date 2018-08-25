@@ -11,6 +11,7 @@ import UserNotifications
 import Hero
 import IQKeyboardManagerSwift
 import KVNProgress
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -114,3 +115,59 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 }
 
 
+/*
+extension AppDelegate: CLLocationManagerDelegate {
+  
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    guard status == .authorizedAlways else {
+      return
+    }
+    
+    startMonitoring()
+    
+  }
+  
+  /*
+   func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+   guard let b = beacons.filter({ (be) -> Bool in
+   be.proximityUUID.uuidString == "00001803-494C-4F47-4943-544543480000"
+   }).first else {
+   return
+   }
+   
+   if b.proximity == .near {
+   
+   }
+   
+   }
+   func sendNotif() {
+   guard shouldSendNotif else {
+   return
+   }
+   
+   shouldSendNotif = false
+   print("Sending notif")
+   let content = UNMutableNotificationContent()
+   content.title = "پشمک"
+   content.body = "به کیان دیجیال خوش اومدید!"
+   
+   let request = UNNotificationRequest(identifier: "Checkin", content: content, trigger: nil)
+   UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+   }*/
+  
+  func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+    print("Entered region: \(region.identifier)")
+    guard "00001803-494C-4F47-4943-544543480000" == (region as? CLBeaconRegion)?.proximityUUID.uuidString else {
+      return
+    }
+    
+    let content = UNMutableNotificationContent()
+    content.title = "پشمک"
+    content.body = "به کیان دیجیال خوش اومدید!"
+    
+    let request = UNNotificationRequest(identifier: "Checkin", content: content, trigger: nil)
+    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+  }
+}
+
+*/
