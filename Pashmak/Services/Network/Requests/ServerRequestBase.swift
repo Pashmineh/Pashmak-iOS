@@ -12,3 +12,20 @@ struct ServerRequest {
   
 }
 
+/*
+ 
+ static func registerDevice(with phoneNumber: String) -> HTTPRequest {
+ 
+ var url = RequestURL()
+ url.appendPathComponents([.usermanagement, .api,.users(nil)])
+ 
+ let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.basicAuthorizatoion].merging(BaseRequestHeaders) { (current, _) in current }
+ let deviceModel = ServerModels.UserDevice(deviceID: DeviceInfo.DeviceID)
+ let userCreateModel = ServerModels.UserCreate()
+ userCreateModel.dev = deviceModel
+ userCreateModel.username = phoneNumber
+ return HTTPRequest(method: .POST, url: url, parameters: nil, bodyMessage: userCreateModel, headers: headers)
+ }
+ 
+ }
+ */
