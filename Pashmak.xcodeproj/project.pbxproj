@@ -11,6 +11,11 @@
 		843FB33D212AD7CD0047A734 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33B212AD7CD0047A734 /* Main.storyboard */; };
 		843FB33F212AD7CE0047A734 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33E212AD7CE0047A734 /* Assets.xcassets */; };
 		843FB342212AD7CE0047A734 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843FB340212AD7CE0047A734 /* LaunchScreen.storyboard */; };
+		845CB26A213129E6001957B3 /* BiometricAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB269213129E6001957B3 /* BiometricAuthentication.swift */; };
+		845CB26C21312A0E001957B3 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB26B21312A0E001957B3 /* Controls.swift */; };
+		845CB26E21312A34001957B3 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB26D21312A34001957B3 /* UIButton+Extensions.swift */; };
+		845CB27021312A5D001957B3 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB26F21312A5D001957B3 /* Date+Extensions.swift */; };
+		845CB27221312A7C001957B3 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB27121312A7C001957B3 /* UIView+Animations.swift */; };
 		845E3FF0213103A80025477A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E3FEF213103A80025477A /* Network.swift */; };
 		845E3FF2213103DB0025477A /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E3FF1213103DB0025477A /* APIError.swift */; };
 		845E3FF4213103F10025477A /* HTTPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E3FF3213103F10025477A /* HTTPConstants.swift */; };
@@ -56,6 +61,11 @@
 		843FB341212AD7CE0047A734 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		843FB343212AD7CE0047A734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		843FB349212AD7EC0047A734 /* Pashmak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pashmak.entitlements; sourceTree = "<group>"; };
+		845CB269213129E6001957B3 /* BiometricAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthentication.swift; sourceTree = "<group>"; };
+		845CB26B21312A0E001957B3 /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
+		845CB26D21312A34001957B3 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		845CB26F21312A5D001957B3 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		845CB27121312A7C001957B3 /* UIView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		845E3FEF213103A80025477A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		845E3FF1213103DB0025477A /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		845E3FF3213103F10025477A /* HTTPConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPConstants.swift; sourceTree = "<group>"; };
@@ -157,6 +167,14 @@
 				843FB343212AD7CE0047A734 /* Info.plist */,
 			);
 			path = Pashmak;
+			sourceTree = "<group>";
+		};
+		845CB268213129D2001957B3 /* LocalAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				845CB269213129E6001957B3 /* BiometricAuthentication.swift */,
+			);
+			path = LocalAuthentication;
 			sourceTree = "<group>";
 		};
 		845E3FED213103840025477A /* Network */ = {
@@ -263,6 +281,10 @@
 				95C0DCA3212D722B00A01C4F /* Regex.swift */,
 				845E4003213104DC0025477A /* Log.swift */,
 				845E4005213105080025477A /* JSONTypes.swift */,
+				845CB26B21312A0E001957B3 /* Controls.swift */,
+				845CB26D21312A34001957B3 /* UIButton+Extensions.swift */,
+				845CB26F21312A5D001957B3 /* Date+Extensions.swift */,
+				845CB27121312A7C001957B3 /* UIView+Animations.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,6 +292,7 @@
 		95BC0074212CA55B001B4375 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				845CB268213129D2001957B3 /* LocalAuthentication */,
 				845E3FED213103840025477A /* Network */,
 			);
 			path = Services;
@@ -463,6 +486,7 @@
 				95BC0080212CA96A001B4375 /* Settings.swift in Sources */,
 				845E4008213106F00025477A /* FetchState.swift in Sources */,
 				845E4000213104910025477A /* ServerModel.swift in Sources */,
+				845CB26E21312A34001957B3 /* UIButton+Extensions.swift in Sources */,
 				845E3FF8213104350025477A /* URLPath.swift in Sources */,
 				95BC0073212CA400001B4375 /* UIColor+Hue.swift in Sources */,
 				84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */,
@@ -474,11 +498,15 @@
 				84FC6CBC212BCA4100B4A56A /* LoginRouter.swift in Sources */,
 				95C0DCA4212D722B00A01C4F /* Regex.swift in Sources */,
 				845E4002213104A90025477A /* EmptyServerModel.swift in Sources */,
+				845CB27021312A5D001957B3 /* Date+Extensions.swift in Sources */,
+				845CB26A213129E6001957B3 /* BiometricAuthentication.swift in Sources */,
 				84FC6CC7212BCA6B00B4A56A /* SplashModels.swift in Sources */,
 				843FB338212AD7CD0047A734 /* AppDelegate.swift in Sources */,
 				84FC6CC9212BCA6B00B4A56A /* SplashRouter.swift in Sources */,
 				84FC6CC6212BCA6B00B4A56A /* SplashInteractor.swift in Sources */,
+				845CB27221312A7C001957B3 /* UIView+Animations.swift in Sources */,
 				845E3FF4213103F10025477A /* HTTPConstants.swift in Sources */,
+				845CB26C21312A0E001957B3 /* Controls.swift in Sources */,
 				95BC0077212CA57B001B4375 /* RealmProvider.swift in Sources */,
 				845E4006213105080025477A /* JSONTypes.swift in Sources */,
 				845E3FF2213103DB0025477A /* APIError.swift in Sources */,

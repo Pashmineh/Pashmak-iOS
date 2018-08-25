@@ -10,6 +10,7 @@ import UIKit
 import UserNotifications
 import Hero
 import IQKeyboardManagerSwift
+import KVNProgress
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -79,7 +80,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func prepareHero() {
     Hero.shared.containerColor = UIColor.Pashmak.Grey
   }
-
+  
+  private func prepareKVNProgress() {
+    let kvnconf: KVNProgressConfiguration = KVNProgressConfiguration()
+    
+    kvnconf.backgroundFillColor = UIColor.Pashmak.Orange
+    kvnconf.backgroundType = .solid
+    kvnconf.backgroundTintColor = UIColor.white
+    kvnconf.circleStrokeForegroundColor = .white
+    kvnconf.statusColor = .white
+    kvnconf.errorColor = UIColor.red
+    kvnconf.successColor = UIColor.green
+    kvnconf.minimumDisplayTime = 1.0
+    kvnconf.minimumErrorDisplayTime = 3.0
+    
+    kvnconf.statusFont = UIFont.farsiFont(.regular, size: 15.0)
+    
+    KVNProgress.setConfiguration(kvnconf)
+  }
+  
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
