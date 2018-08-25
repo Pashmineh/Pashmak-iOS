@@ -11,10 +11,12 @@
 //
 
 import UIKit
+import Hero
+import Material
 
 protocol LoginDisplayLogic: class
 {
-  
+  func displayVerify(viewModel: Login.Verify.ViewModel)
 }
 
 class LoginViewController: UIViewController
@@ -66,15 +68,116 @@ class LoginViewController: UIViewController
   
   // MARK: View lifecycle
   
+  var phoneNumber: String {
+    return self.userNameTextField.text ?? ""
+  }
+  
+  var password: String {
+    return self.passwordTextField.text ?? ""
+  }
+  
+  @IBOutlet weak var userNameTextField: TextField!
+  @IBOutlet weak var passwordTextField: TextField!
+  @IBOutlet weak var nextButton: Button!
+  @IBAction func nextButtonTapped(_ sender: Any) {
+  }
+  
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    prepareUI()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    preparePush()
+  }
+  
+ 
+  private func prepareUI() {
+    self.hero.isEnabled = true
+    prepareTextFields()
+    prepareNextButton()
+  }
+  
+  private func prepareTextFields() {
+    func format(_ tf: TextField, placeHolder: String) {
+      tf.tintColor = UIColor.Pashmak.Orange
+      
+      tf.placeholderLabel.text = placeHolder
+      tf.placeholderLabel.font = UIFont.farsiFont(.light, size: 18.0)
+      tf.placeholderLabel.textColor = UIColor.Pashmak.TextDeactive
+      tf.textAlignment = .center
+      
+      tf.textAlignment = .center
+      tf.font = UIFont.farsiFont(.bold, size: 18.0)
+      tf.textColor = UIColor.Pashmak.Orange
+      
+      tf.dividerActiveHeight = 2.0
+      tf.dividerNormalHeight = 1.0
+      
+      tf.dividerActiveColor = UIColor.Pashmak.Orange
+      tf.dividerNormalColor = UIColor.Pashmak.NormalDivider
+      
+      tf.placeholderAnimation = .hidden
+      tf.addTarget(self, action: #selector(self.verify), for: .editingChanged)
+    }
+    
+    format(self.userNameTextField, placeHolder: "شماره تلفن همراه")
+    format(self.passwordTextField, placeHolder: "کد ملی")
+    
+  }
+ 
+  private func prepareNextButton() {
+    guard let btn = self.nextButton else { return }
+    btn.pulseColor = .white
+    btn.isEnabled = false
+    let layer = btn.layer
+    
+    layer.cornerRadius = 22.0
+    
     
   }
   
   
+  private func preparePush() {
+    print("Current Token: [\(Settings.current.pushToken)]")
+    (UIApplication.shared.delegate as? AppDelegate)?.preparePush()
+  }
+  
+  private func updateNextButton(_ isValid: Bool) {
+    guard let btn = self.nextButton else { return }
+    btn.isEnabled = isValid
+    btn.backgroundColor = isValid ? UIColor.Pashmak.buttonActive : UIColor.Pashmak.Timberwolf
+    btn.setTitleColor(isValid ?  UIColor.white : UIColor.Pashmak.TextDeactive, for: [])
+  }
+  
+  @objc
+  private func verify() {
+    let phone = self.phoneNumber
+    let password = self.password
+    let request = Login.Verify.Request(phone: phone, nationalID: password)
+    interactor?.verify(request: request)
+  }
 }
 
 extension LoginViewController: LoginDisplayLogic {
-  
+  func displayVerify(viewModel: Login.Verify.ViewModel) {
+    let phoneIsValid = viewModel.phoneIsValid
+    let nationalIDIsValid = viewModel.nationalIdIsValid
+    
+    let formIsValid = phoneIsValid && nationalIDIsValid
+   updateNextButton(formIsValid)
+    
+    if phoneIsValid {
+      if userNameTextField.isFirstResponder {
+        _ = passwordTextField.becomeFirstResponder()
+      }
+    }
+    
+    if formIsValid {
+      self.view.endEditing(true)
+    }
+    
+  }
 }

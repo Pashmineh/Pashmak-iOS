@@ -14,11 +14,17 @@ import UIKit
 
 protocol LoginPresentationLogic
 {
-  
+  func presentVerify(response: Login.Verify.Response)
 }
 
 class LoginPresenter: LoginPresentationLogic
 {
   weak var viewController: LoginDisplayLogic?
-  
+  func presentVerify(response: Login.Verify.Response) {
+    let phoneIsValid = response.phoneIsValid
+    let idIsValid = response.nationalIdIsValid
+    
+    let viewModel = Login.Verify.ViewModel(phoneIsValid: phoneIsValid, nationalIdIsValid: idIsValid)
+    viewController?.displayVerify(viewModel: viewModel)
+  }
 }

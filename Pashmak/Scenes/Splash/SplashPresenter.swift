@@ -14,11 +14,15 @@ import UIKit
 
 protocol SplashPresentationLogic
 {
-  
+  func presentGoNext(response: Splash.GoNext.Response)
 }
 
 class SplashPresenter: SplashPresentationLogic
 {
   weak var viewController: SplashDisplayLogic?
-  
+  func presentGoNext(response: Splash.GoNext.Response) {
+    let dest = response.destination
+    let viewModel = Splash.GoNext.ViewModel(destination: dest)
+    viewController?.displayGoNext(viewModel: viewModel)
+  }
 }
