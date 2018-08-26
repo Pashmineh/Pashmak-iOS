@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //      self.preparePush(application)
       self.prepareHero()
       self.prepareIQKeyboard()
+      self.prepareKVNProgress()
     }
     
     

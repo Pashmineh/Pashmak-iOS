@@ -12,9 +12,11 @@
 
 import UIKit
 
+
 protocol LoginPresentationLogic
 {
   func presentVerify(response: Login.Verify.Response)
+  func presentAuthenticate(response: Login.Authenticate.Response)
 }
 
 class LoginPresenter: LoginPresentationLogic
@@ -27,4 +29,53 @@ class LoginPresenter: LoginPresentationLogic
     let viewModel = Login.Verify.ViewModel(phoneIsValid: phoneIsValid, nationalIdIsValid: idIsValid)
     viewController?.displayVerify(viewModel: viewModel)
   }
+  
+  func presentAuthenticate(response: Login.Authenticate.Response) {
+    
+    let state = response.state
+    
+    switch state {
+    case .loading:
+      let message = Messages.Loading.messages.randomElement() ?? ""
+      let viewModel = Login.Authenticate.ViewModel.Loading.init(message: message)
+      viewController?.displayAuthenticateLoading(viewModel: viewModel)
+    case .failure(let error):
+      var message = "نشد که بشه!"
+      if case APIError.invalidParameters(_) = error {
+        message = "نام کاربری و پسورد رو اشتباه زدی که!"
+      } else if case APIError.invalidResponseCode(let statusCode) = error {
+        if statusCode == 401 {
+          message = "مشکوک به نظر میرسی 🤨🤨🤨\n این شماره و رمزی که دادی غلط از آب در اومد!"
+        } else {
+          message = Messages.ServerErrors.messages.randomElement() ?? message
+          message = message + "\n(\(statusCode))"
+        }
+        
+      }
+      
+      
+      let viewModel = Login.Authenticate.ViewModel.Failed.init(message: message)
+      viewController?.displayAuthenticateFailed(viewModel: viewModel)
+      
+    case .success(let response):
+      let firstName = response.name ?? ""
+      let lastName = response.lastName ?? ""
+      
+      var fullName = ""
+      if !firstName.isEmpty {
+        fullName += firstName
+      }
+      
+      if !lastName.isEmpty {
+        fullName += lastName
+      }
+      let message = "\(fullName) خوش اومدی!"
+
+      let viewModel = Login.Authenticate.ViewModel.Success.init(message: message)
+      viewController?.displayAuthenticateSuccess(viewModel: viewModel)
+      
+    }
+    
+  }
+  
 }

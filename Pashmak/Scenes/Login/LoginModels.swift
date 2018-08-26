@@ -31,4 +31,29 @@ enum Login
     }
   }
 
+  enum Authenticate {
+    typealias LoginFetchState = FetchState<ServerModels.Authentication.Response, Error>
+    struct Request {
+      let userName: String
+      let password: String
+    }
+    struct Response {
+      let state: LoginFetchState
+    }
+    enum ViewModel {
+      struct Loading {
+        let message: String
+      }
+      
+      struct Failed {
+        let message: String
+      }
+      
+      struct Success {
+        let message: String
+        
+      }
+    }
+  }
+  
 }

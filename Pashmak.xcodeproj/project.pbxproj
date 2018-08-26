@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84052D422132510C0040ABF5 /* AuthenticationRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84052D412132510C0040ABF5 /* AuthenticationRequests.swift */; };
+		84052D44213251240040ABF5 /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84052D43213251240040ABF5 /* AuthenticationModels.swift */; };
+		84052D4621325EBF0040ABF5 /* PashmakMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84052D4521325EBF0040ABF5 /* PashmakMessages.swift */; };
 		843FB338212AD7CD0047A734 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FB337212AD7CD0047A734 /* AppDelegate.swift */; };
 		843FB33D212AD7CD0047A734 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33B212AD7CD0047A734 /* Main.storyboard */; };
 		843FB33F212AD7CE0047A734 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33E212AD7CE0047A734 /* Assets.xcassets */; };
@@ -55,6 +58,9 @@
 
 /* Begin PBXFileReference section */
 		45DCB8EDB27B3D6DB39A7A59 /* Pods-Pashmak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pashmak.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pashmak/Pods-Pashmak.release.xcconfig"; sourceTree = "<group>"; };
+		84052D412132510C0040ABF5 /* AuthenticationRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRequests.swift; sourceTree = "<group>"; };
+		84052D43213251240040ABF5 /* AuthenticationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModels.swift; sourceTree = "<group>"; };
+		84052D4521325EBF0040ABF5 /* PashmakMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PashmakMessages.swift; sourceTree = "<group>"; };
 		843FB334212AD7CD0047A734 /* Pashmak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pashmak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843FB337212AD7CD0047A734 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843FB33C212AD7CD0047A734 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -204,6 +210,7 @@
 				845E3FFF213104910025477A /* ServerModel.swift */,
 				845E4001213104A90025477A /* EmptyServerModel.swift */,
 				845E4007213106F00025477A /* FetchState.swift */,
+				84052D43213251240040ABF5 /* AuthenticationModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -224,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				845E3FFB213104650025477A /* ServerRequestBase.swift */,
+				84052D412132510C0040ABF5 /* AuthenticationRequests.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -295,6 +303,7 @@
 				845CB26D21312A34001957B3 /* UIButton+Extensions.swift */,
 				845CB26F21312A5D001957B3 /* Date+Extensions.swift */,
 				845CB27121312A7C001957B3 /* UIView+Animations.swift */,
+				84052D4521325EBF0040ABF5 /* PashmakMessages.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -505,6 +514,7 @@
 				845E3FF0213103A80025477A /* Network.swift in Sources */,
 				84FC6CB9212BCA4100B4A56A /* LoginInteractor.swift in Sources */,
 				95BC0071212C972D001B4375 /* UIFont+Farsi.swift in Sources */,
+				84052D44213251240040ABF5 /* AuthenticationModels.swift in Sources */,
 				845E3FFE2131047E0025477A /* DiffableBox.swift in Sources */,
 				84FC6CBC212BCA4100B4A56A /* LoginRouter.swift in Sources */,
 				95C0DCA4212D722B00A01C4F /* Regex.swift in Sources */,
@@ -514,6 +524,7 @@
 				84FC6CC7212BCA6B00B4A56A /* SplashModels.swift in Sources */,
 				843FB338212AD7CD0047A734 /* AppDelegate.swift in Sources */,
 				84FC6CC9212BCA6B00B4A56A /* SplashRouter.swift in Sources */,
+				84052D4621325EBF0040ABF5 /* PashmakMessages.swift in Sources */,
 				84FC6CC6212BCA6B00B4A56A /* SplashInteractor.swift in Sources */,
 				845CB27221312A7C001957B3 /* UIView+Animations.swift in Sources */,
 				845E3FF4213103F10025477A /* HTTPConstants.swift in Sources */,
@@ -523,6 +534,7 @@
 				845E3FF2213103DB0025477A /* APIError.swift in Sources */,
 				845E4004213104DC0025477A /* Log.swift in Sources */,
 				845CB27521313246001957B3 /* LocationManager.swift in Sources */,
+				84052D422132510C0040ABF5 /* AuthenticationRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

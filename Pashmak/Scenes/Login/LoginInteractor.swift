@@ -16,6 +16,8 @@ import Regex
 protocol LoginBusinessLogic
 {
   func verify(request: Login.Verify.Request)
+  
+  func login(request: Login.Authenticate.Request)
 }
 
 protocol LoginDataStore
@@ -66,5 +68,53 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
     
     return res == controlDigit
   }
+  
+  func login(request: Login.Authenticate.Request) {
+    
+    let userName = request.userName
+    let password = request.password
+    
+    func sendFailed(error: Error) {
+      
+      let response = Login.Authenticate.Response.init(state: .failure(error))
+      presenter?.presentAuthenticate(response: response)
+      Log.error("Error Authenticating:\n\(error.localizedDescription)")
+    }
+    
+    func sendAuthenticationLoading() {
+      let response = Login.Authenticate.Response.init(state: .loading)
+      presenter?.presentAuthenticate(response: response)
+    }
+    
+    func preserveAuthenticationResults(response: ServerModels.Authentication.Response) {
+      
+    }
+    
+    guard self.verifyPhone(phone: userName) && self.verifyNationalID(nationalID: password) else {
+      let error = APIError.invalidParameters("Username or Password")
+      sendFailed(error: error)
+      return
+    }
+    
+    sendAuthenticationLoading()
+    
+    let authInfo = ServerModels.Authentication.Request(username: userName, password: password)
+    
+    
+    PashmakServer.perform(request: ServerRequest.Authentication.authenticate(info: authInfo), validResponseCodes: [200, 201])
+      .done { (ressult: ServerData<ServerModels.Authentication.Response>) in
+        let model = ressult.model
+        preserveAuthenticationResults(response: model)
+        let response = Login.Authenticate.Response.init(state: .success(model))
+        self.presenter?.presentAuthenticate(response: response)
+        
+    }
+      .catch { (error) in
+        sendFailed(error: error)
+    }
+    
+  }
+  
+  
   
 }

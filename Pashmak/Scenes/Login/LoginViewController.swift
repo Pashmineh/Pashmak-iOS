@@ -13,10 +13,16 @@
 import UIKit
 import Hero
 import Material
+import KVNProgress
 
 protocol LoginDisplayLogic: class
 {
   func displayVerify(viewModel: Login.Verify.ViewModel)
+  
+  func displayAuthenticateLoading(viewModel: Login.Authenticate.ViewModel.Loading)
+  func displayAuthenticateFailed(viewModel: Login.Authenticate.ViewModel.Failed)
+  func displayAuthenticateSuccess(viewModel: Login.Authenticate.ViewModel.Success)
+  
 }
 
 class LoginViewController: UIViewController
@@ -80,6 +86,7 @@ class LoginViewController: UIViewController
   @IBOutlet weak var passwordTextField: TextField!
   @IBOutlet weak var nextButton: Button!
   @IBAction func nextButtonTapped(_ sender: Any) {
+    self.login()
   }
   
   override func viewDidLoad()
@@ -159,6 +166,16 @@ class LoginViewController: UIViewController
     let request = Login.Verify.Request(phone: phone, nationalID: password)
     interactor?.verify(request: request)
   }
+  
+  private func login() {
+    
+    let username = self.phoneNumber
+    let password = self.password
+    
+    let request = Login.Authenticate.Request.init(userName: username, password: password)
+    interactor?.login(request: request)
+    
+  }
 }
 
 extension LoginViewController: LoginDisplayLogic {
@@ -179,5 +196,23 @@ extension LoginViewController: LoginDisplayLogic {
       self.view.endEditing(true)
     }
     
+  }
+  
+  func displayAuthenticateLoading(viewModel: Login.Authenticate.ViewModel.Loading) {
+    let message = viewModel.message
+    KVNProgress.show(withStatus: message)
+  }
+  
+  func displayAuthenticateFailed(viewModel: Login.Authenticate.ViewModel.Failed) {
+    let message = viewModel.message
+    KVNProgress.showError(withStatus: message)
+  }
+  
+  func displayAuthenticateSuccess(viewModel: Login.Authenticate.ViewModel.Success) {
+    let message = viewModel.message
+    KVNProgress.showSuccess(withStatus: message) { [weak self] in
+      guard let self = self else { return }
+      
+    }
   }
 }

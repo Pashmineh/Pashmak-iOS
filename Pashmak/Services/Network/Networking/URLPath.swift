@@ -10,9 +10,9 @@ import Foundation
 
 fileprivate let baseURL: String = {
   #if DEBUG
-    return "http://178.128.195.55"
+  return "http://178.128.195.55:8080"
   #else
-    return "http://178.128.195.55"
+  return "http://178.128.195.55:8080"
   #endif
 }()
 
@@ -20,12 +20,15 @@ fileprivate let baseURL: String = {
 enum URLPath {
   
   case api
+  case authenticate
   
   func toString() -> String {
     var result = ""
     switch self {
     case .api:
-      result = "api/v1"
+      result = "api"
+    case .authenticate:
+      result = "authenticate"
     }
     return result
   }

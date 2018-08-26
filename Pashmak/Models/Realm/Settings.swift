@@ -44,7 +44,7 @@ class Settings: Object {
     }
     
     let settings = Settings()
-    
+    settings.deviceToken = UUID().uuidString
     try! realm.write {
       realm.add(settings)
     }
@@ -77,5 +77,7 @@ class Settings: Object {
       self.oauthToken = oauthToken
     }
   }
+  
+  
   
 }
