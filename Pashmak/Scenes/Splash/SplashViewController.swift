@@ -114,7 +114,7 @@ extension SplashViewController: SplashDisplayLogic {
     case .login:
       self.router?.routeToLogin(segue: nil)
     case .home:
-      return
+      self.router?.routeToHome(segue: nil)
     }
   }
 }

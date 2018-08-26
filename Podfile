@@ -25,6 +25,7 @@ target 'Pashmak' do
   pod 'lottie-ios'
   pod 'STRegex'
   pod 'SwiftLint'
+  pod 'Kingfisher'
   
 inhibit_all_warnings!
 

@@ -10,6 +10,11 @@
 		84052D422132510C0040ABF5 /* AuthenticationRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84052D412132510C0040ABF5 /* AuthenticationRequests.swift */; };
 		84052D44213251240040ABF5 /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84052D43213251240040ABF5 /* AuthenticationModels.swift */; };
 		84052D4621325EBF0040ABF5 /* PashmakMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84052D4521325EBF0040ABF5 /* PashmakMessages.swift */; };
+		841BF3002132B9C3003E7BA7 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BF2FB2132B9C3003E7BA7 /* HomePresenter.swift */; };
+		841BF3012132B9C3003E7BA7 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BF2FC2132B9C3003E7BA7 /* HomeRouter.swift */; };
+		841BF3022132B9C3003E7BA7 /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BF2FD2132B9C3003E7BA7 /* HomeModels.swift */; };
+		841BF3032132B9C3003E7BA7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BF2FE2132B9C3003E7BA7 /* HomeViewController.swift */; };
+		841BF3042132B9C3003E7BA7 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BF2FF2132B9C3003E7BA7 /* HomeInteractor.swift */; };
 		843FB338212AD7CD0047A734 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FB337212AD7CD0047A734 /* AppDelegate.swift */; };
 		843FB33D212AD7CD0047A734 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33B212AD7CD0047A734 /* Main.storyboard */; };
 		843FB33F212AD7CE0047A734 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33E212AD7CE0047A734 /* Assets.xcassets */; };
@@ -61,6 +66,11 @@
 		84052D412132510C0040ABF5 /* AuthenticationRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRequests.swift; sourceTree = "<group>"; };
 		84052D43213251240040ABF5 /* AuthenticationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModels.swift; sourceTree = "<group>"; };
 		84052D4521325EBF0040ABF5 /* PashmakMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PashmakMessages.swift; sourceTree = "<group>"; };
+		841BF2FB2132B9C3003E7BA7 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		841BF2FC2132B9C3003E7BA7 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		841BF2FD2132B9C3003E7BA7 /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
+		841BF2FE2132B9C3003E7BA7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		841BF2FF2132B9C3003E7BA7 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		843FB334212AD7CD0047A734 /* Pashmak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pashmak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		843FB337212AD7CD0047A734 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843FB33C212AD7CD0047A734 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -236,9 +246,22 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
+		84E805712132B64000BC47CC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				841BF2FF2132B9C3003E7BA7 /* HomeInteractor.swift */,
+				841BF2FD2132B9C3003E7BA7 /* HomeModels.swift */,
+				841BF2FB2132B9C3003E7BA7 /* HomePresenter.swift */,
+				841BF2FC2132B9C3003E7BA7 /* HomeRouter.swift */,
+				841BF2FE2132B9C3003E7BA7 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		84FC6CB0212BCA0800B4A56A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				84E805712132B64000BC47CC /* Home */,
 				84FC6CBF212BCA5C00B4A56A /* Splash */,
 				84FC6CB2212BCA2A00B4A56A /* Login */,
 			);
@@ -335,11 +358,11 @@
 			buildConfigurationList = 843FB346212AD7CE0047A734 /* Build configuration list for PBXNativeTarget "Pashmak" */;
 			buildPhases = (
 				FB5F5C7609CDF3DED5348C71 /* [CP] Check Pods Manifest.lock */,
-				84E80570213297C700BC47CC /* ShellScript */,
 				843FB330212AD7CD0047A734 /* Sources */,
 				843FB331212AD7CD0047A734 /* Frameworks */,
 				843FB332212AD7CD0047A734 /* Resources */,
 				8F3D115ED6A95ADCA54BA9DC /* [CP] Embed Pods Frameworks */,
+				84E80570213297C700BC47CC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -432,7 +455,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Pashmak/Pods-Pashmak-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Pashmak/Pods-Pashmak-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AsyncSwift/Async.framework",
 				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
@@ -443,6 +466,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KUIActionSheet/KUIActionSheet.framework",
 				"${BUILT_PRODUCTS_DIR}/KVNProgress/KVNProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/Log/Log.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
@@ -469,6 +493,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KUIActionSheet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KVNProgress.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Log.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
@@ -485,7 +510,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pashmak/Pods-Pashmak-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pashmak/Pods-Pashmak-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FB5F5C7609CDF3DED5348C71 /* [CP] Check Pods Manifest.lock */ = {
@@ -520,6 +545,7 @@
 				84FC6CC8212BCA6B00B4A56A /* SplashPresenter.swift in Sources */,
 				84FC6CBB212BCA4100B4A56A /* LoginPresenter.swift in Sources */,
 				95BC007C212CA7B0001B4375 /* String+sha512.swift in Sources */,
+				841BF3032132B9C3003E7BA7 /* HomeViewController.swift in Sources */,
 				845E3FF6213104170025477A /* HTTPRequest.swift in Sources */,
 				95BC0080212CA96A001B4375 /* Settings.swift in Sources */,
 				845E4008213106F00025477A /* FetchState.swift in Sources */,
@@ -541,17 +567,21 @@
 				845CB26A213129E6001957B3 /* BiometricAuthentication.swift in Sources */,
 				84FC6CC7212BCA6B00B4A56A /* SplashModels.swift in Sources */,
 				843FB338212AD7CD0047A734 /* AppDelegate.swift in Sources */,
+				841BF3002132B9C3003E7BA7 /* HomePresenter.swift in Sources */,
 				84FC6CC9212BCA6B00B4A56A /* SplashRouter.swift in Sources */,
 				84052D4621325EBF0040ABF5 /* PashmakMessages.swift in Sources */,
 				84FC6CC6212BCA6B00B4A56A /* SplashInteractor.swift in Sources */,
+				841BF3042132B9C3003E7BA7 /* HomeInteractor.swift in Sources */,
 				845CB27221312A7C001957B3 /* UIView+Animations.swift in Sources */,
 				845E3FF4213103F10025477A /* HTTPConstants.swift in Sources */,
 				845CB26C21312A0E001957B3 /* Controls.swift in Sources */,
 				95BC0077212CA57B001B4375 /* RealmProvider.swift in Sources */,
 				845E4006213105080025477A /* JSONTypes.swift in Sources */,
+				841BF3012132B9C3003E7BA7 /* HomeRouter.swift in Sources */,
 				845E3FF2213103DB0025477A /* APIError.swift in Sources */,
 				845E4004213104DC0025477A /* Log.swift in Sources */,
 				845CB27521313246001957B3 /* LocationManager.swift in Sources */,
+				841BF3022132B9C3003E7BA7 /* HomeModels.swift in Sources */,
 				84052D422132510C0040ABF5 /* AuthenticationRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

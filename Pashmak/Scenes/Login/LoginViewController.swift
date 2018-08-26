@@ -201,7 +201,7 @@ extension LoginViewController: LoginDisplayLogic {
     let message = viewModel.message
     KVNProgress.showSuccess(withStatus: message) { [weak self] in
       guard let self = self else { return }
-
+      self.router?.routeToHome(segue: nil)
     }
   }
 }

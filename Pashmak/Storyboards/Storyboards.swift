@@ -17,7 +17,8 @@ struct Storyboards {
 struct StoryboardsIDs {
 
   struct Main {
-      static let Login = "LoginStoryboardID"
+    static let Login = "LoginStoryboardID"
+    static let Home = "HomeViewControllerStoryboardID"
   }
 
 }

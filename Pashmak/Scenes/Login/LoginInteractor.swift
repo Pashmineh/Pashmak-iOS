@@ -83,7 +83,20 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
       presenter?.presentAuthenticate(response: response)
     }
 
-    func preserveAuthenticationResults(response: ServerModels.Authentication.Response) {
+    func preserveAuthenticationResults(response: ServerModels.Authentication.Response, phoneNumber: String) {
+      guard let token = response.token else {
+        Log.trace("Oauth token not found!")
+        return
+      }
+      Settings.current.update(oauthToken: token)
+
+      let firstName = response.name ?? ""
+      let lastName = response.lastName ?? ""
+
+      Settings.current.update(firstName: firstName, lastName: lastName)
+
+      let avatarURL = "http://178.62.20.28/Photos/\(phoneNumber).jpeg"
+      Settings.current.update(avatarURL: avatarURL)
 
     }
 
@@ -100,7 +113,7 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
     PashmakServer.perform(request: ServerRequest.Authentication.authenticate(info: authInfo), validResponseCodes: [200, 201])
       .done { (ressult: ServerData<ServerModels.Authentication.Response>) in
         let model = ressult.model
-        preserveAuthenticationResults(response: model)
+        preserveAuthenticationResults(response: model, phoneNumber: userName)
         let response = Login.Authenticate.Response.init(state: .success(model))
         self.presenter?.presentAuthenticate(response: response)
 

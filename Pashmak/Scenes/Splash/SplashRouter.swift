@@ -15,6 +15,7 @@ import Hero
 
 @objc protocol SplashRoutingLogic {
   func routeToLogin(segue: UIStoryboardSegue?)
+  func routeToHome(segue: UIStoryboardSegue?)
 }
 
 protocol SplashDataPassing {
@@ -60,6 +61,49 @@ class SplashRouter: NSObject, SplashRoutingLogic, SplashDataPassing {
   }
 
   private func navigateToLogin(source: SplashViewController, destination: LoginViewController) {
+    source.navigationController?.setViewControllers([destination], animated: true)
+  }
+
+  func routeToHome(segue: UIStoryboardSegue?) {
+
+    guard let sourceVC = viewController, let sourceDS = dataStore else {
+      return
+    }
+
+    func handleNonSegue() {
+
+      let destVC = Storyboards.Main.instantiateViewController(withIdentifier: StoryboardsIDs.Main.Home) as? HomeViewController
+      guard let destinationVC = destVC, var destinationDS = destVC?.router?.dataStore else {
+        return
+      }
+
+      passDataToHome(source: sourceDS, destination: &destinationDS)
+      prepareHome(source: sourceVC, destination: destinationVC)
+      navigateToHome(source: sourceVC, destination: destinationVC)
+
+    }
+
+    guard let destinationVC = segue?.destination as? HomeViewController, var destinationDS = destinationVC.router?.dataStore else {
+      handleNonSegue()
+      return
+    }
+
+    passDataToHome(source: sourceDS, destination: &destinationDS)
+    prepareHome(source: sourceVC, destination: destinationVC)
+
+  }
+
+  private func passDataToHome(source: SplashDataStore, destination: inout HomeDataStore) {
+
+  }
+
+  private func prepareHome(source: SplashViewController, destination: HomeViewController) {
+    destination.hero.isEnabled = true
+    source.navigationController?.hero.navigationAnimationType = .zoomOut
+    destination.populate()
+  }
+
+  private func navigateToHome(source: SplashViewController, destination: HomeViewController) {
     source.navigationController?.setViewControllers([destination], animated: true)
   }
 

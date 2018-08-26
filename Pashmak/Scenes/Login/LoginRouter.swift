@@ -11,9 +11,10 @@
 //
 
 import UIKit
+import Hero
 
 @objc protocol LoginRoutingLogic {
-
+  func routeToHome(segue: UIStoryboardSegue?)
 }
 
 protocol LoginDataPassing {
@@ -23,5 +24,48 @@ protocol LoginDataPassing {
 class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing {
   weak var viewController: LoginViewController?
   var dataStore: LoginDataStore?
+
+  func routeToHome(segue: UIStoryboardSegue?) {
+
+    guard let sourceVC = viewController, let sourceDS = dataStore else {
+      return
+    }
+
+    func handleNonSegue() {
+
+      let destVC = Storyboards.Main.instantiateViewController(withIdentifier: StoryboardsIDs.Main.Home) as? HomeViewController
+      guard let destinationVC = destVC, var destinationDS = destVC?.router?.dataStore else {
+        return
+      }
+
+      passDataToHome(source: sourceDS, destination: &destinationDS)
+      prepareHome(source: sourceVC, destination: destinationVC)
+      navigateToHome(source: sourceVC, destination: destinationVC)
+
+    }
+
+    guard let destinationVC = segue?.destination as? HomeViewController, var destinationDS = destinationVC.router?.dataStore else {
+      handleNonSegue()
+      return
+    }
+
+    passDataToHome(source: sourceDS, destination: &destinationDS)
+    prepareHome(source: sourceVC, destination: destinationVC)
+
+  }
+
+  private func passDataToHome(source: LoginDataStore, destination: inout HomeDataStore) {
+
+  }
+
+  private func prepareHome(source: LoginViewController, destination: HomeViewController) {
+    destination.hero.isEnabled = true
+    source.navigationController?.hero.navigationAnimationType = .zoomOut
+    destination.populate()
+  }
+
+  private func navigateToHome(source: LoginViewController, destination: HomeViewController) {
+    source.navigationController?.setViewControllers([destination], animated: true)
+  }
 
 }

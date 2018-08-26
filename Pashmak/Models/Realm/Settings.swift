@@ -36,6 +36,10 @@ class Settings: Object {
   dynamic var pushToken: String = ""
   dynamic var deviceToken: String = ""
   dynamic var oauthToken: String = ""
+  dynamic var firstName: String = ""
+  dynamic var lastName: String = ""
+  dynamic var phoneNumber: String = ""
+  dynamic var avatarURL: String = ""
 
   convenience init(deviceToken: String, pushToken: String, oauthToken: String) {
     self.init()
@@ -61,6 +65,21 @@ class Settings: Object {
     }
 
     return settings
+
+  }
+
+  var fullName: String {
+
+    var result = ""
+    if !firstName.isEmpty {
+      result += firstName
+    }
+
+    if !lastName.isEmpty {
+      result += " \(lastName)"
+    }
+
+    return result
 
   }
 
@@ -100,6 +119,40 @@ class Settings: Object {
       fatalError(error.localizedDescription)
     }
 
+  }
+
+  func update(firstName: String, lastName: String) {
+    let realm = RealmProvider.SettingsProvider.realm
+    do {
+      try realm.write {
+        self.firstName = firstName
+        self.lastName = lastName
+      }
+    } catch {
+      fatalError(error.localizedDescription)
+    }
+  }
+
+  func update(phoneNumber: String) {
+    let realm = RealmProvider.SettingsProvider.realm
+    do {
+      try realm.write {
+        self.phoneNumber = phoneNumber
+      }
+    } catch {
+      fatalError(error.localizedDescription)
+    }
+  }
+
+  func update(avatarURL: String) {
+    let realm = RealmProvider.SettingsProvider.realm
+    do {
+      try realm.write {
+        self.avatarURL = avatarURL
+      }
+    } catch {
+      fatalError(error.localizedDescription)
+    }
   }
 
 }

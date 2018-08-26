@@ -24,7 +24,14 @@ class SplashInteractor: SplashBusinessLogic, SplashDataStore {
   var presenter: SplashPresentationLogic?
 
   func goNext(request: Splash.GoNext.Request) {
-    let response = Splash.GoNext.Response(destination: .login)
-    presenter?.presentGoNext(response: response)
+
+    if !Settings.current.oauthToken.isEmpty {
+      let response = Splash.GoNext.Response(destination: .home)
+      presenter?.presentGoNext(response: response)
+    } else {
+      let response = Splash.GoNext.Response(destination: .login)
+      presenter?.presentGoNext(response: response)
+    }
+
   }
 }
