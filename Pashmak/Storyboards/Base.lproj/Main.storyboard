@@ -134,7 +134,7 @@
                                             <constraint firstAttribute="height" constant="32" id="mdJ-GJ-eRr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="IRANSansDNFaNum-Light" family="IRANSansDNFaNum" pointSize="20"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="Black"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5d7-oz-iw7">
@@ -152,15 +152,27 @@
                                             <constraint firstAttribute="height" constant="96" id="nAZ-rp-Tbp"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9u-Wt-Ppp">
+                                        <rect key="frame" x="122" y="60" width="233" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="U8Z-lE-8ld"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="IRANSansDNFaNum-Light" family="IRANSansDNFaNum" pointSize="14"/>
+                                        <color key="textColor" name="Black"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" name="TextDeactive"/>
                                 <constraints>
                                     <constraint firstItem="5d7-oz-iw7" firstAttribute="centerY" secondItem="4bb-sv-TU2" secondAttribute="centerY" id="0hJ-Ek-l6l"/>
                                     <constraint firstItem="00l-ro-dfv" firstAttribute="leading" secondItem="5d7-oz-iw7" secondAttribute="trailing" constant="16" id="6kl-CA-EKh"/>
                                     <constraint firstItem="wfb-q9-xvF" firstAttribute="centerY" secondItem="5d7-oz-iw7" secondAttribute="centerY" id="EAz-0w-vd9"/>
+                                    <constraint firstItem="K9u-Wt-Ppp" firstAttribute="top" secondItem="00l-ro-dfv" secondAttribute="bottom" constant="8" id="Ney-Vb-njA"/>
                                     <constraint firstItem="5d7-oz-iw7" firstAttribute="leading" secondItem="4bb-sv-TU2" secondAttribute="leading" constant="16" id="aZK-Mz-uVd"/>
                                     <constraint firstItem="wfb-q9-xvF" firstAttribute="centerX" secondItem="5d7-oz-iw7" secondAttribute="centerX" id="bYF-Uw-KWI"/>
                                     <constraint firstAttribute="trailing" secondItem="00l-ro-dfv" secondAttribute="trailing" constant="20" id="ffd-JI-OsW"/>
+                                    <constraint firstItem="K9u-Wt-Ppp" firstAttribute="trailing" secondItem="00l-ro-dfv" secondAttribute="trailing" id="gBZ-8R-Rnd"/>
+                                    <constraint firstItem="K9u-Wt-Ppp" firstAttribute="leading" secondItem="00l-ro-dfv" secondAttribute="leading" id="iQX-hs-JSn"/>
                                     <constraint firstAttribute="height" constant="150" id="jze-bP-xKo"/>
                                     <constraint firstItem="00l-ro-dfv" firstAttribute="top" secondItem="4bb-sv-TU2" secondAttribute="top" constant="20" id="xBh-sS-q3Q"/>
                                 </constraints>
@@ -270,6 +282,9 @@
     </scenes>
     <resources>
         <image name="splashIcon" width="61" height="100.5"/>
+        <namedColor name="Black">
+            <color red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ButtonDeactive">
             <color red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -20,10 +20,28 @@ class HomePresenter: HomePresentationLogic {
   weak var viewController: HomeDisplayLogic?
   func presentPopulate(response: Home.Populate.Response) {
 
-    let fullName = response.fullName
-    let avatarURL = response.avatarURL
-    let viewModel = Home.Populate.ViewModel.init(fullName: fullName, avatarURL: avatarURL, items: [])
-    viewController?.displayPopulate(viewModel: viewModel)
+   let state = response.state
+
+    switch state {
+    case .loading:
+      let message = Messages.Loading.messages.randomElement() ?? "در حال خوندن اطلاعات..."
+      let viewModel = Home.Populate.ViewModel.Loading.init(message: message)
+      viewController?.displayPopulateLoading(viewModel: viewModel)
+    case .failure(let error):
+      var message = "خطا!"
+      if case APIError.invalidResponseCode(let status) = error {
+        message = Messages.ServerErrors.messages.randomElement() ?? message
+        message += "\n\(status)"
+      }
+      let viewModel = Home.Populate.ViewModel.Failed.init(message: message)
+      viewController?.displayPopulateFailed(viewModel: viewModel)
+    case .success((let homeData, let settings)):
+      let fullName = settings.fullName
+      let avatarURL = settings.avatarURL
+
+      let viewModel = Home.Populate.ViewModel.Success.init(fullName: fullName, avatarURL: avatarURL, items: [])
+      viewController?.displayPopulateSuccess(viewModel: viewModel)
+    }
 
   }
 }

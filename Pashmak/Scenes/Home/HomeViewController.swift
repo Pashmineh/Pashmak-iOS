@@ -17,9 +17,12 @@ import Material
 import Async
 import KVNProgress
 import Kingfisher
+import SkeletonView
 
 protocol HomeDisplayLogic: class {
-func displayPopulate(viewModel: Home.Populate.ViewModel)
+  func displayPopulateLoading(viewModel: Home.Populate.ViewModel.Loading)
+  func displayPopulateFailed(viewModel: Home.Populate.ViewModel.Failed)
+  func displayPopulateSuccess(viewModel: Home.Populate.ViewModel.Success)
 }
 
 class HomeViewController: UIViewController {
@@ -96,11 +99,11 @@ class HomeViewController: UIViewController {
   private func prepareAvatar() {
     self.avatarImageView.clipsToBounds = true
     self.avatarImageView.layer.cornerRadius = 45.0
-
+    self.avatarImageView.isSkeletonable = true
     self.avatarBorderView.layer.cornerRadius = 45.0
     self.avatarBorderView.clipsToBounds = true
     self.avatarBorderView.layer.borderColor = #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1)
-    self.avatarBorderView.layer.borderWidth = 3.0 / Screen.scale
+    self.avatarBorderView.layer.borderWidth = 2.0
   }
 
   private func prepareCollectionView() {
@@ -125,7 +128,7 @@ class HomeViewController: UIViewController {
     interactor?.populate(request: request)
   }
 
-  private func updateProfile(viewModel: Home.Populate.ViewModel) {
+  private func updateProfile(viewModel: Home.Populate.ViewModel.Success) {
     let fullName = viewModel.fullName
     self.fullnameLabel.text = fullName
 
@@ -139,14 +142,36 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: HomeDisplayLogic {
-  func displayPopulate(viewModel: Home.Populate.ViewModel) {
-    self.updateProfile(viewModel: viewModel)
+
+  func displayPopulateLoading(viewModel: Home.Populate.ViewModel.Loading) {
+//    let message = viewModel.message
+//    KVNProgress.show(withStatus: message)
+    self.view.isSkeletonable = true
+    
+    self.view.startSkeletonAnimation()
+  }
+
+  func displayPopulateFailed(viewModel: Home.Populate.ViewModel.Failed) {
+    let message = viewModel.message
+    KVNProgress.showError(withStatus: message)
+
+  }
+
+  func displayPopulateSuccess(viewModel: Home.Populate.ViewModel.Success) {
     let items = viewModel.items
     self.displayedItems = items
-    self.adapter.performUpdates(animated: true) { (_) in
-
-    }
+    self.updateProfile(viewModel: viewModel)
+    self.adapter.performUpdates(animated: true, completion: { (_) in
+    })
+//    KVNProgress.dismiss { [weak self] in
+//      guard let self = self else { return }
+//      self.adapter.performUpdates(animated: true, completion: { (_) in
+//
+//      })
+//
+//    }
   }
+
 }
 
 extension HomeViewController: ListAdapterDataSource {

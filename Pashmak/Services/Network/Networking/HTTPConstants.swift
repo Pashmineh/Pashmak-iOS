@@ -42,6 +42,9 @@ struct HTTPHeaderValues {
   static let basicAuthorizatoion = "Basic YnJvd3NlcjoxMjM0NTY="
   static let UserAgent = "mobile"
   static let AcceptLanguage = "fa"
+  static var OauthToken: String {
+    return "Bearer \(Settings.current.oauthToken)"
+  }
 }
 
 enum HttpContentType {

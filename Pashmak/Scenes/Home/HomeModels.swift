@@ -15,18 +15,30 @@ import IGListKit
 
 enum Home {
   enum Populate {
+    typealias FetchHomeState = FetchState<(ServerModels.Home, Settings), Error>
     struct Request {
 
     }
     struct Response {
-      let fullName: String
-      let avatarURL: String
-      let items: [ListDiffable]
+      let state: FetchHomeState
     }
-    struct ViewModel {
-      let fullName: String
-      let avatarURL: String
-      let items: [ListDiffable]
+
+    enum ViewModel {
+
+      struct Loading {
+        let message: String
+      }
+
+      struct Failed {
+        let message: String
+      }
+
+      struct Success {
+        let fullName: String
+        let avatarURL: String
+        let items: [ListDiffable]
+      }
+
     }
   }
 }

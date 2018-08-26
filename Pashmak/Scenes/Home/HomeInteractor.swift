@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Async
 
 protocol HomeBusinessLogic {
   func populate(request: Home.Populate.Request)
@@ -25,10 +26,32 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
 
   func populate(request: Home.Populate.Request) {
 
-    let fullName = Settings.current.fullName
-    let avatarURL = Settings.current.avatarURL
-    let response = Home.Populate.Response.init(fullName: fullName, avatarURL: avatarURL, items: [])
-    presenter?.presentPopulate(response: response)
+    func sendLoading() {
+      let response = Home.Populate.Response.init(state: .loading)
+      presenter?.presentPopulate(response: response)
+    }
+
+    func sendFailed(_ error: Error) {
+      let response = Home.Populate.Response.init(state: .failure(error))
+      presenter?.presentPopulate(response: response)
+    }
+
+    sendLoading()
+
+    PashmakServer.perform(request: ServerRequest.Home.fetchHome())
+      .done { [weak self] (result: ServerData<ServerModels.Home>) in
+        guard let self = self else { return }
+        let homeData = result.model
+        let settings = Settings.current
+
+        Async.main(after: 2.0) {
+          let response = Home.Populate.Response.init(state: Home.Populate.FetchHomeState.success((homeData, settings)))
+          self.presenter?.presentPopulate(response: response)
+        }
+    }
+      .catch { (error) in
+        sendFailed(error)
+    }
 
   }
 }
