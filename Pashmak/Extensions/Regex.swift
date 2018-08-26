@@ -10,12 +10,12 @@ import Foundation
 import Regex
 
 extension Regex {
-  
+
   struct KD {
-    
+
     static let phoneNumber = Regex("^09\\d{9}$")
     static let nationalID = Regex("^\\d{10}$")
-    
+
   }
-  
+
 }

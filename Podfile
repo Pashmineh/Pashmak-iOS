@@ -24,6 +24,7 @@ target 'Pashmak' do
   pod 'SkeletonView'
   pod 'lottie-ios'
   pod 'STRegex'
+  pod 'SwiftLint'
   
 inhibit_all_warnings!
 

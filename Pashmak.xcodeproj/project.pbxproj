@@ -335,6 +335,7 @@
 			buildConfigurationList = 843FB346212AD7CE0047A734 /* Build configuration list for PBXNativeTarget "Pashmak" */;
 			buildPhases = (
 				FB5F5C7609CDF3DED5348C71 /* [CP] Check Pods Manifest.lock */,
+				84E80570213297C700BC47CC /* ShellScript */,
 				843FB330212AD7CD0047A734 /* Sources */,
 				843FB331212AD7CD0047A734 /* Frameworks */,
 				843FB332212AD7CD0047A734 /* Resources */,
@@ -408,6 +409,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		84E80570213297C700BC47CC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
 		8F3D115ED6A95ADCA54BA9DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -10,22 +10,29 @@ import Foundation
 import RealmSwift
 
 extension RealmProvider {
-  private static let settingsConfig = Realm.Configuration(fileURL: try! Path.inLibary("settings.realm"),  encryptionKey: "242DC31B-D4F9-4C7A-879E-76328D84D692".sha512, readOnly: false, schemaVersion: 1, objectTypes: [Settings.self])
-  
+  private static let settingsConfig: Realm.Configuration = {
+    do {
+      let path = try Path.inLibary("settings.realm")
+      return Realm.Configuration(fileURL: path, encryptionKey: "242DC31B-D4F9-4C7A-879E-76328D84D692".sha512, readOnly: false, schemaVersion: 1, objectTypes: [Settings.self])
+    } catch {
+      fatalError(error.localizedDescription)
+    }
+
+  }()
+
   static var SettingsProvider: RealmProvider {
     return RealmProvider(config: RealmProvider.settingsConfig)
   }
-  
-}
 
+}
 
 @objcMembers
 class Settings: Object {
-  
+
   enum Property: String {
     case pushToken, deviceToken, oauthToken
   }
-  
+
   dynamic var pushToken: String = ""
   dynamic var deviceToken: String = ""
   dynamic var oauthToken: String = ""
@@ -36,48 +43,63 @@ class Settings: Object {
     self.pushToken = pushToken
     self.oauthToken = oauthToken
   }
-  
+
   static var current: Settings {
     let realm = RealmProvider.SettingsProvider.realm
     if let settings = realm.objects(Settings.self).first {
       return settings
     }
-    
+
     let settings = Settings()
     settings.deviceToken = UUID().uuidString
-    try! realm.write {
-      realm.add(settings)
+    do {
+      try realm.write {
+        realm.add(settings)
+      }
+    } catch {
+      fatalError(error.localizedDescription)
     }
-    
+
     return settings
-    
+
   }
-  
+
   func update(pushToken: String) {
     let realm = RealmProvider.SettingsProvider.realm
 
-    try! realm.write {
-      self.pushToken = pushToken
+    do {
+      try realm.write {
+        self.pushToken = pushToken
+      }
+    } catch {
+      fatalError(error.localizedDescription)
     }
-    
+
   }
-  
+
   func update(deviceToken: String) {
     let realm = RealmProvider.SettingsProvider.realm
-    
-    try! realm.write {
-      self.deviceToken = deviceToken
+
+    do {
+      try realm.write {
+        self.deviceToken = deviceToken
+      }
+    } catch {
+      fatalError(error.localizedDescription)
     }
+
   }
-  
+
   func update(oauthToken: String) {
     let realm = RealmProvider.SettingsProvider.realm
-    
-    try! realm.write {
-      self.oauthToken = oauthToken
+    do {
+      try realm.write {
+        self.oauthToken = oauthToken
+      }
+    } catch {
+      fatalError(error.localizedDescription)
     }
+
   }
-  
-  
-  
+
 }

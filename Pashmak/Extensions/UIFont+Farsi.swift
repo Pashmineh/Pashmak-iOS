@@ -12,7 +12,7 @@ enum FarsiFontWeight {
   case regular
   case light
   case bold
-  
+
   fileprivate var fontName: String {
     switch self {
     case .regular:
@@ -23,7 +23,7 @@ enum FarsiFontWeight {
       return "IRANSansDNFaNum-Bold"
     }
   }
-  
+
 }
 
 extension UIFont {

@@ -21,7 +21,7 @@ enum APIError: Error, LocalizedError {
   case accountDeactivated(String)
   case operationError(String)
   case noConnection
-  
+
   public var errorDescription: String? {
     switch self {
     case .invalidRequest: return "Could not make URLRequest from HTTPRequest."
@@ -52,7 +52,7 @@ enum SepError: Error, LocalizedError {
     case .paymentExpired(let msg): return "مهلت پرداخت سپری شد.\n\(msg)"
     case .invalidGateway(let msg): return "درگاه پرداخت نامعتبر است.\n\(msg)"
     }
-    
+
   }
-  
+
 }

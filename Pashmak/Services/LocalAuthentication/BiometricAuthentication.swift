@@ -10,20 +10,18 @@ import Foundation
 import LocalAuthentication
 import Async
 
-
 class BiometricAuthentication {
-  
+
   private static var appDelegate = UIApplication.shared.delegate as? AppDelegate
-  
-  
+
   private static let context = LAContext()
-  
+
   static var canEvaluate: Bool {
     return context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: nil)
   }
-  
-  static func confirmWithUser(on VC: UIViewController, onConfirm: @escaping ButtonAction, onReject: @escaping ButtonAction) {
-    
+
+  static func confirmWithUser(on parent: UIViewController, onConfirm: @escaping ButtonAction, onReject: @escaping ButtonAction) {
+
     guard canEvaluate else {
       Log.trace("Cannot evaluate so skiped asking user.")
       onReject()
@@ -40,10 +38,10 @@ class BiometricAuthentication {
       onReject()
       return
     }
-    
-    Async.main() {
+
+    Async.main {
       let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-      
+
       alert.addAction(UIAlertAction(title: "بله", style: UIAlertAction.Style.default, handler: { (_) in
         authenticate(message: "ثبت برای ورود‌های آتی", success: {
           onConfirm()
@@ -54,46 +52,44 @@ class BiometricAuthentication {
         })
       }))
       alert.addAction(UIAlertAction(title: "خیر", style: UIAlertAction.Style.cancel, handler: { (_) in
-        
+
       }))
-      
-      VC.present(alert, animated: true, completion: nil)
+
+      parent.present(alert, animated: true, completion: nil)
     }
-    
-    
+
   }
-  
+
   static func authenticate(message: String, success: @escaping ButtonAction, failure: @escaping ButtonAction) {
 //    appDelegate?.shouldBlur = false
-    context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: message) { (ok, error) in
+    context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: message) { (confirmed, error) in
       defer {
 //        appDelegate?.shouldBlur = true
       }
       guard error == nil else {
         Log.trace("Error evaluating user!\n\(error?.localizedDescription ?? "")")
-        Async.main() {
-          
+        Async.main {
+
           failure()
         }
-        
+
         return
       }
-      
-      if ok {
-        Async.main() {
+
+      if confirmed {
+        Async.main {
           success()
         }
       } else {
-        Async.main() {
+        Async.main {
           failure()
-          
+
         }
-        
+
       }
-      
+
     }
-    
+
   }
-  
-  
+
 }

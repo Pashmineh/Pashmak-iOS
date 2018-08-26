@@ -10,63 +10,63 @@ import UIKit
 
 typealias ButtonAction = () -> Void
 
-fileprivate struct AssociatedKeys {
+private struct AssociatedKeys {
   static var touchUp = "touchUp"
   static var touchDown = "touchDown"
   static var touchLeave = "touchLeave"
 }
 
-fileprivate class ClosureWrapper {
+private class ClosureWrapper {
   var closure: ButtonAction?
-  
+
   init(_ closure: ButtonAction?) {
     self.closure = closure
   }
 }
 
 extension UIControl {
-  
+
   @objc private func performTouchUp() {
-    
+
     guard let action = touchUp else {
       return
     }
-    
+
     action()
-    
+
   }
-  
+
   @objc private func performTouchDown() {
-    
+
     guard let action = touchDown else {
       return
     }
-    
+
     action()
-    
+
   }
-  
+
   @objc private func performTouchLeave() {
-    
+
     guard let action = touchLeave else {
       return
     }
-    
+
     action()
-    
+
   }
-  
+
   var touchUp: ButtonAction? {
-    
+
     get {
-      
+
       let closure = objc_getAssociatedObject(self, &AssociatedKeys.touchUp)
-      guard let action = closure as? ClosureWrapper else{
+      guard let action = closure as? ClosureWrapper else {
         return nil
       }
       return action.closure
     }
-    
+
     set {
       if let action = newValue {
         let closure = ClosureWrapper(action)
@@ -80,22 +80,21 @@ extension UIControl {
       } else {
         self.removeTarget(self, action: #selector(performTouchUp), for: .touchUpInside)
       }
-      
+
     }
   }
-  
-  
+
   var touchDown: ButtonAction? {
-    
+
     get {
-      
+
       let closure = objc_getAssociatedObject(self, &AssociatedKeys.touchDown)
-      guard let action = closure as? ClosureWrapper else{
+      guard let action = closure as? ClosureWrapper else {
         return nil
       }
       return action.closure
     }
-    
+
     set {
       if let action = newValue {
         let closure = ClosureWrapper(action)
@@ -109,21 +108,21 @@ extension UIControl {
       } else {
         self.removeTarget(self, action: #selector(performTouchDown), for: .touchDown)
       }
-      
+
     }
   }
-  
+
   var touchLeave: ButtonAction? {
-    
+
     get {
-      
+
       let closure = objc_getAssociatedObject(self, &AssociatedKeys.touchLeave)
-      guard let action = closure as? ClosureWrapper else{
+      guard let action = closure as? ClosureWrapper else {
         return nil
       }
       return action.closure
     }
-    
+
     set {
       if let action = newValue {
         let closure = ClosureWrapper(action)
@@ -137,16 +136,15 @@ extension UIControl {
       } else {
         self.removeTarget(self, action: #selector(performTouchLeave), for: [.touchUpInside, .touchUpOutside, .touchCancel, .touchDragExit])
       }
-      
+
     }
   }
 }
 
-
 extension UIViewController {
   var previousViewController: UIViewController? {
-    guard let vcs = self.navigationController?.viewControllers else { return nil }
-    guard vcs.count >= 2 else { return nil }
-    return vcs[vcs.endIndex - 2]
+    guard let viewControllers = self.navigationController?.viewControllers else { return nil }
+    guard viewControllers.count >= 2 else { return nil }
+    return viewControllers[viewControllers.endIndex - 2]
   }
 }

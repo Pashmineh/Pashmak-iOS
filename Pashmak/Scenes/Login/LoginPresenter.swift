@@ -12,28 +12,25 @@
 
 import UIKit
 
-
-protocol LoginPresentationLogic
-{
+protocol LoginPresentationLogic {
   func presentVerify(response: Login.Verify.Response)
   func presentAuthenticate(response: Login.Authenticate.Response)
 }
 
-class LoginPresenter: LoginPresentationLogic
-{
+class LoginPresenter: LoginPresentationLogic {
   weak var viewController: LoginDisplayLogic?
   func presentVerify(response: Login.Verify.Response) {
     let phoneIsValid = response.phoneIsValid
     let idIsValid = response.nationalIdIsValid
-    
+
     let viewModel = Login.Verify.ViewModel(phoneIsValid: phoneIsValid, nationalIdIsValid: idIsValid)
     viewController?.displayVerify(viewModel: viewModel)
   }
-  
+
   func presentAuthenticate(response: Login.Authenticate.Response) {
-    
+
     let state = response.state
-    
+
     switch state {
     case .loading:
       let message = Messages.Loading.messages.randomElement() ?? ""
@@ -48,24 +45,23 @@ class LoginPresenter: LoginPresentationLogic
           message = "مشکوک به نظر میرسی 🤨🤨🤨\n این شماره و رمزی که دادی غلط از آب در اومد!"
         } else {
           message = Messages.ServerErrors.messages.randomElement() ?? message
-          message = message + "\n(\(statusCode))"
+          message += "\n(\(statusCode))"
         }
-        
+
       }
-      
-      
+
       let viewModel = Login.Authenticate.ViewModel.Failed.init(message: message)
       viewController?.displayAuthenticateFailed(viewModel: viewModel)
-      
+
     case .success(let response):
       let firstName = response.name ?? ""
       let lastName = response.lastName ?? ""
-      
+
       var fullName = ""
       if !firstName.isEmpty {
         fullName += firstName
       }
-      
+
       if !lastName.isEmpty {
         fullName += lastName
       }
@@ -73,9 +69,9 @@ class LoginPresenter: LoginPresentationLogic
 
       let viewModel = Login.Authenticate.ViewModel.Success.init(message: message)
       viewController?.displayAuthenticateSuccess(viewModel: viewModel)
-      
+
     }
-    
+
   }
-  
+
 }

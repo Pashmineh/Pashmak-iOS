@@ -12,19 +12,18 @@
 
 import UIKit
 
-enum Login
-{
-  enum Verify{
+enum Login {
+  enum Verify {
     struct Request {
       let phone: String
       let nationalID: String
     }
-    
+
     struct Response {
       let phoneIsValid: Bool
       let nationalIdIsValid: Bool
     }
-    
+
     struct ViewModel {
       let phoneIsValid: Bool
       let nationalIdIsValid: Bool
@@ -44,16 +43,16 @@ enum Login
       struct Loading {
         let message: String
       }
-      
+
       struct Failed {
         let message: String
       }
-      
+
       struct Success {
         let message: String
-        
+
       }
     }
   }
-  
+
 }

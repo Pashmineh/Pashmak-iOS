@@ -9,7 +9,6 @@
 import Foundation
 
 struct Messages {
-  
   struct Loading {
     static let messages = [
       "پول نمیدین سرور کُنده دیگه...",
@@ -21,17 +20,13 @@ struct Messages {
       "لطفاً کمی صبر بفرمایید قربان..."
     ]
   }
-  
+
   struct ServerErrors {
-    
     static let messages = [
       "نشد که بشه!",
     "خطایی در سرور رخ داد.",
     "به من هیچ ربطی نداره، کد فرزاد کار نکرد!",
     "خطا در سرور.\n(فرززززاااددد.. بدو بیا ببینیم چی شده!)"
     ]
-    
   }
-  
-  
 }

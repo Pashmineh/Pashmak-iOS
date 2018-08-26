@@ -11,14 +11,18 @@ import RealmSwift
 
 class RealmProvider {
   let configuration: Realm.Configuration
-  
+
   internal init(config: Realm.Configuration) {
     self.configuration = config
   }
-  
+
   var realm: Realm {
-    return try! Realm(configuration: configuration)
+    do {
+      return try Realm(configuration: configuration)
+    } catch {
+      fatalError(error.localizedDescription)
+    }
+
   }
- 
-  
+
 }

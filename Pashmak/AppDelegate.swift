@@ -17,19 +17,14 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-
-
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    
     DispatchQueue.main.async {
 //      self.preparePush(application)
       self.prepareHero()
       self.prepareIQKeyboard()
       self.prepareKVNProgress()
     }
-    
-    
     return true
   }
 
@@ -57,20 +52,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func preparePush(_ application: UIApplication = .shared) {
     let notifCenter = UNUserNotificationCenter.current()
     let userNotificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
-    
     notifCenter.delegate = self
-    notifCenter.requestAuthorization(options: userNotificationTypes) { (granted, error) in
+    notifCenter.requestAuthorization(options: userNotificationTypes) { (granted, _) in
       print("Permission granted: \(granted)")
-      
       guard granted else { return }
-      
       DispatchQueue.main.async {
         application.registerForRemoteNotifications()
       }
-      
     }
   }
-  
+
   private func prepareIQKeyboard() {
     IQKeyboardManager.shared.enable = true
     IQKeyboardManager.shared.enableAutoToolbar = true
@@ -78,14 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     IQKeyboardManager.shared.keyboardDistanceFromTextField = 24.0
   }
-  
   private func prepareHero() {
     Hero.shared.containerColor = UIColor.Pashmak.Grey
   }
-  
   private func prepareKVNProgress() {
     let kvnconf: KVNProgressConfiguration = KVNProgressConfiguration()
-    
     kvnconf.backgroundFillColor = UIColor.Pashmak.Orange
     kvnconf.backgroundType = .solid
     kvnconf.backgroundTintColor = UIColor.white
@@ -95,26 +83,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     kvnconf.successColor = UIColor.green
     kvnconf.minimumDisplayTime = 1.0
     kvnconf.minimumErrorDisplayTime = 3.0
-    
     kvnconf.statusFont = UIFont.farsiFont(.regular, size: 15.0)
-    
     KVNProgress.setConfiguration(kvnconf)
   }
-  
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-  
+
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    
     let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
     Settings.current.update(pushToken: token)
     print("Token: [\(token)]")
-    
-  }
-  
-}
 
+  }
+
+}
 
 /*
 extension AppDelegate: CLLocationManagerDelegate {

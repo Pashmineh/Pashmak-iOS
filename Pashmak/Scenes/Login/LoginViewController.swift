@@ -15,39 +15,34 @@ import Hero
 import Material
 import KVNProgress
 
-protocol LoginDisplayLogic: class
-{
+protocol LoginDisplayLogic: class {
   func displayVerify(viewModel: Login.Verify.ViewModel)
-  
+
   func displayAuthenticateLoading(viewModel: Login.Authenticate.ViewModel.Loading)
   func displayAuthenticateFailed(viewModel: Login.Authenticate.ViewModel.Failed)
   func displayAuthenticateSuccess(viewModel: Login.Authenticate.ViewModel.Success)
-  
+
 }
 
-class LoginViewController: UIViewController
-{
+class LoginViewController: UIViewController {
   var interactor: LoginBusinessLogic?
   var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
 
   // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
+
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
   }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
+
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
   }
-  
+
   // MARK: Setup
-  
-  private func setup()
-  {
+
+  private func setup() {
     let viewController = self
     let interactor = LoginInteractor()
     let presenter = LoginPresenter()
@@ -59,11 +54,10 @@ class LoginViewController: UIViewController
     router.viewController = viewController
     router.dataStore = interactor
   }
-  
+
   // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let scene = segue.identifier {
       let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
       if let router = router, router.responds(to: selector) {
@@ -71,94 +65,89 @@ class LoginViewController: UIViewController
       }
     }
   }
-  
+
   // MARK: View lifecycle
-  
+
   var phoneNumber: String {
     return self.userNameTextField.text ?? ""
   }
-  
+
   var password: String {
     return self.passwordTextField.text ?? ""
   }
-  
+
   @IBOutlet weak var userNameTextField: TextField!
   @IBOutlet weak var passwordTextField: TextField!
   @IBOutlet weak var nextButton: Button!
   @IBAction func nextButtonTapped(_ sender: Any) {
     self.login()
   }
-  
-  override func viewDidLoad()
-  {
+
+  override func viewDidLoad() {
     super.viewDidLoad()
     prepareUI()
   }
-  
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     preparePush()
   }
-  
- 
+
   private func prepareUI() {
     self.hero.isEnabled = true
     prepareTextFields()
     prepareNextButton()
   }
-  
+
   private func prepareTextFields() {
-    func format(_ tf: TextField, placeHolder: String) {
-      tf.tintColor = UIColor.Pashmak.Orange
-      
-      tf.placeholderLabel.text = placeHolder
-      tf.placeholderLabel.font = UIFont.farsiFont(.light, size: 18.0)
-      tf.placeholderLabel.textColor = UIColor.Pashmak.TextDeactive
-      tf.textAlignment = .center
-      
-      tf.textAlignment = .center
-      tf.font = UIFont.farsiFont(.bold, size: 18.0)
-      tf.textColor = UIColor.Pashmak.Orange
-      
-      tf.dividerActiveHeight = 2.0
-      tf.dividerNormalHeight = 1.0
-      
-      tf.dividerActiveColor = UIColor.Pashmak.Orange
-      tf.dividerNormalColor = UIColor.Pashmak.NormalDivider
-      
-      tf.placeholderAnimation = .hidden
-      tf.addTarget(self, action: #selector(self.verify), for: .editingChanged)
+    func format(_ textField: TextField, placeHolder: String) {
+      textField.tintColor = UIColor.Pashmak.Orange
+
+      textField.placeholderLabel.text = placeHolder
+      textField.placeholderLabel.font = UIFont.farsiFont(.light, size: 18.0)
+      textField.placeholderLabel.textColor = UIColor.Pashmak.TextDeactive
+      textField.textAlignment = .center
+
+      textField.font = UIFont.farsiFont(.bold, size: 18.0)
+      textField.textColor = UIColor.Pashmak.Orange
+
+      textField.dividerActiveHeight = 2.0
+      textField.dividerNormalHeight = 1.0
+
+      textField.dividerActiveColor = UIColor.Pashmak.Orange
+      textField.dividerNormalColor = UIColor.Pashmak.NormalDivider
+
+      textField.placeholderAnimation = .hidden
+      textField.addTarget(self, action: #selector(self.verify), for: .editingChanged)
     }
-    
+
     format(self.userNameTextField, placeHolder: "شماره تلفن همراه")
     format(self.passwordTextField, placeHolder: "کد ملی")
-    
+
   }
- 
+
   private func prepareNextButton() {
     guard let btn = self.nextButton else { return }
     btn.pulseColor = .white
     btn.isEnabled = false
     let layer = btn.layer
-    
+
     layer.cornerRadius = 22.0
-    
-    
+
   }
-  
-  
+
   private func preparePush() {
     print("Current Token: [\(Settings.current.pushToken)]")
     (UIApplication.shared.delegate as? AppDelegate)?.preparePush()
   }
-  
+
   private func updateNextButton(_ isValid: Bool) {
     guard let btn = self.nextButton else { return }
     btn.isEnabled = isValid
     btn.backgroundColor = isValid ? UIColor.Pashmak.buttonActive : UIColor.Pashmak.Timberwolf
     btn.setTitleColor(isValid ?  UIColor.white : UIColor.Pashmak.TextDeactive, for: [])
   }
-  
+
   @objc
   private func verify() {
     let phone = self.phoneNumber
@@ -166,15 +155,15 @@ class LoginViewController: UIViewController
     let request = Login.Verify.Request(phone: phone, nationalID: password)
     interactor?.verify(request: request)
   }
-  
+
   private func login() {
-    
+
     let username = self.phoneNumber
     let password = self.password
-    
+
     let request = Login.Authenticate.Request.init(userName: username, password: password)
     interactor?.login(request: request)
-    
+
   }
 }
 
@@ -182,37 +171,37 @@ extension LoginViewController: LoginDisplayLogic {
   func displayVerify(viewModel: Login.Verify.ViewModel) {
     let phoneIsValid = viewModel.phoneIsValid
     let nationalIDIsValid = viewModel.nationalIdIsValid
-    
+
     let formIsValid = phoneIsValid && nationalIDIsValid
    updateNextButton(formIsValid)
-    
+
     if phoneIsValid {
       if userNameTextField.isFirstResponder {
         _ = passwordTextField.becomeFirstResponder()
       }
     }
-    
+
     if formIsValid {
       self.view.endEditing(true)
     }
-    
+
   }
-  
+
   func displayAuthenticateLoading(viewModel: Login.Authenticate.ViewModel.Loading) {
     let message = viewModel.message
     KVNProgress.show(withStatus: message)
   }
-  
+
   func displayAuthenticateFailed(viewModel: Login.Authenticate.ViewModel.Failed) {
     let message = viewModel.message
     KVNProgress.showError(withStatus: message)
   }
-  
+
   func displayAuthenticateSuccess(viewModel: Login.Authenticate.ViewModel.Success) {
     let message = viewModel.message
     KVNProgress.showSuccess(withStatus: message) { [weak self] in
       guard let self = self else { return }
-      
+
     }
   }
 }

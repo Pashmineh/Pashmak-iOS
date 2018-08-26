@@ -10,12 +10,12 @@ import Foundation
 extension ServerModels {
   class EmptyServerModel: ServerModel {
   }
-  
+
   class StringServerModel: ServerModel {
     var bodyString: String?
-    
+
     required init(from decoder: Decoder) throws {
     }
-    
+
   }
 }

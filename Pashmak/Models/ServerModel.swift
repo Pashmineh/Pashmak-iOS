@@ -9,7 +9,6 @@
 import Foundation
 import Log
 
-
 extension Encodable {
   var serializedData: Data? {
     do {
@@ -24,15 +23,11 @@ extension Encodable {
 protocol ServerModel: Codable {
 }
 
-
 struct ServerData<T: Codable> {
   let httpStatus: Int?
   let model: T
 }
 
-
 enum ServerModels {
   // This is a placeholder enumeration to help manage different type of models
 }
-
-

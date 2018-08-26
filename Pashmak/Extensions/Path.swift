@@ -33,7 +33,8 @@ enum PathError: Error, LocalizedError {
 
   var errorDescription: String? {
     switch self {
-      case .notFound: return "Resource not found"
+    case .notFound:
+      return "Resource not found"
     }
   }
 }

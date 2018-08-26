@@ -9,11 +9,9 @@
 import Foundation
 
 extension Date {
-  
   var utcValue: Double {
     return self.timeIntervalSince1970 * 1000.0
   }
-  
 }
 
 extension Double {

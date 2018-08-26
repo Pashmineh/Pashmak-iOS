@@ -9,19 +9,14 @@
 import UIKit
 import Hue
 
-
 extension UIColor {
-  
+
   struct Pashmak {
     static var Grey: UIColor = UIColor(hex: "e8e8e8")
     static var Orange: UIColor = UIColor(hex: "F5A623")
     static var TextDeactive: UIColor = UIColor(hex: "BABABA")
     static var NormalDivider: UIColor = UIColor(hex: "979797")
     static var Timberwolf: UIColor = UIColor(hex: "D8D8D8")
-    static var buttonActive: UIColor = UIColor(hex: "9b9b9b")    
+    static var buttonActive: UIColor = UIColor(hex: "9b9b9b")
   }
-  
-  
 }
-
-

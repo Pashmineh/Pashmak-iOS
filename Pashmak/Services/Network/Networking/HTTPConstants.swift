@@ -9,33 +9,33 @@
 import Foundation
 
 enum HTTPMethod: String {
-  
-  case GET = "GET"
-  case POST = "POST"
-  case PUT = "PUT"
-  case DELETE = "DELETE"
-  case HEAD = "HEAD"
-  case OPTIONS = "OPTIONS"
+
+  case GET
+  case POST
+  case PUT
+  case DELETE
+  case HEAD
+  case OPTIONS
 }
 
 enum HTTPTimeOut: Double {
-  
-  case Short = 15.0
-  case Normal = 30.0
-  case Long = 120.0
-  case Unlimited = 3600.0
-  
+
+  case short = 15.0
+  case normal = 30.0
+  case long = 120.0
+  case unlimited = 3600.0
+
 }
 
 struct HTTPHeaders {
-  
+
   static let ContentType = "content-type"
   static let ContentLength = "Content-Length"
   static let Accept = "Accept"
   static let Authorization = "Authorization"
   static let UserAgent = "User-Agent"
   static let AcceptLanguage = "Accept-Language"
-  
+
 }
 
 struct HTTPHeaderValues {
@@ -51,7 +51,7 @@ enum HttpContentType {
   case urlEncodedForm
   case multipartFormdata
   case text
-  
+
   var value: String {
     switch self {
     case .any:
@@ -70,6 +70,6 @@ enum HttpContentType {
   }
 }
 
-var BaseRequestHeaders: [String: String] {
+var baseRequestHeaders: [String: String] {
   return [HTTPHeaders.UserAgent: HTTPHeaderValues.UserAgent, HTTPHeaders.AcceptLanguage: HTTPHeaderValues.AcceptLanguage]
 }

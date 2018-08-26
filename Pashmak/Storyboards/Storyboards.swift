@@ -9,15 +9,15 @@
 import UIKit
 
 struct Storyboards {
-  
+
   static let Main = UIStoryboard(name: "Main", bundle: nil)
-  
+
 }
 
 struct StoryboardsIDs {
-  
+
   struct Main {
       static let Login = "LoginStoryboardID"
   }
-  
+
 }

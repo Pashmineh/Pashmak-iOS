@@ -13,57 +13,54 @@
 import UIKit
 import Hero
 
-@objc protocol SplashRoutingLogic
-{
+@objc protocol SplashRoutingLogic {
   func routeToLogin(segue: UIStoryboardSegue?)
 }
 
-protocol SplashDataPassing
-{
+protocol SplashDataPassing {
   var dataStore: SplashDataStore? { get }
 }
 
-class SplashRouter: NSObject, SplashRoutingLogic, SplashDataPassing
-{
+class SplashRouter: NSObject, SplashRoutingLogic, SplashDataPassing {
   weak var viewController: SplashViewController?
   var dataStore: SplashDataStore?
 
   func routeToLogin(segue: UIStoryboardSegue?) {
-    
+
     guard let sourceVC = viewController, let sourceDS = dataStore else { return }
-    
+
     func handleNonSegue() {
       let destVC = Storyboards.Main.instantiateViewController(withIdentifier: StoryboardsIDs.Main.Login) as? LoginViewController
       guard let destinationVC = destVC, var destinationDS = destinationVC.router?.dataStore else {
         return
       }
-      
+
       passDataToLogin(source: sourceDS, destination: &destinationDS)
       prepareLogin(source: sourceVC, destination: destinationVC)
       navigateToLogin(source: sourceVC, destination: destinationVC)
     }
-    
+
     guard let destinationVC = segue?.destination as? LoginViewController, var destinationDS = destinationVC.router?.dataStore else {
       handleNonSegue()
       return
     }
-    
+
     passDataToLogin(source: sourceDS, destination: &destinationDS)
     prepareLogin(source: sourceVC, destination: destinationVC)
-    
+
   }
-  
+
   private func passDataToLogin(source: SplashDataStore, destination: inout LoginDataStore) {
-    
+
   }
-  
+
   private func prepareLogin(source: SplashViewController, destination: LoginViewController) {
     destination.hero.isEnabled = true
     source.navigationController?.hero.navigationAnimationType = .zoom
   }
-  
+
   private func navigateToLogin(source: SplashViewController, destination: LoginViewController) {
     source.navigationController?.setViewControllers([destination], animated: true)
   }
-  
+
 }

@@ -9,16 +9,16 @@
 import Foundation
 
 extension ServerRequest {
-  
+
   struct Authentication {
-    
+
     static func authenticate(info: ServerModels.Authentication.Request) -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api,.authenticate])
-      return HTTPRequest(method: .POST, url: url, parameters: nil, bodyMessage: info, headers: nil, timeOut: .Normal, acceptType: .json, contentType: .json)
-      
+      url.appendPathComponents([.api, .authenticate])
+      return HTTPRequest(method: .POST, url: url, parameters: nil, bodyMessage: info, headers: nil, timeOut: .normal, acceptType: .json, contentType: .json)
+
     }
-    
+
   }
-  
+
 }

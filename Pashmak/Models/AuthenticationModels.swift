@@ -26,36 +26,36 @@ import Foundation
 }
  */
 extension ServerModels {
-  class Authentication {
+  enum Authentication {
     class Request: ServerModel {
-      
+
       let deviceID: String
       let password: String
       let platform: String
       let rememberMe: Bool = true
       let token: String
       let username: String
-      
+
       init(username: String, password: String) {
-        
+
         self.username = username
         self.password = password
-        
+
         self.deviceID = Settings.current.deviceToken
         self.platform = "IOS"
         self.token = Settings.current.pushToken
-        
+
       }
-      
+
     }
-   
+
     class Response: ServerModel {
       var avatar: String?
       var lastName: String?
       var name: String?
-      var token: String?      
-      
+      var token: String?
+
     }
-    
+
   }
 }

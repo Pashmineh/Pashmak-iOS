@@ -12,20 +12,17 @@
 
 import UIKit
 
-protocol SplashBusinessLogic
-{
+protocol SplashBusinessLogic {
   func goNext(request: Splash.GoNext.Request)
 }
 
-protocol SplashDataStore
-{
-  
+protocol SplashDataStore {
+
 }
 
-class SplashInteractor: SplashBusinessLogic, SplashDataStore
-{
+class SplashInteractor: SplashBusinessLogic, SplashDataStore {
   var presenter: SplashPresentationLogic?
- 
+
   func goNext(request: Splash.GoNext.Request) {
     let response = Splash.GoNext.Response(destination: .login)
     presenter?.presentGoNext(response: response)

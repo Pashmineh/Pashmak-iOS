@@ -10,7 +10,7 @@ import UIKit
 import AudioToolbox
 
 extension UIView {
-  
+
   func shake(vibrate: Bool = true) {
     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     UIView.animate(withDuration: 0.05, animations: { [weak self] in
@@ -23,7 +23,7 @@ extension UIView {
       }, completion: nil)
     }
   }
-  
+
 }
 
 /*

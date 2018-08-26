@@ -12,13 +12,11 @@
 
 import UIKit
 
-protocol SplashPresentationLogic
-{
+protocol SplashPresentationLogic {
   func presentGoNext(response: Splash.GoNext.Response)
 }
 
-class SplashPresenter: SplashPresentationLogic
-{
+class SplashPresenter: SplashPresentationLogic {
   weak var viewController: SplashDisplayLogic?
   func presentGoNext(response: Splash.GoNext.Response) {
     let dest = response.destination
