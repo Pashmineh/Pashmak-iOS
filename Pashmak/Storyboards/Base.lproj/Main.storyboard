@@ -128,6 +128,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DzS-Dm-dk3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bb-sv-TU2">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                 <subviews>
@@ -189,7 +193,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="TextDeactive"/>
+                                <color key="backgroundColor" red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="5d7-oz-iw7" firstAttribute="centerY" secondItem="4bb-sv-TU2" secondAttribute="centerY" constant="-4" id="0hJ-Ek-l6l"/>
                                     <constraint firstItem="uhe-f4-MoA" firstAttribute="top" secondItem="K9u-Wt-Ppp" secondAttribute="bottom" constant="8" id="1xo-cZ-7pJ"/>
@@ -220,15 +224,30 @@
                                     <constraint firstAttribute="height" constant="1" id="2J6-bU-aJk"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DzS-Dm-dk3">
-                                <rect key="frame" x="0.0" y="150" width="375" height="453"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEP-f2-uYd">
                                 <rect key="frame" x="0.0" y="603" width="375" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2oS-H1-S6a" customClass="Button" customModule="Material">
+                                        <rect key="frame" x="16" y="10" width="343" height="44"/>
+                                        <color key="backgroundColor" name="DavyGrey"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="W51-rO-U9e"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="IRANSansDNFaNum-Bold" family="IRANSansDNFaNum" pointSize="16"/>
+                                        <state key="normal" title="ثبت ورود">
+                                            <color key="titleColor" name="Grey"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="checkinButtonTapped:" destination="FyZ-sJ-4aE" eventType="touchUpInside" id="d30-Nd-qqp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="2oS-H1-S6a" firstAttribute="centerY" secondItem="sEP-f2-uYd" secondAttribute="centerY" id="1RX-b1-ch4"/>
+                                    <constraint firstAttribute="trailing" secondItem="2oS-H1-S6a" secondAttribute="trailing" constant="16" id="LDu-l5-cuC"/>
                                     <constraint firstAttribute="height" constant="64" id="PKb-JO-bFh"/>
+                                    <constraint firstItem="2oS-H1-S6a" firstAttribute="leading" secondItem="sEP-f2-uYd" secondAttribute="leading" constant="16" id="X5l-0Y-p9Q"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -244,8 +263,8 @@
                             <constraint firstItem="sEP-f2-uYd" firstAttribute="bottom" secondItem="8L5-r5-1YD" secondAttribute="bottom" id="dKn-XE-0VX"/>
                             <constraint firstAttribute="right" secondItem="4bb-sv-TU2" secondAttribute="right" id="dz3-y3-C79"/>
                             <constraint firstItem="fGi-Qn-iQw" firstAttribute="leading" secondItem="8L5-r5-1YD" secondAttribute="leading" id="fG7-8I-1sp"/>
-                            <constraint firstItem="sEP-f2-uYd" firstAttribute="top" secondItem="DzS-Dm-dk3" secondAttribute="bottom" id="hUt-jb-dlS"/>
-                            <constraint firstItem="DzS-Dm-dk3" firstAttribute="top" secondItem="4bb-sv-TU2" secondAttribute="bottom" id="qnV-Hk-jSx"/>
+                            <constraint firstAttribute="bottom" secondItem="DzS-Dm-dk3" secondAttribute="bottom" id="hUt-jb-dlS"/>
+                            <constraint firstItem="DzS-Dm-dk3" firstAttribute="top" secondItem="ldm-sA-eBA" secondAttribute="top" id="qnV-Hk-jSx"/>
                             <constraint firstItem="8L5-r5-1YD" firstAttribute="trailing" secondItem="DzS-Dm-dk3" secondAttribute="trailing" id="tiI-mM-spy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8L5-r5-1YD"/>
@@ -255,6 +274,7 @@
                         <outlet property="avatarImageView" destination="5d7-oz-iw7" id="Ksg-CL-6gZ"/>
                         <outlet property="balanceLabel" destination="uhe-f4-MoA" id="AuS-dB-FxB"/>
                         <outlet property="bottomContainer" destination="sEP-f2-uYd" id="Utn-Ej-Bs4"/>
+                        <outlet property="checkinButton" destination="2oS-H1-S6a" id="IbM-kf-nu3"/>
                         <outlet property="collectionContainer" destination="DzS-Dm-dk3" id="klP-ya-qLN"/>
                         <outlet property="cycleNameLabel" destination="K9u-Wt-Ppp" id="EGW-Lp-xas"/>
                         <outlet property="fullnameLabel" destination="00l-ro-dfv" id="zls-pb-26V"/>

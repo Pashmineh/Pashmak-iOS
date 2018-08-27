@@ -27,8 +27,19 @@ class HomeEventSectionController: ListSectionController {
   }
 
   var cellHeight: CGFloat {
-    return 200.0
+    return 230.0
   }
-  
 
+  override func cellForItem(at index: Int) -> UICollectionViewCell {
+    guard let cell = collectionContext?.dequeueReusableCell(withNibName: "HomeEventCell", bundle: nil, for: self, at: index) as? HomeEventCell else {
+      fatalError()
+    }
+    cell.event = self.event
+    return cell
+  }
+
+  override func didUpdate(to object: Any) {
+    guard let object = object as? ServerModels.Home.Event else { return }
+    self.event = object
+  }
 }

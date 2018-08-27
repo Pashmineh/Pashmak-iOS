@@ -11,16 +11,18 @@
 //
 
 import UIKit
+import IGListKit
 
 protocol HomePresentationLogic {
-func presentPopulate(response: Home.Populate.Response)
+  func presentPopulate(response: Home.Populate.Response)
+  func presentRefresh(response: Home.Refresh.Response)
 }
 
 class HomePresenter: HomePresentationLogic {
   weak var viewController: HomeDisplayLogic?
   func presentPopulate(response: Home.Populate.Response) {
 
-   let state = response.state
+    let state = response.state
 
     switch state {
     case .loading:
@@ -37,9 +39,38 @@ class HomePresenter: HomePresentationLogic {
       viewController?.displayPopulateFailed(viewModel: viewModel)
     case .success(let homeData):
       let profile = Home.UserProfile(homeData: homeData, settings: Settings.current)
-      let viewModel = Home.Populate.ViewModel.Success.init(profile: profile, items: [])
+      var items: [ListDiffable] = []
+      if let events = homeData.events?.sorted(by: { ($0.eventTimeEpoch ?? 0) < ($1.eventTimeEpoch ?? 0) }) {
+        events.forEach { items.append($0) }
+      }
+      let viewModel = Home.Populate.ViewModel.Success.init(profile: profile, items: items)
       viewController?.displayPopulateSuccess(viewModel: viewModel)
     }
 
+  }
+
+  func presentRefresh(response: Home.Refresh.Response) {
+    let state = response.state
+
+    switch state {
+    case .loading:
+      break
+    case .failure(let error):
+      var message = "خطا!"
+      if case APIError.invalidResponseCode(let status) = error {
+        message = Messages.ServerErrors.messages.randomElement() ?? message
+        message += "\n\(status)"
+      }
+      let viewModel = Home.Refresh.ViewModel.Failed(message: message)
+      viewController?.displayRefreshFailed(viewModel: viewModel)
+    case .success(let homeData):
+      let profile = Home.UserProfile(homeData: homeData, settings: Settings.current)
+      var items: [ListDiffable] = []
+      if let events = homeData.events?.sorted(by: { ($0.eventTimeEpoch ?? 0) < ($1.eventTimeEpoch ?? 0) }) {
+        events.forEach { items.append($0) }
+      }
+      let viewModel = Home.Refresh.ViewModel.Success(profile: profile, items: items)
+      viewController?.displayRefreshSuccess(viewModel: viewModel)
+    }
   }
 }

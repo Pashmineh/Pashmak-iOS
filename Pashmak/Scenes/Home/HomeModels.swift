@@ -14,7 +14,7 @@ import UIKit
 import IGListKit
 
 enum Home {
-
+    typealias FetchHomeState = FetchState<ServerModels.Home, Error>
   struct UserProfile {
 
     let fullName: String
@@ -50,7 +50,7 @@ enum Home {
   }
 
   enum Populate {
-    typealias FetchHomeState = FetchState<ServerModels.Home, Error>
+
     struct Request {
 
     }
@@ -76,4 +76,26 @@ enum Home {
 
     }
   }
+
+  enum Refresh {
+    struct Request {
+
+    }
+
+    struct Response {
+      let state: FetchHomeState
+    }
+
+    enum ViewModel {
+      struct Failed {
+        let message: String
+      }
+
+      struct Success {
+        let profile: UserProfile
+        let items: [ListDiffable]
+      }
+    }
+  }
+
 }
