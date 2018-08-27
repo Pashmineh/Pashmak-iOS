@@ -35,11 +35,9 @@ class HomePresenter: HomePresentationLogic {
       }
       let viewModel = Home.Populate.ViewModel.Failed.init(message: message)
       viewController?.displayPopulateFailed(viewModel: viewModel)
-    case .success((let homeData, let settings)):
-      let fullName = settings.fullName
-      let avatarURL = settings.avatarURL
-
-      let viewModel = Home.Populate.ViewModel.Success.init(fullName: fullName, avatarURL: avatarURL, items: [])
+    case .success(let homeData):
+      let profile = Home.UserProfile(homeData: homeData, settings: Settings.current)
+      let viewModel = Home.Populate.ViewModel.Success.init(profile: profile, items: [])
       viewController?.displayPopulateSuccess(viewModel: viewModel)
     }
 

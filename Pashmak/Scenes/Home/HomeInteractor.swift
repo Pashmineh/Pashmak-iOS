@@ -42,10 +42,9 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
       .done { [weak self] (result: ServerData<ServerModels.Home>) in
         guard let self = self else { return }
         let homeData = result.model
-        let settings = Settings.current
 
         Async.main(after: 2.0) {
-          let response = Home.Populate.Response.init(state: Home.Populate.FetchHomeState.success((homeData, settings)))
+          let response = Home.Populate.Response.init(state: Home.Populate.FetchHomeState.success(homeData))
           self.presenter?.presentPopulate(response: response)
         }
     }

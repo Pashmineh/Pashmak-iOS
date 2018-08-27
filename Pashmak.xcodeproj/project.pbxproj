@@ -10,6 +10,7 @@
 		84052D422132510C0040ABF5 /* AuthenticationRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84052D412132510C0040ABF5 /* AuthenticationRequests.swift */; };
 		84052D44213251240040ABF5 /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84052D43213251240040ABF5 /* AuthenticationModels.swift */; };
 		84052D4621325EBF0040ABF5 /* PashmakMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84052D4521325EBF0040ABF5 /* PashmakMessages.swift */; };
+		8412D01A2133C0B400942874 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412D0192133C0B400942874 /* Formatters.swift */; };
 		841BF3002132B9C3003E7BA7 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BF2FB2132B9C3003E7BA7 /* HomePresenter.swift */; };
 		841BF3012132B9C3003E7BA7 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BF2FC2132B9C3003E7BA7 /* HomeRouter.swift */; };
 		841BF3022132B9C3003E7BA7 /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BF2FD2132B9C3003E7BA7 /* HomeModels.swift */; };
@@ -68,6 +69,7 @@
 		84052D412132510C0040ABF5 /* AuthenticationRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRequests.swift; sourceTree = "<group>"; };
 		84052D43213251240040ABF5 /* AuthenticationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModels.swift; sourceTree = "<group>"; };
 		84052D4521325EBF0040ABF5 /* PashmakMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PashmakMessages.swift; sourceTree = "<group>"; };
+		8412D0192133C0B400942874 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		841BF2FB2132B9C3003E7BA7 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		841BF2FC2132B9C3003E7BA7 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		841BF2FD2132B9C3003E7BA7 /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				845CB26F21312A5D001957B3 /* Date+Extensions.swift */,
 				845CB27121312A7C001957B3 /* UIView+Animations.swift */,
 				84052D4521325EBF0040ABF5 /* PashmakMessages.swift */,
+				8412D0192133C0B400942874 /* Formatters.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */,
 				95446D2021333F9F0096E78F /* HomedataModels.swift in Sources */,
 				84FC6CBA212BCA4100B4A56A /* LoginModels.swift in Sources */,
+				8412D01A2133C0B400942874 /* Formatters.swift in Sources */,
 				845E3FF0213103A80025477A /* Network.swift in Sources */,
 				84FC6CB9212BCA4100B4A56A /* LoginInteractor.swift in Sources */,
 				95BC0071212C972D001B4375 /* UIFont+Farsi.swift in Sources */,

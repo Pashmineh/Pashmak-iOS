@@ -14,8 +14,43 @@ import UIKit
 import IGListKit
 
 enum Home {
+
+  struct UserProfile {
+
+    let fullName: String
+    let avatarURL: String
+    let balance: String
+    let balanceColor: UIColor
+    let paid: String
+    let cycleName: String
+
+    init(homeData: ServerModels.Home, settings: Settings) {
+
+      let balanceNumber = NSNumber(value: homeData.balance?.balance ?? 0)
+      let balance = Formatters.TomanFormatter.string(from: balanceNumber) ?? ""
+
+      let balanceColor = (homeData.balance?.balance ?? 0) < 0 ? UIColor.Pashmak.rudy : UIColor.Pashmak.kellyGreen
+
+      let paidNumber = NSNumber(value: homeData.balance?.totalPaid ?? 0)
+      let paidAmount = Formatters.TomanFormatter.string(from: paidNumber) ?? "0"
+
+      let paid = "مجموع پرداختی این دوره: \(paidAmount)"
+
+      let cycleName = homeData.cycle ?? ""
+
+      self.fullName = settings.fullName
+      self.avatarURL = settings.avatarURL
+      self.cycleName = cycleName
+      self.balance = balance
+      self.balanceColor = balanceColor
+      self.paid = paid
+
+    }
+
+  }
+
   enum Populate {
-    typealias FetchHomeState = FetchState<(ServerModels.Home, Settings), Error>
+    typealias FetchHomeState = FetchState<ServerModels.Home, Error>
     struct Request {
 
     }
@@ -34,8 +69,7 @@ enum Home {
       }
 
       struct Success {
-        let fullName: String
-        let avatarURL: String
+        let profile: UserProfile
         let items: [ListDiffable]
       }
 

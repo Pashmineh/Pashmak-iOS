@@ -61,7 +61,7 @@ class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing {
   private func prepareHome(source: LoginViewController, destination: HomeViewController) {
     destination.hero.isEnabled = true
     source.navigationController?.hero.navigationAnimationType = .zoomOut
-    destination.populate()
+//    destination.populate()
   }
 
   private func navigateToHome(source: LoginViewController, destination: HomeViewController) {

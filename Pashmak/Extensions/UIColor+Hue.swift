@@ -18,5 +18,8 @@ extension UIColor {
     static var NormalDivider: UIColor = UIColor(hex: "979797")
     static var Timberwolf: UIColor = UIColor(hex: "D8D8D8")
     static var buttonActive: UIColor = UIColor(hex: "9b9b9b")
+    static var davyGrey: UIColor = UIColor(hex: "5f5f5f")
+    static var rudy: UIColor = UIColor(hex: "ff001f")
+    static var kellyGreen: UIColor = UIColor(hex: "53a500")
   }
 }

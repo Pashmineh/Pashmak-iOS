@@ -82,6 +82,9 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var bottomContainer: UIView!
 
   @IBOutlet weak var fullnameLabel: UILabel!
+  @IBOutlet weak var cycleNameLabel: UILabel!
+  @IBOutlet weak var balanceLabel: UILabel!
+  @IBOutlet weak var paidLabel: UILabel!
   @IBOutlet weak var avatarImageView: UIImageView!
   @IBOutlet weak var avatarBorderView: UIView!
 
@@ -90,10 +93,32 @@ class HomeViewController: UIViewController {
     prepareUI()
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    self.populate()
+  }
+
   private func prepareUI() {
     self.hero.isEnabled = true
+    prepareSkeleton()
     prepareAvatar()
     prepareCollectionView()
+  }
+
+  private func prepareSkeleton() {
+    self.topContainer.isSkeletonable = false
+    let cornerRadius = 3
+
+    self.fullnameLabel.isSkeletonable = true
+    self.fullnameLabel.linesCornerRadius = cornerRadius
+
+    self.avatarBorderView.isSkeletonable = true
+    self.cycleNameLabel.isSkeletonable = true
+    self.cycleNameLabel.linesCornerRadius = cornerRadius
+    self.balanceLabel.isSkeletonable = true
+    self.balanceLabel.linesCornerRadius = cornerRadius
+    self.paidLabel.isSkeletonable = true
+    self.paidLabel.linesCornerRadius = cornerRadius
   }
 
   private func prepareAvatar() {
@@ -128,15 +153,25 @@ class HomeViewController: UIViewController {
     interactor?.populate(request: request)
   }
 
-  private func updateProfile(viewModel: Home.Populate.ViewModel.Success) {
+  private func updateProfile(_ viewModel: Home.UserProfile) {
     let fullName = viewModel.fullName
+    let avatarURL = viewModel.avatarURL
+    let cycleName = viewModel.cycleName
+    let balance = viewModel.balance
+    let paid = viewModel.paid
+
     self.fullnameLabel.text = fullName
 
-    let avatarURL = viewModel.avatarURL
     if let imageURL = URL(string: avatarURL) {
       self.avatarImageView.kf.setImage(with: imageURL)
-
     }
+
+    self.cycleNameLabel.text = cycleName
+    self.balanceLabel.text = balance
+    self.paidLabel.text = paid
+
+    self.balanceLabel.textColor = viewModel.balanceColor
+    self.avatarBorderView.layer.borderColor = viewModel.balanceColor.cgColor
   }
 
 }
@@ -144,11 +179,12 @@ class HomeViewController: UIViewController {
 extension HomeViewController: HomeDisplayLogic {
 
   func displayPopulateLoading(viewModel: Home.Populate.ViewModel.Loading) {
-//    let message = viewModel.message
-//    KVNProgress.show(withStatus: message)
     self.view.isSkeletonable = true
-    
-    self.view.startSkeletonAnimation()
+    let skeletonAnimation = SkeletonGradient(baseColor: UIColor.Pashmak.Grey, secondaryColor: UIColor.Pashmak.Timberwolf)
+
+    self.topContainer.showGradientSkeleton(usingGradient: skeletonAnimation)
+    self.topContainer.startSkeletonAnimation()
+
   }
 
   func displayPopulateFailed(viewModel: Home.Populate.ViewModel.Failed) {
@@ -159,17 +195,12 @@ extension HomeViewController: HomeDisplayLogic {
 
   func displayPopulateSuccess(viewModel: Home.Populate.ViewModel.Success) {
     let items = viewModel.items
+    let profile = viewModel.profile
     self.displayedItems = items
-    self.updateProfile(viewModel: viewModel)
+    self.updateProfile(profile)
+    self.topContainer.hideSkeleton()
     self.adapter.performUpdates(animated: true, completion: { (_) in
     })
-//    KVNProgress.dismiss { [weak self] in
-//      guard let self = self else { return }
-//      self.adapter.performUpdates(animated: true, completion: { (_) in
-//
-//      })
-//
-//    }
   }
 
 }

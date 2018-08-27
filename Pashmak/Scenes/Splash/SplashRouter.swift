@@ -100,7 +100,7 @@ class SplashRouter: NSObject, SplashRoutingLogic, SplashDataPassing {
   private func prepareHome(source: SplashViewController, destination: HomeViewController) {
     destination.hero.isEnabled = true
     source.navigationController?.hero.navigationAnimationType = .zoomOut
-    destination.populate()
+//    destination.populate()
   }
 
   private func navigateToHome(source: SplashViewController, destination: HomeViewController) {
