@@ -20,6 +20,7 @@ enum URLPath {
 
   case api
   case authenticate
+  case home
 
   func toString() -> String {
     var result = ""
@@ -28,7 +29,10 @@ enum URLPath {
       result = "api"
     case .authenticate:
       result = "authenticate"
+    case .home:
+      result = "home"
     }
+
     return result
   }
 
