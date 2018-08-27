@@ -223,6 +223,8 @@ extension HomeViewController: ListAdapterDataSource {
     switch object {
     case is HomeSkeletonItem:
       return HomeSkeletonSectionController()
+    case is ServerModels.Home.Event:
+      return HomeEventSectionController()
     default:
       fatalError()
     }

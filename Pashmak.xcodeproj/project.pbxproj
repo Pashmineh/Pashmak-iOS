@@ -41,6 +41,9 @@
 		84EC2249213409740040ECE2 /* HomeSkeletonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC2248213409740040ECE2 /* HomeSkeletonCard.swift */; };
 		84EC2254213420770040ECE2 /* HomeSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC2252213420770040ECE2 /* HomeSkeletonCell.swift */; };
 		84EC2255213420770040ECE2 /* HomeSkeletonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EC2253213420770040ECE2 /* HomeSkeletonCell.xib */; };
+		84EC2259213422D20040ECE2 /* HomeEventItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC2258213422D20040ECE2 /* HomeEventItem.swift */; };
+		84EC225C213422E50040ECE2 /* HomeEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC225A213422E50040ECE2 /* HomeEventCell.swift */; };
+		84EC225D213422E50040ECE2 /* HomeEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EC225B213422E50040ECE2 /* HomeEventCell.xib */; };
 		84FC6CB9212BCA4100B4A56A /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CB3212BCA4100B4A56A /* LoginInteractor.swift */; };
 		84FC6CBA212BCA4100B4A56A /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CB4212BCA4100B4A56A /* LoginModels.swift */; };
 		84FC6CBB212BCA4100B4A56A /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CB5212BCA4100B4A56A /* LoginPresenter.swift */; };
@@ -106,6 +109,9 @@
 		84EC2248213409740040ECE2 /* HomeSkeletonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCard.swift; sourceTree = "<group>"; };
 		84EC2252213420770040ECE2 /* HomeSkeletonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCell.swift; sourceTree = "<group>"; };
 		84EC2253213420770040ECE2 /* HomeSkeletonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSkeletonCell.xib; sourceTree = "<group>"; };
+		84EC2258213422D20040ECE2 /* HomeEventItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEventItem.swift; sourceTree = "<group>"; };
+		84EC225A213422E50040ECE2 /* HomeEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEventCell.swift; sourceTree = "<group>"; };
+		84EC225B213422E50040ECE2 /* HomeEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeEventCell.xib; sourceTree = "<group>"; };
 		84FC6CB3212BCA4100B4A56A /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		84FC6CB4212BCA4100B4A56A /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
 		84FC6CB5212BCA4100B4A56A /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
@@ -276,11 +282,30 @@
 		84EC2247213409630040ECE2 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				84EC2257213422BE0040ECE2 /* Events */,
+				84EC2256213422AE0040ECE2 /* Skeletons */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		84EC2256213422AE0040ECE2 /* Skeletons */ = {
+			isa = PBXGroup;
+			children = (
 				84EC2252213420770040ECE2 /* HomeSkeletonCell.swift */,
 				84EC2253213420770040ECE2 /* HomeSkeletonCell.xib */,
 				84EC2248213409740040ECE2 /* HomeSkeletonCard.swift */,
 			);
-			path = Cards;
+			path = Skeletons;
+			sourceTree = "<group>";
+		};
+		84EC2257213422BE0040ECE2 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				84EC2258213422D20040ECE2 /* HomeEventItem.swift */,
+				84EC225A213422E50040ECE2 /* HomeEventCell.swift */,
+				84EC225B213422E50040ECE2 /* HomeEventCell.xib */,
+			);
+			path = Events;
 			sourceTree = "<group>";
 		};
 		84FC6CB0212BCA0800B4A56A /* Scenes */ = {
@@ -451,6 +476,7 @@
 				843FB342212AD7CE0047A734 /* LaunchScreen.storyboard in Resources */,
 				9578F3A1212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf in Resources */,
 				843FB33F212AD7CE0047A734 /* Assets.xcassets in Resources */,
+				84EC225D213422E50040ECE2 /* HomeEventCell.xib in Resources */,
 				9578F3A0212F446700A667E9 /* IRANSansDN_Fa_Num.ttf in Resources */,
 				843FB33D212AD7CD0047A734 /* Main.storyboard in Resources */,
 			);
@@ -582,6 +608,7 @@
 				95BC0073212CA400001B4375 /* UIColor+Hue.swift in Sources */,
 				84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */,
 				95446D2021333F9F0096E78F /* HomedataModels.swift in Sources */,
+				84EC225C213422E50040ECE2 /* HomeEventCell.swift in Sources */,
 				84FC6CBA212BCA4100B4A56A /* LoginModels.swift in Sources */,
 				8412D01A2133C0B400942874 /* Formatters.swift in Sources */,
 				845E3FF0213103A80025477A /* Network.swift in Sources */,
@@ -589,6 +616,7 @@
 				95BC0071212C972D001B4375 /* UIFont+Farsi.swift in Sources */,
 				84052D44213251240040ABF5 /* AuthenticationModels.swift in Sources */,
 				845E3FFE2131047E0025477A /* DiffableBox.swift in Sources */,
+				84EC2259213422D20040ECE2 /* HomeEventItem.swift in Sources */,
 				84FC6CBC212BCA4100B4A56A /* LoginRouter.swift in Sources */,
 				95C0DCA4212D722B00A01C4F /* Regex.swift in Sources */,
 				845E4002213104A90025477A /* EmptyServerModel.swift in Sources */,
