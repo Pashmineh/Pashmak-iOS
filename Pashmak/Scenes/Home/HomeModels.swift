@@ -98,4 +98,18 @@ enum Home {
     }
   }
 
+  enum Signout {
+    struct Request {
+
+    }
+
+    struct Response {
+
+    }
+
+    struct ViewModel {
+
+    }
+  }
+
 }

@@ -23,7 +23,7 @@ class HomeEventCell: UICollectionViewCell {
   @IBOutlet weak var mapImageView: UIImageView!
   @IBOutlet weak var eventTimeLabel: UILabel!
   @IBOutlet weak var eventDescription: UILabel!
-  
+
   override func awakeFromNib() {
     super.awakeFromNib()
     prepareUI()

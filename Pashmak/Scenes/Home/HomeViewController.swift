@@ -28,6 +28,8 @@ protocol HomeDisplayLogic: class {
 
   func displayRefreshFailed(viewModel: Home.Refresh.ViewModel.Failed)
   func displayRefreshSuccess(viewModel: Home.Refresh.ViewModel.Success)
+
+  func displaySignout(viewModel: Home.Signout.ViewModel)
 }
 
 class HomeViewController: UIViewController {
@@ -96,6 +98,11 @@ class HomeViewController: UIViewController {
   @IBAction func checkinButtonTapped(_ sender: Any) {
   }
 
+  @IBOutlet weak var signoutButton: Material.Button!
+  @IBAction func signoutButtonTapped(_ sender: Any) {
+    self.signout()
+  }
+
   lazy var refreshControl: UIRefreshControl = {
     let refreshControl = UIRefreshControl()
     refreshControl.tintColor = UIColor.Pashmak.Orange
@@ -110,6 +117,11 @@ class HomeViewController: UIViewController {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+//    self.populate()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     self.populate()
   }
 
@@ -128,6 +140,8 @@ class HomeViewController: UIViewController {
     blurView.blurRadius = 5.0
     self.topContainer.insertSubview(blurView, at: 0)
     self.topContainer.layout(blurView).edges()
+    self.signoutButton.pulseColor = UIColor.Pashmak.davyGrey
+    self.signoutButton.pulseAnimation = .centerRadialBeyondBounds
   }
 
   private func prepareSkeleton() {
@@ -214,6 +228,11 @@ class HomeViewController: UIViewController {
     self.avatarBorderView.layer.borderColor = viewModel.balanceColor.cgColor
   }
 
+  private func signout() {
+    let request = Home.Signout.Request()
+    interactor?.signout(request: request)
+  }
+
 }
 
 extension HomeViewController: HomeDisplayLogic {
@@ -262,8 +281,12 @@ extension HomeViewController: HomeDisplayLogic {
     let items = viewModel.items
     self.displayedItems = items
     self.adapter.performUpdates(animated: true) { (_) in
-      
+
     }
+  }
+
+  func displaySignout(viewModel: Home.Signout.ViewModel) {
+    self.router?.routeToLogin(segue: nil)
   }
 
 }

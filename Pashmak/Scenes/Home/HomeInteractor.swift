@@ -16,6 +16,7 @@ import Async
 protocol HomeBusinessLogic {
   func populate(request: Home.Populate.Request)
   func refresh(request: Home.Refresh.Request)
+  func signout(request: Home.Signout.Request)
 }
 
 protocol HomeDataStore {
@@ -70,6 +71,12 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
         self.presenter?.presentRefresh(response: response)
     }
 
+  }
+
+  func signout(request: Home.Signout.Request) {
+    Settings.clear()
+    let response = Home.Signout.Response()
+    presenter?.presentSignout(response: response)
   }
 
 }

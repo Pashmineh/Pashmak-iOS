@@ -16,6 +16,7 @@ import IGListKit
 protocol HomePresentationLogic {
   func presentPopulate(response: Home.Populate.Response)
   func presentRefresh(response: Home.Refresh.Response)
+  func presentSignout(response: Home.Signout.Response)
 }
 
 class HomePresenter: HomePresentationLogic {
@@ -72,5 +73,10 @@ class HomePresenter: HomePresentationLogic {
       let viewModel = Home.Refresh.ViewModel.Success(profile: profile, items: items)
       viewController?.displayRefreshSuccess(viewModel: viewModel)
     }
+  }
+
+  func presentSignout(response: Home.Signout.Response) {
+    let viewModel = Home.Signout.ViewModel()
+    viewController?.displaySignout(viewModel: viewModel)
   }
 }
