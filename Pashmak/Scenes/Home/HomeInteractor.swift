@@ -25,7 +25,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
   var presenter: HomePresentationLogic?
 
   func populate(request: Home.Populate.Request) {
-
+    Log.trace("Push Token: [\(Settings.current.pushToken)]")
     func sendLoading() {
       let response = Home.Populate.Response.init(state: .loading)
       presenter?.presentPopulate(response: response)

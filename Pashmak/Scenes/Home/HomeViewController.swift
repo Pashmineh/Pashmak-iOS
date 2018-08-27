@@ -112,7 +112,8 @@ class HomeViewController: UIViewController {
     self.fullnameLabel.isSkeletonable = true
     self.fullnameLabel.linesCornerRadius = cornerRadius
 
-    self.avatarBorderView.isSkeletonable = true
+    self.avatarImageView.isSkeletonable = true
+    self.avatarBorderView.isSkeletonable = false
     self.cycleNameLabel.isSkeletonable = true
     self.cycleNameLabel.linesCornerRadius = cornerRadius
     self.balanceLabel.isSkeletonable = true
@@ -125,8 +126,9 @@ class HomeViewController: UIViewController {
     self.avatarImageView.clipsToBounds = true
     self.avatarImageView.layer.cornerRadius = 45.0
     self.avatarImageView.isSkeletonable = true
-    self.avatarBorderView.layer.cornerRadius = 45.0
-    self.avatarBorderView.clipsToBounds = true
+
+    self.avatarBorderView.layer.cornerRadius = 49.0
+    self.avatarBorderView.clipsToBounds = false
     self.avatarBorderView.layer.borderColor = #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1)
     self.avatarBorderView.layer.borderWidth = 2.0
   }

@@ -154,11 +154,11 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfb-q9-xvF">
-                                        <rect key="frame" x="13" y="23" width="96" height="96"/>
+                                        <rect key="frame" x="12" y="22" width="98" height="98"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="96" id="3n5-Xy-FKk"/>
-                                            <constraint firstAttribute="height" constant="96" id="nAZ-rp-Tbp"/>
+                                            <constraint firstAttribute="width" constant="98" id="3n5-Xy-FKk"/>
+                                            <constraint firstAttribute="height" constant="98" id="nAZ-rp-Tbp"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9u-Wt-Ppp">
