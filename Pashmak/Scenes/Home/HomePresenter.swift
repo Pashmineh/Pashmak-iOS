@@ -25,7 +25,7 @@ class HomePresenter: HomePresentationLogic {
     switch state {
     case .loading:
       let message = Messages.Loading.messages.randomElement() ?? "در حال خوندن اطلاعات..."
-      let viewModel = Home.Populate.ViewModel.Loading.init(message: message)
+      let viewModel = Home.Populate.ViewModel.Loading.init(message: message, items: [HomeSkeletonItem()])
       viewController?.displayPopulateLoading(viewModel: viewModel)
     case .failure(let error):
       var message = "خطا!"

@@ -62,6 +62,7 @@ enum Home {
 
       struct Loading {
         let message: String
+        let items: [ListDiffable]
       }
 
       struct Failed {

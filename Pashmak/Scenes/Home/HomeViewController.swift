@@ -139,7 +139,7 @@ class HomeViewController: UIViewController {
 
     collectionView.backgroundColor = .clear
     collectionView.isScrollEnabled = true
-
+collectionView.contentInset.top = 8.0
     adapter.collectionView = collectionView
     adapter.dataSource = self
     guard let containerView = self.collectionContainer else { return }
@@ -184,6 +184,12 @@ extension HomeViewController: HomeDisplayLogic {
     self.view.isSkeletonable = true
     let skeletonAnimation = SkeletonGradient(baseColor: UIColor.Pashmak.Grey, secondaryColor: UIColor.Pashmak.Timberwolf)
 
+    let items = viewModel.items
+    self.displayedItems = items
+    self.adapter.performUpdates(animated: true) { (_) in
+
+    }
+
     self.topContainer.showGradientSkeleton(usingGradient: skeletonAnimation)
     self.topContainer.startSkeletonAnimation()
 
@@ -215,6 +221,8 @@ extension HomeViewController: ListAdapterDataSource {
 
   func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
     switch object {
+    case is HomeSkeletonItem:
+      return HomeSkeletonSectionController()
     default:
       fatalError()
     }
