@@ -199,6 +199,8 @@ class HomeViewController: UIViewController {
   private func prepareCheckinButton() {
     self.checkinButton.layer.cornerRadius = 22.0
     self.checkinButton.pulseColor = UIColor.Pashmak.Grey
+    self.checkinButton.transform = CGAffineTransform(translationX: 0, y: 54.0)
+    self.checkinButton.alpha = 0.0
   }
 
   func populate() {
@@ -239,6 +241,23 @@ class HomeViewController: UIViewController {
     interactor?.signout(request: request)
   }
 
+  private func showCheckinButton(isActive: Bool) {
+
+    guard let button = self.checkinButton else { return }
+    button.isEnabled = isActive
+    button.backgroundColor = isActive ? UIColor.Pashmak.buttonActive : UIColor.Pashmak.Grey
+    let title = isActive ? "ثبت ورود" : "ورود امروز خود را ثبت کرده‌اید"
+    button.setTitle(title, for: [])
+
+    UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.65, initialSpringVelocity: 6.0, options: [], animations: {
+      button.transform = .identity
+      button.alpha = 1.0
+    }) { (_) in
+
+    }
+
+  }
+
 }
 
 extension HomeViewController: HomeDisplayLogic {
@@ -267,9 +286,12 @@ extension HomeViewController: HomeDisplayLogic {
   func displayPopulateSuccess(viewModel: Home.Populate.ViewModel.Success) {
     let items = viewModel.items
     let profile = viewModel.profile
+    let needsCheckin = viewModel.needsCheckIn
     self.displayedItems = items
     self.updateProfile(profile)
     self.topContainer.hideSkeleton()
+
+    self.showCheckinButton(isActive: needsCheckin)
     self.adapter.performUpdates(animated: true, completion: { (_) in
     })
   }

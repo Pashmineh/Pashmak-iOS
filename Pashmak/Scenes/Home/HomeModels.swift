@@ -71,6 +71,7 @@ enum Home {
 
       struct Success {
         let profile: UserProfile
+        let needsCheckIn: Bool
         let items: [ListDiffable]
       }
 
@@ -107,6 +108,19 @@ enum Home {
 
     }
 
+    struct ViewModel {
+
+    }
+  }
+
+  enum Checkin {
+    typealias CheckinFetchState = FetchState<ServerModels.EmptyServerModel, Error>
+    struct Request {
+
+    }
+    struct Response {
+
+    }
     struct ViewModel {
 
     }

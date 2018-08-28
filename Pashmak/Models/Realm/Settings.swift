@@ -26,148 +26,148 @@ extension RealmProvider {
 
 }
 
-@objcMembers
-class Settings: Object {
+  @objcMembers
+  class Settings: Object {
 
-  enum Property: String {
-    case pushToken, deviceToken, oauthToken
-  }
+    enum Property: String {
+      case pushToken, deviceToken, oauthToken
+    }
 
-  dynamic var pushToken: String = ""
-  dynamic var deviceToken: String = ""
-  dynamic var oauthToken: String = ""
-  dynamic var firstName: String = ""
-  dynamic var lastName: String = ""
-  dynamic var phoneNumber: String = ""
-  dynamic var avatarURL: String = ""
+    dynamic var pushToken: String = ""
+    dynamic var deviceToken: String = ""
+    dynamic var oauthToken: String = ""
+    dynamic var firstName: String = ""
+    dynamic var lastName: String = ""
+    dynamic var phoneNumber: String = ""
+    dynamic var avatarURL: String = ""
 
-  convenience init(deviceToken: String, pushToken: String, oauthToken: String) {
-    self.init()
-    self.deviceToken = deviceToken
-    self.pushToken = pushToken
-    self.oauthToken = oauthToken
-  }
+    convenience init(deviceToken: String, pushToken: String, oauthToken: String) {
+      self.init()
+      self.deviceToken = deviceToken
+      self.pushToken = pushToken
+      self.oauthToken = oauthToken
+    }
 
-  static var current: Settings {
-    let realm = RealmProvider.SettingsProvider.realm
-    if let settings = realm.objects(Settings.self).first {
+    static var current: Settings {
+      let realm = RealmProvider.SettingsProvider.realm
+      if let settings = realm.objects(Settings.self).first {
+        return settings
+      }
+
+      let settings = Settings()
+      settings.deviceToken = UUID().uuidString
+      do {
+        try realm.write {
+          realm.add(settings)
+        }
+      } catch {
+        fatalError(error.localizedDescription)
+      }
+
       return settings
+
     }
 
-    let settings = Settings()
-    settings.deviceToken = UUID().uuidString
-    do {
-      try realm.write {
-        realm.add(settings)
+    var fullName: String {
+
+      var result = ""
+      if !firstName.isEmpty {
+        result += firstName
       }
-    } catch {
-      fatalError(error.localizedDescription)
-    }
 
-    return settings
-
-  }
-
-  var fullName: String {
-
-    var result = ""
-    if !firstName.isEmpty {
-      result += firstName
-    }
-
-    if !lastName.isEmpty {
-      result += " \(lastName)"
-    }
-
-    return result
-
-  }
-
-  func update(pushToken: String) {
-    let realm = RealmProvider.SettingsProvider.realm
-
-    do {
-      try realm.write {
-        self.pushToken = pushToken
+      if !lastName.isEmpty {
+        result += " \(lastName)"
       }
-    } catch {
-      fatalError(error.localizedDescription)
+
+      return result
+
     }
 
-  }
+    func update(pushToken: String) {
+      let realm = RealmProvider.SettingsProvider.realm
 
-  func update(deviceToken: String) {
-    let realm = RealmProvider.SettingsProvider.realm
-
-    do {
-      try realm.write {
-        self.deviceToken = deviceToken
+      do {
+        try realm.write {
+          self.pushToken = pushToken
+        }
+      } catch {
+        fatalError(error.localizedDescription)
       }
-    } catch {
-      fatalError(error.localizedDescription)
+
     }
 
-  }
+    func update(deviceToken: String) {
+      let realm = RealmProvider.SettingsProvider.realm
 
-  func update(oauthToken: String) {
-    let realm = RealmProvider.SettingsProvider.realm
-    do {
-      try realm.write {
-        self.oauthToken = oauthToken
+      do {
+        try realm.write {
+          self.deviceToken = deviceToken
+        }
+      } catch {
+        fatalError(error.localizedDescription)
       }
-    } catch {
-      fatalError(error.localizedDescription)
+
     }
 
-  }
-
-  func update(firstName: String, lastName: String) {
-    let realm = RealmProvider.SettingsProvider.realm
-    do {
-      try realm.write {
-        self.firstName = firstName
-        self.lastName = lastName
+    func update(oauthToken: String) {
+      let realm = RealmProvider.SettingsProvider.realm
+      do {
+        try realm.write {
+          self.oauthToken = oauthToken
+        }
+      } catch {
+        fatalError(error.localizedDescription)
       }
-    } catch {
-      fatalError(error.localizedDescription)
-    }
-  }
 
-  func update(phoneNumber: String) {
-    let realm = RealmProvider.SettingsProvider.realm
-    do {
-      try realm.write {
-        self.phoneNumber = phoneNumber
+    }
+
+    func update(firstName: String, lastName: String) {
+      let realm = RealmProvider.SettingsProvider.realm
+      do {
+        try realm.write {
+          self.firstName = firstName
+          self.lastName = lastName
+        }
+      } catch {
+        fatalError(error.localizedDescription)
       }
-    } catch {
-      fatalError(error.localizedDescription)
     }
-  }
 
-  func update(avatarURL: String) {
-    let realm = RealmProvider.SettingsProvider.realm
-    do {
-      try realm.write {
-        self.avatarURL = avatarURL
+    func update(phoneNumber: String) {
+      let realm = RealmProvider.SettingsProvider.realm
+      do {
+        try realm.write {
+          self.phoneNumber = phoneNumber
+        }
+      } catch {
+        fatalError(error.localizedDescription)
       }
-    } catch {
-      fatalError(error.localizedDescription)
     }
-  }
 
-  static func clear() {
-
-    let pushToken = Settings.current.pushToken
-    let realm = RealmProvider.SettingsProvider.realm
-    do {
-      try realm.write {
-       realm.delete(realm.objects(Settings.self))
+    func update(avatarURL: String) {
+      let realm = RealmProvider.SettingsProvider.realm
+      do {
+        try realm.write {
+          self.avatarURL = avatarURL
+        }
+      } catch {
+        fatalError(error.localizedDescription)
       }
-      Settings.current.update(pushToken: pushToken)
-    } catch {
-      fatalError(error.localizedDescription)
     }
 
-  }
+    static func clear() {
+
+      let pushToken = Settings.current.pushToken
+      let realm = RealmProvider.SettingsProvider.realm
+      do {
+        try realm.write {
+          realm.delete(realm.objects(Settings.self))
+        }
+        Settings.current.update(pushToken: pushToken)
+      } catch {
+        fatalError(error.localizedDescription)
+      }
+
+    }
 
 }

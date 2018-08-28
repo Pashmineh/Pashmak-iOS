@@ -38,6 +38,10 @@
 		845E4004213104DC0025477A /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4003213104DC0025477A /* Log.swift */; };
 		845E4006213105080025477A /* JSONTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4005213105080025477A /* JSONTypes.swift */; };
 		845E4008213106F00025477A /* FetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4007213106F00025477A /* FetchState.swift */; };
+		84CB27402135130600DE59C5 /* Checkins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB273F2135130600DE59C5 /* Checkins.swift */; };
+		84CB274221351DDA00DE59C5 /* CheckinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB274121351DDA00DE59C5 /* CheckinModels.swift */; };
+		84CB274421351ECE00DE59C5 /* CheckinRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB274321351ECE00DE59C5 /* CheckinRequests.swift */; };
+		84CB2747213530EE00DE59C5 /* CheckinServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB2746213530EE00DE59C5 /* CheckinServices.swift */; };
 		84EC2249213409740040ECE2 /* HomeSkeletonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC2248213409740040ECE2 /* HomeSkeletonCard.swift */; };
 		84EC2254213420770040ECE2 /* HomeSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC2252213420770040ECE2 /* HomeSkeletonCell.swift */; };
 		84EC2255213420770040ECE2 /* HomeSkeletonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EC2253213420770040ECE2 /* HomeSkeletonCell.xib */; };
@@ -107,6 +111,10 @@
 		845E4003213104DC0025477A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		845E4005213105080025477A /* JSONTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTypes.swift; sourceTree = "<group>"; };
 		845E4007213106F00025477A /* FetchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchState.swift; sourceTree = "<group>"; };
+		84CB273F2135130600DE59C5 /* Checkins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkins.swift; sourceTree = "<group>"; };
+		84CB274121351DDA00DE59C5 /* CheckinModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinModels.swift; sourceTree = "<group>"; };
+		84CB274321351ECE00DE59C5 /* CheckinRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinRequests.swift; sourceTree = "<group>"; };
+		84CB2746213530EE00DE59C5 /* CheckinServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinServices.swift; sourceTree = "<group>"; };
 		84EC2248213409740040ECE2 /* HomeSkeletonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCard.swift; sourceTree = "<group>"; };
 		84EC2252213420770040ECE2 /* HomeSkeletonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCell.swift; sourceTree = "<group>"; };
 		84EC2253213420770040ECE2 /* HomeSkeletonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeSkeletonCell.xib; sourceTree = "<group>"; };
@@ -242,6 +250,7 @@
 				845E4007213106F00025477A /* FetchState.swift */,
 				84052D43213251240040ABF5 /* AuthenticationModels.swift */,
 				95446D1F21333F9F0096E78F /* HomedataModels.swift */,
+				84CB274121351DDA00DE59C5 /* CheckinModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -264,8 +273,17 @@
 				845E3FFB213104650025477A /* ServerRequestBase.swift */,
 				84052D412132510C0040ABF5 /* AuthenticationRequests.swift */,
 				95446D21213342000096E78F /* HomeRequests.swift */,
+				84CB274321351ECE00DE59C5 /* CheckinRequests.swift */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		84CB2745213530E000DE59C5 /* Checkin */ = {
+			isa = PBXGroup;
+			children = (
+				84CB2746213530EE00DE59C5 /* CheckinServices.swift */,
+			);
+			path = Checkin;
 			sourceTree = "<group>";
 		};
 		84E805712132B64000BC47CC /* Home */ = {
@@ -388,6 +406,7 @@
 		95BC0074212CA55B001B4375 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				84CB2745213530E000DE59C5 /* Checkin */,
 				845CB27321313231001957B3 /* LocationService */,
 				845CB268213129D2001957B3 /* LocalAuthentication */,
 				845E3FED213103840025477A /* Network */,
@@ -400,6 +419,7 @@
 			children = (
 				95BC0076212CA57B001B4375 /* RealmProvider.swift */,
 				95BC007F212CA96A001B4375 /* Settings.swift */,
+				84CB273F2135130600DE59C5 /* Checkins.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -620,12 +640,15 @@
 				845E3FF0213103A80025477A /* Network.swift in Sources */,
 				84FC6CB9212BCA4100B4A56A /* LoginInteractor.swift in Sources */,
 				95BC0071212C972D001B4375 /* UIFont+Farsi.swift in Sources */,
+				84CB2747213530EE00DE59C5 /* CheckinServices.swift in Sources */,
 				84052D44213251240040ABF5 /* AuthenticationModels.swift in Sources */,
+				84CB274421351ECE00DE59C5 /* CheckinRequests.swift in Sources */,
 				845E3FFE2131047E0025477A /* DiffableBox.swift in Sources */,
 				84EC2259213422D20040ECE2 /* HomeEventItem.swift in Sources */,
 				84FC6CBC212BCA4100B4A56A /* LoginRouter.swift in Sources */,
 				95C0DCA4212D722B00A01C4F /* Regex.swift in Sources */,
 				845E4002213104A90025477A /* EmptyServerModel.swift in Sources */,
+				84CB274221351DDA00DE59C5 /* CheckinModels.swift in Sources */,
 				845CB27021312A5D001957B3 /* Date+Extensions.swift in Sources */,
 				845CB26A213129E6001957B3 /* BiometricAuthentication.swift in Sources */,
 				84FC6CC7212BCA6B00B4A56A /* SplashModels.swift in Sources */,
@@ -649,6 +672,7 @@
 				841BF3022132B9C3003E7BA7 /* HomeModels.swift in Sources */,
 				84EC2249213409740040ECE2 /* HomeSkeletonCard.swift in Sources */,
 				84052D422132510C0040ABF5 /* AuthenticationRequests.swift in Sources */,
+				84CB27402135130600DE59C5 /* Checkins.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

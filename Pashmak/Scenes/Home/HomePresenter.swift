@@ -44,7 +44,9 @@ class HomePresenter: HomePresentationLogic {
       if let events = homeData.events?.sorted(by: { ($0.eventTimeEpoch ?? 0) < ($1.eventTimeEpoch ?? 0) }) {
         events.forEach { items.append($0) }
       }
-      let viewModel = Home.Populate.ViewModel.Success.init(profile: profile, items: items)
+
+      let needsCheckin = !Checkin.checkedInToday
+      let viewModel = Home.Populate.ViewModel.Success.init(profile: profile, needsCheckIn: needsCheckin, items: items)
       viewController?.displayPopulateSuccess(viewModel: viewModel)
     }
 

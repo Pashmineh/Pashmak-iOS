@@ -26,3 +26,6 @@ class RealmProvider {
   }
 
 }
+
+/// All realm objects must extend this class
+class RealmObjects { }
