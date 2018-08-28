@@ -11,9 +11,10 @@
 //
 
 import UIKit
+import Hero
 
 @objc protocol HomeRoutingLogic {
-
+func routeToLogin(segue: UIStoryboardSegue?)
 }
 
 protocol HomeDataPassing {
@@ -23,5 +24,16 @@ protocol HomeDataPassing {
 class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
   weak var viewController: HomeViewController?
   var dataStore: HomeDataStore?
+
+  func routeToLogin(segue: UIStoryboardSegue?) {
+
+    guard let loginVC = Storyboards.Main.instantiateViewController(withIdentifier: StoryboardsIDs.Main.Login) as? LoginViewController else {
+      return
+    }
+
+    viewController?.navigationController?.hero.navigationAnimationType = .zoom
+    viewController?.navigationController?.setViewControllers([loginVC], animated: true)
+
+  }
 
 }

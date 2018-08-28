@@ -18,11 +18,18 @@ import Async
 import KVNProgress
 import Kingfisher
 import SkeletonView
+import VisualEffectView
+import SnapKit
 
 protocol HomeDisplayLogic: class {
   func displayPopulateLoading(viewModel: Home.Populate.ViewModel.Loading)
   func displayPopulateFailed(viewModel: Home.Populate.ViewModel.Failed)
   func displayPopulateSuccess(viewModel: Home.Populate.ViewModel.Success)
+
+  func displayRefreshFailed(viewModel: Home.Refresh.ViewModel.Failed)
+  func displayRefreshSuccess(viewModel: Home.Refresh.ViewModel.Success)
+
+  func displaySignout(viewModel: Home.Signout.ViewModel)
 }
 
 class HomeViewController: UIViewController {
@@ -87,6 +94,21 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var paidLabel: UILabel!
   @IBOutlet weak var avatarImageView: UIImageView!
   @IBOutlet weak var avatarBorderView: UIView!
+  @IBOutlet weak var checkinButton: Material.Button!
+  @IBAction func checkinButtonTapped(_ sender: Any) {
+  }
+
+  @IBOutlet weak var signoutButton: Material.Button!
+  @IBAction func signoutButtonTapped(_ sender: Any) {
+    self.signout()
+  }
+
+  lazy var refreshControl: UIRefreshControl = {
+    let refreshControl = UIRefreshControl()
+    refreshControl.tintColor = UIColor.Pashmak.Orange
+    refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
+    return refreshControl
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -95,14 +117,31 @@ class HomeViewController: UIViewController {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+//    self.populate()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     self.populate()
   }
 
   private func prepareUI() {
     self.hero.isEnabled = true
+    prepareTopContainer()
     prepareSkeleton()
     prepareAvatar()
     prepareCollectionView()
+    prepareCheckinButton()
+  }
+
+  private func prepareTopContainer() {
+
+    let blurView = VisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.light))
+    blurView.blurRadius = 5.0
+    self.topContainer.insertSubview(blurView, at: 0)
+    self.topContainer.layout(blurView).edges()
+    self.signoutButton.pulseColor = UIColor.Pashmak.davyGrey
+    self.signoutButton.pulseAnimation = .centerRadialBeyondBounds
   }
 
   private func prepareSkeleton() {
@@ -139,7 +178,9 @@ class HomeViewController: UIViewController {
 
     collectionView.backgroundColor = .clear
     collectionView.isScrollEnabled = true
-collectionView.contentInset.top = 8.0
+    collectionView.contentInset.top = 140.0
+    collectionView.contentInset.bottom = 64.0
+    collectionView.refreshControl = self.refreshControl
     adapter.collectionView = collectionView
     adapter.dataSource = self
     guard let containerView = self.collectionContainer else { return }
@@ -149,10 +190,21 @@ collectionView.contentInset.top = 8.0
     collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
   }
 
+  private func prepareCheckinButton() {
+    self.checkinButton.layer.cornerRadius = 22.0
+    self.checkinButton.pulseColor = UIColor.Pashmak.Grey
+  }
+
   func populate() {
     self.view.layoutIfNeeded()
     let request = Home.Populate.Request()
     interactor?.populate(request: request)
+  }
+
+  @objc
+  func refresh() {
+    let request = Home.Refresh.Request.init()
+    interactor?.refresh(request: request)
   }
 
   private func updateProfile(_ viewModel: Home.UserProfile) {
@@ -174,6 +226,11 @@ collectionView.contentInset.top = 8.0
 
     self.balanceLabel.textColor = viewModel.balanceColor
     self.avatarBorderView.layer.borderColor = viewModel.balanceColor.cgColor
+  }
+
+  private func signout() {
+    let request = Home.Signout.Request()
+    interactor?.signout(request: request)
   }
 
 }
@@ -209,6 +266,27 @@ extension HomeViewController: HomeDisplayLogic {
     self.topContainer.hideSkeleton()
     self.adapter.performUpdates(animated: true, completion: { (_) in
     })
+  }
+
+  func displayRefreshFailed(viewModel: Home.Refresh.ViewModel.Failed) {
+    self.refreshControl.endRefreshing()
+    let message = viewModel.message
+    KVNProgress.showError(withStatus: message)
+  }
+
+  func displayRefreshSuccess(viewModel: Home.Refresh.ViewModel.Success) {
+    self.refreshControl.endRefreshing()
+    let profile = viewModel.profile
+    self.updateProfile(profile)
+    let items = viewModel.items
+    self.displayedItems = items
+    self.adapter.performUpdates(animated: true) { (_) in
+
+    }
+  }
+
+  func displaySignout(viewModel: Home.Signout.ViewModel) {
+    self.router?.routeToLogin(segue: nil)
   }
 
 }

@@ -15,6 +15,8 @@ import Async
 
 protocol HomeBusinessLogic {
   func populate(request: Home.Populate.Request)
+  func refresh(request: Home.Refresh.Request)
+  func signout(request: Home.Signout.Request)
 }
 
 protocol HomeDataStore {
@@ -44,7 +46,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
         let homeData = result.model
 
         Async.main(after: 2.0) {
-          let response = Home.Populate.Response.init(state: Home.Populate.FetchHomeState.success(homeData))
+          let response = Home.Populate.Response.init(state: .success(homeData))
           self.presenter?.presentPopulate(response: response)
         }
     }
@@ -53,4 +55,28 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
     }
 
   }
+
+  func refresh(request: Home.Refresh.Request) {
+
+    PashmakServer.perform(request: ServerRequest.Home.fetchHome())
+      .done { (result: ServerData<ServerModels.Home>) in
+        let homeData = result.model
+
+        let response = Home.Refresh.Response(state: .success(homeData))
+        self.presenter?.presentRefresh(response: response)
+
+    }
+      .catch { (error) in
+        let response = Home.Refresh.Response(state: .failure(error))
+        self.presenter?.presentRefresh(response: response)
+    }
+
+  }
+
+  func signout(request: Home.Signout.Request) {
+    Settings.clear()
+    let response = Home.Signout.Response()
+    presenter?.presentSignout(response: response)
+  }
+
 }

@@ -155,4 +155,19 @@ class Settings: Object {
     }
   }
 
+  static func clear() {
+
+    let pushToken = Settings.current.pushToken
+    let realm = RealmProvider.SettingsProvider.realm
+    do {
+      try realm.write {
+       realm.delete(realm.objects(Settings.self))
+      }
+      Settings.current.update(pushToken: pushToken)
+    } catch {
+      fatalError(error.localizedDescription)
+    }
+
+  }
+
 }

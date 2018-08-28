@@ -26,7 +26,7 @@ class HomeSkeletonCell: UICollectionViewCell {
     self.contentView.isSkeletonable = false
 
     card.layer.cornerRadius = 8.0
-    card.depthPreset = .depth3
+    card.setShadow(opacity: 0.15, radius: 6.0)
     card.isSkeletonable = false
 
     skeletonviews.forEach {

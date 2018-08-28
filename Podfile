@@ -26,6 +26,7 @@ target 'Pashmak' do
   pod 'STRegex'
   pod 'SwiftLint'
   pod 'Kingfisher'
+  pod 'SwiftDate'
   
 inhibit_all_warnings!
 

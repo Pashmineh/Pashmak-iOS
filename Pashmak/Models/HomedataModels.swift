@@ -8,6 +8,7 @@
 
 import Foundation
 import IGListKit
+import SwiftDate
 /*
 {
   "balance": {
@@ -26,6 +27,17 @@ import IGListKit
   ]
 }
 */
+
+private let eventTimeFormatter: DateFormatter = {
+  let formatter = DateFormatter()
+  formatter.locale = Locale(identifier: "fa_IR")
+  formatter.calendar = Calendar(identifier: .persian)
+  formatter.timeZone = TimeZone.autoupdatingCurrent
+  formatter.timeStyle = .none
+  formatter.dateFormat = "EEEE dd MMMM YY | ساعت HH:mm"
+  return formatter
+}()
+
 extension ServerModels {
 
   class Home: ServerModel {
@@ -39,7 +51,18 @@ extension ServerModels {
       var name: String?
       var description: String?
       var eventTime: String?
+      var eventTimeEpoch: Double?
       var location: String?
+
+      var eventDateTime: String {
+        guard let epoch = eventTimeEpoch else { return "" }
+        return eventTimeFormatter.string(from: epoch.utcDate)
+      }
+
+      var hasPassed: Bool {
+        guard let epoch = eventTimeEpoch else { return false }
+        return epoch.utcDate.isBeforeDate(Date(), granularity: Calendar.Component.hour)
+      }
 
     }
 

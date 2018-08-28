@@ -55,6 +55,7 @@
 		84FC6CC9212BCA6B00B4A56A /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CC3212BCA6B00B4A56A /* SplashRouter.swift */; };
 		84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CC4212BCA6B00B4A56A /* SplashViewController.swift */; };
 		84FC6CCD212BCAE900B4A56A /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC6CCC212BCAE900B4A56A /* Storyboards.swift */; };
+		9519AA9621346EA4003AB3ED /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9519AA9521346EA4003AB3ED /* UIView+Extensions.swift */; };
 		95446D2021333F9F0096E78F /* HomedataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95446D1F21333F9F0096E78F /* HomedataModels.swift */; };
 		95446D22213342000096E78F /* HomeRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95446D21213342000096E78F /* HomeRequests.swift */; };
 		9578F39F212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39C212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf */; };
@@ -123,6 +124,7 @@
 		84FC6CC3212BCA6B00B4A56A /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		84FC6CC4212BCA6B00B4A56A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		84FC6CCC212BCAE900B4A56A /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
+		9519AA9521346EA4003AB3ED /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		95446D1F21333F9F0096E78F /* HomedataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomedataModels.swift; sourceTree = "<group>"; };
 		95446D21213342000096E78F /* HomeRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRequests.swift; sourceTree = "<group>"; };
 		9578F39C212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansDN_FaNum_Light.ttf; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 				845CB27121312A7C001957B3 /* UIView+Animations.swift */,
 				84052D4521325EBF0040ABF5 /* PashmakMessages.swift */,
 				8412D0192133C0B400942874 /* Formatters.swift */,
+				9519AA9521346EA4003AB3ED /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				"${BUILT_PRODUCTS_DIR}/SecureNSUserDefaults/SecureNSUserDefaults.framework",
 				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/VisualEffectView/VisualEffectView.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
@@ -558,6 +562,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SecureNSUserDefaults.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VisualEffectView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
@@ -601,6 +606,7 @@
 				841BF3032132B9C3003E7BA7 /* HomeViewController.swift in Sources */,
 				845E3FF6213104170025477A /* HTTPRequest.swift in Sources */,
 				95BC0080212CA96A001B4375 /* Settings.swift in Sources */,
+				9519AA9621346EA4003AB3ED /* UIView+Extensions.swift in Sources */,
 				845E4008213106F00025477A /* FetchState.swift in Sources */,
 				845E4000213104910025477A /* ServerModel.swift in Sources */,
 				845CB26E21312A34001957B3 /* UIButton+Extensions.swift in Sources */,
