@@ -17,6 +17,7 @@ protocol HomePresentationLogic {
   func presentPopulate(response: Home.Populate.Response)
   func presentRefresh(response: Home.Refresh.Response)
   func presentSignout(response: Home.Signout.Response)
+  func presentCheckin(response: Home.Checkin.Response)
 }
 
 class HomePresenter: HomePresentationLogic {
@@ -27,13 +28,13 @@ class HomePresenter: HomePresentationLogic {
 
     switch state {
     case .loading:
-      let message = Messages.Loading.messages.randomElement() ?? "در حال خوندن اطلاعات..."
+      let message = Messages.Loading.random
       let viewModel = Home.Populate.ViewModel.Loading.init(message: message, items: [HomeSkeletonItem()])
       viewController?.displayPopulateLoading(viewModel: viewModel)
     case .failure(let error):
       var message = "خطا!"
       if case APIError.invalidResponseCode(let status) = error {
-        message = Messages.ServerErrors.messages.randomElement() ?? message
+        message = Messages.ServerErrors.random
         message += "\n\(status)"
       }
       let viewModel = Home.Populate.ViewModel.Failed.init(message: message)
@@ -61,7 +62,7 @@ class HomePresenter: HomePresentationLogic {
     case .failure(let error):
       var message = "خطا!"
       if case APIError.invalidResponseCode(let status) = error {
-        message = Messages.ServerErrors.messages.randomElement() ?? message
+        message = Messages.ServerErrors.random
         message += "\n\(status)"
       }
       let viewModel = Home.Refresh.ViewModel.Failed(message: message)
@@ -80,5 +81,30 @@ class HomePresenter: HomePresentationLogic {
   func presentSignout(response: Home.Signout.Response) {
     let viewModel = Home.Signout.ViewModel()
     viewController?.displaySignout(viewModel: viewModel)
+  }
+
+  func presentCheckin(response: Home.Checkin.Response) {
+    let state = response.state
+
+    switch state {
+    case .loading:
+      let message = Messages.Loading.random
+      let viewModel = Home.Checkin.ViewModel.Loading(message: message)
+      viewController?.displayCheckinLoading(viewModel: viewModel)
+    case .failure(let error):
+      var message = "خطا در عملیات!"
+
+      if case APIError.invalidPrecondition(let msg) = error {
+        message = msg
+      } else if case APIError.invalidResponseCode(let status) = error {
+        message = Messages.ServerErrors.random + "\n(\(status))"
+      }
+
+      let viewModel = Home.Checkin.ViewModel.Failed(message: message)
+      viewController?.displayCheckinFailed(viewModel: viewModel)
+    case .success(let message):
+      let viewModel = Home.Checkin.ViewModel.Success(message: message)
+      viewController?.displayCheckinSuccess(viewModel: viewModel)
+    }
   }
 }

@@ -114,15 +114,27 @@ enum Home {
   }
 
   enum Checkin {
-    typealias CheckinFetchState = FetchState<ServerModels.EmptyServerModel, Error>
+    typealias CheckinFetchState = FetchState<String, Error>
     struct Request {
 
     }
+
     struct Response {
-
+      let state: CheckinFetchState
     }
-    struct ViewModel {
 
+    enum ViewModel {
+      struct Loading {
+        let message: String
+      }
+
+      struct Failed {
+        let message: String
+      }
+
+      struct Success {
+        let message: String
+      }
     }
   }
 

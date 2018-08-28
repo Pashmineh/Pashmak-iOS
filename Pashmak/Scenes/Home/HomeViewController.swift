@@ -30,6 +30,10 @@ protocol HomeDisplayLogic: class {
   func displayRefreshSuccess(viewModel: Home.Refresh.ViewModel.Success)
 
   func displaySignout(viewModel: Home.Signout.ViewModel)
+
+  func displayCheckinLoading(viewModel: Home.Checkin.ViewModel.Loading)
+  func displayCheckinFailed(viewModel: Home.Checkin.ViewModel.Failed)
+  func displayCheckinSuccess(viewModel: Home.Checkin.ViewModel.Success)
 }
 
 class HomeViewController: UIViewController {
@@ -96,6 +100,7 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var avatarBorderView: UIView!
   @IBOutlet weak var checkinButton: Material.Button!
   @IBAction func checkinButtonTapped(_ sender: Any) {
+    checkin()
   }
 
   @IBOutlet weak var signoutButton: Material.Button!
@@ -258,6 +263,11 @@ class HomeViewController: UIViewController {
 
   }
 
+  private func checkin() {
+    let request = Home.Checkin.Request()
+    interactor?.checkin(request: request)
+  }
+
 }
 
 extension HomeViewController: HomeDisplayLogic {
@@ -317,6 +327,34 @@ extension HomeViewController: HomeDisplayLogic {
 
   func displaySignout(viewModel: Home.Signout.ViewModel) {
     self.router?.routeToLogin(segue: nil)
+  }
+
+  func displayCheckinLoading(viewModel: Home.Checkin.ViewModel.Loading) {
+    let message = viewModel.message
+    KVNProgress.show(withStatus: message)
+  }
+
+  func displayCheckinFailed(viewModel: Home.Checkin.ViewModel.Failed) {
+    let message = viewModel.message
+    KVNProgress.showError(withStatus: message)
+  }
+
+  func displayCheckinSuccess(viewModel: Home.Checkin.ViewModel.Success) {
+    let message = viewModel.message
+
+    func updateForCheckin() {
+      showCheckinButton(isActive: false)
+    }
+
+    if !message.isEmpty {
+      KVNProgress.showSuccess(withStatus: message) {
+        updateForCheckin()
+      }
+    } else {
+      KVNProgress.dismiss {
+        updateForCheckin()
+      }
+    }
   }
 
 }
