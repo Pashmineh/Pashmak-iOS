@@ -97,6 +97,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
   }
 
+  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//    Log.trace("Notification receivd:\n\(notification.request.content.body)")
+    completionHandler([.alert, .badge, .sound])
+  }
+
 }
 
 /*

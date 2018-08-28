@@ -137,7 +137,7 @@ class LoginViewController: UIViewController {
   }
 
   private func preparePush() {
-    print("Current Token: [\(Settings.current.pushToken)]")
+//    print("Current Token: [\(Settings.current.pushToken)]")
     (UIApplication.shared.delegate as? AppDelegate)?.preparePush()
   }
 

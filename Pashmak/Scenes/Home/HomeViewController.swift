@@ -127,11 +127,17 @@ class HomeViewController: UIViewController {
 
   private func prepareUI() {
     self.hero.isEnabled = true
+    preparePush()
     prepareTopContainer()
     prepareSkeleton()
     prepareAvatar()
     prepareCollectionView()
     prepareCheckinButton()
+  }
+
+  private func preparePush() {
+//    print("Current Token: [\(Settings.current.pushToken)]")
+    (UIApplication.shared.delegate as? AppDelegate)?.preparePush()
   }
 
   private func prepareTopContainer() {
@@ -277,9 +283,11 @@ extension HomeViewController: HomeDisplayLogic {
   func displayRefreshSuccess(viewModel: Home.Refresh.ViewModel.Success) {
     self.refreshControl.endRefreshing()
     let profile = viewModel.profile
+    self.topContainer.hideSkeleton()
     self.updateProfile(profile)
     let items = viewModel.items
     self.displayedItems = items
+
     self.adapter.performUpdates(animated: true) { (_) in
 
     }
