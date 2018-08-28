@@ -80,16 +80,18 @@ enum Home {
 
   enum Refresh {
     struct Request {
-
+      let isInBackground: Bool
     }
 
     struct Response {
       let state: FetchHomeState
+      let isInBackground: Bool
     }
 
     enum ViewModel {
       struct Failed {
         let message: String
+        let isInBackground: Bool
       }
 
       struct Success {

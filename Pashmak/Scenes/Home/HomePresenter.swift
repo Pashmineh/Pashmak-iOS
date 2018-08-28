@@ -55,7 +55,7 @@ class HomePresenter: HomePresentationLogic {
 
   func presentRefresh(response: Home.Refresh.Response) {
     let state = response.state
-
+    let isInBack = response.isInBackground
     switch state {
     case .loading:
       break
@@ -65,7 +65,7 @@ class HomePresenter: HomePresentationLogic {
         message = Messages.ServerErrors.random
         message += "\n\(status)"
       }
-      let viewModel = Home.Refresh.ViewModel.Failed(message: message)
+      let viewModel = Home.Refresh.ViewModel.Failed(message: message, isInBackground: isInBack)
       viewController?.displayRefreshFailed(viewModel: viewModel)
     case .success(let homeData):
       let profile = Home.UserProfile(homeData: homeData, settings: Settings.current)

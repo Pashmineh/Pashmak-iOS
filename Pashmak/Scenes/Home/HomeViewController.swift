@@ -216,7 +216,7 @@ class HomeViewController: UIViewController {
 
   @objc
   func refresh() {
-    let request = Home.Refresh.Request.init()
+    let request = Home.Refresh.Request.init(isInBackground: false)
     interactor?.refresh(request: request)
   }
 
@@ -252,8 +252,9 @@ class HomeViewController: UIViewController {
     button.isEnabled = isActive
     button.backgroundColor = isActive ? UIColor.Pashmak.buttonActive : UIColor.Pashmak.Grey
     let title = isActive ? "ثبت ورود" : "ورود امروز خود را ثبت کرده‌اید"
+    let color: UIColor = isActive ? UIColor.Pashmak.Grey : UIColor.Pashmak.TextDeactive
     button.setTitle(title, for: [])
-
+    button.setTitleColor(color, for: [])
     UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.65, initialSpringVelocity: 6.0, options: [], animations: {
       button.transform = .identity
       button.alpha = 1.0
@@ -307,9 +308,14 @@ extension HomeViewController: HomeDisplayLogic {
   }
 
   func displayRefreshFailed(viewModel: Home.Refresh.ViewModel.Failed) {
+    let isInBack = viewModel.isInBackground
     self.refreshControl.endRefreshing()
-    let message = viewModel.message
-    KVNProgress.showError(withStatus: message)
+
+    if !isInBack {
+      let message = viewModel.message
+      KVNProgress.showError(withStatus: message)
+    }
+
   }
 
   func displayRefreshSuccess(viewModel: Home.Refresh.ViewModel.Success) {

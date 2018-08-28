@@ -99,6 +99,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 //    Log.trace("Notification receivd:\n\(notification.request.content.body)")
+    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.UpdateReceievd, object: nil)
     completionHandler([.alert, .badge, .sound])
   }
 

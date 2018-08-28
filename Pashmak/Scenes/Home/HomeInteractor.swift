@@ -25,6 +25,15 @@ protocol HomeDataStore {
 }
 
 class HomeInteractor: HomeBusinessLogic, HomeDataStore {
+
+  init() {
+    NotificationCenter.default.addObserver(self, selector: #selector(self.updateReceived), name: NSNotification.Name.Pashmak.UpdateReceievd, object: nil)
+  }
+
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+
   var presenter: HomePresentationLogic?
 
   // MARK: Populate
@@ -59,18 +68,25 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
 
   }
   // MARK: Refresh
-  func refresh(request: Home.Refresh.Request) {
 
+  @objc
+  func updateReceived() {
+    let request = Home.Refresh.Request(isInBackground: true)
+    self.refresh(request: request)
+  }
+
+  func refresh(request: Home.Refresh.Request) {
+    let isInBackground = request.isInBackground
     PashmakServer.perform(request: ServerRequest.Home.fetchHome())
       .done { (result: ServerData<ServerModels.Home>) in
         let homeData = result.model
 
-        let response = Home.Refresh.Response(state: .success(homeData))
+        let response = Home.Refresh.Response(state: .success(homeData), isInBackground: isInBackground)
         self.presenter?.presentRefresh(response: response)
 
     }
       .catch { (error) in
-        let response = Home.Refresh.Response(state: .failure(error))
+        let response = Home.Refresh.Response(state: .failure(error), isInBackground: isInBackground)
         self.presenter?.presentRefresh(response: response)
     }
 
