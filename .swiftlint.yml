@@ -44,6 +44,7 @@ type_name:
   excluded:
     - iPhone # excluded via string
     - KD
+    - iBeacon
 identifier_name:
   min_length: # only min_length
     error: 3 # only error
