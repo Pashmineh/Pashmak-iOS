@@ -26,6 +26,7 @@ class SplashInteractor: SplashBusinessLogic, SplashDataStore {
   func goNext(request: Splash.GoNext.Request) {
 
     if !Settings.current.oauthToken.isEmpty {
+      Log.trace("Oauth token: [\(Settings.current.oauthToken)]")
       let response = Splash.GoNext.Response(destination: .home)
       presenter?.presentGoNext(response: response)
     } else {
