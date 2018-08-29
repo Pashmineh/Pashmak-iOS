@@ -86,24 +86,31 @@ class HomePresenter: HomePresentationLogic {
 
   func presentCheckin(response: Home.Checkin.Response) {
     let state = response.state
-
+    let isRanging = response.isRanging
     switch state {
     case .loading:
-      let message = Messages.Loading.random
+      Log.trace("======= Loading: [\(isRanging)]")
+      let message = isRanging ? Messages.Ranging.random : Messages.Loading.random
       let viewModel = Home.Checkin.ViewModel.Loading(message: message)
       viewController?.displayCheckinLoading(viewModel: viewModel)
     case .failure(let error):
-      var message = "خطا در عملیات!"
 
-      if case APIError.invalidPrecondition(let msg) = error {
-        message = msg
-      } else if case APIError.invalidResponseCode(let status) = error {
-        message = Messages.ServerErrors.random + "\n(\(status))"
+      var message = "خطا در عملیات!"
+      if isRanging {
+        message = Messages.RangingError.random
+      } else {
+        if case APIError.invalidPrecondition(let msg) = error {
+          message = msg
+        } else if case APIError.invalidResponseCode(let status) = error {
+          message = Messages.ServerErrors.random + "\n(\(status))"
+        }
       }
 
       let viewModel = Home.Checkin.ViewModel.Failed(message: message)
       viewController?.displayCheckinFailed(viewModel: viewModel)
+
     case .success(let message):
+      Log.trace("======= success")
       let viewModel = Home.Checkin.ViewModel.Success(message: message)
       viewController?.displayCheckinSuccess(viewModel: viewModel)
     }

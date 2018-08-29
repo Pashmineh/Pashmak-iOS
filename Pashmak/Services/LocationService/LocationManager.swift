@@ -24,4 +24,8 @@ struct iBeacon {
     iBeacon(proximityID: UUID(uuidString: "00001803-494C-4F47-4943-544543480000") ?? UUID(), major: 10009, minor: 13846, identifier: "KianDigital01")
   }()
 
+  static var Beacons: [CLBeaconRegion] {
+    return [KianDigital01.beaconRegion]
+  }
+
 }
