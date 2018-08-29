@@ -143,7 +143,7 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
       sendChekinLoading(isRanging: false)
 
       Async.main(after: 1.0) {
-        CheckinServices.shared.checkInNow().done { (chekinResponse) in
+        CheckinServices.shared.checkInNow(type: .manual).done { (chekinResponse) in
           guard let checkinResponse = chekinResponse else {
             sendChekinFailed(notRequired, isRanging: false)
             return

@@ -21,9 +21,15 @@ import IGListKit
 extension ServerModels {
 
   enum Checkin {
-
+    enum CheckinType: String, Codable {
+      case manual = "MANUAL"
+      case iBeacon = "IBEACON"
+    }
     class Request: ServerModel {
-
+      let type: CheckinType
+      init(type: CheckinType) {
+        self.type = type
+      }
     }
 
     class Response: ServerModel {
