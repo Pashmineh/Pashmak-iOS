@@ -34,6 +34,8 @@ protocol HomeDisplayLogic: class {
   func displayCheckinLoading(viewModel: Home.Checkin.ViewModel.Loading)
   func displayCheckinFailed(viewModel: Home.Checkin.ViewModel.Failed)
   func displayCheckinSuccess(viewModel: Home.Checkin.ViewModel.Success)
+
+  func displayCheckinUpdate(viewModel: Home.UpdateChekinButton.ViewModel)
 }
 
 class HomeViewController: UIViewController {
@@ -133,6 +135,7 @@ class HomeViewController: UIViewController {
   private func prepareUI() {
     self.hero.isEnabled = true
     preparePush()
+    prepareLocationMonitoring()
     prepareTopContainer()
     prepareSkeleton()
     prepareAvatar()
@@ -143,6 +146,10 @@ class HomeViewController: UIViewController {
   private func preparePush() {
 //    print("Current Token: [\(Settings.current.pushToken)]")
     (UIApplication.shared.delegate as? AppDelegate)?.preparePush()
+  }
+
+  private func prepareLocationMonitoring() {
+    (UIApplication.shared.delegate as? AppDelegate)?.prepareLocationManager()
   }
 
   private func prepareTopContainer() {
@@ -255,6 +262,10 @@ class HomeViewController: UIViewController {
     let color: UIColor = isActive ? UIColor.Pashmak.Grey : UIColor.Pashmak.TextDeactive
     button.setTitle(title, for: [])
     button.setTitleColor(color, for: [])
+
+    button.layer.borderColor = color.cgColor
+    button.layer.borderWidth = isActive ? 0.0 : 1.0
+
     UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.65, initialSpringVelocity: 6.0, options: [], animations: {
       button.transform = .identity
       button.alpha = 1.0
@@ -361,6 +372,11 @@ extension HomeViewController: HomeDisplayLogic {
         updateForCheckin()
       }
     }
+  }
+
+  func displayCheckinUpdate(viewModel: Home.UpdateChekinButton.ViewModel) {
+    let needsCheckin = viewModel.needsChekin
+    self.showCheckinButton(isActive: needsCheckin)
   }
 
 }

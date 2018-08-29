@@ -123,6 +123,7 @@ enum Home {
 
     struct Response {
       let state: CheckinFetchState
+      let isRanging: Bool
     }
 
     enum ViewModel {
@@ -137,6 +138,18 @@ enum Home {
       struct Success {
         let message: String
       }
+    }
+  }
+
+  enum UpdateChekinButton {
+    struct Request {
+
+    }
+    struct Response {
+      let needsChekin: Bool
+    }
+    struct ViewModel {
+      let needsChekin: Bool
     }
   }
 

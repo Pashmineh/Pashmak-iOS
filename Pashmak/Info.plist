@@ -22,6 +22,14 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
+	<key>NSLocationUsageDescription</key>
+	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>IRANSansDN_Fa_Num.ttf</string>
@@ -30,7 +38,9 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>bluetooth-central</string>
 		<string>fetch</string>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
@@ -54,13 +64,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
-	<key>NSLocationUsageDescription</key>
-	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>دسترسی به موقعیت شما برای کارهای ضروری  ;(</string>
 </dict>
 </plist>
