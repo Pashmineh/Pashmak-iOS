@@ -48,6 +48,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="شماره تلفن همراه با ۰۹ شروع می‌شود." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Zx-rM-GRL">
+                                <rect key="frame" x="32" y="208" width="303" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="3UT-nx-ZkY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="IRANSansDNFaNum-Light" family="IRANSansDNFaNum" pointSize="12"/>
+                                <color key="textColor" name="Rudy"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Ak6-I7-2F8">
                                 <rect key="frame" x="157" y="44" width="61" height="100"/>
                                 <constraints>
@@ -68,7 +77,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="ASCIICapableNumberPad" keyboardAppearance="alert" textContentType="tel"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kti-TB-J3U" customClass="TextField" customModule="Material">
-                                <rect key="frame" x="32" y="235" width="311" height="40"/>
+                                <rect key="frame" x="32" y="240" width="311" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2H5-Sa-FwY"/>
                                 </constraints>
@@ -96,11 +105,14 @@
                         <constraints>
                             <constraint firstItem="WEN-fy-NQf" firstAttribute="centerX" secondItem="oJ4-Wu-cRz" secondAttribute="centerX" id="5Pm-Wi-QF2"/>
                             <constraint firstItem="kti-TB-J3U" firstAttribute="leading" secondItem="YCg-Bw-Jtl" secondAttribute="leading" id="BWN-J2-uXG"/>
+                            <constraint firstItem="5Zx-rM-GRL" firstAttribute="top" secondItem="YCg-Bw-Jtl" secondAttribute="bottom" id="JR4-Xu-pj1"/>
                             <constraint firstItem="YCg-Bw-Jtl" firstAttribute="top" secondItem="Ak6-I7-2F8" secondAttribute="bottom" constant="24" id="Lcv-6R-VHl"/>
+                            <constraint firstItem="5Zx-rM-GRL" firstAttribute="trailing" secondItem="YCg-Bw-Jtl" secondAttribute="trailing" constant="-8" id="aT1-cd-Yhb"/>
                             <constraint firstItem="Ak6-I7-2F8" firstAttribute="centerX" secondItem="oJ4-Wu-cRz" secondAttribute="centerX" id="awo-iR-XfN"/>
                             <constraint firstItem="Ak6-I7-2F8" firstAttribute="top" secondItem="oJ4-Wu-cRz" secondAttribute="top" constant="44" id="c0D-Rz-Lea"/>
                             <constraint firstItem="0Oy-1A-wJy" firstAttribute="trailing" secondItem="YCg-Bw-Jtl" secondAttribute="trailing" constant="32" id="eu5-OU-aGQ"/>
-                            <constraint firstItem="kti-TB-J3U" firstAttribute="top" secondItem="YCg-Bw-Jtl" secondAttribute="bottom" constant="27" id="hL1-H5-a5T"/>
+                            <constraint firstItem="kti-TB-J3U" firstAttribute="top" secondItem="YCg-Bw-Jtl" secondAttribute="bottom" constant="32" id="hL1-H5-a5T"/>
+                            <constraint firstItem="5Zx-rM-GRL" firstAttribute="leading" secondItem="YCg-Bw-Jtl" secondAttribute="leading" id="ktM-Go-ePu"/>
                             <constraint firstAttribute="bottom" secondItem="WEN-fy-NQf" secondAttribute="bottom" constant="24" id="uQj-Zn-aim"/>
                             <constraint firstItem="kti-TB-J3U" firstAttribute="trailing" secondItem="YCg-Bw-Jtl" secondAttribute="trailing" id="vfw-Ao-KUw"/>
                             <constraint firstItem="YCg-Bw-Jtl" firstAttribute="leading" secondItem="0Oy-1A-wJy" secondAttribute="leading" constant="32" id="yIW-yS-DCb"/>
@@ -111,6 +123,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="errorLabel" destination="5Zx-rM-GRL" id="ply-Eq-n9l"/>
                         <outlet property="nextButton" destination="WEN-fy-NQf" id="mBA-xN-kHz"/>
                         <outlet property="passwordTextField" destination="kti-TB-J3U" id="5iN-M6-THb"/>
                         <outlet property="userNameTextField" destination="YCg-Bw-Jtl" id="rIy-gW-6nP"/>
@@ -118,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xib-go-fCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1540" y="163"/>
+            <point key="canvasLocation" x="1540" y="162.3688155922039"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="8df-Y1-PdJ">
@@ -373,6 +386,9 @@
         </namedColor>
         <namedColor name="Orange">
             <color red="0.96078431372549022" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Rudy">
+            <color red="1" green="0.0" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextDeactive">
             <color red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

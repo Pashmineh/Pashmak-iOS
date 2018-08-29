@@ -15,6 +15,10 @@ import Hero
 import Material
 import KVNProgress
 
+private struct Constants {
+  static let hiddenErrorTransform = CGAffineTransform(translationX: 0, y: -20.0)
+}
+
 protocol LoginDisplayLogic: class {
   func displayVerify(viewModel: Login.Verify.ViewModel)
 
@@ -27,6 +31,8 @@ protocol LoginDisplayLogic: class {
 class LoginViewController: UIViewController {
   var interactor: LoginBusinessLogic?
   var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
+
+  private var numberOfShake = 0
 
   // MARK: Object lifecycle
 
@@ -78,6 +84,7 @@ class LoginViewController: UIViewController {
 
   @IBOutlet weak var userNameTextField: TextField!
   @IBOutlet weak var passwordTextField: TextField!
+  @IBOutlet weak var errorLabel: UILabel!
   @IBOutlet weak var nextButton: Button!
   @IBAction func nextButtonTapped(_ sender: Any) {
     self.login()
@@ -95,10 +102,15 @@ class LoginViewController: UIViewController {
 
   private func prepareUI() {
     self.hero.isEnabled = true
+    prepareErrorLabel()
     prepareTextFields()
     prepareNextButton()
   }
 
+  private func prepareErrorLabel() {
+    self.errorLabel.transform = Constants.hiddenErrorTransform
+    self.errorLabel.alpha = 0.0
+  }
   private func prepareTextFields() {
     func format(_ textField: TextField, placeHolder: String) {
       textField.tintColor = UIColor.Pashmak.Orange
@@ -119,6 +131,8 @@ class LoginViewController: UIViewController {
 
       textField.placeholderAnimation = .hidden
       textField.addTarget(self, action: #selector(self.verify), for: .editingChanged)
+      textField.backgroundColor = UIColor.Pashmak.Grey
+      textField.delegate = self
     }
 
     format(self.userNameTextField, placeHolder: "شماره تلفن همراه")
@@ -165,6 +179,33 @@ class LoginViewController: UIViewController {
     interactor?.login(request: request)
 
   }
+
+  fileprivate func shakePhoneField() {
+    guard let field = self.userNameTextField else { return }
+    numberOfShake += 1
+    field.shake()
+    if numberOfShake >= 3 {
+      showFieldError()
+    }
+  }
+
+  fileprivate func showFieldError() {
+    UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0.0, options: [], animations: { [weak self] in
+      guard let self = self else { return }
+      self.errorLabel.transform = .identity
+      self.errorLabel.alpha = 1.0
+      }, completion: nil)
+  }
+
+  fileprivate func hideFieldError() {
+
+    UIView.animate(withDuration: 0.2, animations: { [weak self] in
+      guard let self = self else { return }
+      self.errorLabel.transform = Constants.hiddenErrorTransform
+      self.errorLabel.alpha = 0.0
+    })
+
+  }
 }
 
 extension LoginViewController: LoginDisplayLogic {
@@ -204,4 +245,40 @@ extension LoginViewController: LoginDisplayLogic {
       self.router?.routeToHome(segue: nil)
     }
   }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    guard string.count > 0 else { return true }
+
+    if textField === self.userNameTextField {
+
+      let currentText = textField.text ?? ""
+      if currentText.count == 0 {
+        if string != "0" {
+          self.shakePhoneField()
+          return false
+        } else {
+          self.hideFieldError()
+        }
+
+      } else if currentText.count == 1 {
+
+        if string != "9" {
+          self.shakePhoneField()
+          return false
+        } else {
+          self.hideFieldError()
+        }
+
+      } else {
+        numberOfShake = 0
+      }
+      return 11 > (textField.text ?? "").count
+    }
+
+    return true
+  }
+
 }
