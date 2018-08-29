@@ -89,7 +89,6 @@ class HomePresenter: HomePresentationLogic {
     let isRanging = response.isRanging
     switch state {
     case .loading:
-      Log.trace("======= Loading: [\(isRanging)]")
       let message = isRanging ? Messages.Ranging.random : Messages.Loading.random
       let viewModel = Home.Checkin.ViewModel.Loading(message: message)
       viewController?.displayCheckinLoading(viewModel: viewModel)
@@ -109,8 +108,7 @@ class HomePresenter: HomePresentationLogic {
       let viewModel = Home.Checkin.ViewModel.Failed(message: message)
       viewController?.displayCheckinFailed(viewModel: viewModel)
 
-    case .success(let message):
-      Log.trace("======= success")
+    case .success(let message):      
       let viewModel = Home.Checkin.ViewModel.Success(message: message)
       viewController?.displayCheckinSuccess(viewModel: viewModel)
     }
