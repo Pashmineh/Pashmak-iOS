@@ -17,6 +17,7 @@ protocol HomeBusinessLogic {
   func populate(request: Home.Populate.Request)
   func refresh(request: Home.Refresh.Request)
   func signout(request: Home.Signout.Request)
+  func checkin(request: Home.Checkin.Request)
 }
 
 protocol HomeDataStore {
@@ -24,7 +25,18 @@ protocol HomeDataStore {
 }
 
 class HomeInteractor: HomeBusinessLogic, HomeDataStore {
+
+  init() {
+    NotificationCenter.default.addObserver(self, selector: #selector(self.updateReceived), name: NSNotification.Name.Pashmak.UpdateReceievd, object: nil)
+  }
+
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+
   var presenter: HomePresentationLogic?
+
+  // MARK: Populate
 
   func populate(request: Home.Populate.Request) {
     Log.trace("Push Token: [\(Settings.current.pushToken)]")
@@ -55,19 +67,26 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
     }
 
   }
+  // MARK: Refresh
+
+  @objc
+  func updateReceived() {
+    let request = Home.Refresh.Request(isInBackground: true)
+    self.refresh(request: request)
+  }
 
   func refresh(request: Home.Refresh.Request) {
-
+    let isInBackground = request.isInBackground
     PashmakServer.perform(request: ServerRequest.Home.fetchHome())
       .done { (result: ServerData<ServerModels.Home>) in
         let homeData = result.model
 
-        let response = Home.Refresh.Response(state: .success(homeData))
+        let response = Home.Refresh.Response(state: .success(homeData), isInBackground: isInBackground)
         self.presenter?.presentRefresh(response: response)
 
     }
       .catch { (error) in
-        let response = Home.Refresh.Response(state: .failure(error))
+        let response = Home.Refresh.Response(state: .failure(error), isInBackground: isInBackground)
         self.presenter?.presentRefresh(response: response)
     }
 
@@ -77,6 +96,42 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
     Settings.clear()
     let response = Home.Signout.Response()
     presenter?.presentSignout(response: response)
+  }
+
+  // MARK: Chekin
+
+  func checkin(request: Home.Checkin.Request) {
+    let notRequired = APIError.invalidPrecondition("ورود امروز خود را ثبت کرده‌اید!")
+    func sendChekinLoading() {
+      let response = Home.Checkin.Response.init(state: .loading)
+      presenter?.presentCheckin(response: response)
+    }
+
+    func sendChekinFailed(_ error: Error) {
+      let response = Home.Checkin.Response(state: .failure(error))
+      presenter?.presentCheckin(response: response)
+    }
+
+    guard !Checkin.checkedInToday else {
+      sendChekinFailed(notRequired)
+      return
+    }
+
+    sendChekinLoading()
+
+    CheckinServices.shared.checkInNow().done { (chekinResponse) in
+      guard let checkinResponse = chekinResponse else {
+        sendChekinFailed(notRequired)
+        return
+      }
+
+      let message = checkinResponse.message ?? ""
+      let response = Home.Checkin.Response.init(state: .success(message))
+      self.presenter?.presentCheckin(response: response)
+    }
+      .catch { (error) in
+        sendChekinFailed(error)
+    }
   }
 
 }
