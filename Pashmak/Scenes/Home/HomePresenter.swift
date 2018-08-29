@@ -18,6 +18,7 @@ protocol HomePresentationLogic {
   func presentRefresh(response: Home.Refresh.Response)
   func presentSignout(response: Home.Signout.Response)
   func presentCheckin(response: Home.Checkin.Response)
+  func presentCheckinUpdate(response: Home.UpdateChekinButton.Response)
 }
 
 class HomePresenter: HomePresentationLogic {
@@ -106,5 +107,11 @@ class HomePresenter: HomePresentationLogic {
       let viewModel = Home.Checkin.ViewModel.Success(message: message)
       viewController?.displayCheckinSuccess(viewModel: viewModel)
     }
+  }
+
+  func presentCheckinUpdate(response: Home.UpdateChekinButton.Response) {
+    let needsCheckin = response.needsChekin
+    let viewModel = Home.UpdateChekinButton.ViewModel.init(needsChekin: needsCheckin)
+    viewController?.displayCheckinUpdate(viewModel: viewModel)
   }
 }

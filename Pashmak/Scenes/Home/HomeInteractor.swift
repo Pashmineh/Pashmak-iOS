@@ -12,22 +12,27 @@
 
 import UIKit
 import Async
+import CoreLocation
 
 protocol HomeBusinessLogic {
   func populate(request: Home.Populate.Request)
   func refresh(request: Home.Refresh.Request)
   func signout(request: Home.Signout.Request)
   func checkin(request: Home.Checkin.Request)
+//  func updateCheckin(request: Home.UpdateChekinButton.Request)
 }
 
 protocol HomeDataStore {
 
 }
 
-class HomeInteractor: HomeBusinessLogic, HomeDataStore {
+class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
 
-  init() {
-    NotificationCenter.default.addObserver(self, selector: #selector(self.updateReceived), name: NSNotification.Name.Pashmak.UpdateReceievd, object: nil)
+  override init() {
+    super.init()
+
+    NotificationCenter.default.addObserver(self, selector: #selector(self.updateReceived), name: Notification.Name.Pashmak.UpdateReceievd, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.checkinUpdate), name: Notification.Name.Pashmak.checkinUpdated, object: nil)
   }
 
   deinit {
@@ -35,6 +40,13 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
   }
 
   var presenter: HomePresentationLogic?
+
+  // MARK: iBeacon definistions
+  lazy var locationManager = CLLocationManager()
+  lazy var beacon: CLBeaconRegion = {
+    let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: "00001803-494C-4F47-4943-544543480000")!, major: 10009, minor: 13846, identifier: "KianDigital")
+    return beacon
+  }()
 
   // MARK: Populate
 
@@ -94,6 +106,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
 
   func signout(request: Home.Signout.Request) {
     Settings.clear()
+    (UIApplication.shared.delegate as? AppDelegate)?.stopMonitoring()
     let response = Home.Signout.Response()
     presenter?.presentSignout(response: response)
   }
@@ -133,5 +146,20 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
         sendChekinFailed(error)
     }
   }
+
+  @objc
+  private func checkinUpdate() {
+    let needsCheckin = !Checkin.checkedInToday
+    let response = Home.UpdateChekinButton.Response.init(needsChekin: needsCheckin)
+    presenter?.presentCheckinUpdate(response: response)
+  }
+
+  private func prepareLocationManager() {
+
+  }
+
+}
+
+extension HomeInteractor: CLLocationManagerDelegate {
 
 }

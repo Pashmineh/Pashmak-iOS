@@ -140,4 +140,16 @@ enum Home {
     }
   }
 
+  enum UpdateChekinButton {
+    struct Request {
+
+    }
+    struct Response {
+      let needsChekin: Bool
+    }
+    struct ViewModel {
+      let needsChekin: Bool
+    }
+  }
+
 }
