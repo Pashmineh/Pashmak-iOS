@@ -168,7 +168,7 @@ extension AppDelegate: CLLocationManagerDelegate {
       return
     }
 
-    CheckinServices.shared.checkInNow()
+    CheckinServices.shared.checkInNow(type: .iBeacon)
       .done { (resp) in
         if let resp = resp {
 

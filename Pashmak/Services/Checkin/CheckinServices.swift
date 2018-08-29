@@ -13,7 +13,7 @@ class CheckinServices {
 
   static let shared = CheckinServices()
 
-  func checkInNow() -> Promise<ServerModels.Checkin.Response?> {
+  func checkInNow(type: ServerModels.Checkin.CheckinType) -> Promise<ServerModels.Checkin.Response?> {
 
     return Promise { seal in
 
@@ -23,7 +23,7 @@ class CheckinServices {
         return
       }
 
-      let request = ServerModels.Checkin.Request()
+      let request = ServerModels.Checkin.Request(type: type)
       PashmakServer.perform(request: ServerRequest.Checkin.checkin(info: request), validResponseCodes: [200, 201])
         .done({ (result: ServerData<ServerModels.Checkin.Response>) in
           let response = result.model
