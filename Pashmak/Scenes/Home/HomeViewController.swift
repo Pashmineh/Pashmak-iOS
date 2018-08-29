@@ -30,6 +30,12 @@ protocol HomeDisplayLogic: class {
   func displayRefreshSuccess(viewModel: Home.Refresh.ViewModel.Success)
 
   func displaySignout(viewModel: Home.Signout.ViewModel)
+
+  func displayCheckinLoading(viewModel: Home.Checkin.ViewModel.Loading)
+  func displayCheckinFailed(viewModel: Home.Checkin.ViewModel.Failed)
+  func displayCheckinSuccess(viewModel: Home.Checkin.ViewModel.Success)
+
+  func displayCheckinUpdate(viewModel: Home.UpdateChekinButton.ViewModel)
 }
 
 class HomeViewController: UIViewController {
@@ -96,6 +102,7 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var avatarBorderView: UIView!
   @IBOutlet weak var checkinButton: Material.Button!
   @IBAction func checkinButtonTapped(_ sender: Any) {
+    checkin()
   }
 
   @IBOutlet weak var signoutButton: Material.Button!
@@ -128,6 +135,7 @@ class HomeViewController: UIViewController {
   private func prepareUI() {
     self.hero.isEnabled = true
     preparePush()
+    prepareLocationMonitoring()
     prepareTopContainer()
     prepareSkeleton()
     prepareAvatar()
@@ -138,6 +146,10 @@ class HomeViewController: UIViewController {
   private func preparePush() {
 //    print("Current Token: [\(Settings.current.pushToken)]")
     (UIApplication.shared.delegate as? AppDelegate)?.preparePush()
+  }
+
+  private func prepareLocationMonitoring() {
+    (UIApplication.shared.delegate as? AppDelegate)?.prepareLocationManager()
   }
 
   private func prepareTopContainer() {
@@ -211,7 +223,7 @@ class HomeViewController: UIViewController {
 
   @objc
   func refresh() {
-    let request = Home.Refresh.Request.init()
+    let request = Home.Refresh.Request.init(isInBackground: false)
     interactor?.refresh(request: request)
   }
 
@@ -247,7 +259,12 @@ class HomeViewController: UIViewController {
     button.isEnabled = isActive
     button.backgroundColor = isActive ? UIColor.Pashmak.buttonActive : UIColor.Pashmak.Grey
     let title = isActive ? "ثبت ورود" : "ورود امروز خود را ثبت کرده‌اید"
+    let color: UIColor = isActive ? UIColor.Pashmak.Grey : UIColor.Pashmak.TextDeactive
     button.setTitle(title, for: [])
+    button.setTitleColor(color, for: [])
+
+    button.layer.borderColor = color.cgColor
+    button.layer.borderWidth = isActive ? 0.0 : 1.0
 
     UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.65, initialSpringVelocity: 6.0, options: [], animations: {
       button.transform = .identity
@@ -256,6 +273,11 @@ class HomeViewController: UIViewController {
 
     }
 
+  }
+
+  private func checkin() {
+    let request = Home.Checkin.Request()
+    interactor?.checkin(request: request)
   }
 
 }
@@ -297,9 +319,14 @@ extension HomeViewController: HomeDisplayLogic {
   }
 
   func displayRefreshFailed(viewModel: Home.Refresh.ViewModel.Failed) {
+    let isInBack = viewModel.isInBackground
     self.refreshControl.endRefreshing()
-    let message = viewModel.message
-    KVNProgress.showError(withStatus: message)
+
+    if !isInBack {
+      let message = viewModel.message
+      KVNProgress.showError(withStatus: message)
+    }
+
   }
 
   func displayRefreshSuccess(viewModel: Home.Refresh.ViewModel.Success) {
@@ -317,6 +344,39 @@ extension HomeViewController: HomeDisplayLogic {
 
   func displaySignout(viewModel: Home.Signout.ViewModel) {
     self.router?.routeToLogin(segue: nil)
+  }
+
+  func displayCheckinLoading(viewModel: Home.Checkin.ViewModel.Loading) {
+    let message = viewModel.message
+    KVNProgress.show(withStatus: message)
+  }
+
+  func displayCheckinFailed(viewModel: Home.Checkin.ViewModel.Failed) {
+    let message = viewModel.message
+    KVNProgress.showError(withStatus: message)
+  }
+
+  func displayCheckinSuccess(viewModel: Home.Checkin.ViewModel.Success) {
+    let message = viewModel.message
+
+    func updateForCheckin() {
+      showCheckinButton(isActive: false)
+    }
+
+    if !message.isEmpty {
+      KVNProgress.showSuccess(withStatus: message) {
+        updateForCheckin()
+      }
+    } else {
+      KVNProgress.dismiss {
+        updateForCheckin()
+      }
+    }
+  }
+
+  func displayCheckinUpdate(viewModel: Home.UpdateChekinButton.ViewModel) {
+    let needsCheckin = viewModel.needsChekin
+    self.showCheckinButton(isActive: needsCheckin)
   }
 
 }

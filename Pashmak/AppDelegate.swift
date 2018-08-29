@@ -16,6 +16,9 @@ import CoreLocation
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+  let locationManager = CLLocationManager()
+  let beacons: [CLBeaconRegion] = [iBeacon.KianDigital01.beaconRegion]
+
   var window: UIWindow?
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
@@ -24,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       self.prepareHero()
       self.prepareIQKeyboard()
       self.prepareKVNProgress()
+//      self.prepareLocationManager()
     }
     return true
   }
@@ -86,6 +90,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     kvnconf.statusFont = UIFont.farsiFont(.regular, size: 15.0)
     KVNProgress.setConfiguration(kvnconf)
   }
+
+  func prepareLocationManager() {
+    locationManager.activityType = .otherNavigation
+    locationManager.allowsBackgroundLocationUpdates = true
+    locationManager.delegate = self
+
+    switch CLLocationManager.authorizationStatus() {
+    case .authorizedAlways:
+      startMonitoring()
+    case .authorizedWhenInUse:
+      locationManager.requestAlwaysAuthorization()
+    case .denied:
+      Log.trace("Authorization is denied!")
+    case .notDetermined:
+      locationManager.requestAlwaysAuthorization()
+    case .restricted:
+      Log.trace("Authorization is restricted!")
+    }
+
+  }
+
+  func startMonitoring() {
+    for beacon in beacons {
+      if locationManager.monitoredRegions.filter({ $0.identifier == beacon.identifier }).isEmpty {
+        locationManager.startMonitoring(for: beacon)
+        print("Started to monitor for \(beacon.identifier)")
+      } else {
+        print("already monitoring beacon [\(beacon.identifier)].")
+      }
+    }
+  }
+
+  func stopMonitoring() {
+    beacons.forEach { locationManager.stopMonitoring(for: $0) }
+  }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -94,69 +133,53 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
     Settings.current.update(pushToken: token)
     print("Token: [\(token)]")
-
   }
 
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 //    Log.trace("Notification receivd:\n\(notification.request.content.body)")
+    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.UpdateReceievd, object: nil)
     completionHandler([.alert, .badge, .sound])
   }
 
 }
 
-/*
 extension AppDelegate: CLLocationManagerDelegate {
-  
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    guard status == .authorizedAlways else {
-      return
+    if status == .authorizedAlways {
+      startMonitoring()
     }
-    
-    startMonitoring()
-    
   }
-  
-  /*
-   func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-   guard let b = beacons.filter({ (be) -> Bool in
-   be.proximityUUID.uuidString == "00001803-494C-4F47-4943-544543480000"
-   }).first else {
-   return
-   }
-   
-   if b.proximity == .near {
-   
-   }
-   
-   }
-   func sendNotif() {
-   guard shouldSendNotif else {
-   return
-   }
-   
-   shouldSendNotif = false
-   print("Sending notif")
-   let content = UNMutableNotificationContent()
-   content.title = "پشمک"
-   content.body = "به کیان دیجیال خوش اومدید!"
-   
-   let request = UNNotificationRequest(identifier: "Checkin", content: content, trigger: nil)
-   UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-   }*/
-  
+
   func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
     print("Entered region: \(region.identifier)")
-    guard "00001803-494C-4F47-4943-544543480000" == (region as? CLBeaconRegion)?.proximityUUID.uuidString else {
+
+    guard !Checkin.checkedInToday else {
+      Log.trace("Already checked in today, no need for beacon checkin!")
       return
     }
-    
-    let content = UNMutableNotificationContent()
-    content.title = "پشمک"
-    content.body = "به کیان دیجیال خوش اومدید!"
-    
-    let request = UNNotificationRequest(identifier: "Checkin", content: content, trigger: nil)
-    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+
+    let beaconIDs = beacons.map { $0.proximityUUID }
+    guard let regionID = (region as? CLBeaconRegion)?.proximityUUID, beaconIDs.contains(regionID) else {
+      return
+    }
+
+    CheckinServices.shared.checkInNow()
+      .done { (resp) in
+        if let resp = resp {
+
+          NotificationCenter.default.post(Notification.init(name: Notification.Name.Pashmak.checkinUpdated))
+
+          let content = UNMutableNotificationContent()
+          content.title = "پشمک"
+          content.body = "به کیان دیجیال خوش اومدید!\n\(resp.message ?? "")"
+          let request = UNNotificationRequest(identifier: "Checkin", content: content, trigger: nil)
+          UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        } else {
+          Log.trace("Looks like we've already cheked in with server")
+        }
+      }.catch { (error) in
+        Log.trace("Chekin failed!\n\(error.localizedDescription)")
+    }
+
   }
 }
-
-*/

@@ -21,6 +21,7 @@ enum APIError: Error, LocalizedError {
   case accountDeactivated(String)
   case operationError(String)
   case noConnection
+  case invalidPrecondition(String)
 
   public var errorDescription: String? {
     switch self {
@@ -36,23 +37,7 @@ enum APIError: Error, LocalizedError {
     case .accountDeactivated(let message): return "Account has been daectivated with message: \(message)"
     case .operationError(let error): return "Error in operation.\n\(error)"
     case .noConnection: return "ارتباط خود با اینترنت را بررسی کنید."
+    case .invalidPrecondition(let message): return message
     }
   }
-}
-
-enum SepError: Error, LocalizedError {
-  case networkError(String)
-  case userCanceled(String)
-  case paymentExpired(String)
-  case invalidGateway(String)
-  public var errorDescription: String? {
-    switch self {
-    case .networkError(let msg): return "ارتباط خودتان با اینترنت را بررسی کنید.\n\(msg)"
-    case .userCanceled(let msg): return msg
-    case .paymentExpired(let msg): return "مهلت پرداخت سپری شد.\n\(msg)"
-    case .invalidGateway(let msg): return "درگاه پرداخت نامعتبر است.\n\(msg)"
-    }
-
-  }
-
 }

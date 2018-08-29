@@ -19,6 +19,10 @@ struct Messages {
       "خب بابا... چه خبره؟! وایسا دیگه...",
       "لطفاً کمی صبر بفرمایید قربان..."
     ]
+
+    static var random: String {
+      return messages.randomElement() ?? messages[0]
+    }
   }
 
   struct ServerErrors {
@@ -28,5 +32,9 @@ struct Messages {
     "به من هیچ ربطی نداره، کد فرزاد کار نکرد!",
     "خطا در سرور.\n(فرززززاااددد.. بدو بیا ببینیم چی شده!)"
     ]
+
+    static var random: String {
+      return messages.randomElement() ?? messages[0]
+    }
   }
 }

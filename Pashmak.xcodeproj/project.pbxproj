@@ -65,6 +65,7 @@
 		9578F39F212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39C212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf */; };
 		9578F3A0212F446700A667E9 /* IRANSansDN_Fa_Num.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39D212F446700A667E9 /* IRANSansDN_Fa_Num.ttf */; };
 		9578F3A1212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39E212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf */; };
+		959B0AD42135CF700042B847 /* Notifs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959B0AD32135CF700042B847 /* Notifs.swift */; };
 		95BC0071212C972D001B4375 /* UIFont+Farsi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC0070212C972D001B4375 /* UIFont+Farsi.swift */; };
 		95BC0073212CA400001B4375 /* UIColor+Hue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC0072212CA400001B4375 /* UIColor+Hue.swift */; };
 		95BC0077212CA57B001B4375 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BC0076212CA57B001B4375 /* RealmProvider.swift */; };
@@ -138,6 +139,7 @@
 		9578F39C212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansDN_FaNum_Light.ttf; sourceTree = "<group>"; };
 		9578F39D212F446700A667E9 /* IRANSansDN_Fa_Num.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansDN_Fa_Num.ttf; sourceTree = "<group>"; };
 		9578F39E212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IRANSansDN_FaNum-Bold.ttf"; sourceTree = "<group>"; };
+		959B0AD32135CF700042B847 /* Notifs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifs.swift; sourceTree = "<group>"; };
 		95BC0070212C972D001B4375 /* UIFont+Farsi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Farsi.swift"; sourceTree = "<group>"; };
 		95BC0072212CA400001B4375 /* UIColor+Hue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hue.swift"; sourceTree = "<group>"; };
 		95BC0076212CA57B001B4375 /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				84052D4521325EBF0040ABF5 /* PashmakMessages.swift */,
 				8412D0192133C0B400942874 /* Formatters.swift */,
 				9519AA9521346EA4003AB3ED /* UIView+Extensions.swift */,
+				959B0AD32135CF700042B847 /* Notifs.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				959B0AD42135CF700042B847 /* Notifs.swift in Sources */,
 				95BC007D212CA7B0001B4375 /* Path.swift in Sources */,
 				845E3FFC213104650025477A /* ServerRequestBase.swift in Sources */,
 				84FC6CCD212BCAE900B4A56A /* Storyboards.swift in Sources */,

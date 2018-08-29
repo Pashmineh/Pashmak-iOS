@@ -80,16 +80,18 @@ enum Home {
 
   enum Refresh {
     struct Request {
-
+      let isInBackground: Bool
     }
 
     struct Response {
       let state: FetchHomeState
+      let isInBackground: Bool
     }
 
     enum ViewModel {
       struct Failed {
         let message: String
+        let isInBackground: Bool
       }
 
       struct Success {
@@ -114,15 +116,39 @@ enum Home {
   }
 
   enum Checkin {
-    typealias CheckinFetchState = FetchState<ServerModels.EmptyServerModel, Error>
+    typealias CheckinFetchState = FetchState<String, Error>
+    struct Request {
+
+    }
+
+    struct Response {
+      let state: CheckinFetchState
+    }
+
+    enum ViewModel {
+      struct Loading {
+        let message: String
+      }
+
+      struct Failed {
+        let message: String
+      }
+
+      struct Success {
+        let message: String
+      }
+    }
+  }
+
+  enum UpdateChekinButton {
     struct Request {
 
     }
     struct Response {
-
+      let needsChekin: Bool
     }
     struct ViewModel {
-
+      let needsChekin: Bool
     }
   }
 

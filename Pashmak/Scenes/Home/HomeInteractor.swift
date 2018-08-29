@@ -12,19 +12,43 @@
 
 import UIKit
 import Async
+import CoreLocation
 
 protocol HomeBusinessLogic {
   func populate(request: Home.Populate.Request)
   func refresh(request: Home.Refresh.Request)
   func signout(request: Home.Signout.Request)
+  func checkin(request: Home.Checkin.Request)
+//  func updateCheckin(request: Home.UpdateChekinButton.Request)
 }
 
 protocol HomeDataStore {
 
 }
 
-class HomeInteractor: HomeBusinessLogic, HomeDataStore {
+class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
+
+  override init() {
+    super.init()
+
+    NotificationCenter.default.addObserver(self, selector: #selector(self.updateReceived), name: Notification.Name.Pashmak.UpdateReceievd, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.checkinUpdate), name: Notification.Name.Pashmak.checkinUpdated, object: nil)
+  }
+
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+
   var presenter: HomePresentationLogic?
+
+  // MARK: iBeacon definistions
+  lazy var locationManager = CLLocationManager()
+  lazy var beacon: CLBeaconRegion = {
+    let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: "00001803-494C-4F47-4943-544543480000")!, major: 10009, minor: 13846, identifier: "KianDigital")
+    return beacon
+  }()
+
+  // MARK: Populate
 
   func populate(request: Home.Populate.Request) {
     Log.trace("Push Token: [\(Settings.current.pushToken)]")
@@ -55,19 +79,26 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
     }
 
   }
+  // MARK: Refresh
+
+  @objc
+  func updateReceived() {
+    let request = Home.Refresh.Request(isInBackground: true)
+    self.refresh(request: request)
+  }
 
   func refresh(request: Home.Refresh.Request) {
-
+    let isInBackground = request.isInBackground
     PashmakServer.perform(request: ServerRequest.Home.fetchHome())
       .done { (result: ServerData<ServerModels.Home>) in
         let homeData = result.model
 
-        let response = Home.Refresh.Response(state: .success(homeData))
+        let response = Home.Refresh.Response(state: .success(homeData), isInBackground: isInBackground)
         self.presenter?.presentRefresh(response: response)
 
     }
       .catch { (error) in
-        let response = Home.Refresh.Response(state: .failure(error))
+        let response = Home.Refresh.Response(state: .failure(error), isInBackground: isInBackground)
         self.presenter?.presentRefresh(response: response)
     }
 
@@ -75,8 +106,60 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
 
   func signout(request: Home.Signout.Request) {
     Settings.clear()
+    (UIApplication.shared.delegate as? AppDelegate)?.stopMonitoring()
     let response = Home.Signout.Response()
     presenter?.presentSignout(response: response)
   }
+
+  // MARK: Chekin
+
+  func checkin(request: Home.Checkin.Request) {
+    let notRequired = APIError.invalidPrecondition("ورود امروز خود را ثبت کرده‌اید!")
+    func sendChekinLoading() {
+      let response = Home.Checkin.Response.init(state: .loading)
+      presenter?.presentCheckin(response: response)
+    }
+
+    func sendChekinFailed(_ error: Error) {
+      let response = Home.Checkin.Response(state: .failure(error))
+      presenter?.presentCheckin(response: response)
+    }
+
+    guard !Checkin.checkedInToday else {
+      sendChekinFailed(notRequired)
+      return
+    }
+
+    sendChekinLoading()
+
+    CheckinServices.shared.checkInNow().done { (chekinResponse) in
+      guard let checkinResponse = chekinResponse else {
+        sendChekinFailed(notRequired)
+        return
+      }
+
+      let message = checkinResponse.message ?? ""
+      let response = Home.Checkin.Response.init(state: .success(message))
+      self.presenter?.presentCheckin(response: response)
+    }
+      .catch { (error) in
+        sendChekinFailed(error)
+    }
+  }
+
+  @objc
+  private func checkinUpdate() {
+    let needsCheckin = !Checkin.checkedInToday
+    let response = Home.UpdateChekinButton.Response.init(needsChekin: needsCheckin)
+    presenter?.presentCheckinUpdate(response: response)
+  }
+
+  private func prepareLocationManager() {
+
+  }
+
+}
+
+extension HomeInteractor: CLLocationManagerDelegate {
 
 }
