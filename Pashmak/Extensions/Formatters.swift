@@ -47,7 +47,7 @@ class Formatters {
     formatter.alwaysShowsDecimalSeparator = false
     formatter.positiveSuffix = " تومان "
     formatter.positivePrefix = "\u{200F}"
-    formatter.negativeSuffix = "-" + " ﷼ "
+    formatter.negativeSuffix = "-" + " تومان "
     formatter.negativePrefix = "\u{200F}"
     formatter.isLenient  = true
     return formatter
