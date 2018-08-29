@@ -196,7 +196,7 @@ class HomeViewController: UIViewController {
 
     collectionView.backgroundColor = .clear
     collectionView.isScrollEnabled = true
-    collectionView.contentInset.top = 140.0
+    collectionView.contentInset.top = 150.0
     collectionView.contentInset.bottom = 64.0
     collectionView.refreshControl = self.refreshControl
     adapter.collectionView = collectionView

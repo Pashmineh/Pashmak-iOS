@@ -31,7 +31,7 @@ extension RealmProvider {
   class Checkin: Object {
 
     enum Property: String {
-      case time, id, type, message
+      case time, id, type, message, userName
     }
 
     enum CheckinType: String {
@@ -43,6 +43,7 @@ extension RealmProvider {
     dynamic var id: Int = 0
     dynamic var type: CheckinType = .manual
     dynamic var message: String = ""
+    dynamic var userName: String = ""
 
     convenience init(model: ServerModels.Checkin.Response) {
       self.init()
@@ -50,6 +51,7 @@ extension RealmProvider {
       self.id = model.id ?? 0
       self.message = model.message ?? ""
       self.type = .iBeacon
+      self.userName = Settings.current.phoneNumber
     }
 
   }
@@ -57,7 +59,10 @@ extension RealmProvider {
 extension Checkin {
 
   static var lastCheckin: Checkin? {
-    return RealmProvider.CheckinsProvider.realm.objects(Checkin.self).sorted(byKeyPath: Property.time.rawValue, ascending: false).first
+    let userName = Settings.current.phoneNumber
+    let predicate = NSPredicate(format: "%K == %@", Checkin.Property.userName.rawValue, userName)
+//    Log.trace("Finding last checkin for: [\(userName)]")
+    return RealmProvider.CheckinsProvider.realm.objects(Checkin.self).filter(predicate).sorted(byKeyPath: Property.time.rawValue, ascending: false).first
   }
 
   static func addCheckin(_ checkin: ServerModels.Checkin.Response) {

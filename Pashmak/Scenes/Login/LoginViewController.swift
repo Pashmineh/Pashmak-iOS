@@ -14,6 +14,7 @@ import UIKit
 import Hero
 import Material
 import KVNProgress
+import Regex
 
 private struct Constants {
   static let hiddenErrorTransform = CGAffineTransform(translationX: 0, y: -20.0)
@@ -253,6 +254,20 @@ extension LoginViewController: UITextFieldDelegate {
     guard string.count > 0 else { return true }
 
     if textField === self.userNameTextField {
+
+      if string.count > 0 {
+        if String(string.prefix(3)) == "+98" {
+          let newSring = string.replacingOccurrences(of: "+98", with: "0")
+          let str = NSString(string: textField.text ?? "").replacingCharacters(in: range, with: newSring)
+          textField.text = str
+          return false
+        } else {
+          let str = NSString(string: textField.text ?? "").replacingCharacters(in: range, with: string)
+          if Regex.KD.phoneNumber.matches(str) {
+            return true
+          }
+        }
+      }
 
       let currentText = textField.text ?? ""
       if currentText.count == 0 {
