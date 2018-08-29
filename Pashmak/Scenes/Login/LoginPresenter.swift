@@ -63,7 +63,7 @@ class LoginPresenter: LoginPresentationLogic {
       }
 
       if !lastName.isEmpty {
-        fullName += lastName
+        fullName += " \(lastName)"
       }
       let message = "\(fullName) خوش اومدی!"
 

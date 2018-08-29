@@ -108,7 +108,7 @@ class HomePresenter: HomePresentationLogic {
       let viewModel = Home.Checkin.ViewModel.Failed(message: message)
       viewController?.displayCheckinFailed(viewModel: viewModel)
 
-    case .success(let message):      
+    case .success(let message):
       let viewModel = Home.Checkin.ViewModel.Success(message: message)
       viewController?.displayCheckinSuccess(viewModel: viewModel)
     }
