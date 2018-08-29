@@ -34,6 +34,7 @@ extension RealmProvider {
     }
 
     dynamic var pushToken: String = ""
+    dynamic var lastUpdatedPush: String = ""
     dynamic var deviceToken: String = ""
     dynamic var oauthToken: String = ""
     dynamic var firstName: String = ""
@@ -85,13 +86,41 @@ extension RealmProvider {
 
     func update(pushToken: String) {
       let realm = RealmProvider.SettingsProvider.realm
-
+      updatePushOnServer(token: pushToken)
       do {
         try realm.write {
           self.pushToken = pushToken
         }
       } catch {
         fatalError(error.localizedDescription)
+      }
+
+    }
+
+    private func updateLastPushToken(token: String) {
+      let realm = RealmProvider.SettingsProvider.realm
+      do {
+        try realm.write {
+          self.lastUpdatedPush = token
+        }
+      } catch {
+        fatalError(error.localizedDescription)
+      }
+    }
+
+    private func updatePushOnServer(token: String) {
+      guard lastUpdatedPush != token else {
+        Log.trace("Token is already uptodate")
+        return
+      }
+
+      PashmakServer.perform(request: ServerRequest.Authentication.updateToken(token: token), validResponseCodes: [200, 201])
+        .done { (result: ServerData<ServerModels.EmptyServerModel>) in
+          let model = result.model
+          Log.trace(model)
+          self.updateLastPushToken(token: token)
+        } .catch { (error) in
+          Log.error("Error sending token update.\n\(error.localizedDescription)")
       }
 
     }

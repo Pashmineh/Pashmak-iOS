@@ -88,6 +88,7 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
         Log.trace("Oauth token not found!")
         return
       }
+      Log.trace("OauthToken: [\(token)]")
       Settings.current.update(oauthToken: token)
 
       let firstName = response.name ?? ""
@@ -97,6 +98,8 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
 
       let avatarURL = "http://178.62.20.28/Photos/\(phoneNumber).jpeg"
       Settings.current.update(avatarURL: avatarURL)
+
+      Settings.current.update(phoneNumber: phoneNumber)
 
     }
 
