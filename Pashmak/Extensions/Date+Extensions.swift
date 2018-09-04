@@ -10,12 +10,12 @@ import Foundation
 
 extension Date {
   var utcValue: Double {
-    return self.timeIntervalSince1970 * 1000.0
+    return self.timeIntervalSince1970 * 1_000.0
   }
 }
 
 extension Double {
   var utcDate: Date {
-    return Date(timeIntervalSince1970: self / 1000.0)
+    return Date(timeIntervalSince1970: self / 1_000.0)
   }
 }

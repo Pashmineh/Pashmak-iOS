@@ -10,18 +10,18 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
-import IGListKit
-import Hero
-import Material
 import Async
-import KVNProgress
+import Hero
+import IGListKit
 import Kingfisher
+import KVNProgress
+import Material
 import SkeletonView
-import VisualEffectView
 import SnapKit
+import UIKit
+import VisualEffectView
 
-protocol HomeDisplayLogic: class {
+protocol HomeDisplayLogic: AnyObject {
   func displayPopulateLoading(viewModel: Home.Populate.ViewModel.Loading)
   func displayPopulateFailed(viewModel: Home.Populate.ViewModel.Failed)
   func displayPopulateSuccess(viewModel: Home.Populate.ViewModel.Success)
@@ -90,23 +90,25 @@ class HomeViewController: UIViewController {
 
   // MARK: View lifecycle
 
-  @IBOutlet weak var topContainer: UIView!
-  @IBOutlet weak var collectionContainer: UIView!
-  @IBOutlet weak var bottomContainer: UIView!
+  @IBOutlet private weak var topContainer: UIView!
+  @IBOutlet private weak var collectionContainer: UIView!
+  @IBOutlet private weak var bottomContainer: UIView!
 
-  @IBOutlet weak var fullnameLabel: UILabel!
-  @IBOutlet weak var cycleNameLabel: UILabel!
-  @IBOutlet weak var balanceLabel: UILabel!
-  @IBOutlet weak var paidLabel: UILabel!
-  @IBOutlet weak var avatarImageView: UIImageView!
-  @IBOutlet weak var avatarBorderView: UIView!
-  @IBOutlet weak var checkinButton: Material.Button!
-  @IBAction func checkinButtonTapped(_ sender: Any) {
+  @IBOutlet private weak var fullnameLabel: UILabel!
+  @IBOutlet private weak var cycleNameLabel: UILabel!
+  @IBOutlet private weak var balanceLabel: UILabel!
+  @IBOutlet private weak var paidLabel: UILabel!
+  @IBOutlet private weak var avatarImageView: UIImageView!
+  @IBOutlet private weak var avatarBorderView: UIView!
+  @IBOutlet private weak var checkinButton: Material.Button!
+
+  @IBAction private func checkinButtonTapped(_ sender: Any) {
     checkin()
   }
 
-  @IBOutlet weak var signoutButton: Material.Button!
-  @IBAction func signoutButtonTapped(_ sender: Any) {
+  @IBOutlet private weak var signoutButton: Material.Button!
+
+  @IBAction private func signoutButtonTapped(_ sender: Any) {
     self.signout()
   }
 
@@ -201,7 +203,9 @@ class HomeViewController: UIViewController {
     collectionView.refreshControl = self.refreshControl
     adapter.collectionView = collectionView
     adapter.dataSource = self
-    guard let containerView = self.collectionContainer else { return }
+    guard let containerView = self.collectionContainer else {
+        return
+      }
     containerView.backgroundColor = .clear
     collectionView.frame = containerView.bounds
     containerView.addSubview(collectionView)
@@ -223,7 +227,7 @@ class HomeViewController: UIViewController {
 
   @objc
   func refresh() {
-    let request = Home.Refresh.Request.init(isInBackground: false)
+    let request = Home.Refresh.Request(isInBackground: false)
     interactor?.refresh(request: request)
   }
 
@@ -255,7 +259,9 @@ class HomeViewController: UIViewController {
 
   private func showCheckinButton(isActive: Bool) {
 
-    guard let button = self.checkinButton else { return }
+    guard let button = self.checkinButton else {
+        return
+      }
     button.isEnabled = isActive
     button.backgroundColor = isActive ? UIColor.Pashmak.buttonActive : UIColor.Pashmak.Grey
     let title = isActive ? "ثبت ورود" : "ورود امروز خود را ثبت کرده‌اید"
@@ -266,10 +272,15 @@ class HomeViewController: UIViewController {
     button.layer.borderColor = color.cgColor
     button.layer.borderWidth = isActive ? 0.0 : 1.0
 
-    UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.65, initialSpringVelocity: 6.0, options: [], animations: {
+    UIView.animate(withDuration: 0.3,
+                   delay: 0.0,
+                   usingSpringWithDamping: 0.65,
+                   initialSpringVelocity: 6.0,
+                   options: [],
+                   animations: {
       button.transform = .identity
       button.alpha = 1.0
-    }) { (_) in
+    }) { _ in
 
     }
 
@@ -290,7 +301,7 @@ extension HomeViewController: HomeDisplayLogic {
 
     let items = viewModel.items
     self.displayedItems = items
-    self.adapter.performUpdates(animated: true) { (_) in
+    self.adapter.performUpdates(animated: true) { _ in
 
     }
 
@@ -314,8 +325,8 @@ extension HomeViewController: HomeDisplayLogic {
     self.topContainer.hideSkeleton()
 
     self.showCheckinButton(isActive: needsCheckin)
-    self.adapter.performUpdates(animated: true, completion: { (_) in
-    })
+    self.adapter.performUpdates(animated: true) { _ in
+    }
   }
 
   func displayRefreshFailed(viewModel: Home.Refresh.ViewModel.Failed) {
@@ -337,7 +348,7 @@ extension HomeViewController: HomeDisplayLogic {
     let items = viewModel.items
     self.displayedItems = items
 
-    self.adapter.performUpdates(animated: true) { (_) in
+    self.adapter.performUpdates(animated: true) { _ in
 
     }
   }
@@ -394,7 +405,7 @@ extension HomeViewController: ListAdapterDataSource {
     case is ServerModels.Home.Event:
       return HomeEventSectionController()
     default:
-      fatalError()
+      fatalError("Unknown object for section controller: [\(object)]")
     }
   }
 

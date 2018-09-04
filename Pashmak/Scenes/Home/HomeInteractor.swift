@@ -10,9 +10,9 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
 import Async
 import CoreLocation
+import UIKit
 
 protocol HomeBusinessLogic {
   func populate(request: Home.Populate.Request)
@@ -49,7 +49,7 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
     return locMan
   }()
   lazy var beacon: CLBeaconRegion = {
-    let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: "00001803-494C-4F47-4943-544543480000")!, major: 10009, minor: 13846, identifier: "KianDigital")
+    let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: "00001803-494C-4F47-4943-544543480000") ?? UUID(), major: 10_009, minor: 13_846, identifier: "KianDigital")
     return beacon
   }()
 
@@ -60,12 +60,12 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
   func populate(request: Home.Populate.Request) {
     Log.trace("Push Token: [\(Settings.current.pushToken)]")
     func sendLoading() {
-      let response = Home.Populate.Response.init(state: .loading)
+      let response = Home.Populate.Response(state: .loading)
       presenter?.presentPopulate(response: response)
     }
 
     func sendFailed(_ error: Error) {
-      let response = Home.Populate.Response.init(state: .failure(error))
+      let response = Home.Populate.Response(state: .failure(error))
       presenter?.presentPopulate(response: response)
     }
 
@@ -73,17 +73,19 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
 
     PashmakServer.perform(request: ServerRequest.Home.fetchHome())
       .done { [weak self] (result: ServerData<ServerModels.Home>) in
-        guard let self = self else { return }
+        guard let self = self else {
+          return
+        }
         let homeData = result.model
 
         Async.main(after: 2.0) {
-          let response = Home.Populate.Response.init(state: .success(homeData))
+          let response = Home.Populate.Response(state: .success(homeData))
           self.presenter?.presentPopulate(response: response)
         }
-    }
-      .catch { (error) in
+      }
+      .catch { error in
         sendFailed(error)
-    }
+      }
 
   }
   // MARK: Refresh
@@ -103,11 +105,11 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
         let response = Home.Refresh.Response(state: .success(homeData), isInBackground: isInBackground)
         self.presenter?.presentRefresh(response: response)
 
-    }
-      .catch { (error) in
+      }
+      .catch { error in
         let response = Home.Refresh.Response(state: .failure(error), isInBackground: isInBackground)
         self.presenter?.presentRefresh(response: response)
-    }
+      }
 
   }
 
@@ -123,7 +125,7 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
   func checkin(request: Home.Checkin.Request) {
     let notRequired = APIError.invalidPrecondition("ورود امروز خود را ثبت کرده‌اید!")
     func sendChekinLoading(isRanging: Bool) {
-      let response = Home.Checkin.Response.init(state: .loading, isRanging: isRanging)
+      let response = Home.Checkin.Response(state: .loading, isRanging: isRanging)
       presenter?.presentCheckin(response: response)
     }
 
@@ -143,27 +145,29 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
       sendChekinLoading(isRanging: false)
 
       Async.main(after: 1.0) {
-        CheckinServices.shared.checkInNow(type: .manual).done { (chekinResponse) in
+        CheckinServices.shared.checkInNow(type: .manual).done { chekinResponse in
           guard let checkinResponse = chekinResponse else {
             sendChekinFailed(notRequired, isRanging: false)
             return
           }
 
           let message = checkinResponse.message ?? ""
-          let response = Home.Checkin.Response.init(state: .success(message), isRanging: false)
+          let response = Home.Checkin.Response(state: .success(message), isRanging: false)
           self.presenter?.presentCheckin(response: response)
-          }
-          .catch { (error) in
-            sendChekinFailed(error, isRanging: false)
         }
+          .catch { error in
+            sendChekinFailed(error, isRanging: false)
+          }
       }
 
     }
 
     sendChekinLoading(isRanging: true)
 
-    let startedRanging = startRanging { [weak self] (ranged) in
-      guard let self = self else { return }
+    let startedRanging = startRanging { [weak self] ranged in
+      guard let self = self else {
+        return
+      }
       self.stopRanging()
       guard ranged else {
         let error = APIError.invalidParameters("Range")
@@ -184,7 +188,7 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
   @objc
   private func checkinUpdate() {
     let needsCheckin = !Checkin.checkedInToday
-    let response = Home.UpdateChekinButton.Response.init(needsChekin: needsCheckin)
+    let response = Home.UpdateChekinButton.Response(needsChekin: needsCheckin)
     presenter?.presentCheckinUpdate(response: response)
   }
 
@@ -197,13 +201,13 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
     }
     Log.trace("Starting to range for beacons!")
     beaconRanged = rangedHandler
-    raningTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false, block: { (_) in
+    raningTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { _ in
       Async.main {
         self.stopRanging()
         self.beaconRanged?(false)
       }
 
-    })
+    }
 
     iBeacon.Beacons.forEach { locationManager.startMonitoring(for: $0); locationManager.startRangingBeacons(in: $0) }
     return true

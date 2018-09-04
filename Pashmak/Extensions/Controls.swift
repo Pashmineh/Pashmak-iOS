@@ -10,7 +10,7 @@ import UIKit
 
 typealias ButtonAction = () -> Void
 
-private struct AssociatedKeys {
+private enum AssociatedKeys {
   static var touchUp = "touchUp"
   static var touchDown = "touchDown"
   static var touchLeave = "touchLeave"
@@ -26,7 +26,8 @@ private class ClosureWrapper {
 
 extension UIControl {
 
-  @objc private func performTouchUp() {
+  @objc
+  private func performTouchUp() {
 
     guard let action = touchUp else {
       return
@@ -36,7 +37,8 @@ extension UIControl {
 
   }
 
-  @objc private func performTouchDown() {
+  @objc
+  private func performTouchDown() {
 
     guard let action = touchDown else {
       return
@@ -46,7 +48,8 @@ extension UIControl {
 
   }
 
-  @objc private func performTouchLeave() {
+  @objc
+  private func performTouchLeave() {
 
     guard let action = touchLeave else {
       return
@@ -143,8 +146,12 @@ extension UIControl {
 
 extension UIViewController {
   var previousViewController: UIViewController? {
-    guard let viewControllers = self.navigationController?.viewControllers else { return nil }
-    guard viewControllers.count >= 2 else { return nil }
+    guard let viewControllers = self.navigationController?.viewControllers else {
+      return nil
+    }
+    guard viewControllers.count >= 2 else {
+      return nil
+    }
     return viewControllers[viewControllers.endIndex - 2]
   }
 }

@@ -27,6 +27,7 @@ extension ServerModels {
     }
     class Request: ServerModel {
       let type: CheckinType
+
       init(type: CheckinType) {
         self.type = type
       }

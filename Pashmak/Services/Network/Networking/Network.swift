@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import PromiseKit
 import Log
+import PromiseKit
 
-struct PashmakServer {
+enum PashmakServer {
 
   private static var networkActivity: Int = 0 {
     didSet {
@@ -29,10 +29,14 @@ struct PashmakServer {
   private static func updateAppNetworkActivity() {
     DispatchQueue.main.async {
       if networkActivity > 0 {
-        guard !UIApplication.shared.isNetworkActivityIndicatorVisible else { return }
+        guard !UIApplication.shared.isNetworkActivityIndicatorVisible else {
+        return
+      }
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
       } else {
-        guard UIApplication.shared.isNetworkActivityIndicatorVisible else { return }
+        guard UIApplication.shared.isNetworkActivityIndicatorVisible else {
+        return
+      }
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
       }
     }
@@ -58,7 +62,7 @@ struct PashmakServer {
       let session = URLSession.shared
 
       // Generate the task
-      let dataTask = session.dataTask(with: urlRequest) { (responseData, urlResponse, err) -> Void in
+      let dataTask = session.dataTask(with: urlRequest) { responseData, urlResponse, err -> Void in
 
         // Remove the activity because the network call has been concluded here.
         PashmakServer.decreaseNetworkActivity()
@@ -86,7 +90,7 @@ struct PashmakServer {
 
         // Parse Response
         do {
-          if responseData.count == 0 {
+          if responseData.isEmpty {
             responseData = "{}".data(using: .utf8) ?? Data()
           }
 

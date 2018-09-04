@@ -23,21 +23,34 @@ enum APIError: Error, LocalizedError {
   case noConnection
   case invalidPrecondition(String)
 
-  public var errorDescription: String? {
+  var errorDescription: String? {
     switch self {
-    case .invalidRequest: return "Could not make URLRequest from HTTPRequest."
-    case .networkError(let err): return "There was a network Error:\n\(err)"
-    case .invalidResponse: return "Could not convert url response."
-    case .invalidResponseCode(let status): return "Response status code is invalid [\(status)]:\n)"
-    case .noResponseData: return "Server response has no data."
-    case .parserFailed(let error): return "Could not parse server's response. \n\(error.localizedDescription)"
-    case .invalidFile: return "Could not convert file for upload."
-    case .invalidUploadFile: return "Document has no file to upload."
-    case .invalidParameters(let parameter): return "Parameter missing: \(parameter)"
-    case .accountDeactivated(let message): return "Account has been daectivated with message: \(message)"
-    case .operationError(let error): return "Error in operation.\n\(error)"
-    case .noConnection: return "ارتباط خود با اینترنت را بررسی کنید."
-    case .invalidPrecondition(let message): return message
+    case .invalidRequest:
+      return "Could not make URLRequest from HTTPRequest."
+    case .networkError(let err):
+      return "There was a network Error:\n\(err)"
+    case .invalidResponse:
+      return "Could not convert url response."
+    case .invalidResponseCode(let status):
+      return "Response status code is invalid [\(status)]:\n)"
+    case .noResponseData:
+      return "Server response has no data."
+    case .parserFailed(let error):
+      return "Could not parse server's response. \n\(error.localizedDescription)"
+    case .invalidFile:
+      return "Could not convert file for upload."
+    case .invalidUploadFile:
+      return "Document has no file to upload."
+    case .invalidParameters(let parameter):
+      return "Parameter missing: \(parameter)"
+    case .accountDeactivated(let message):
+      return "Account has been daectivated with message: \(message)"
+    case .operationError(let error):
+      return "Error in operation.\n\(error)"
+    case .noConnection:
+      return "ارتباط خود با اینترنت را بررسی کنید."
+    case .invalidPrecondition(let message):
+      return message
     }
   }
 }

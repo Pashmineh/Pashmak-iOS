@@ -6,19 +6,29 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
-import UIKit
 import AudioToolbox
+import UIKit
 
 extension UIView {
 
   func shake(vibrate: Bool = true) {
     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-    UIView.animate(withDuration: 0.05, animations: { [weak self] in
-      guard let self = self else { return }
+    UIView.animate(withDuration: 0.05,
+                   animations: { [weak self] in
+      guard let self = self else {
+        return
+      }
       self.transform = CGAffineTransform(translationX: 12.0, y: 0.0)
-    }) { [weak self] (_) in
-      guard let self = self else { return }
-      UIView.animate(withDuration: 0.35, delay: 0.0, usingSpringWithDamping: 0.15, initialSpringVelocity: 0.1, options: [], animations: {
+    }) { [weak self] _ in
+      guard let self = self else {
+        return
+      }
+      UIView.animate(withDuration: 0.35,
+                     delay: 0.0,
+                     usingSpringWithDamping: 0.15,
+                     initialSpringVelocity: 0.1,
+                     options: [],
+                     animations: {
         self.transform = .identity
       }, completion: nil)
     }

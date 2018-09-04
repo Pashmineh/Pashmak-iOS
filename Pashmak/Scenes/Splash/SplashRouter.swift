@@ -10,8 +10,8 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
 import Hero
+import UIKit
 
 @objc protocol SplashRoutingLogic {
   func routeToLogin(segue: UIStoryboardSegue?)
@@ -28,7 +28,9 @@ class SplashRouter: NSObject, SplashRoutingLogic, SplashDataPassing {
 
   func routeToLogin(segue: UIStoryboardSegue?) {
 
-    guard let sourceVC = viewController, let sourceDS = dataStore else { return }
+    guard let sourceVC = viewController, let sourceDS = dataStore else {
+        return
+      }
 
     func handleNonSegue() {
       let destVC = Storyboards.Main.instantiateViewController(withIdentifier: StoryboardsIDs.Main.Login) as? LoginViewController

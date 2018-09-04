@@ -6,11 +6,11 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
+import Async
 import Foundation
 import LocalAuthentication
-import Async
 
-class BiometricAuthentication {
+enum BiometricAuthentication {
 
   private static var appDelegate = UIApplication.shared.delegate as? AppDelegate
 
@@ -42,18 +42,18 @@ class BiometricAuthentication {
     Async.main {
       let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-      alert.addAction(UIAlertAction(title: "بله", style: UIAlertAction.Style.default, handler: { (_) in
-        authenticate(message: "ثبت برای ورود‌های آتی", success: {
+      alert.addAction(UIAlertAction(title: "بله", style: UIAlertAction.Style.default) { _ in
+        authenticate(message: "ثبت برای ورود‌های آتی",
+                     success: {
           onConfirm()
         }, failure: {
           Log.trace("Culd not evalate user.")
           onReject()
           return
         })
-      }))
-      alert.addAction(UIAlertAction(title: "خیر", style: UIAlertAction.Style.cancel, handler: { (_) in
-
-      }))
+      })
+      alert.addAction(UIAlertAction(title: "خیر", style: UIAlertAction.Style.cancel) { _ in
+      })
 
       parent.present(alert, animated: true, completion: nil)
     }
@@ -62,7 +62,7 @@ class BiometricAuthentication {
 
   static func authenticate(message: String, success: @escaping ButtonAction, failure: @escaping ButtonAction) {
 //    appDelegate?.shouldBlur = false
-    context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: message) { (confirmed, error) in
+    context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: message) { confirmed, error in
       defer {
 //        appDelegate?.shouldBlur = true
       }

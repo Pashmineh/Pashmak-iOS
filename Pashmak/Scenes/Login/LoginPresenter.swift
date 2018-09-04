@@ -19,6 +19,7 @@ protocol LoginPresentationLogic {
 
 class LoginPresenter: LoginPresentationLogic {
   weak var viewController: LoginDisplayLogic?
+
   func presentVerify(response: Login.Verify.Response) {
     let phoneIsValid = response.phoneIsValid
     let idIsValid = response.nationalIdIsValid
@@ -34,7 +35,7 @@ class LoginPresenter: LoginPresentationLogic {
     switch state {
     case .loading:
       let message = Messages.Loading.messages.randomElement() ?? ""
-      let viewModel = Login.Authenticate.ViewModel.Loading.init(message: message)
+      let viewModel = Login.Authenticate.ViewModel.Loading(message: message)
       viewController?.displayAuthenticateLoading(viewModel: viewModel)
     case .failure(let error):
       var message = "نشد که بشه!"
@@ -50,7 +51,7 @@ class LoginPresenter: LoginPresentationLogic {
 
       }
 
-      let viewModel = Login.Authenticate.ViewModel.Failed.init(message: message)
+      let viewModel = Login.Authenticate.ViewModel.Failed(message: message)
       viewController?.displayAuthenticateFailed(viewModel: viewModel)
 
     case .success(let response):
@@ -67,7 +68,7 @@ class LoginPresenter: LoginPresentationLogic {
       }
       let message = "\(fullName) خوش اومدی!"
 
-      let viewModel = Login.Authenticate.ViewModel.Success.init(message: message)
+      let viewModel = Login.Authenticate.ViewModel.Success(message: message)
       viewController?.displayAuthenticateSuccess(viewModel: viewModel)
 
     }

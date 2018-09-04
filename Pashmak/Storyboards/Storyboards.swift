@@ -8,15 +8,15 @@
 
 import UIKit
 
-struct Storyboards {
+enum Storyboards {
 
   static let Main = UIStoryboard(name: "Main", bundle: nil)
 
 }
 
-struct StoryboardsIDs {
+enum StoryboardsIDs {
 
-  struct Main {
+  enum Main {
     static let Login = "LoginStoryboardID"
     static let Home = "HomeViewControllerStoryboardID"
   }

@@ -28,7 +28,7 @@ import SwiftDate
 }
 */
 
-private let eventTimeFormatter: DateFormatter = {
+private let kEventTimeFormatter: DateFormatter = {
   let formatter = DateFormatter()
   formatter.locale = Locale(identifier: "fa_IR")
   formatter.calendar = Calendar(identifier: .persian)
@@ -55,12 +55,16 @@ extension ServerModels {
       var location: String?
 
       var eventDateTime: String {
-        guard let epoch = eventTimeEpoch else { return "" }
-        return eventTimeFormatter.string(from: epoch.utcDate)
+        guard let epoch = eventTimeEpoch else {
+          return ""
+        }
+        return kEventTimeFormatter.string(from: epoch.utcDate)
       }
 
       var hasPassed: Bool {
-        guard let epoch = eventTimeEpoch else { return false }
+        guard let epoch = eventTimeEpoch else {
+          return false
+        }
         return epoch.utcDate.isBeforeDate(Date(), granularity: Calendar.Component.hour)
       }
 
@@ -83,7 +87,9 @@ extension ServerModels.Home.Event: ListDiffable {
   }
 
   func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-    guard let object = object as? ServerModels.Home.Event else { return false }
+    guard let object = object as? ServerModels.Home.Event else {
+      return false
+    }
 
     return object.id == self.id && object.name == self.name && object.description == self.description && object.eventTime == self.eventTime && object.location == self.location
   }

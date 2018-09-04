@@ -10,17 +10,17 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
 import Hero
-import Material
 import KVNProgress
+import Material
 import Regex
+import UIKit
 
-private struct Constants {
+private enum Constants {
   static let hiddenErrorTransform = CGAffineTransform(translationX: 0, y: -20.0)
 }
 
-protocol LoginDisplayLogic: class {
+protocol LoginDisplayLogic: AnyObject {
   func displayVerify(viewModel: Login.Verify.ViewModel)
 
   func displayAuthenticateLoading(viewModel: Login.Authenticate.ViewModel.Loading)
@@ -83,11 +83,12 @@ class LoginViewController: UIViewController {
     return self.passwordTextField.text ?? ""
   }
 
-  @IBOutlet weak var userNameTextField: TextField!
-  @IBOutlet weak var passwordTextField: TextField!
-  @IBOutlet weak var errorLabel: UILabel!
-  @IBOutlet weak var nextButton: Button!
-  @IBAction func nextButtonTapped(_ sender: Any) {
+  @IBOutlet private weak var userNameTextField: TextField!
+  @IBOutlet private weak var passwordTextField: TextField!
+  @IBOutlet private weak var errorLabel: UILabel!
+  @IBOutlet private weak var nextButton: Button!
+
+  @IBAction private func nextButtonTapped(_ sender: Any) {
     self.login()
   }
 
@@ -142,7 +143,9 @@ class LoginViewController: UIViewController {
   }
 
   private func prepareNextButton() {
-    guard let btn = self.nextButton else { return }
+    guard let btn = self.nextButton else {
+        return
+      }
     btn.pulseColor = .white
     btn.isEnabled = false
     let layer = btn.layer
@@ -157,7 +160,9 @@ class LoginViewController: UIViewController {
   }
 
   private func updateNextButton(_ isValid: Bool) {
-    guard let btn = self.nextButton else { return }
+    guard let btn = self.nextButton else {
+        return
+      }
     btn.isEnabled = isValid
     btn.backgroundColor = isValid ? UIColor.Pashmak.buttonActive : UIColor.Pashmak.Timberwolf
     btn.setTitleColor(isValid ?  UIColor.white : UIColor.Pashmak.TextDeactive, for: [])
@@ -176,13 +181,15 @@ class LoginViewController: UIViewController {
     let username = self.phoneNumber
     let password = self.password
 
-    let request = Login.Authenticate.Request.init(userName: username, password: password)
+    let request = Login.Authenticate.Request(userName: username, password: password)
     interactor?.login(request: request)
 
   }
 
   fileprivate func shakePhoneField() {
-    guard let field = self.userNameTextField else { return }
+    guard let field = self.userNameTextField else {
+        return
+      }
     numberOfShake += 1
     field.shake()
     if numberOfShake >= 3 {
@@ -191,8 +198,15 @@ class LoginViewController: UIViewController {
   }
 
   fileprivate func showFieldError() {
-    UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0.0, options: [], animations: { [weak self] in
-      guard let self = self else { return }
+    UIView.animate(withDuration: 0.25,
+                   delay: 0.0,
+                   usingSpringWithDamping: 0.65,
+                   initialSpringVelocity: 0.0,
+                   options: [],
+                   animations: { [weak self] in
+      guard let self = self else {
+        return
+      }
       self.errorLabel.transform = .identity
       self.errorLabel.alpha = 1.0
       }, completion: nil)
@@ -200,11 +214,13 @@ class LoginViewController: UIViewController {
 
   fileprivate func hideFieldError() {
 
-    UIView.animate(withDuration: 0.2, animations: { [weak self] in
-      guard let self = self else { return }
+    UIView.animate(withDuration: 0.2) { [weak self] in
+      guard let self = self else {
+        return
+      }
       self.errorLabel.transform = Constants.hiddenErrorTransform
       self.errorLabel.alpha = 0.0
-    })
+    }
 
   }
 }
@@ -242,7 +258,9 @@ extension LoginViewController: LoginDisplayLogic {
   func displayAuthenticateSuccess(viewModel: Login.Authenticate.ViewModel.Success) {
     let message = viewModel.message
     KVNProgress.showSuccess(withStatus: message) { [weak self] in
-      guard let self = self else { return }
+      guard let self = self else {
+        return
+      }
       self.router?.routeToHome(segue: nil)
     }
   }
@@ -251,11 +269,13 @@ extension LoginViewController: LoginDisplayLogic {
 extension LoginViewController: UITextFieldDelegate {
 
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    guard string.count > 0 else { return true }
+    guard !string.isEmpty else {
+      return true
+    }
 
     if textField === self.userNameTextField {
 
-      if string.count > 0 {
+      if !string.isEmpty {
         if String(string.prefix(3)) == "+98" {
           let newSring = string.replacingOccurrences(of: "+98", with: "0")
           let str = NSString(string: textField.text ?? "").replacingCharacters(in: range, with: newSring)
@@ -270,7 +290,7 @@ extension LoginViewController: UITextFieldDelegate {
       }
 
       let currentText = textField.text ?? ""
-      if currentText.count == 0 {
+      if currentText.isEmpty {
         if string != "0" {
           self.shakePhoneField()
           return false

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Formatters {
+enum Formatters {
   static let RialFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
     formatter.locale = Locale(identifier: "fa_IR")
@@ -17,7 +17,7 @@ class Formatters {
     //  formatter.currencyGroupingSeparator = ","
     formatter.groupingSize = 3
     formatter.alwaysShowsDecimalSeparator = false
-    formatter.isLenient  = true
+    formatter.isLenient = true
     return formatter
   }()
 
@@ -33,7 +33,7 @@ class Formatters {
     formatter.positivePrefix = "\u{200F}"
     formatter.negativeSuffix = "-" + " ﷼ "
     formatter.negativePrefix = "\u{200F}"
-    formatter.isLenient  = true
+    formatter.isLenient = true
     return formatter
   }()
 
@@ -49,7 +49,7 @@ class Formatters {
     formatter.positivePrefix = "\u{200F}"
     formatter.negativeSuffix = "-" + " تومان "
     formatter.negativePrefix = "\u{200F}"
-    formatter.isLenient  = true
+    formatter.isLenient = true
     return formatter
   }()
 
@@ -65,7 +65,7 @@ class Formatters {
     formatter.positivePrefix = "\u{200F}"
     formatter.negativeSuffix = "-" + " ﷼ "
     formatter.negativePrefix = "\u{200F}"
-    formatter.isLenient  = true
+    formatter.isLenient = true
     return formatter
   }()
 

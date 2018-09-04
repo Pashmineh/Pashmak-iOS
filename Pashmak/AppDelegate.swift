@@ -6,12 +6,12 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
-import UIKit
-import UserNotifications
+import CoreLocation
 import Hero
 import IQKeyboardManagerSwift
 import KVNProgress
-import CoreLocation
+import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   let beacons: [CLBeaconRegion] = [iBeacon.KianDigital01.beaconRegion]
 
   var window: UIWindow?
+
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     DispatchQueue.main.async {
@@ -55,16 +56,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationSignificantTimeChange(_ application: UIApplication) {
-    NotificationCenter.default.post(Notification.init(name: Notification.Name.Pashmak.checkinUpdated))
+    NotificationCenter.default.post(Notification(name: Notification.Name.Pashmak.checkinUpdated))
   }
 
   func preparePush(_ application: UIApplication = .shared) {
     let notifCenter = UNUserNotificationCenter.current()
     let userNotificationTypes: UNAuthorizationOptions = [.alert, .badge, .sound]
     notifCenter.delegate = self
-    notifCenter.requestAuthorization(options: userNotificationTypes) { (granted, _) in
+    notifCenter.requestAuthorization(options: userNotificationTypes) { granted, _ in
       print("Permission granted: \(granted)")
-      guard granted else { return }
+      guard granted else {
+        return
+      }
       DispatchQueue.main.async {
         application.registerForRemoteNotifications()
       }
@@ -82,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Hero.shared.containerColor = UIColor.Pashmak.Grey
   }
   private func prepareKVNProgress() {
-    let kvnconf: KVNProgressConfiguration = KVNProgressConfiguration()
+    let kvnconf = KVNProgressConfiguration()
     kvnconf.backgroundFillColor = UIColor.Pashmak.Orange
     kvnconf.backgroundType = .solid
     kvnconf.backgroundTintColor = UIColor.white
@@ -169,10 +172,10 @@ extension AppDelegate: CLLocationManagerDelegate {
     }
 
     CheckinServices.shared.checkInNow(type: .iBeacon)
-      .done { (resp) in
+      .done { resp in
         if let resp = resp {
 
-          NotificationCenter.default.post(Notification.init(name: Notification.Name.Pashmak.checkinUpdated))
+          NotificationCenter.default.post(Notification(name: Notification.Name.Pashmak.checkinUpdated))
 
           let content = UNMutableNotificationContent()
           content.title = "پشمک"
@@ -182,9 +185,9 @@ extension AppDelegate: CLLocationManagerDelegate {
         } else {
           Log.trace("Looks like we've already cheked in with server")
         }
-      }.catch { (error) in
+      }.catch { error in
         Log.trace("Chekin failed!\n\(error.localizedDescription)")
-    }
+      }
 
   }
 }

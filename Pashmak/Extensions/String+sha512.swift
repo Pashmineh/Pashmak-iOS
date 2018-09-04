@@ -32,7 +32,9 @@ extension String {
 
   /// Uses CommonCrypto framework to generate sha512 of the current string
   var sha512: Data? {
-    let stringData = data(using: String.Encoding.utf8)!
+    guard let stringData = data(using: String.Encoding.utf8) else {
+      return nil
+    }
     var result = Data(count: Int(CC_SHA512_DIGEST_LENGTH))
     _ = result.withUnsafeMutableBytes { resultBytes in
       stringData.withUnsafeBytes { stringBytes in

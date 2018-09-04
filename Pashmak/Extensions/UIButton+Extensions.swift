@@ -15,7 +15,8 @@ import UIKit
   /// - bottom: title below button image
   /// - left: title to the left of button image
   /// - right: title to the right of button image
-  @objc enum Position: Int {
+  @objc
+  enum Position: Int {
     case top, bottom, left, right
   }
   /// This method sets an image and title for a UIButton and
@@ -27,7 +28,8 @@ import UIKit
   ///   - titlePosition: UIViewContentModeTop, UIViewContentModeBottom, UIViewContentModeLeft or UIViewContentModeRight
   ///   - additionalSpacing: Spacing between image and title
   ///   - state: State to apply this behaviour
-  @objc func set(image: UIImage?, title: String, titlePosition: Position, additionalSpacing: CGFloat, state: UIControl.State) {
+  @objc
+  func set(image: UIImage?, title: String, titlePosition: Position, additionalSpacing: CGFloat, state: UIControl.State) {
     imageView?.contentMode = .center
     setImage(image, for: state)
     setTitle(title, for: state)
@@ -46,7 +48,8 @@ import UIKit
   ///   - titlePosition: UIViewContentModeTop, UIViewContentModeBottom, UIViewContentModeLeft or UIViewContentModeRight
   ///   - additionalSpacing: Spacing between image and title
   ///   - state: State to apply this behaviour
-  @objc func set(image: UIImage?, attributedTitle title: NSAttributedString, at position: Position, width spacing: CGFloat, state: UIControl.State) {
+  @objc
+  func set(image: UIImage?, attributedTitle title: NSAttributedString, at position: Position, width spacing: CGFloat, state: UIControl.State) {
     imageView?.contentMode = .center
     setImage(image, for: state)
 
@@ -58,7 +61,8 @@ import UIKit
 
   // MARK: Private Methods
 
-  @objc private func adjust(title: NSString, at position: Position, with spacing: CGFloat) {
+  @objc
+  private func adjust(title: NSString, at position: Position, with spacing: CGFloat) {
     let imageRect: CGRect = self.imageRect(forContentRect: frame)
 
     // Use predefined font, otherwise use the default
@@ -68,23 +72,25 @@ import UIKit
     arrange(titleSize: titleSize, imageRect: imageRect, atPosition: position, withSpacing: spacing)
   }
 
-  @objc private func adjust(attributedTitle: NSAttributedString, at position: Position, with spacing: CGFloat) {
+  @objc
+  private func adjust(attributedTitle: NSAttributedString, at position: Position, with spacing: CGFloat) {
     let imageRect: CGRect = self.imageRect(forContentRect: frame)
     let titleSize = attributedTitle.size()
 
     arrange(titleSize: titleSize, imageRect: imageRect, atPosition: position, withSpacing: spacing)
   }
 
-  @objc private func arrange(titleSize: CGSize, imageRect: CGRect, atPosition position: Position, withSpacing spacing: CGFloat) {
+  @objc
+  private func arrange(titleSize: CGSize, imageRect: CGRect, atPosition position: Position, withSpacing spacing: CGFloat) {
     switch position {
     case .top:
       titleEdgeInsets = UIEdgeInsets(top: -(imageRect.height + titleSize.height + spacing), left: -(imageRect.width), bottom: 0, right: 0)
       imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -titleSize.width)
-      contentEdgeInsets = UIEdgeInsets(top: spacing / 2 + titleSize.height, left: -imageRect.width/2, bottom: 0, right: -imageRect.width/2)
+      contentEdgeInsets = UIEdgeInsets(top: spacing / 2 + titleSize.height, left: -imageRect.width / 2, bottom: 0, right: -imageRect.width / 2)
     case .bottom:
       titleEdgeInsets = UIEdgeInsets(top: (imageRect.height + titleSize.height + spacing), left: -(imageRect.width), bottom: 0, right: 0)
       imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -titleSize.width)
-      contentEdgeInsets = UIEdgeInsets(top: 0, left: -imageRect.width/2, bottom: spacing / 2 + titleSize.height, right: -imageRect.width/2)
+      contentEdgeInsets = UIEdgeInsets(top: 0, left: -imageRect.width / 2, bottom: spacing / 2 + titleSize.height, right: -imageRect.width / 2)
     case .left:
       titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageRect.width * 2), bottom: 0, right: 0)
       imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -(titleSize.width * 2 + spacing))

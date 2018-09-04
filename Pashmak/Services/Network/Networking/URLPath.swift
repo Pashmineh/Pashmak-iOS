@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let baseURL: String = {
+private let kBaseURL: String = {
   #if DEBUG
   return "http://178.128.195.55:8080"
   #else
@@ -46,9 +46,9 @@ enum URLPath {
 
 struct RequestURL {
   static var baseURLString: String {
-    return baseURL
+    return kBaseURL
   }
-  private var urlStr: String = baseURL
+  private var urlStr: String = kBaseURL
 
   var url: NSURL? {
 

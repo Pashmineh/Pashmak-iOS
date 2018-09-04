@@ -27,7 +27,7 @@ enum FarsiFontWeight {
 }
 
 extension UIFont {
-  static func farsiFont(_ weight: FarsiFontWeight = .regular, size: CGFloat) -> UIFont {
+  static func farsiFont(_ weight: FarsiFontWeight = .regular, size: CGFloat = 14.0) -> UIFont {
     return UIFont(name: weight.fontName, size: size) ?? UIFont.systemFont(ofSize: size)
   }
 }

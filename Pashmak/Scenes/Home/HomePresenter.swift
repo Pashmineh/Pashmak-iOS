@@ -10,8 +10,8 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
 import IGListKit
+import UIKit
 
 protocol HomePresentationLogic {
   func presentPopulate(response: Home.Populate.Response)
@@ -23,6 +23,7 @@ protocol HomePresentationLogic {
 
 class HomePresenter: HomePresentationLogic {
   weak var viewController: HomeDisplayLogic?
+
   func presentPopulate(response: Home.Populate.Response) {
 
     let state = response.state
@@ -30,7 +31,7 @@ class HomePresenter: HomePresentationLogic {
     switch state {
     case .loading:
       let message = Messages.Loading.random
-      let viewModel = Home.Populate.ViewModel.Loading.init(message: message, items: [HomeSkeletonItem()])
+      let viewModel = Home.Populate.ViewModel.Loading(message: message, items: [HomeSkeletonItem()])
       viewController?.displayPopulateLoading(viewModel: viewModel)
     case .failure(let error):
       var message = "خطا!"
@@ -38,7 +39,7 @@ class HomePresenter: HomePresentationLogic {
         message = Messages.ServerErrors.random
         message += "\n\(status)"
       }
-      let viewModel = Home.Populate.ViewModel.Failed.init(message: message)
+      let viewModel = Home.Populate.ViewModel.Failed(message: message)
       viewController?.displayPopulateFailed(viewModel: viewModel)
     case .success(let homeData):
       let profile = Home.UserProfile(homeData: homeData, settings: Settings.current)
@@ -48,7 +49,7 @@ class HomePresenter: HomePresentationLogic {
       }
 
       let needsCheckin = !Checkin.checkedInToday
-      let viewModel = Home.Populate.ViewModel.Success.init(profile: profile, needsCheckIn: needsCheckin, items: items)
+      let viewModel = Home.Populate.ViewModel.Success(profile: profile, needsCheckIn: needsCheckin, items: items)
       viewController?.displayPopulateSuccess(viewModel: viewModel)
     }
 
@@ -116,7 +117,7 @@ class HomePresenter: HomePresentationLogic {
 
   func presentCheckinUpdate(response: Home.UpdateChekinButton.Response) {
     let needsCheckin = response.needsChekin
-    let viewModel = Home.UpdateChekinButton.ViewModel.init(needsChekin: needsCheckin)
+    let viewModel = Home.UpdateChekinButton.ViewModel(needsChekin: needsCheckin)
     viewController?.displayCheckinUpdate(viewModel: viewModel)
   }
 }

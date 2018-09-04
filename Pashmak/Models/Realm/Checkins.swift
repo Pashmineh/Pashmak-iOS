@@ -10,6 +10,8 @@ import Foundation
 import RealmSwift
 import SwiftDate
 
+// swiftlint:disable sorted_first_last
+
 extension RealmProvider {
   private static let checkinsConfig: Realm.Configuration = {
     do {
@@ -27,41 +29,41 @@ extension RealmProvider {
 
 }
 
-  @objcMembers
-  class Checkin: Object {
+@objcMembers
+class Checkin: Object {
 
-    enum Property: String {
-      case time, id, type, message, userName
-    }
-
-    enum CheckinType: String {
-      case manual = "MANUAL"
-      case iBeacon = "IBEACON"
-    }
-
-    dynamic var time: Date = Date()
-    dynamic var id: Int = 0
-    dynamic var type: CheckinType = .manual
-    dynamic var message: String = ""
-    dynamic var userName: String = ""
-
-    convenience init(model: ServerModels.Checkin.Response) {
-      self.init()
-      self.time = model.checkinTimeEpoch?.utcDate ?? Date()
-      self.id = model.id ?? 0
-      self.message = model.message ?? ""
-      self.type = .iBeacon
-      self.userName = Settings.current.phoneNumber
-    }
-
+  enum Property: String {
+    case time, id, type, message, userName
   }
+
+  enum CheckinType: String {
+    case manual = "MANUAL"
+    case iBeacon = "IBEACON"
+  }
+
+  dynamic var time = Date()
+  dynamic var id: Int = 0
+  dynamic var type: CheckinType = .manual
+  dynamic var message: String = ""
+  dynamic var userName: String = ""
+
+  convenience init(model: ServerModels.Checkin.Response) {
+    self.init()
+    self.time = model.checkinTimeEpoch?.utcDate ?? Date()
+    self.id = model.id ?? 0
+    self.message = model.message ?? ""
+    self.type = .iBeacon
+    self.userName = Settings.current.phoneNumber
+  }
+
+}
 
 extension Checkin {
 
   static var lastCheckin: Checkin? {
     let userName = Settings.current.phoneNumber
     let predicate = NSPredicate(format: "%K == %@", Checkin.Property.userName.rawValue, userName)
-//    Log.trace("Finding last checkin for: [\(userName)]")
+    //    Log.trace("Finding last checkin for: [\(userName)]")
     return RealmProvider.CheckinsProvider.realm.objects(Checkin.self).filter(predicate).sorted(byKeyPath: Property.time.rawValue, ascending: false).first
   }
 

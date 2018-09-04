@@ -119,9 +119,10 @@ extension RealmProvider {
           let model = result.model
           Log.trace(model)
           self.updateLastPushToken(token: token)
-        } .catch { (error) in
+        }
+        .catch { error in
           Log.error("Error sending token update.\n\(error.localizedDescription)")
-      }
+        }
 
     }
 

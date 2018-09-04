@@ -23,11 +23,11 @@ enum HTTPTimeOut: Double {
   case short = 15.0
   case normal = 30.0
   case long = 120.0
-  case unlimited = 3600.0
+  case unlimited = 3_600.0
 
 }
 
-struct HTTPHeaders {
+enum HTTPHeaders {
 
   static let ContentType = "content-type"
   static let ContentLength = "Content-Length"
@@ -38,7 +38,7 @@ struct HTTPHeaders {
 
 }
 
-struct HTTPHeaderValues {
+enum HTTPHeaderValues {
   static let basicAuthorizatoion = "Basic YnJvd3NlcjoxMjM0NTY="
   static let UserAgent = "mobile"
   static let AcceptLanguage = "fa"

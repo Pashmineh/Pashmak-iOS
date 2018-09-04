@@ -10,7 +10,7 @@ import Foundation
 
 extension ServerRequest {
 
-  struct Authentication {
+  enum Authentication {
 
     static func authenticate(info: ServerModels.Authentication.Request) -> HTTPRequest {
       var url = RequestURL()
@@ -22,7 +22,7 @@ extension ServerRequest {
     static func updateToken(token: String) -> HTTPRequest {
       var url = RequestURL()
       url.appendPathComponents([.api, .updatePush])
-      let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { (current, _) in current }
+      let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
       let params = ["token": token]
       return HTTPRequest(method: .PUT, url: url, parameters: params, bodyMessage: nil, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)
     }

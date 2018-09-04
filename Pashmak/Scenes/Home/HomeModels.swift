@@ -10,8 +10,8 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
 import IGListKit
+import UIKit
 
 enum Home {
     typealias FetchHomeState = FetchState<ServerModels.Home, Error>

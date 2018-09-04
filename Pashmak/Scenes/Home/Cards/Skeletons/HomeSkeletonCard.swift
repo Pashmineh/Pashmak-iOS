@@ -6,10 +6,10 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
-import UIKit
 import IGListKit
 import Material
 import SkeletonView
+import UIKit
 
 class HomeSkeletonItem: ListDiffable {
 
@@ -20,7 +20,9 @@ class HomeSkeletonItem: ListDiffable {
   }
 
   func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-    guard let object = object as? HomeSkeletonItem else { return false }
+    guard let object = object as? HomeSkeletonItem else {
+      return false
+    }
     return object.id == self.id
   }
 
@@ -46,7 +48,7 @@ class HomeSkeletonSectionController: ListSectionController {
 
   override func cellForItem(at index: Int) -> UICollectionViewCell {
     guard let cell = collectionContext?.dequeueReusableCell(withNibName: "HomeSkeletonCell", bundle: nil, for: self, at: index) as? HomeSkeletonCell else {
-      fatalError()
+      fatalError("Could not dequeue [HomeSkeletonCell]")
     }
 
     return cell

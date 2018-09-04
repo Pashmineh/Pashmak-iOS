@@ -6,8 +6,8 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
-import UIKit
 import Material
+import UIKit
 
 class HomeEventCell: UICollectionViewCell {
 
@@ -17,12 +17,12 @@ class HomeEventCell: UICollectionViewCell {
     }
   }
 
-  @IBOutlet weak var card: PulseView!
-  @IBOutlet weak var eventNameLabel: UILabel!
-  @IBOutlet weak var addressLabel: UILabel!
-  @IBOutlet weak var mapImageView: UIImageView!
-  @IBOutlet weak var eventTimeLabel: UILabel!
-  @IBOutlet weak var eventDescription: UILabel!
+  @IBOutlet private weak var card: PulseView!
+  @IBOutlet private weak var eventNameLabel: UILabel!
+  @IBOutlet private weak var addressLabel: UILabel!
+  @IBOutlet private weak var mapImageView: UIImageView!
+  @IBOutlet private weak var eventTimeLabel: UILabel!
+  @IBOutlet private weak var eventDescription: UILabel!
 
   override func awakeFromNib() {
     super.awakeFromNib()

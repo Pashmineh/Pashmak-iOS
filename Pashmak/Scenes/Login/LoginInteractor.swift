@@ -10,8 +10,8 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
 import Regex
+import UIKit
 
 protocol LoginBusinessLogic {
   func verify(request: Login.Verify.Request)
@@ -48,13 +48,13 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
       return false
     }
 
-    var chars = Array(nationalID.compactMap({ Int("\($0)")}))
+    var chars = Array(nationalID.compactMap { Int("\($0)") })
 
     let controlDigit = chars.removeFirst()
 
     var acc = 0
     for indx in 1...9 {
-      acc += ((indx + 1) * chars[indx-1])
+      acc += ((indx + 1) * chars[indx - 1])
     }
 
     var res = acc % 11
@@ -73,13 +73,13 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
 
     func sendFailed(error: Error) {
 
-      let response = Login.Authenticate.Response.init(state: .failure(error))
+      let response = Login.Authenticate.Response(state: .failure(error))
       presenter?.presentAuthenticate(response: response)
       Log.error("Error Authenticating:\n\(error.localizedDescription)")
     }
 
     func sendAuthenticationLoading() {
-      let response = Login.Authenticate.Response.init(state: .loading)
+      let response = Login.Authenticate.Response(state: .loading)
       presenter?.presentAuthenticate(response: response)
     }
 
@@ -117,13 +117,13 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
       .done { (ressult: ServerData<ServerModels.Authentication.Response>) in
         let model = ressult.model
         preserveAuthenticationResults(response: model, phoneNumber: userName)
-        let response = Login.Authenticate.Response.init(state: .success(model))
+        let response = Login.Authenticate.Response(state: .success(model))
         self.presenter?.presentAuthenticate(response: response)
 
-    }
-      .catch { (error) in
+      }
+      .catch { error in
         sendFailed(error: error)
-    }
+      }
 
   }
 

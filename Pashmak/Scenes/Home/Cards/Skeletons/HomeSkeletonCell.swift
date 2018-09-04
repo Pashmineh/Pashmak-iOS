@@ -6,15 +6,15 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
-import UIKit
 import Material
 import SkeletonView
+import UIKit
 
 class HomeSkeletonCell: UICollectionViewCell {
 
-  @IBOutlet weak var card: UIView!
-  @IBOutlet var skeletonviews: [UIView]!
-  @IBOutlet weak var skeletonLabel: UILabel!
+  @IBOutlet private weak var card: UIView!
+  @IBOutlet private var skeletonviews: [UIView]!
+  @IBOutlet private weak var skeletonLabel: UILabel!
 
   override func awakeFromNib() {
     super.awakeFromNib()

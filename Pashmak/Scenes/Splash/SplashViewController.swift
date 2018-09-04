@@ -10,11 +10,11 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
-import Hero
 import Async
+import Hero
+import UIKit
 
-protocol SplashDisplayLogic: class {
+protocol SplashDisplayLogic: AnyObject {
   func displayGoNext(viewModel: Splash.GoNext.ViewModel)
 }
 
@@ -61,7 +61,7 @@ class SplashViewController: UIViewController {
   }
 
   // MARK: View lifecycle
-  @IBOutlet weak var attributionLabel: UILabel!
+  @IBOutlet private weak var attributionLabel: UILabel!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -79,21 +79,30 @@ class SplashViewController: UIViewController {
   }
 
   private func prepareAttribution() {
-    guard let label = attributionLabel else { return }
+    guard let label = attributionLabel else {
+        return
+      }
     label.alpha = 0
     label.transform = CGAffineTransform(translationX: 0, y: 12.0)
   }
 
   private func showAttribution() {
-    guard let label = attributionLabel else { return }
-    UIView.animate(withDuration: 0.3, delay: 0.5, options: [], animations: { [weak label] in
+    guard let label = attributionLabel else {
+        return
+      }
+    UIView.animate(withDuration: 0.3,
+                   delay: 0.5,
+                   options: [],
+                   animations: { [weak label] in
 
       label?.alpha = 1.0
       label?.transform = .identity
 
-    }) { (_) in
+    }) { _ in
       Async.main(after: 1.0) {[weak self] in
-        guard let self = self else { return }
+        guard let self = self else {
+        return
+      }
         self.goNext()
 
       }

@@ -79,9 +79,9 @@ extension NSMutableURLRequest {
     characterSet.insert(charactersIn: "-._* ")
 
     return string
-      .addingPercentEncoding(withAllowedCharacters: characterSet)!
+      .addingPercentEncoding(withAllowedCharacters: characterSet)?
       .replacingOccurrences(of: " ", with: "+")
-      .replacingOccurrences(of: " ", with: "+", options: [], range: nil)
+      .replacingOccurrences(of: " ", with: "+", options: [], range: nil) ?? string
   }
 
   func prepareRequestMethod(method: HTTPMethod) {
@@ -103,7 +103,7 @@ extension NSMutableURLRequest {
   }
 
   func prepareURLEndodedForm(params: JSONDictionary) {
-    let parameterArray = params.map { (arg) -> String in
+    let parameterArray = params.map { arg -> String in
       let (key, value) = arg
       let val = "\(value)"
       return "\(key)=\(self.percentEscapeString(val))"
@@ -130,7 +130,7 @@ extension NSMutableURLRequest {
       qString = encodedQuery
     }
 
-    let newUrlStr = url.absoluteString! + "?" + qString
+    let newUrlStr = (url.absoluteString ?? "") + "?" + qString
     guard let newURL = NSURL(string: newUrlStr) else {
       Log.error("Invalid url: \(newUrlStr)")
       return

@@ -25,16 +25,16 @@ class CheckinServices {
 
       let request = ServerModels.Checkin.Request(type: type)
       PashmakServer.perform(request: ServerRequest.Checkin.checkin(info: request), validResponseCodes: [200, 201])
-        .done({ (result: ServerData<ServerModels.Checkin.Response>) in
+        .done { (result: ServerData<ServerModels.Checkin.Response>) in
           let response = result.model
           response.message = response.message ?? "ورود شما برای امروز ثبت شد."
           Checkin.addCheckin(response)
           seal.fulfill(response)
-        })
-        .catch({ (error) in
+        }
+        .catch { error in
           Log.error("Error cheking in.\n\(error)")
           seal.reject(error)
-        })
+        }
 
     }
 

@@ -10,8 +10,8 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
 import Hero
+import UIKit
 
 @objc protocol HomeRoutingLogic {
 func routeToLogin(segue: UIStoryboardSegue?)

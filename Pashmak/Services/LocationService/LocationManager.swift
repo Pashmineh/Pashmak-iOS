@@ -6,8 +6,8 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
 struct iBeacon {
 
@@ -21,7 +21,7 @@ struct iBeacon {
   }
 
   static let KianDigital01 = {
-    iBeacon(proximityID: UUID(uuidString: "00001803-494C-4F47-4943-544543480000") ?? UUID(), major: 10009, minor: 13846, identifier: "KianDigital01")
+    iBeacon(proximityID: UUID(uuidString: "00001803-494C-4F47-4943-544543480000") ?? UUID(), major: 10_009, minor: 13_846, identifier: "KianDigital01")
   }()
 
   static var Beacons: [CLBeaconRegion] {
