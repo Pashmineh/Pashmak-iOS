@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func prepareLocationManager() {
-    locationManager.activityType = .otherNavigation
+    locationManager.activityType = .fitness
     locationManager.allowsBackgroundLocationUpdates = true
     locationManager.delegate = self
 
@@ -120,6 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func startMonitoring() {
+    locationManager.startMonitoringSignificantLocationChanges()
     for beacon in beacons {
       if locationManager.monitoredRegions.filter({ $0.identifier == beacon.identifier }).isEmpty {
         locationManager.startMonitoring(for: beacon)
@@ -131,6 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func stopMonitoring() {
+    locationManager.stopMonitoringSignificantLocationChanges()
     beacons.forEach { locationManager.stopMonitoring(for: $0) }
   }
 }
