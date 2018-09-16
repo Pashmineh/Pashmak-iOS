@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Messages {
+struct Texts {
 
   let messages: [String]
   var random: String {
@@ -25,7 +25,7 @@ struct Messages {
     "لطفاً کمی صبر بفرمایید قربان..."
   ]
 
-  static let Loading = Messages(messages: Messages.loadingMessages)
+  static let Loading = Texts(messages: Texts.loadingMessages)
 
   private static let rangingMessages = [
     "وایسا ببینم کجایی ...",
@@ -34,7 +34,7 @@ struct Messages {
     "الان بهت میگم کجایی!..."
   ]
 
-  static let Ranging = Messages(messages: Messages.rangingMessages)
+  static let Ranging = Texts(messages: Texts.rangingMessages)
 
   private static let rangingErrorMessages = [
     "نتونستیم ببینیم کجایی! یه مشکلی داری تو!",
@@ -42,7 +42,7 @@ struct Messages {
     "مگه من پیدات نکنم!"
   ]
 
-  static let RangingError = Messages(messages: Messages.rangingErrorMessages)
+  static let RangingError = Texts(messages: Texts.rangingErrorMessages)
 
   private static let serverErrorMessages = [
     "نشد که بشه!",
@@ -51,6 +51,6 @@ struct Messages {
     "خطا در سرور.\n(فرززززاااددد.. بدو بیا ببینیم چی شده!)"
   ]
 
-  static let ServerErrors = Messages(messages: Messages.serverErrorMessages)
+  static let ServerErrors = Texts(messages: Texts.serverErrorMessages)
 
 }

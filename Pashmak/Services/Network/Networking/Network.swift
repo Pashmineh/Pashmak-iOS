@@ -119,21 +119,21 @@ enum PashmakServer {
   }
   /*
   static private func generateServerError(from urlResponse: URLResponse?, responseData: Data?, status: Int) -> ServerErrorModel {
-    
+
     let url = (urlResponse as? HTTPURLResponse)?.url?.absoluteString
-    
+
     func fallbackErrorModel() -> ServerErrorModel {
-      
+
       return ServerErrorModel(statusCode: status, url: url, messages: nil)
     }
-    
+
     guard let responseData = responseData else {
       return fallbackErrorModel()
     }
-    
+
     do {
       let errorMessages = try JSONDecoder().decode([ServerErrorModel.serverErrorMessage].self, from: responseData)
-      
+
       let errorModel = ServerErrorModel(statusCode: status, url: url, messages: errorMessages)
       return errorModel
     } catch {
@@ -142,7 +142,7 @@ enum PashmakServer {
       Log.trace("++++++++ [\(url ?? "")] ERROR: \(errorString ?? "")")
       return fallbackErrorModel()
     }
-    
+
   }
   */
 

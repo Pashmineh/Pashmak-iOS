@@ -7,6 +7,7 @@
 //
 
 import AudioToolbox
+import SkeletonView
 import UIKit
 
 extension UIView {
@@ -38,7 +39,7 @@ extension UIView {
 
 /*
  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
- 
+
  guard string.count > 0 else { return true }
  defer {
  validatePhoneNumberAndUpdateNextButton()
@@ -51,19 +52,32 @@ extension UIView {
  } else {
  self.hideFieldError()
  }
- 
+
  } else if currentText.count == 1 {
- 
+
  if string != "9" {
  self.shakePhoneField()
  return false
  } else {
  self.hideFieldError()
  }
- 
+
  } else {
  numberOfShake = 0
  }
  return 11 > (textField.text ?? "").count
  }
  */
+extension UIView {
+
+  func startPashmakSkeleton() {
+    self.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient(baseColor: #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1)))
+    self.startSkeletonAnimation()
+  }
+
+  func stopPashmakSkeleton() {
+    self.hideSkeleton()
+    self.stopSkeletonAnimation()
+  }
+
+}

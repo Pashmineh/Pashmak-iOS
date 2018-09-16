@@ -34,7 +34,7 @@ class LoginPresenter: LoginPresentationLogic {
 
     switch state {
     case .loading:
-      let message = Messages.Loading.messages.randomElement() ?? ""
+      let message = Texts.Loading.messages.randomElement() ?? ""
       let viewModel = Login.Authenticate.ViewModel.Loading(message: message)
       viewController?.displayAuthenticateLoading(viewModel: viewModel)
     case .failure(let error):
@@ -45,7 +45,7 @@ class LoginPresenter: LoginPresentationLogic {
         if statusCode == 401 {
           message = "مشکوک به نظر میرسی 🤨🤨🤨\n این شماره و رمزی که دادی غلط از آب در اومد!"
         } else {
-          message = Messages.ServerErrors.messages.randomElement() ?? message
+          message = Texts.ServerErrors.messages.randomElement() ?? message
           message += "\n(\(statusCode))"
         }
 

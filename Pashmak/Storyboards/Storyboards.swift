@@ -18,6 +18,7 @@ enum StoryboardsIDs {
 
   enum Main {
     static let Login = "LoginStoryboardID"
+    static let MainTabbar = "MainTabbarController"
     static let Home = "HomeViewControllerStoryboardID"
   }
 

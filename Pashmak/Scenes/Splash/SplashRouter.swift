@@ -106,7 +106,12 @@ class SplashRouter: NSObject, SplashRoutingLogic, SplashDataPassing {
   }
 
   private func navigateToHome(source: SplashViewController, destination: HomeViewController) {
-    source.navigationController?.setViewControllers([destination], animated: true)
+    guard let tabbar = Storyboards.Main.instantiateViewController(withIdentifier: StoryboardsIDs.Main.MainTabbar) as? MainTabBarController else {
+      return
+    }
+
+//    source.navigationController?.setViewControllers([destination], animated: true)
+    source.navigationController?.setViewControllers([tabbar], animated: true)
   }
 
 }

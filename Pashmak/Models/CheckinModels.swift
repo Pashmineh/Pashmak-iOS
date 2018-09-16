@@ -18,6 +18,17 @@ import IGListKit
  "userLogin": "string"
  }
  */
+/*
+ {
+ "id": 3201,
+ "checkinTime": "2018-08-29T11:42:16.363Z",
+ "checkinTimeEpoch": 1535542936000,
+ "message": null,
+ "userId": 1052,
+ "checkinType": null,
+ "userLogin": "09122214063"
+ }
+ */
 extension ServerModels {
 
   enum Checkin {
@@ -25,6 +36,7 @@ extension ServerModels {
       case manual = "MANUAL"
       case iBeacon = "IBEACON"
     }
+
     class Request: ServerModel {
       let type: CheckinType
 
@@ -40,6 +52,35 @@ extension ServerModels {
       var message: String?
     }
 
+    class ListItem: ServerModel {
+      var id: UInt64?
+      var checkinTimeEpoch: Double?
+      var message: String?
+      var userId: UInt64?
+      var checkinType: CheckinType?
+      var userLogin: String?
+    }
+
+  }
+
+}
+
+extension ServerModels.Checkin.ListItem: ListDiffable {
+
+  func diffIdentifier() -> NSObjectProtocol {
+    return "\(self.id ?? 0)" as NSObjectProtocol
+  }
+
+  func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
+    guard let object = object as? ServerModels.Checkin.ListItem else {
+      return false
+    }
+
+    return object.id == self.id
+    && object.checkinTimeEpoch == self.checkinTimeEpoch
+    && object.checkinType == self.checkinType
+    && object.message == self.message
+    && object.userId == self.userId
   }
 
 }

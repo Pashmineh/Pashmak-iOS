@@ -19,3 +19,14 @@ extension UIView {
   }
 
 }
+
+extension CALayer {
+
+  func setShadow(opacity: Float, radius: CGFloat, color: UIColor = .black, offset: CGSize = .zero) {
+    self.shadowColor = color.cgColor
+    self.shadowOpacity = opacity
+    self.shadowRadius = radius
+    self.shadowOffset = offset
+  }
+
+}

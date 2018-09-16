@@ -30,13 +30,13 @@ class HomePresenter: HomePresentationLogic {
 
     switch state {
     case .loading:
-      let message = Messages.Loading.random
+      let message = Texts.Loading.random
       let viewModel = Home.Populate.ViewModel.Loading(message: message, items: [HomeSkeletonItem()])
       viewController?.displayPopulateLoading(viewModel: viewModel)
     case .failure(let error):
       var message = "خطا!"
       if case APIError.invalidResponseCode(let status) = error {
-        message = Messages.ServerErrors.random
+        message = Texts.ServerErrors.random
         message += "\n\(status)"
       }
       let viewModel = Home.Populate.ViewModel.Failed(message: message)
@@ -64,7 +64,7 @@ class HomePresenter: HomePresentationLogic {
     case .failure(let error):
       var message = "خطا!"
       if case APIError.invalidResponseCode(let status) = error {
-        message = Messages.ServerErrors.random
+        message = Texts.ServerErrors.random
         message += "\n\(status)"
       }
       let viewModel = Home.Refresh.ViewModel.Failed(message: message, isInBackground: isInBack)
@@ -90,19 +90,19 @@ class HomePresenter: HomePresentationLogic {
     let isRanging = response.isRanging
     switch state {
     case .loading:
-      let message = isRanging ? Messages.Ranging.random : Messages.Loading.random
+      let message = isRanging ? Texts.Ranging.random : Texts.Loading.random
       let viewModel = Home.Checkin.ViewModel.Loading(message: message)
       viewController?.displayCheckinLoading(viewModel: viewModel)
     case .failure(let error):
 
       var message = "خطا در عملیات!"
       if isRanging {
-        message = Messages.RangingError.random
+        message = Texts.RangingError.random
       } else {
         if case APIError.invalidPrecondition(let msg) = error {
           message = msg
         } else if case APIError.invalidResponseCode(let status) = error {
-          message = Messages.ServerErrors.random + "\n(\(status))"
+          message = Texts.ServerErrors.random + "\n(\(status))"
         }
       }
 

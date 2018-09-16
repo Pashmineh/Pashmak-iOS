@@ -31,3 +31,14 @@ extension UIFont {
     return UIFont(name: weight.fontName, size: size) ?? UIFont.systemFont(ofSize: size)
   }
 }
+
+extension String {
+
+  func size(with font: UIFont, in bounds: CGSize) -> CGSize {
+    let attributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: font]
+    let attrStr = NSAttributedString(string: self, attributes: attributes)
+    let size = attrStr.boundingRect(with: bounds, options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
+    return size.size
+  }
+
+}

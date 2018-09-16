@@ -131,7 +131,10 @@ class HomeViewController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.populate()
+    if self.displayedItems.isEmpty {
+      self.populate()
+    }
+
   }
 
   private func prepareUI() {

@@ -77,3 +77,15 @@ enum Formatters {
   }()
 
 }
+
+extension DateFormatter {
+  static func farsiDateFormatter(with dateFormat: String) -> DateFormatter {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "fa_IR")
+    dateFormatter.calendar = Calendar(identifier: .persian)
+    dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+    dateFormatter.timeStyle = .none
+    dateFormatter.dateFormat = dateFormat
+    return dateFormatter
+  }
+}

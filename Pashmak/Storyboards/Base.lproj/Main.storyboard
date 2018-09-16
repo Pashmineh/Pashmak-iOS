@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rME-Lz-6xn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rME-Lz-6xn">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -133,6 +133,22 @@
             </objects>
             <point key="canvasLocation" x="1540" y="162.3688155922039"/>
         </scene>
+        <!--خانه-->
+        <scene sceneID="wou-TT-NGx">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="lWJ-8N-gwW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="خانه" image="Home" id="qIN-Oc-Czv"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="G8a-X9-Ch3">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="FyZ-sJ-4aE" kind="relationship" relationship="rootViewController" id="bGb-vk-cwJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kzw-qm-9cL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3284" y="-528"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="8df-Y1-PdJ">
             <objects>
@@ -251,7 +267,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEP-f2-uYd">
-                                <rect key="frame" x="0.0" y="603" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="554" width="375" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2oS-H1-S6a" customClass="Button" customModule="Material">
                                         <rect key="frame" x="16" y="10" width="343" height="44"/>
@@ -295,6 +311,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8L5-r5-1YD"/>
                     </view>
+                    <navigationItem key="navigationItem" id="PEb-LF-V2f"/>
                     <connections>
                         <outlet property="avatarBorderView" destination="wfb-q9-xvF" id="BVJ-6v-KqX"/>
                         <outlet property="avatarImageView" destination="5d7-oz-iw7" id="Ksg-CL-6gZ"/>
@@ -311,7 +328,95 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sYt-ck-MKR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2397.5999999999999" y="161.46926536731635"/>
+            <point key="canvasLocation" x="4012" y="-528"/>
+        </scene>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="e96-M4-7aQ">
+            <objects>
+                <tabBarController storyboardIdentifier="MainTabbarController" id="GaZ-JK-ENA" customClass="MainTabBarController" customModule="Pashmak" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nhC-Tg-9lZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="Orange"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="lWJ-8N-gwW" kind="relationship" relationship="viewControllers" id="kvy-5N-6fO"/>
+                        <segue destination="lCu-jb-Noj" kind="relationship" relationship="viewControllers" id="oHF-NR-HDD"/>
+                        <segue destination="7CW-qB-wzL" kind="relationship" relationship="viewControllers" id="Nlz-m9-Wkp"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qkI-I3-cRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2426" y="161"/>
+        </scene>
+        <!--پیام‌ها-->
+        <scene sceneID="hr7-Iq-fBX">
+            <objects>
+                <navigationController id="lCu-jb-Noj" customClass="MessagesNavigationController" customModule="Pashmak" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="پیام‌ها" image="Messages" id="T28-9b-Raz"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BMi-M6-XWm" customClass="NavigationBar" customModule="Material">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="Orange"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="WvD-tA-yQ0" kind="relationship" relationship="rootViewController" id="FAr-c1-7Yg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eyG-zv-zVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3300" y="217"/>
+        </scene>
+        <!--Messages View Controller-->
+        <scene sceneID="edW-rw-QHh">
+            <objects>
+                <viewController id="WvD-tA-yQ0" customClass="MessagesViewController" customModule="Pashmak" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RCC-fa-3jc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="NHZ-MM-VOT"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="O44-DH-qYA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aH4-x2-LAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4022" y="218"/>
+        </scene>
+        <!--ترددها-->
+        <scene sceneID="zgE-Vd-oOp">
+            <objects>
+                <navigationController id="7CW-qB-wzL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="ترددها" image="Checkins" id="0sB-Q5-TYj"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="v9x-4O-Mh9" customClass="NavigationBar" customModule="Material">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="Orange"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Pgz-tf-CQ7" kind="relationship" relationship="rootViewController" id="MD3-dM-eAr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zQr-oE-Q7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3300" y="954"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="oGm-yW-Rre">
+            <objects>
+                <viewController id="Pgz-tf-CQ7" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KLv-Rd-O9z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5fR-SC-2HB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9vG-kf-WLL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BC4-mL-A7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4022" y="954"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="znB-0j-boa">
@@ -358,7 +463,6 @@
                     <connections>
                         <outlet property="attributionLabel" destination="DDk-6N-XuO" id="0cp-JC-ib8"/>
                         <segue destination="3o2-wD-Pfh" kind="show" identifier="Login" id="9Q9-9G-map"/>
-                        <segue destination="FyZ-sJ-4aE" kind="show" identifier="Home" id="ml0-3d-YvD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zn-TG-jeg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -367,6 +471,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Checkins" width="24" height="24"/>
+        <image name="Home" width="24" height="24"/>
+        <image name="Messages" width="24" height="24"/>
         <image name="signout" width="19" height="19"/>
         <image name="splashIcon" width="61" height="100.5"/>
         <namedColor name="Black">

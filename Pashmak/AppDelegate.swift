@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     DispatchQueue.main.async {
 //      self.preparePush(application)
+      self.prepareUI()
       self.prepareHero()
       self.prepareIQKeyboard()
       self.prepareKVNProgress()
@@ -57,6 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationSignificantTimeChange(_ application: UIApplication) {
     NotificationCenter.default.post(Notification(name: Notification.Name.Pashmak.checkinUpdated))
+  }
+
+  func prepareUI() {
+    UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.farsiFont(.light, size: 11.0)], for: [])
   }
 
   func preparePush(_ application: UIApplication = .shared) {
