@@ -24,6 +24,7 @@ enum URLPath {
   case checkin
   case updatePush
   case messages
+  case polls
 
   func toString() -> String {
     var result = ""
@@ -40,6 +41,8 @@ enum URLPath {
       result = "token"
     case .messages:
       result = "messages"
+    case .polls:
+      result = "polls"
     }
 
     return result

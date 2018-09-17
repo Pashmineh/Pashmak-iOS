@@ -36,11 +36,9 @@ extension ServerModels {
     class ListItem: ServerModel {
       var id: UInt64 = .random(in: 0...100_000)
       var sendTime: String?
+      var eventTimeEpoch: Double?
       var sendDate: Date {
-        guard let sendTime = self.sendTime else {
-          return Date()
-        }
-        return kDateFormatter.date(from: sendTime) ?? Date()
+        return eventTimeEpoch?.utcDate ?? Date()
       }
       var messageType: MessageType?
       var message: String?

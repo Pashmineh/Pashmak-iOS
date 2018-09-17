@@ -77,11 +77,8 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
           return
         }
         let homeData = result.model
-
-        Async.main(after: 2.0) {
           let response = Home.Populate.Response(state: .success(homeData))
           self.presenter?.presentPopulate(response: response)
-        }
       }
       .catch { error in
         sendFailed(error)
