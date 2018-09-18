@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="IRANSansDN_Fa_Num.ttf">
+            <string>IRANSansDNFaNum</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="PollHeaderCell" customModule="Pashmak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JxU-FU-LKC">
+                    <rect key="frame" x="10" y="8" width="300" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0Vz-3j-9Qa">
+                            <rect key="frame" x="16" y="8" width="260" height="26"/>
+                            <fontDescription key="fontDescription" name="IRANSansDNFaNum" family="IRANSansDNFaNum" pointSize="16"/>
+                            <color key="textColor" name="DarkText"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="0Vz-3j-9Qa" firstAttribute="leading" secondItem="JxU-FU-LKC" secondAttribute="leading" constant="16" id="0Pi-az-eft"/>
+                        <constraint firstAttribute="trailing" secondItem="0Vz-3j-9Qa" secondAttribute="trailing" constant="24" id="UIh-Hn-8Uj"/>
+                        <constraint firstAttribute="bottom" secondItem="0Vz-3j-9Qa" secondAttribute="bottom" constant="16" id="Wwr-ck-dWg"/>
+                        <constraint firstItem="0Vz-3j-9Qa" firstAttribute="top" secondItem="JxU-FU-LKC" secondAttribute="top" constant="8" id="yeI-PG-wjB"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="JxU-FU-LKC" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="8" id="Agc-v5-Wk4"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="JxU-FU-LKC" secondAttribute="trailing" constant="10" id="PNp-fV-giA"/>
+                <constraint firstAttribute="bottom" secondItem="JxU-FU-LKC" secondAttribute="bottom" constant="-8" id="SSQ-EZ-jaI"/>
+                <constraint firstItem="JxU-FU-LKC" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="10" id="TzI-Kf-OtB"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="card" destination="JxU-FU-LKC" id="xaK-sy-xfC"/>
+                <outlet property="questionLabel" destination="0Vz-3j-9Qa" id="085-9m-Bzr"/>
+            </connections>
+            <point key="canvasLocation" x="52.799999999999997" y="48.575712143928037"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <namedColor name="DarkText">
+            <color red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -13,6 +13,15 @@ class PollItemSectionConttroller: ListSectionController {
 
   var item: ServerModels.Poll.PollItem?
 
+  override init() {
+    super.init()
+    self.supplementaryViewSource = self
+  }
+
+  override func numberOfItems() -> Int {
+    return 3
+  }
+
   override func sizeForItem(at index: Int) -> CGSize {
     return CGSize(width: cellWidth, height: cellHeight)
   }
@@ -22,7 +31,7 @@ class PollItemSectionConttroller: ListSectionController {
   }
 
   var cellHeight: CGFloat {
-    return 150.0
+    return 64.0
   }
 
   override func cellForItem(at index: Int) -> UICollectionViewCell {
@@ -39,6 +48,50 @@ class PollItemSectionConttroller: ListSectionController {
     }
 
     self.item = object
+  }
+
+}
+
+extension PollItemSectionConttroller: ListSupplementaryViewSource {
+
+  func supportedElementKinds() -> [String] {
+    return [UICollectionView.elementKindSectionHeader, UICollectionView.elementKindSectionFooter]
+  }
+
+  func sizeForSupplementaryView(ofKind elementKind: String, at index: Int) -> CGSize {
+    switch elementKind {
+    case UICollectionView.elementKindSectionHeader:
+
+      let width = self.cellWidth
+      let hPadding: CGFloat = 10.0 + 10.0 + 16.0 + 24.0
+      let maxWidth = width - hPadding
+      let question = item?.question ?? ""
+      let questionHeight = question.size(with: UIFont.farsiFont(.regular, size: 16.0), in: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)).height
+      let height = max(50.0, (questionHeight + 8.0 + 16.0))
+      return CGSize(width: width, height: height)
+    case UICollectionView.elementKindSectionFooter:
+      return .zero
+    default:
+      fatalError("Unknown element kind for size: [\(elementKind)]")
+    }
+  }
+
+  func viewForSupplementaryElement(ofKind elementKind: String, at index: Int) -> UICollectionReusableView {
+    switch elementKind {
+    case UICollectionView.elementKindSectionHeader:
+
+      guard let header = collectionContext?.dequeueReusableSupplementaryView(ofKind: elementKind, for: self, nibName: "PollHeaderCell", bundle: nil, at: index) as? PollHeaderCell else {
+        fatalError("Coould not deque header cell!")
+      }
+      let question = item?.question ?? ""
+      header.question = question
+      return header
+
+    case UICollectionView.elementKindSectionFooter:
+      return UICollectionReusableView()
+    default:
+      fatalError("Unknown element kind for view: [\(elementKind)]")
+    }
   }
 
 }

@@ -13,7 +13,7 @@ import UIKit
 class PollItemCell: UICollectionViewCell {
 
   @IBOutlet private weak var card: PulseView!
-  @IBOutlet private weak var questionLabel: UILabel!
+//  @IBOutlet private weak var questionLabel: UILabel!
 
   var item: ServerModels.Poll.PollItem? {
     didSet {
@@ -31,23 +31,23 @@ class PollItemCell: UICollectionViewCell {
   }
 
   private func prepareCard() {
-    self.card.layer.cornerRadius = 8.0
-    self.card.clipsToBounds = true
-    self.questionLabel.linesCornerRadius = 5
-    self.questionLabel.lastLineFillPercent = 65
+//    self.card.layer.cornerRadius = 8.0
+//    self.card.clipsToBounds = true
+//    self.questionLabel.linesCornerRadius = 5
+//    self.questionLabel.lastLineFillPercent = 65
   }
 
   private func update() {
 
     if item?.isLoading == true {
-      self.questionLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
+//      self.questionLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
       self.card.startPashmakSkeleton()
       return
     }
 
     self.card.stopPashmakSkeleton()
-    self.questionLabel.transform = .identity
-    self.questionLabel.text = item?.question
+//    self.questionLabel.transform = .identity
+//    self.questionLabel.text = item?.question
 
   }
 

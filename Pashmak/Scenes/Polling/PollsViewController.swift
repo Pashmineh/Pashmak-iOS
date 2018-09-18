@@ -109,11 +109,11 @@ class PollsViewController: UIViewController {
   private func prepareCollectionView() {
     let layout = ListCollectionViewLayout(stickyHeaders: false, scrollDirection: UICollectionView.ScrollDirection.vertical, topContentInset: 0.0, stretchToEdge: false)
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    //    let topOffset: CGFloat = 64.0
+    let topOffset: CGFloat = 8.0
     collectionView.backgroundColor = .clear
     collectionView.isScrollEnabled = true
-    //    collectionView.scrollIndicatorInsets.top = topOffset
-    //    collectionView.contentInset.top = topOffset
+    collectionView.scrollIndicatorInsets.top = topOffset
+    collectionView.contentInset.top = topOffset
     //    collectionView.contentInset.bottom = 8.0
     collectionView.layer.setShadow(opacity: 0.15, radius: 8.0)
     collectionView.refreshControl = self.refreshControl
