@@ -7,12 +7,27 @@
 //
 
 import Material
+import SkeletonView
 import UIKit
 
 class PollHeaderCell: UICollectionReusableView {
 
-  @IBOutlet weak var card: UIView!
-  @IBOutlet weak var questionLabel: UILabel!
+  @IBOutlet private weak var card: UIView!
+  @IBOutlet private weak var questionLabel: UILabel!
+
+  var isLoading: Bool = false {
+    didSet {
+      if isLoading {
+        self.questionLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
+        self.card.startPashmakSkeleton()
+
+      } else {
+        self.card.stopPashmakSkeleton()
+        self.questionLabel.transform = .identity
+      }
+
+    }
+  }
 
   var question: String = "" {
     didSet {
@@ -31,6 +46,8 @@ class PollHeaderCell: UICollectionReusableView {
 
   private func prepareCard() {
     self.card.layer.cornerRadius = 8.0
+    self.questionLabel.linesCornerRadius = 5
+    self.questionLabel.lastLineFillPercent = 65
   }
 
   private func update() {

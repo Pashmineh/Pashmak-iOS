@@ -348,13 +348,6 @@
 			path = Messages;
 			sourceTree = "<group>";
 		};
-		8498D976214E3DCB00CEC73F /* Checkins */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Checkins;
-			sourceTree = "<group>";
-		};
 		8498D979214E48A800CEC73F /* Items */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,7 +439,6 @@
 			isa = PBXGroup;
 			children = (
 				84EE944B214F931000499D96 /* Polling */,
-				8498D976214E3DCB00CEC73F /* Checkins */,
 				84E805712132B64000BC47CC /* Home */,
 				84FC6CB2212BCA2A00B4A56A /* Login */,
 				8498D969214E3B0E00CEC73F /* Messages */,

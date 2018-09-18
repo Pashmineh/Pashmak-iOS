@@ -63,7 +63,7 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
     case UICollectionView.elementKindSectionHeader:
 
       let width = self.cellWidth
-      let hPadding: CGFloat = 10.0 + 10.0 + 16.0 + 24.0
+      let hPadding: CGFloat = 10.0 + 10.0 + 16.0 + 8 + 24.0 + 12.0
       let maxWidth = width - hPadding
       let question = item?.question ?? ""
       let questionHeight = question.size(with: UIFont.farsiFont(.regular, size: 16.0), in: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)).height
@@ -84,6 +84,7 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
         fatalError("Coould not deque header cell!")
       }
       let question = item?.question ?? ""
+      header.isLoading = item?.isLoading ?? false
       header.question = question
       return header
 
