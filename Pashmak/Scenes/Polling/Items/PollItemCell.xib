@@ -6,22 +6,71 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="IRANSansDN_Fa_Num.ttf">
+            <string>IRANSansDNFaNum</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PollItemCell" customModule="Pashmak" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07T-IA-Nfw" customClass="PulseView" customModule="Material">
-                        <rect key="frame" x="10" y="0.0" width="300" height="64"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07T-IA-Nfw">
+                        <rect key="frame" x="10" y="0.0" width="300" height="80"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QVL-pG-2Gg" customClass="PulseView" customModule="Material">
+                                <rect key="frame" x="8" y="8" width="284" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="W3E-SQ-ufK">
+                                        <rect key="frame" x="16" y="21.5" width="201" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="RSI-Bb-Fcp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="IRANSansDNFaNum" family="IRANSansDNFaNum" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ec9-11-90V">
+                                        <rect key="frame" x="225" y="5" width="54" height="54"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="54" id="Lqy-cd-Y9M"/>
+                                            <constraint firstAttribute="height" constant="54" id="ehU-kt-izN"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" name="whiteSmoke"/>
+                                <constraints>
+                                    <constraint firstItem="ec9-11-90V" firstAttribute="leading" secondItem="W3E-SQ-ufK" secondAttribute="trailing" constant="8" id="4mQ-F3-69W"/>
+                                    <constraint firstAttribute="trailing" secondItem="ec9-11-90V" secondAttribute="trailing" constant="5" id="L84-ph-UEE"/>
+                                    <constraint firstAttribute="height" constant="64" id="gD7-ff-p5M"/>
+                                    <constraint firstItem="ec9-11-90V" firstAttribute="centerY" secondItem="QVL-pG-2Gg" secondAttribute="centerY" id="gKA-CO-cKx"/>
+                                    <constraint firstItem="W3E-SQ-ufK" firstAttribute="leading" secondItem="QVL-pG-2Gg" secondAttribute="leading" constant="16" id="jZh-28-uTR"/>
+                                    <constraint firstItem="W3E-SQ-ufK" firstAttribute="centerY" secondItem="ec9-11-90V" secondAttribute="centerY" id="ou9-YA-fwU"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QVL-pG-2Gg" secondAttribute="trailing" constant="8" id="1Iy-d9-EYV"/>
+                            <constraint firstItem="QVL-pG-2Gg" firstAttribute="leading" secondItem="07T-IA-Nfw" secondAttribute="leading" constant="8" id="BqU-4t-E4U"/>
+                            <constraint firstItem="QVL-pG-2Gg" firstAttribute="centerY" secondItem="07T-IA-Nfw" secondAttribute="centerY" id="gHp-KZ-oV6"/>
+                        </constraints>
                     </view>
                 </subviews>
             </view>
@@ -35,8 +84,16 @@
             <size key="customSize" width="366" height="173"/>
             <connections>
                 <outlet property="card" destination="07T-IA-Nfw" id="cgb-ii-i0M"/>
+                <outlet property="itemCard" destination="QVL-pG-2Gg" id="jJz-Hn-aab"/>
+                <outlet property="itemImageView" destination="ec9-11-90V" id="Fl2-nh-7iQ"/>
+                <outlet property="itemTitleLabel" destination="W3E-SQ-ufK" id="XcT-0q-rHk"/>
             </connections>
             <point key="canvasLocation" x="57.600000000000001" y="139.43028485757122"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <namedColor name="whiteSmoke">
+            <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

@@ -10,6 +10,7 @@
 //  see http://clean-swift.com
 //
 
+import Async
 import UIKit
 
 protocol PollsBusinessLogic {
@@ -42,8 +43,10 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
           return
         }
         let polls = result.model
-        let response = Polls.Populate.Response(state: .success(polls))
-        self.presenter?.presentPopulate(response: response)
+        Async.main(after: 2.0) {
+          let response = Polls.Populate.Response(state: .success(polls))
+          self.presenter?.presentPopulate(response: response)
+        }
       }
       .catch { error in
         sendFailed(error)

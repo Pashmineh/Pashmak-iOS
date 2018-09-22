@@ -19,7 +19,7 @@ class PollItemSectionConttroller: ListSectionController {
   }
 
   override func numberOfItems() -> Int {
-    return 3
+    return item?.isLoading != true ? item?.pollItemSet?.count ?? 0 : 3
   }
 
   override func sizeForItem(at index: Int) -> CGSize {
@@ -31,14 +31,22 @@ class PollItemSectionConttroller: ListSectionController {
   }
 
   var cellHeight: CGFloat {
-    return 64.0
+    return 80.0
   }
 
   override func cellForItem(at index: Int) -> UICollectionViewCell {
     guard let cell = collectionContext?.dequeueReusableCell(withNibName: "PollItemCell", bundle: nil, for: self, at: index) as? PollItemCell else {
       fatalError("Could nto dequeue [PollItemCell]")
     }
-    cell.item = item
+    if item?.isLoading == true {
+      cell.isLoading = true
+      cell.item = nil
+    } else {
+      let answer = item?.pollItemSet?[index]
+      cell.item = answer
+      cell.isLoading = false
+    }
+
     return cell
   }
 
@@ -70,7 +78,7 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
       let height = max(50.0, (questionHeight + 8.0 + 16.0))
       return CGSize(width: width, height: height)
     case UICollectionView.elementKindSectionFooter:
-      return CGSize(width: cellWidth, height: 68.0)
+      return CGSize(width: cellWidth, height: 72.0)
     default:
       fatalError("Unknown element kind for size: [\(elementKind)]")
     }

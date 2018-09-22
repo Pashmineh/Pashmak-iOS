@@ -58,19 +58,24 @@ class PollFooterCell: UICollectionReusableView {
 
   private func update() {
 
-    let remainingVotes = pollItem?.remainingVotes ?? 0
-    let totalVoted = pollItem?.totalVote ?? 0
-    let timeRemaining = 10
+    if pollItem?.isLoading == true {
+      self.card.startPashmakSkeleton()
+    } else {
 
-    let itemsLeftText = combine(title: "آراء باقی‌مانده شما: ", with: "\(remainingVotes)")
-    self.itemsLeftLabel.attributedText = itemsLeftText
+      self.card.stopPashmakSkeleton()
+      let remainingVotes = pollItem?.remainingVotes ?? 0
+      let totalVoted = pollItem?.totalVote ?? 0
+      let timeRemaining = 10
 
-    let totalVotesText = combine(title: "آراء اخذ شده: ", with: "\(totalVoted) نفر")
-    self.castedVotesLabel.attributedText = totalVotesText
+      let itemsLeftText = combine(title: "آراء باقی‌مانده شما: ", with: "\(remainingVotes)")
+      self.itemsLeftLabel.attributedText = itemsLeftText
 
-    let timeRemainingText = combine(title: "زمان باقی‌مانده: ", with: "\(timeRemaining) ساعت")
-    self.expirationDateLabel.attributedText = timeRemainingText
+      let totalVotesText = combine(title: "آراء اخذ شده: ", with: "\(totalVoted) نفر")
+      self.castedVotesLabel.attributedText = totalVotesText
 
+      let timeRemainingText = combine(title: "زمان باقی‌مانده: ", with: "\(timeRemaining) ساعت")
+      self.expirationDateLabel.attributedText = timeRemainingText
+    }
   }
 
   private func combine(title: String, with value: String) -> NSAttributedString {
