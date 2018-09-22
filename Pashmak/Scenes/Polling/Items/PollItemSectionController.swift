@@ -92,7 +92,7 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
       guard let footer = collectionContext?.dequeueReusableSupplementaryView(ofKind: elementKind, for: self, nibName: "PollFooterCell", bundle: nil, at: index) as? PollFooterCell else {
         fatalError("Could not dequee [PollFooterCell]")
       }
-
+      footer.pollItem = self.item
       return footer
     default:
       fatalError("Unknown element kind for view: [\(elementKind)]")

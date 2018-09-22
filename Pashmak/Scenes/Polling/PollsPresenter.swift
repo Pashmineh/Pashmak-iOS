@@ -26,7 +26,7 @@ class PollsPresenter: PollsPresentationLogic {
     switch state {
     case .loading:
       var items: [ListDiffable] = []
-      (0...4).forEach { _ in
+      (0...2).forEach { _ in
         items.append(ServerModels.Poll.PollItem())
       }
       let viewModel = Polls.Populate.ViewModel.Loading(items: items)

@@ -31,12 +31,13 @@ target 'Pashmak' do
 inhibit_all_warnings!
 
 
-
-  # Pods for Pashmak
 post_install do |installer|
+  oldTargets = ["FSPagerView", "Hero", "KUIActionSheet", "SkeletonView"]
   installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '4.1'
+    if oldTargets.include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.1'
+      end
     end
   end
 end
