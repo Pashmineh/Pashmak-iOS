@@ -70,7 +70,7 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
       let height = max(50.0, (questionHeight + 8.0 + 16.0))
       return CGSize(width: width, height: height)
     case UICollectionView.elementKindSectionFooter:
-      return .zero
+      return CGSize(width: cellWidth, height: 68.0)
     default:
       fatalError("Unknown element kind for size: [\(elementKind)]")
     }
@@ -89,7 +89,11 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
       return header
 
     case UICollectionView.elementKindSectionFooter:
-      return UICollectionReusableView()
+      guard let footer = collectionContext?.dequeueReusableSupplementaryView(ofKind: elementKind, for: self, nibName: "PollFooterCell", bundle: nil, at: index) as? PollFooterCell else {
+        fatalError("Could not dequee [PollFooterCell]")
+      }
+
+      return footer
     default:
       fatalError("Unknown element kind for view: [\(elementKind)]")
     }

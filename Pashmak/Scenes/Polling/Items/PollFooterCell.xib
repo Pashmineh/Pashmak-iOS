@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="IRANSansDN_FaNum_Light.ttf">
+            <string>IRANSansDNFaNum-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="PollFooterCell" customModule="Pashmak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBh-nF-kNs">
+                    <rect key="frame" x="10" y="-8" width="300" height="68"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ovy-Ox-f1e">
+                            <rect key="frame" x="12" y="10" width="276" height="1"/>
+                            <color key="backgroundColor" name="Grey"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="ZMR-rb-ImE"/>
+                            </constraints>
+                        </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollItemsLeft" translatesAutoresizingMaskIntoConstraints="NO" id="j2x-96-a78">
+                            <rect key="frame" x="271" y="19" width="13" height="12"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="12" id="Qsx-0K-Rf1"/>
+                                <constraint firstAttribute="width" constant="13" id="l0R-F5-Ik1"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="آراء باقی مانده شما: ۲ رای" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFp-z2-Gb1">
+                            <rect key="frame" x="143" y="16" width="120" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="hGA-iZ-6li"/>
+                                <constraint firstAttribute="width" constant="120" id="l4u-47-RbB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="IRANSansDNFaNum-Light" family="IRANSansDNFaNum" pointSize="10"/>
+                            <color key="textColor" name="TextDeactive"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollCastCount" translatesAutoresizingMaskIntoConstraints="NO" id="QzJ-WL-rDL">
+                            <rect key="frame" x="272" y="41" width="11" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="11" id="PrS-Qd-nx5"/>
+                                <constraint firstAttribute="height" constant="10" id="sNS-t0-KKi"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="آراء اخذ شده: ۱۲ نفر" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPo-43-Ohx">
+                            <rect key="frame" x="123" y="37" width="140" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="140" id="kvf-9u-PUI"/>
+                                <constraint firstAttribute="height" constant="18" id="v0Z-9e-xQe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="IRANSansDNFaNum-Light" family="IRANSansDNFaNum" pointSize="10"/>
+                            <color key="textColor" name="TextDeactive"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollExpirationTime" translatesAutoresizingMaskIntoConstraints="NO" id="1I0-9D-34W">
+                            <rect key="frame" x="125" y="20" width="10" height="10"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="10" id="jvJ-zP-PGZ"/>
+                                <constraint firstAttribute="height" constant="10" id="xhN-Gc-Chn"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="زمان بقی مانده: ۱۰ ساعت" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0J-SA-y0P">
+                            <rect key="frame" x="12" y="16" width="105" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="9id-H3-rc8"/>
+                                <constraint firstAttribute="width" constant="105" id="kjA-Cg-rob"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="IRANSansDNFaNum-Light" family="IRANSansDNFaNum" pointSize="10"/>
+                            <color key="textColor" name="TextDeactive"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Ovy-Ox-f1e" firstAttribute="top" secondItem="FBh-nF-kNs" secondAttribute="top" constant="10" id="0UT-W7-6FP"/>
+                        <constraint firstItem="q0J-SA-y0P" firstAttribute="centerY" secondItem="lFp-z2-Gb1" secondAttribute="centerY" id="4wj-1m-hqr"/>
+                        <constraint firstItem="RPo-43-Ohx" firstAttribute="centerY" secondItem="QzJ-WL-rDL" secondAttribute="centerY" id="9ZR-91-GjL"/>
+                        <constraint firstItem="QzJ-WL-rDL" firstAttribute="leading" secondItem="RPo-43-Ohx" secondAttribute="trailing" constant="9" id="9xY-Cw-pwc"/>
+                        <constraint firstItem="Ovy-Ox-f1e" firstAttribute="leading" secondItem="FBh-nF-kNs" secondAttribute="leading" constant="12" id="Aeg-UE-3Dv"/>
+                        <constraint firstAttribute="trailing" secondItem="Ovy-Ox-f1e" secondAttribute="trailing" constant="12" id="Rlt-4O-ySV"/>
+                        <constraint firstItem="j2x-96-a78" firstAttribute="top" secondItem="Ovy-Ox-f1e" secondAttribute="bottom" constant="8" id="X8G-gO-gAx"/>
+                        <constraint firstItem="lFp-z2-Gb1" firstAttribute="centerY" secondItem="j2x-96-a78" secondAttribute="centerY" id="YVR-N4-ywC"/>
+                        <constraint firstItem="1I0-9D-34W" firstAttribute="centerY" secondItem="q0J-SA-y0P" secondAttribute="centerY" id="bXH-aj-6Tm"/>
+                        <constraint firstItem="QzJ-WL-rDL" firstAttribute="top" secondItem="j2x-96-a78" secondAttribute="bottom" constant="10" id="cbJ-Tn-8iL"/>
+                        <constraint firstAttribute="trailing" secondItem="j2x-96-a78" secondAttribute="trailing" constant="16" id="ejz-NR-jgN"/>
+                        <constraint firstItem="1I0-9D-34W" firstAttribute="leading" secondItem="q0J-SA-y0P" secondAttribute="trailing" constant="8" id="l5J-Se-890"/>
+                        <constraint firstItem="j2x-96-a78" firstAttribute="leading" secondItem="lFp-z2-Gb1" secondAttribute="trailing" constant="8" id="opA-m0-xqA"/>
+                        <constraint firstItem="QzJ-WL-rDL" firstAttribute="centerX" secondItem="j2x-96-a78" secondAttribute="centerX" id="ygO-Mc-hJg"/>
+                        <constraint firstItem="q0J-SA-y0P" firstAttribute="leading" secondItem="Ovy-Ox-f1e" secondAttribute="leading" id="zsK-jt-m34"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="FBh-nF-kNs" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="-8" id="6ec-Ba-pBG"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="FBh-nF-kNs" secondAttribute="trailing" constant="10" id="E7I-SI-vVD"/>
+                <constraint firstAttribute="bottom" secondItem="FBh-nF-kNs" secondAttribute="bottom" constant="8" id="kNa-4v-Spj"/>
+                <constraint firstItem="FBh-nF-kNs" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="zVV-cx-WMA"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="card" destination="FBh-nF-kNs" id="uQv-H4-LQx"/>
+                <outlet property="castedVotesLabel" destination="RPo-43-Ohx" id="AHw-ia-hUJ"/>
+                <outlet property="expirationDateLabel" destination="q0J-SA-y0P" id="lkO-ZW-qfh"/>
+                <outlet property="itemsLeftLabel" destination="lFp-z2-Gb1" id="FUf-9g-8Ll"/>
+            </connections>
+            <point key="canvasLocation" x="140.80000000000001" y="152.02398800599701"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="pollCastCount" width="11" height="10"/>
+        <image name="pollExpirationTime" width="10" height="10"/>
+        <image name="pollItemsLeft" width="13" height="12"/>
+        <namedColor name="Grey">
+            <color red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextDeactive">
+            <color red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

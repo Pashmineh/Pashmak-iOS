@@ -88,6 +88,8 @@
 		9519AA9621346EA4003AB3ED /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9519AA9521346EA4003AB3ED /* UIView+Extensions.swift */; };
 		95446D2021333F9F0096E78F /* HomedataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95446D1F21333F9F0096E78F /* HomedataModels.swift */; };
 		95446D22213342000096E78F /* HomeRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95446D21213342000096E78F /* HomeRequests.swift */; };
+		95691352215180E70063C8FA /* PollFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95691350215180E70063C8FA /* PollFooterCell.swift */; };
+		95691353215180E70063C8FA /* PollFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95691351215180E70063C8FA /* PollFooterCell.xib */; };
 		9578F39F212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39C212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf */; };
 		9578F3A0212F446700A667E9 /* IRANSansDN_Fa_Num.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39D212F446700A667E9 /* IRANSansDN_Fa_Num.ttf */; };
 		9578F3A1212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9578F39E212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf */; };
@@ -186,6 +188,8 @@
 		9519AA9521346EA4003AB3ED /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		95446D1F21333F9F0096E78F /* HomedataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomedataModels.swift; sourceTree = "<group>"; };
 		95446D21213342000096E78F /* HomeRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRequests.swift; sourceTree = "<group>"; };
+		95691350215180E70063C8FA /* PollFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollFooterCell.swift; sourceTree = "<group>"; };
+		95691351215180E70063C8FA /* PollFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PollFooterCell.xib; sourceTree = "<group>"; };
 		9578F39C212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansDN_FaNum_Light.ttf; sourceTree = "<group>"; };
 		9578F39D212F446700A667E9 /* IRANSansDN_Fa_Num.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IRANSansDN_Fa_Num.ttf; sourceTree = "<group>"; };
 		9578F39E212F446700A667E9 /* IRANSansDN_FaNum-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IRANSansDN_FaNum-Bold.ttf"; sourceTree = "<group>"; };
@@ -431,6 +435,8 @@
 				84EE9460214FA4A700499D96 /* PollItemCell.xib */,
 				84E5542A215119EE001A861F /* PollHeaderCell.swift */,
 				84E5542B215119EE001A861F /* PollHeaderCell.xib */,
+				95691350215180E70063C8FA /* PollFooterCell.swift */,
+				95691351215180E70063C8FA /* PollFooterCell.xib */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -605,6 +611,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9578F39F212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf in Resources */,
+				95691353215180E70063C8FA /* PollFooterCell.xib in Resources */,
 				84EC2255213420770040ECE2 /* HomeSkeletonCell.xib in Resources */,
 				84E5542D215119EE001A861F /* PollHeaderCell.xib in Resources */,
 				843FB342212AD7CE0047A734 /* LaunchScreen.storyboard in Resources */,
@@ -817,6 +824,7 @@
 				84EE9461214FA4A700499D96 /* PollItemCell.swift in Sources */,
 				84CB27402135130600DE59C5 /* Checkins.swift in Sources */,
 				84E5542C215119EE001A861F /* PollHeaderCell.swift in Sources */,
+				95691352215180E70063C8FA /* PollFooterCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
