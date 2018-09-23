@@ -169,7 +169,7 @@ extension AppDelegate: CLLocationManagerDelegate {
     print("Entered region: \(region.identifier)")
 
     guard !Checkin.checkedInToday else {
-      Log.trace("Already checked in today, no need for beacon checkin!")
+//      Log.trace("Already checked in today, no need for beacon checkin!")
       return
     }
 

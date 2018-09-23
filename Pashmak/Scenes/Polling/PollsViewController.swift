@@ -18,9 +18,15 @@ import Material
 import UIKit
 
 protocol PollsDisplayLogic: AnyObject {
+
   func displayPopluateLoading(viewModel: Polls.Populate.ViewModel.Loading)
   func displayPopluateFailed(viewModel: Polls.Populate.ViewModel.Failed)
   func displayPopluateSucces(viewModel: Polls.Populate.ViewModel.Success)
+
+  func displayVoteLoading(viewModel: Polls.Vote.ViewModel.Loading)
+  func displayVoteFailed(viewModel: Polls.Vote.ViewModel.Failed)
+  func displayVoteSuccess(viewModel: Polls.Vote.ViewModel.Success)
+
 }
 
 class PollsViewController: UIViewController {
@@ -134,6 +140,11 @@ class PollsViewController: UIViewController {
     interactor?.populate(request: request)
   }
 
+  func userSelected(_ item: ServerModels.Poll.PollItem.PollAnswer, on poll: ServerModels.Poll.PollItem) {
+    let request = Polls.Vote.Request(isUnvote: item.voted == true, item: item, poll: poll)
+    interactor?.vote(request: request)
+  }
+
 }
 
 extension PollsViewController: PollsDisplayLogic {
@@ -164,6 +175,28 @@ extension PollsViewController: PollsDisplayLogic {
     self.displayedItems = items
     self.adapter.performUpdates(animated: true, completion: nil)
   }
+
+  func displayVoteLoading(viewModel: Polls.Vote.ViewModel.Loading) {
+    self.adapter.performUpdates(animated: true, completion: nil)
+//    self.adapter.reloadData(completion: nil)
+  }
+
+  func displayVoteFailed(viewModel: Polls.Vote.ViewModel.Failed) {
+    let message = viewModel.message
+    KVNProgress.showError(withStatus: message) {[weak self] in
+      guard let self = self else {
+        return
+      }
+      self.adapter.performUpdates(animated: true, completion: nil)
+    }
+  }
+
+  func displayVoteSuccess(viewModel: Polls.Vote.ViewModel.Success) {
+//    self.adapter.performUpdates(animated: true, completion: nil)
+    let poll = viewModel.poll
+    self.adapter.reloadObjects([poll])
+  }
+
 }
 
 extension PollsViewController: ListAdapterDataSource {

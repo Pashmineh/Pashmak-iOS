@@ -13,3 +13,9 @@ enum FetchState<T, E> {
   case success(T)
   case failure(E)
 }
+
+enum SubmitState<L, T, E> {
+  case loading(L)
+  case success(T)
+  case failure(E)
+}

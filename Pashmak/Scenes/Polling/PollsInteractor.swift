@@ -15,14 +15,16 @@ import UIKit
 
 protocol PollsBusinessLogic {
   func populate(request: Polls.Populate.Request)
+  func vote(request: Polls.Vote.Request)
 }
 
 protocol PollsDataStore {
-
+  var polItems: [ServerModels.Poll.PollItem] { get set }
 }
 
 class PollsInteractor: PollsBusinessLogic, PollsDataStore {
   var presenter: PollsPresentationLogic?
+  var polItems: [ServerModels.Poll.PollItem] = []
 
   func populate(request: Polls.Populate.Request) {
     func sendLoading() {
@@ -43,7 +45,7 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
           return
         }
         let polls = result.model
-        Async.main(after: 2.0) {
+        Async.main(after: 0.5) {
           let response = Polls.Populate.Response(state: .success(polls))
           self.presenter?.presentPopulate(response: response)
         }
@@ -53,4 +55,50 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
       }
 
   }
+
+  func vote(request: Polls.Vote.Request) {
+
+    let poll = request.poll
+    let item = request.item
+    let isUnvote = request.isUnvote
+
+    func sendLoading() {
+      let response = Polls.Vote.Response(state: .loading)
+      presenter?.presentVote(response: response)
+    }
+
+    func sendFailure(_ error: Error) {
+      Async.main(after: 1.0) {
+        let response = Polls.Vote.Response(state: .failure(error))
+        item.isSubmitting = false
+        item.voted = !(item.voted == true)
+        self.presenter?.presentVote(response: response)
+      }
+    }
+
+    guard poll.canVote else {
+      Log.warning("Cannot vote at the moment.")
+      return
+    }
+
+    item.isSubmitting = true
+    sendLoading()
+
+    let vote = ServerModels.Poll.Vote(pollID: poll.id, itemID: item.id)
+    PashmakServer.perform(request: ServerRequest.Polls.vote(vote, isUnvote: isUnvote), validResponseCodes: [200, 201])
+      .done { [weak self] (result: ServerData<[ServerModels.Poll.PollItem]>) in
+        _ = result
+        guard let self = self else {
+          return
+        }
+        item.voted = !(item.voted ?? false)
+        let response = Polls.Vote.Response(state: Polls.Vote.VoteSubmitState.success(poll))
+        self.presenter?.presentVote(response: response)
+      }
+      .catch { error in
+        sendFailure(error)
+      }
+
+  }
+
 }

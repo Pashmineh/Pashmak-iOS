@@ -63,35 +63,66 @@ extension ServerModels {
         var title: String = ""
         var imgsrc: String?
         var number: UInt?
-        var poll: PollItem?
+        var voted: Bool? {
+          didSet {
+            itemChnagedHandler?()
+          }
+        }
+        var itemChnagedHandler: ButtonAction?
+        var isSubmitting: Bool = false {
+          didSet {
+            itemChnagedHandler?()
+          }
+        }
 
+        enum CodingKeys: String, CodingKey {
+          case id, title, imgsrc, number, voted
+        }
       }
 
       var answerLimit: UInt8 = 1
       var id: UInt64 = .random(in: 1_000...100_000)
       var question: String = ""
-      var pollItemSet: [PollAnswer]? = []
-      var isLoading: Bool? = false
+      var answers: [PollAnswer]? = []
       var totalVote: UInt?
+      var anonymous: Bool?
+      var imgsrc: String?
+
+      var isLoading: Bool = false
       var remainingVotes: UInt {
 
         let total = UInt(answerLimit)
-        let votes = UInt(pollItemSet?.reduce(0) {
-          if $1.poll != nil {
-            return ($0 ?? 0) + 1
-          }
-          return $0 ?? 0
-        } ?? 0)
+        let votes = UInt(answers?.filter { $0.voted == true || $0.isSubmitting == true }.count ?? 0)
 
         return total - votes
       }
-      var anonymous: Bool?
-      var imgsrc: String?
+
+      var canVote: Bool {
+        let answers = self.answers?.filter { $0.voted == true }.count ?? 0
+        let pending = self.answers?.filter { $0.voted != true && $0.isSubmitting == true }.count ?? 0
+        return answerLimit > (answers + pending)
+      }
 
       init() {
         self.isLoading = true
       }
 
+      enum CodingKeys: String, CodingKey {
+        case id, answerLimit, question, totalVote, anonymous, imgsrc
+        case answers = "itemDTOS"
+
+      }
+
+    }
+
+    class Vote: ServerModel {
+      let item: UInt64
+      let poll: UInt64
+
+      init(pollID: UInt64, itemID: UInt64) {
+        self.item = itemID
+        self.poll = pollID
+      }
     }
   }
 
@@ -108,19 +139,23 @@ extension ServerModels.Poll.PollItem: ListDiffable {
       return false
     }
 
+    let itemsEqual = object.answers?.elementsEqual(self.answers ?? []) {
+        var result = $0.number == $1.number
+        result = result && ($0.id == $1.id)
+        result = result && ($0.title == $1.title)
+        result = result && ($0.imgsrc == $1.imgsrc)
+        result = result && ($0.voted == $1.voted)
+        result = result && ($0.isSubmitting == $1.isSubmitting)
+      return result
+    } ?? true
+
     return object.id == self.id
       && object.question == self.question
       && object.answerLimit == self.answerLimit
       && object.anonymous == self.anonymous
       && object.imgsrc == self.imgsrc
       && object.isLoading == self.isLoading
-      && object.pollItemSet?.elementsEqual(self.pollItemSet ?? []) {
-        $0.number == $1.number
-          && $0.id == $1.id
-          && $0.title == $1.title
-          && $0.imgsrc == $1.imgsrc
-
-      } ?? true
+      && itemsEqual
 
   }
 

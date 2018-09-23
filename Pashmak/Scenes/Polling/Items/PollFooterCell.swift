@@ -57,11 +57,23 @@ class PollFooterCell: UICollectionReusableView {
   }
 
   private func update() {
+    if let item = pollItem {
+      item.answers?.forEach {
+        $0.itemChnagedHandler = { [weak self] in
+          guard let self = self else {
+            return
+          }          
+          self.updateValues()
+        }
+      }
+    }
+    updateValues()
+  }
 
+  private func updateValues() {
     if pollItem?.isLoading == true {
       self.card.startPashmakSkeleton()
     } else {
-
       self.card.stopPashmakSkeleton()
       let remainingVotes = pollItem?.remainingVotes ?? 0
       let totalVoted = pollItem?.totalVote ?? 0

@@ -19,7 +19,7 @@ class PollItemSectionConttroller: ListSectionController {
   }
 
   override func numberOfItems() -> Int {
-    return item?.isLoading != true ? item?.pollItemSet?.count ?? 0 : 3
+    return item?.isLoading != true ? item?.answers?.count ?? 0 : 3
   }
 
   override func sizeForItem(at index: Int) -> CGSize {
@@ -42,7 +42,7 @@ class PollItemSectionConttroller: ListSectionController {
       cell.isLoading = true
       cell.item = nil
     } else {
-      let answer = item?.pollItemSet?[index]
+      let answer = item?.answers?[index]
       cell.item = answer
       cell.isLoading = false
     }
@@ -56,6 +56,16 @@ class PollItemSectionConttroller: ListSectionController {
     }
 
     self.item = object
+  }
+
+  override func didSelectItem(at index: Int) {
+    guard let poll = self.item, let item = poll.answers?[index], poll.isLoading != true, item.isSubmitting != true else {
+      Log.warning("Could not find poll item or item is loading!")
+      return
+    }
+
+    (viewController as? PollsViewController)?.userSelected(item, on: poll)
+
   }
 
 }

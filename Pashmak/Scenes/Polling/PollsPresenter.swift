@@ -14,7 +14,8 @@ import IGListKit
 import UIKit
 
 protocol PollsPresentationLogic {
-func presentPopulate(response: Polls.Populate.Response)
+  func presentPopulate(response: Polls.Populate.Response)
+  func presentVote(response: Polls.Vote.Response)
 }
 
 class PollsPresenter: PollsPresentationLogic {
@@ -41,6 +42,26 @@ class PollsPresenter: PollsPresentationLogic {
     case .success(let polls):
       let viewModel = Polls.Populate.ViewModel.Success(items: polls)
       viewController?.displayPopluateSucces(viewModel: viewModel)
+    }
+  }
+
+  func presentVote(response: Polls.Vote.Response) {
+    let state = response.state
+
+    switch state {
+    case .loading:
+      let viewModel = Polls.Vote.ViewModel.Loading()
+      viewController?.displayVoteLoading(viewModel: viewModel)
+    case .failure(let error):
+      var message = "خطا در عملیات!"
+      if case APIError.invalidResponseCode(let status) = error {
+        message = Texts.ServerErrors.random + "\n (\(status))"
+      }
+      let viewModel = Polls.Vote.ViewModel.Failed(message: message)
+      viewController?.displayVoteFailed(viewModel: viewModel)
+    case .success(let poll):
+      let viewModel = Polls.Vote.ViewModel.Success(poll: poll)
+      viewController?.displayVoteSuccess(viewModel: viewModel)
     }
   }
 }
