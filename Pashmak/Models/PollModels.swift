@@ -59,25 +59,13 @@ extension ServerModels {
 
   enum Poll {
     class PollItem: ServerModel {
-      class PollAnswer: ServerModel {
+      struct PollAnswer: ServerModel {
         var id: UInt64 = .random(in: 1_000...100_000)
         var title: String = ""
         var imgsrc: String?
         var number: UInt?
-        var voted: Bool? {
-          didSet {
-            itemChangedHandler?()
-            pollItemChangeHandler?()
-          }
-        }
-        var itemChangedHandler: ButtonAction?
-        var pollItemChangeHandler: ButtonAction?
-        var isSubmitting: Bool = false {
-          didSet {
-            itemChangedHandler?()
-            pollItemChangeHandler?()
-          }
-        }
+        var voted: Bool?
+        var isSubmitting: Bool = false
 
         enum CodingKeys: String, CodingKey {
           case id, title, imgsrc, number, voted
@@ -144,12 +132,12 @@ extension ServerModels.Poll.PollItem: ListDiffable {
     }
 
     let itemsEqual = object.answers?.elementsEqual(self.answers ?? []) {
-        var result = $0.number == $1.number
-        result = result && ($0.id == $1.id)
-        result = result && ($0.title == $1.title)
-        result = result && ($0.imgsrc == $1.imgsrc)
-        result = result && ($0.voted == $1.voted)
-        result = result && ($0.isSubmitting == $1.isSubmitting)
+      var result = $0.number == $1.number
+      result = result && ($0.id == $1.id)
+      result = result && ($0.title == $1.title)
+      result = result && ($0.imgsrc == $1.imgsrc)
+      result = result && ($0.voted == $1.voted)
+      result = result && ($0.isSubmitting == $1.isSubmitting)
       return result
     } ?? true
 

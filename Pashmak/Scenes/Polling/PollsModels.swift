@@ -39,7 +39,7 @@ enum Polls {
 
   enum Vote {
 
-    typealias VoteSubmitState = FetchState<ServerModels.Poll.PollItem, Error>
+    typealias VoteSubmitState = FetchState<Any?, Error>
 
     struct Request {
       let isUnvote: Bool
@@ -48,15 +48,18 @@ enum Polls {
     }
     struct Response {
       let state: VoteSubmitState
+      let polls: [ServerModels.Poll.PollItem]
     }
     enum ViewModel {
       struct Loading {
+        let polls: [ServerModels.Poll.PollItem]
       }
       struct Failed {
         let message: String
+        let polls: [ServerModels.Poll.PollItem]
       }
       struct Success {
-        let poll: ServerModels.Poll.PollItem
+        let polls: [ServerModels.Poll.PollItem]
       }
     }
   }

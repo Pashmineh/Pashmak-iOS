@@ -47,20 +47,20 @@ class PollsPresenter: PollsPresentationLogic {
 
   func presentVote(response: Polls.Vote.Response) {
     let state = response.state
-
+    let polls = response.polls
     switch state {
     case .loading:
-      let viewModel = Polls.Vote.ViewModel.Loading()
+      let viewModel = Polls.Vote.ViewModel.Loading(polls: polls)
       viewController?.displayVoteLoading(viewModel: viewModel)
     case .failure(let error):
       var message = "خطا در عملیات!"
       if case APIError.invalidResponseCode(let status) = error {
         message = Texts.ServerErrors.random + "\n (\(status))"
       }
-      let viewModel = Polls.Vote.ViewModel.Failed(message: message)
+      let viewModel = Polls.Vote.ViewModel.Failed(message: message, polls: polls)
       viewController?.displayVoteFailed(viewModel: viewModel)
-    case .success(let poll):
-      let viewModel = Polls.Vote.ViewModel.Success(poll: poll)
+    case .success:
+      let viewModel = Polls.Vote.ViewModel.Success(polls: polls)
       viewController?.displayVoteSuccess(viewModel: viewModel)
     }
   }

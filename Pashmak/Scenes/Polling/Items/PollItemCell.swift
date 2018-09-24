@@ -78,29 +78,12 @@ class PollItemCell: UICollectionViewCell {
 
   func update() {
 
-    item?.itemChangedHandler = { [weak self] in
-      guard let self = self else {
-        return
-      }
-
-      self.updateValues()
-
+    if let item = self.item {
+      Log.trace("Cell Item: [\(item.title)], isSubmitting: [\(item.isSubmitting)]")
     }
 
-    updateValues()
-
-    if let imgSrc = item?.imgsrc, let imgURL = URL(string: imgSrc) {
-      self.itemImageView.kf.setImage(with: imgURL, placeholder: kImagePH, options: nil, progressBlock: nil, completionHandler: nil)
-    } else {
-      self.itemImageView.image = kImagePH
-    }
-    self.itemTitleLabel.text = self.item?.title ?? ""
-
-  }
-
-  private func updateValues() {
-    
     if self.item?.isSubmitting == true {
+      Log.trace("item is submitting:[\(self.item?.title ?? "")]")
       self.itemCard.alpha = 0.5
     } else {
       self.itemCard.alpha = 1.0
@@ -115,6 +98,13 @@ class PollItemCell: UICollectionViewCell {
     self.itemImageView.alpha = isVoted ? 1.0 : 0.75
     self.itemTitleLabel.textColor = isVoted ? #colorLiteral(red: 0.2509803922, green: 0.2509803922, blue: 0.2509803922, alpha: 1) : #colorLiteral(red: 0.3725490196, green: 0.3725490196, blue: 0.3725490196, alpha: 1)
     self.itemCard.backgroundColor = isVoted ? #colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9098039216, alpha: 1) : #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+
+    if let imgSrc = item?.imgsrc, let imgURL = URL(string: imgSrc) {
+      self.itemImageView.kf.setImage(with: imgURL, placeholder: kImagePH, options: nil, progressBlock: nil, completionHandler: nil)
+    } else {
+      self.itemImageView.image = kImagePH
+    }
+    self.itemTitleLabel.text = self.item?.title ?? ""
 
   }
 

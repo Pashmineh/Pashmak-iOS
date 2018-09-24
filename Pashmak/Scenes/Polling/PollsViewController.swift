@@ -178,24 +178,23 @@ extension PollsViewController: PollsDisplayLogic {
   }
 
   func displayVoteLoading(viewModel: Polls.Vote.ViewModel.Loading) {
+    let polls = viewModel.polls
+    self.displayedItems = polls
     self.adapter.performUpdates(animated: true, completion: nil)
-//    self.adapter.reloadData(completion: nil)
   }
 
   func displayVoteFailed(viewModel: Polls.Vote.ViewModel.Failed) {
     let message = viewModel.message
-    KVNProgress.showError(withStatus: message) {[weak self] in
-      guard let self = self else {
-        return
-      }
-      self.adapter.performUpdates(animated: true, completion: nil)
-    }
+    KVNProgress.showError(withStatus: message)
+    let polls = viewModel.polls
+    self.displayedItems = polls
+    self.adapter.performUpdates(animated: true, completion: nil)
   }
 
   func displayVoteSuccess(viewModel: Polls.Vote.ViewModel.Success) {
-//    self.adapter.performUpdates(animated: true, completion: nil)
-    let poll = viewModel.poll
-    self.adapter.reloadObjects([poll])
+    let polls = viewModel.polls
+    self.displayedItems = polls
+    self.adapter.performUpdates(animated: true, completion: nil)
   }
 
 }

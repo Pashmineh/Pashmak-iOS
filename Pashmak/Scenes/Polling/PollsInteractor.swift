@@ -19,12 +19,12 @@ protocol PollsBusinessLogic {
 }
 
 protocol PollsDataStore {
-  var polItems: [ServerModels.Poll.PollItem] { get set }
 }
 
 class PollsInteractor: PollsBusinessLogic, PollsDataStore {
   var presenter: PollsPresentationLogic?
-  var polItems: [ServerModels.Poll.PollItem] = []
+  var polls: [ServerModels.Poll.PollItem] = []
+  var pendingPollItems: [(UInt64, UInt64)] = []
 
   func populate(request: Polls.Populate.Request) {
     func sendLoading() {
@@ -44,11 +44,10 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
         guard let self = self else {
           return
         }
-        let polls = result.model
-        Async.main(after: 0.5) {
-          let response = Polls.Populate.Response(state: .success(polls))
-          self.presenter?.presentPopulate(response: response)
-        }
+        let polls = self.preparePolls(polls: result.model)
+        self.polls = polls
+        let response = Polls.Populate.Response(state: .success(polls))
+        self.presenter?.presentPopulate(response: response)
       }
       .catch { error in
         sendFailed(error)
@@ -56,23 +55,60 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
 
   }
 
+  private func preparePolls(polls: [ServerModels.Poll.PollItem]) -> [ServerModels.Poll.PollItem] {
+
+    for poll in polls {
+      let pendingItems: [UInt64] = pendingPollItems.compactMap {
+        guard $0.0 == poll.id else {
+          return nil
+        }
+        return $0.1
+      }
+
+      var items: [ServerModels.Poll.PollItem.PollAnswer] = []
+
+      poll.answers?.forEach {
+        var item = $0
+        item.isSubmitting = pendingItems.contains($0.id)
+        items.append(item)
+      }
+
+      poll.answers = items
+    }
+
+    return polls
+
+  }
+
   func vote(request: Polls.Vote.Request) {
 
     let poll = request.poll
-    let item = request.item
+    var item = request.item
     let isUnvote = request.isUnvote
 
+    let isNotPending = pendingPollItems.filter { $0.0 == poll.id && $0.1 == item.id }.isEmpty
+    guard isNotPending else {
+      Log.warning("Item is already pending for submit!")
+      return
+    }
+
+    pendingPollItems.append((poll.id, item.id))
+
     func sendLoading() {
-      let response = Polls.Vote.Response(state: .loading)
+      let polls = self.preparePolls(polls: self.polls)
+      let response = Polls.Vote.Response(state: .loading, polls: polls)
       presenter?.presentVote(response: response)
     }
 
+    func removeFromPending() {
+      self.pendingPollItems.removeAll { $0.0 == poll.id && $0.1 == item.id }
+    }
+
     func sendFailure(_ error: Error) {
-      Async.main(after: 1.0) {
-        let response = Polls.Vote.Response(state: .failure(error))
-        item.isSubmitting = false
-        self.presenter?.presentVote(response: response)
-      }
+      removeFromPending()
+      let polls = preparePolls(polls: self.polls)
+      let response = Polls.Vote.Response(state: .failure(error), polls: polls)
+      self.presenter?.presentVote(response: response)
     }
 
     guard poll.canVote || isUnvote else {
@@ -80,7 +116,6 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
       return
     }
 
-    item.isSubmitting = true
     sendLoading()
 
     let vote = ServerModels.Poll.Vote(pollID: poll.id, itemID: item.id)
@@ -90,9 +125,10 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
         guard let self = self else {
           return
         }
-        item.voted = !isUnvote
-        item.isSubmitting = false
-        let response = Polls.Vote.Response(state: Polls.Vote.VoteSubmitState.success(poll))
+        removeFromPending()
+        let newPolls = self.preparePolls(polls: result.model)
+        self.polls = newPolls
+        let response = Polls.Vote.Response(state: Polls.Vote.VoteSubmitState.success(nil), polls: newPolls)
         self.presenter?.presentVote(response: response)
       }
       .catch { error in
