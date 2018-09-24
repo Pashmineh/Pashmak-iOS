@@ -59,10 +59,10 @@ class PollFooterCell: UICollectionReusableView {
   private func update() {
     if let item = pollItem {
       item.answers?.forEach {
-        $0.itemChnagedHandler = { [weak self] in
+        $0.pollItemChangeHandler = { [weak self] in
           guard let self = self else {
             return
-          }          
+          }
           self.updateValues()
         }
       }

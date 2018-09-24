@@ -28,7 +28,7 @@ target 'Pashmak' do
   pod 'Kingfisher'
   pod 'SwiftDate'
   pod 'ParticlesLoadingView'
-  
+  pod 'RxSwift'  
 inhibit_all_warnings!
 
 

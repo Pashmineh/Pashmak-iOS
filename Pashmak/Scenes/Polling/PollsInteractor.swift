@@ -71,12 +71,11 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
       Async.main(after: 1.0) {
         let response = Polls.Vote.Response(state: .failure(error))
         item.isSubmitting = false
-        item.voted = !(item.voted == true)
         self.presenter?.presentVote(response: response)
       }
     }
 
-    guard poll.canVote else {
+    guard poll.canVote || isUnvote else {
       Log.warning("Cannot vote at the moment.")
       return
     }
@@ -91,7 +90,8 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
         guard let self = self else {
           return
         }
-        item.voted = !(item.voted ?? false)
+        item.voted = !isUnvote
+        item.isSubmitting = false
         let response = Polls.Vote.Response(state: Polls.Vote.VoteSubmitState.success(poll))
         self.presenter?.presentVote(response: response)
       }

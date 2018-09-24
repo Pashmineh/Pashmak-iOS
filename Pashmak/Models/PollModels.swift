@@ -7,6 +7,7 @@
 //
 
 import IGListKit
+import RxSwift
 /*
 [
   {
@@ -65,13 +66,16 @@ extension ServerModels {
         var number: UInt?
         var voted: Bool? {
           didSet {
-            itemChnagedHandler?()
+            itemChangedHandler?()
+            pollItemChangeHandler?()
           }
         }
-        var itemChnagedHandler: ButtonAction?
+        var itemChangedHandler: ButtonAction?
+        var pollItemChangeHandler: ButtonAction?
         var isSubmitting: Bool = false {
           didSet {
-            itemChnagedHandler?()
+            itemChangedHandler?()
+            pollItemChangeHandler?()
           }
         }
 
