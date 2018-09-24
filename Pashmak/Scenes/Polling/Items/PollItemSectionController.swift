@@ -51,11 +51,11 @@ class PollItemSectionConttroller: ListSectionController {
   }
 
   override func didUpdate(to object: Any) {
-    guard let object = object as? ServerModels.Poll.PollItem else {
+    guard let object = object as? DiffableBox<ServerModels.Poll.PollItem> else {
       return
     }
 
-    self.item = object
+    self.item = object.value
   }
 
   override func didSelectItem(at index: Int) {

@@ -52,14 +52,14 @@ enum Polls {
     }
     enum ViewModel {
       struct Loading {
-        let polls: [ServerModels.Poll.PollItem]
+        let polls: [ListDiffable]
       }
       struct Failed {
         let message: String
-        let polls: [ServerModels.Poll.PollItem]
+        let polls: [ListDiffable]
       }
       struct Success {
-        let polls: [ServerModels.Poll.PollItem]
+        let polls: [ListDiffable]
       }
     }
   }

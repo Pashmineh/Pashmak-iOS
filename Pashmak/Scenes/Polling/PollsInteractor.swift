@@ -57,7 +57,10 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
 
   private func preparePolls(polls: [ServerModels.Poll.PollItem]) -> [ServerModels.Poll.PollItem] {
 
+    var result: [ServerModels.Poll.PollItem] = []
+
     for poll in polls {
+      var poll = poll
       let pendingItems: [UInt64] = pendingPollItems.compactMap {
         guard $0.0 == poll.id else {
           return nil
@@ -74,9 +77,10 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
       }
 
       poll.answers = items
+      result.append(poll)
     }
 
-    return polls
+    return result
 
   }
 

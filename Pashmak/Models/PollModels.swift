@@ -58,7 +58,7 @@ import RxSwift
 extension ServerModels {
 
   enum Poll {
-    class PollItem: ServerModel {
+    struct PollItem: ServerModel {
       struct PollAnswer: ServerModel {
         var id: UInt64 = .random(in: 1_000...100_000)
         var title: String = ""
@@ -69,6 +69,15 @@ extension ServerModels {
 
         enum CodingKeys: String, CodingKey {
           case id, title, imgsrc, number, voted
+        }
+
+        static func == (lhs: PollAnswer, rhs: PollAnswer) -> Bool {
+          return lhs.id == rhs.id
+            && lhs.title == rhs.title
+            && lhs.imgsrc == rhs.imgsrc
+            && lhs.number == rhs.number
+            && lhs.voted == rhs.voted
+            && lhs.isSubmitting == rhs.isSubmitting
         }
       }
 
@@ -120,35 +129,24 @@ extension ServerModels {
 
 }
 
-extension ServerModels.Poll.PollItem: ListDiffable {
+extension ServerModels.Poll.PollItem: Diffable {
 
-  func diffIdentifier() -> NSObjectProtocol {
-    return self.id as NSObjectProtocol
+  var diffIdentifier: String {
+    return "\(self.id)"
   }
 
-  func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-    guard let object = object as? ServerModels.Poll.PollItem else {
-      return false
-    }
+  static func == (lhs: ServerModels.Poll.PollItem, rhs: ServerModels.Poll.PollItem) -> Bool {
+    return lhs.id == rhs.id
+      && lhs.isLoading == rhs.isLoading
+      && lhs.question == rhs.question
+      && lhs.anonymous == rhs.anonymous
+      && lhs.imgsrc == rhs.imgsrc
+      && lhs.answerLimit == rhs.answerLimit
+      && (lhs.answers?.elementsEqual(rhs.answers ?? [], by: ==) ?? true)
+  }
 
-    let itemsEqual = object.answers?.elementsEqual(self.answers ?? []) {
-      var result = $0.number == $1.number
-      result = result && ($0.id == $1.id)
-      result = result && ($0.title == $1.title)
-      result = result && ($0.imgsrc == $1.imgsrc)
-      result = result && ($0.voted == $1.voted)
-      result = result && ($0.isSubmitting == $1.isSubmitting)
-      return result
-    } ?? true
-
-    return object.id == self.id
-      && object.question == self.question
-      && object.answerLimit == self.answerLimit
-      && object.anonymous == self.anonymous
-      && object.imgsrc == self.imgsrc
-      && object.isLoading == self.isLoading
-      && itemsEqual
-
+  var listDiffable: ListDiffable {
+    return DiffableBox(value: self, identifier: self.id as NSObjectProtocol, equal: ==)
   }
 
 }

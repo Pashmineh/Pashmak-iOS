@@ -207,7 +207,7 @@ extension PollsViewController: ListAdapterDataSource {
 
   func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
     switch object {
-    case is ServerModels.Poll.PollItem:
+    case is DiffableBox<ServerModels.Poll.PollItem>:
       return PollItemSectionConttroller()
     default:
       fatalError("Unknown object for section controller: [\(object)]")

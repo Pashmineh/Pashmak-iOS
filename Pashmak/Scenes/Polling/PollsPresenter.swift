@@ -28,7 +28,7 @@ class PollsPresenter: PollsPresentationLogic {
     case .loading:
       var items: [ListDiffable] = []
       (0...2).forEach { _ in
-        items.append(ServerModels.Poll.PollItem())
+        items.append(ServerModels.Poll.PollItem().listDiffable)
       }
       let viewModel = Polls.Populate.ViewModel.Loading(items: items)
       viewController?.displayPopluateLoading(viewModel: viewModel)
@@ -40,14 +40,15 @@ class PollsPresenter: PollsPresentationLogic {
       let viewModel = Polls.Populate.ViewModel.Failed(message: message)
       viewController?.displayPopluateFailed(viewModel: viewModel)
     case .success(let polls):
-      let viewModel = Polls.Populate.ViewModel.Success(items: polls)
+      let listPolls = polls.map { $0.listDiffable }
+      let viewModel = Polls.Populate.ViewModel.Success(items: listPolls)
       viewController?.displayPopluateSucces(viewModel: viewModel)
     }
   }
 
   func presentVote(response: Polls.Vote.Response) {
     let state = response.state
-    let polls = response.polls
+    let polls = response.polls.map { $0.listDiffable }
     switch state {
     case .loading:
       let viewModel = Polls.Vote.ViewModel.Loading(polls: polls)
