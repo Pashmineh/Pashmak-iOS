@@ -50,7 +50,7 @@ struct HTTPRequest {
     result.prepareAcceptHeader(accept: self.accept)
     result.prepareContentTypeHeader(contentType: self.contentType)
 
-    if self.httpMethod == HTTPMethod.GET || self.httpMethod == HTTPMethod.DELETE {
+    if self.httpMethod == HTTPMethod.GET /*|| self.httpMethod == HTTPMethod.DELETE*/ {
       if let params = self.parameters {
         result.prepareURLParameters(params: params, url: url)
       }

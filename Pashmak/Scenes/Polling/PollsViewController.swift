@@ -18,9 +18,15 @@ import Material
 import UIKit
 
 protocol PollsDisplayLogic: AnyObject {
+
   func displayPopluateLoading(viewModel: Polls.Populate.ViewModel.Loading)
   func displayPopluateFailed(viewModel: Polls.Populate.ViewModel.Failed)
   func displayPopluateSucces(viewModel: Polls.Populate.ViewModel.Success)
+
+  func displayVoteLoading(viewModel: Polls.Vote.ViewModel.Loading)
+  func displayVoteFailed(viewModel: Polls.Vote.ViewModel.Failed)
+  func displayVoteSuccess(viewModel: Polls.Vote.ViewModel.Success)
+
 }
 
 class PollsViewController: UIViewController {
@@ -81,9 +87,13 @@ class PollsViewController: UIViewController {
     return refCon
   }()
 
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
   override func viewDidLoad() {
     super.viewDidLoad()
     prepareUI()
+    prepareObservers()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +101,10 @@ class PollsViewController: UIViewController {
     if displayedItems.isEmpty {
       populate()
     }
+  }
+
+  private func prepareObservers() {
+    NotificationCenter.default.addObserver(self, selector: #selector(self.populate), name: Notification.Name.Pashmak.voteUpdateReceived, object: nil)
   }
 
   private func prepareUI() {
@@ -134,6 +148,12 @@ class PollsViewController: UIViewController {
     interactor?.populate(request: request)
   }
 
+  func userSelected(_ item: ServerModels.Poll.PollItem.PollAnswer, on poll: ServerModels.Poll.PollItem) {
+    let isUnvote = (item.voted == true)
+    let request = Polls.Vote.Request(isUnvote: isUnvote, item: item, poll: poll)
+    interactor?.vote(request: request)
+  }
+
 }
 
 extension PollsViewController: PollsDisplayLogic {
@@ -164,6 +184,27 @@ extension PollsViewController: PollsDisplayLogic {
     self.displayedItems = items
     self.adapter.performUpdates(animated: true, completion: nil)
   }
+
+  func displayVoteLoading(viewModel: Polls.Vote.ViewModel.Loading) {
+    let polls = viewModel.polls
+    self.displayedItems = polls
+    self.adapter.performUpdates(animated: false, completion: nil)
+  }
+
+  func displayVoteFailed(viewModel: Polls.Vote.ViewModel.Failed) {
+    let message = viewModel.message
+    KVNProgress.showError(withStatus: message)
+    let polls = viewModel.polls
+    self.displayedItems = polls
+    self.adapter.performUpdates(animated: false, completion: nil)
+  }
+
+  func displayVoteSuccess(viewModel: Polls.Vote.ViewModel.Success) {
+    let polls = viewModel.polls
+    self.displayedItems = polls
+    self.adapter.performUpdates(animated: false, completion: nil)
+  }
+
 }
 
 extension PollsViewController: ListAdapterDataSource {
@@ -174,7 +215,7 @@ extension PollsViewController: ListAdapterDataSource {
 
   func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
     switch object {
-    case is ServerModels.Poll.PollItem:
+    case is DiffableBox<ServerModels.Poll.PollItem>:
       return PollItemSectionConttroller()
     default:
       fatalError("Unknown object for section controller: [\(object)]")

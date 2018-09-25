@@ -19,7 +19,7 @@ class PollItemSectionConttroller: ListSectionController {
   }
 
   override func numberOfItems() -> Int {
-    return 3
+    return item?.isLoading != true ? item?.answers?.count ?? 0 : 3
   }
 
   override func sizeForItem(at index: Int) -> CGSize {
@@ -31,23 +31,45 @@ class PollItemSectionConttroller: ListSectionController {
   }
 
   var cellHeight: CGFloat {
-    return 64.0
+    return 80.0
   }
 
   override func cellForItem(at index: Int) -> UICollectionViewCell {
     guard let cell = collectionContext?.dequeueReusableCell(withNibName: "PollItemCell", bundle: nil, for: self, at: index) as? PollItemCell else {
       fatalError("Could nto dequeue [PollItemCell]")
     }
-    cell.item = item
+    cell.totalVotes = item?.totalVote
+
+    if item?.isLoading == true {
+      cell.isLoading = true
+      cell.item = nil
+
+    } else {
+      let answer = item?.answers?[index]
+      cell.item = answer
+      cell.isLoading = false
+
+    }
+
     return cell
   }
 
   override func didUpdate(to object: Any) {
-    guard let object = object as? ServerModels.Poll.PollItem else {
+    guard let object = object as? DiffableBox<ServerModels.Poll.PollItem> else {
       return
     }
 
-    self.item = object
+    self.item = object.value
+  }
+
+  override func didSelectItem(at index: Int) {
+    guard let poll = self.item, let item = poll.answers?[index], poll.isLoading != true, item.isSubmitting != true else {
+      Log.warning("Could not find poll item or item is loading!")
+      return
+    }
+
+    (viewController as? PollsViewController)?.userSelected(item, on: poll)
+
   }
 
 }
@@ -70,7 +92,7 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
       let height = max(50.0, (questionHeight + 8.0 + 16.0))
       return CGSize(width: width, height: height)
     case UICollectionView.elementKindSectionFooter:
-      return .zero
+      return CGSize(width: cellWidth, height: 72.0)
     default:
       fatalError("Unknown element kind for size: [\(elementKind)]")
     }
@@ -89,7 +111,11 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
       return header
 
     case UICollectionView.elementKindSectionFooter:
-      return UICollectionReusableView()
+      guard let footer = collectionContext?.dequeueReusableSupplementaryView(ofKind: elementKind, for: self, nibName: "PollFooterCell", bundle: nil, at: index) as? PollFooterCell else {
+        fatalError("Could not dequee [PollFooterCell]")
+      }
+      footer.pollItem = self.item
+      return footer
     default:
       fatalError("Unknown element kind for view: [\(elementKind)]")
     }

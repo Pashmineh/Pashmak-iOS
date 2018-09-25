@@ -13,6 +13,7 @@ extension Notification.Name {
   enum Pashmak {
     static let UpdateReceievd: Notification.Name = Notification.Name("UpdateReceived")
     static let checkinUpdated: Notification.Name = Notification.Name("ChekinUpdated")
+    static let voteUpdateReceived: Notification.Name = Notification.Name("VoteUpdated")
   }
 
 }

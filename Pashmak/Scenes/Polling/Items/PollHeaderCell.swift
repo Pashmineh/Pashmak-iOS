@@ -18,7 +18,7 @@ class PollHeaderCell: UICollectionReusableView {
   var isLoading: Bool = false {
     didSet {
       if isLoading {
-        self.questionLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
+        self.questionLabel.transform = CGAffineTransform(scaleX: -1, y: 1).translatedBy(x: 0, y: 8.0)
         self.card.startPashmakSkeleton()
 
       } else {

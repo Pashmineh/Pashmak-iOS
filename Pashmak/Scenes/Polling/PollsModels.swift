@@ -36,4 +36,31 @@ enum Polls {
       }
     }
   }
+
+  enum Vote {
+
+    typealias VoteSubmitState = FetchState<Any?, Error>
+
+    struct Request {
+      let isUnvote: Bool
+      let item: ServerModels.Poll.PollItem.PollAnswer
+      let poll: ServerModels.Poll.PollItem
+    }
+    struct Response {
+      let state: VoteSubmitState
+      let polls: [ServerModels.Poll.PollItem]
+    }
+    enum ViewModel {
+      struct Loading {
+        let polls: [ListDiffable]
+      }
+      struct Failed {
+        let message: String
+        let polls: [ListDiffable]
+      }
+      struct Success {
+        let polls: [ListDiffable]
+      }
+    }
+  }
 }

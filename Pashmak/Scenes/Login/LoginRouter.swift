@@ -65,7 +65,8 @@ class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing {
   }
 
   private func navigateToHome(source: LoginViewController, destination: HomeViewController) {
-    source.navigationController?.setViewControllers([destination], animated: true)
+    let mainTab = Storyboards.Main.instantiateViewController(withIdentifier: StoryboardsIDs.Main.MainTabbar)
+    source.navigationController?.setViewControllers([mainTab], animated: true)
   }
 
 }

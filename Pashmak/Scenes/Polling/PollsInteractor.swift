@@ -10,18 +10,21 @@
 //  see http://clean-swift.com
 //
 
+import Async
 import UIKit
 
 protocol PollsBusinessLogic {
   func populate(request: Polls.Populate.Request)
+  func vote(request: Polls.Vote.Request)
 }
 
 protocol PollsDataStore {
-
 }
 
 class PollsInteractor: PollsBusinessLogic, PollsDataStore {
   var presenter: PollsPresentationLogic?
+  var polls: [ServerModels.Poll.PollItem] = []
+  var pendingPollItems: [(UInt64, UInt64)] = []
 
   func populate(request: Polls.Populate.Request) {
     func sendLoading() {
@@ -41,7 +44,8 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
         guard let self = self else {
           return
         }
-        let polls = result.model
+        let polls = self.preparePolls(polls: result.model)
+        self.polls = polls
         let response = Polls.Populate.Response(state: .success(polls))
         self.presenter?.presentPopulate(response: response)
       }
@@ -50,4 +54,91 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
       }
 
   }
+
+  private func preparePolls(polls: [ServerModels.Poll.PollItem]) -> [ServerModels.Poll.PollItem] {
+
+    var result: [ServerModels.Poll.PollItem] = []
+
+    for poll in polls {
+      var poll = poll
+      let pendingItems: [UInt64] = pendingPollItems.compactMap {
+        guard $0.0 == poll.id else {
+          return nil
+        }
+        return $0.1
+      }
+
+      var items: [ServerModels.Poll.PollItem.PollAnswer] = []
+
+      poll.answers?.forEach {
+        var item = $0
+        item.isSubmitting = pendingItems.contains($0.id)
+        items.append(item)
+      }
+
+      poll.answers = items.sorted { $0.id < $1.id }
+      result.append(poll)
+    }
+
+    return result
+
+  }
+
+  func vote(request: Polls.Vote.Request) {
+
+    let poll = request.poll
+    var item = request.item
+    let isUnvote = request.isUnvote
+
+    let isNotPending = pendingPollItems.filter { $0.0 == poll.id && $0.1 == item.id }.isEmpty
+    guard isNotPending else {
+      Log.warning("Item is already pending for submit!")
+      return
+    }
+
+    func sendLoading() {
+      let polls = self.preparePolls(polls: self.polls)
+      let response = Polls.Vote.Response(state: .loading, polls: polls)
+      presenter?.presentVote(response: response)
+    }
+
+    func removeFromPending() {
+      self.pendingPollItems.removeAll { $0.0 == poll.id && $0.1 == item.id }
+    }
+
+    func sendFailure(_ error: Error) {
+      removeFromPending()
+      let polls = preparePolls(polls: self.polls)
+      let response = Polls.Vote.Response(state: .failure(error), polls: polls)
+      self.presenter?.presentVote(response: response)
+    }
+
+    guard poll.canVote || isUnvote else {
+      Log.warning("Cannot vote at the moment.")
+      return
+    }
+
+    pendingPollItems.append((poll.id, item.id))
+
+    sendLoading()
+
+    let vote = ServerModels.Poll.Vote(pollID: poll.id, itemID: item.id)
+    PashmakServer.perform(request: ServerRequest.Polls.vote(vote, isUnvote: isUnvote), validResponseCodes: [200, 201])
+      .done { [weak self] (result: ServerData<[ServerModels.Poll.PollItem]>) in
+        _ = result
+        guard let self = self else {
+          return
+        }
+        removeFromPending()
+        let newPolls = self.preparePolls(polls: result.model)
+        self.polls = newPolls
+        let response = Polls.Vote.Response(state: Polls.Vote.VoteSubmitState.success(nil), polls: newPolls)
+        self.presenter?.presentVote(response: response)
+      }
+      .catch { error in
+        sendFailure(error)
+      }
+
+  }
+
 }

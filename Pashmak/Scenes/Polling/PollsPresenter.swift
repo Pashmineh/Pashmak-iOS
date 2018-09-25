@@ -14,7 +14,8 @@ import IGListKit
 import UIKit
 
 protocol PollsPresentationLogic {
-func presentPopulate(response: Polls.Populate.Response)
+  func presentPopulate(response: Polls.Populate.Response)
+  func presentVote(response: Polls.Vote.Response)
 }
 
 class PollsPresenter: PollsPresentationLogic {
@@ -26,8 +27,8 @@ class PollsPresenter: PollsPresentationLogic {
     switch state {
     case .loading:
       var items: [ListDiffable] = []
-      (0...4).forEach { _ in
-        items.append(ServerModels.Poll.PollItem())
+      (0...2).forEach { _ in
+        items.append(ServerModels.Poll.PollItem().listDiffable)
       }
       let viewModel = Polls.Populate.ViewModel.Loading(items: items)
       viewController?.displayPopluateLoading(viewModel: viewModel)
@@ -39,8 +40,29 @@ class PollsPresenter: PollsPresentationLogic {
       let viewModel = Polls.Populate.ViewModel.Failed(message: message)
       viewController?.displayPopluateFailed(viewModel: viewModel)
     case .success(let polls):
-      let viewModel = Polls.Populate.ViewModel.Success(items: polls)
+      let listPolls = polls.map { $0.listDiffable }
+      let viewModel = Polls.Populate.ViewModel.Success(items: listPolls)
       viewController?.displayPopluateSucces(viewModel: viewModel)
+    }
+  }
+
+  func presentVote(response: Polls.Vote.Response) {
+    let state = response.state
+    let polls = response.polls.map { $0.listDiffable }
+    switch state {
+    case .loading:
+      let viewModel = Polls.Vote.ViewModel.Loading(polls: polls)
+      viewController?.displayVoteLoading(viewModel: viewModel)
+    case .failure(let error):
+      var message = "خطا در عملیات!"
+      if case APIError.invalidResponseCode(let status) = error {
+        message = Texts.ServerErrors.random + "\n (\(status))"
+      }
+      let viewModel = Polls.Vote.ViewModel.Failed(message: message, polls: polls)
+      viewController?.displayVoteFailed(viewModel: viewModel)
+    case .success:
+      let viewModel = Polls.Vote.ViewModel.Success(polls: polls)
+      viewController?.displayVoteSuccess(viewModel: viewModel)
     }
   }
 }

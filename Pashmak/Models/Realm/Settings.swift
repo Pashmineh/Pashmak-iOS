@@ -109,15 +109,14 @@ extension RealmProvider {
     }
 
     private func updatePushOnServer(token: String) {
-      guard lastUpdatedPush != token else {
-        Log.trace("Token is already uptodate")
-        return
-      }
+//      guard lastUpdatedPush != token else {
+//        Log.trace("Token is already uptodate")
+//        return
+//      }
 
       PashmakServer.perform(request: ServerRequest.Authentication.updateToken(token: token), validResponseCodes: [200, 201])
         .done { (result: ServerData<ServerModels.EmptyServerModel>) in
-          let model = result.model
-          Log.trace(model)
+          _ = result.model
           self.updateLastPushToken(token: token)
         }
         .catch { error in

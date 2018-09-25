@@ -149,11 +149,33 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     Settings.current.update(pushToken: token)
     print("Token: [\(token)]")
   }
+//
+//  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//    Log.trace("Got remote norification.\n[\(userInfo)]")
+//    completionHandler(.newData)
+//  }
 
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//    Log.trace("Notification receivd:\n\(notification.request.content.body)")
-    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.UpdateReceievd, object: nil)
-    completionHandler([.alert, .badge, .sound])
+
+    if notification.request.content.body.isEmpty {
+      Log.trace("Empty notification Received.")
+      switch notification.request.content.title {
+      case "vote", "Vote":
+        handleVoteNotif()
+      default:
+        Log.trace("Unknwon title for empty notification: [\(notification.request.content.title)]")
+      }
+    } else {
+      Log.trace("Notification receivd:\n\(notification.request.content.body)")
+      NotificationCenter.default.post(name: NSNotification.Name.Pashmak.UpdateReceievd, object: nil)
+      completionHandler([.alert, .badge, .sound])
+    }
+
+  }
+
+  private func handleVoteNotif() {
+    Log.trace("Vote notification received.")
+    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.voteUpdateReceived, object: nil)
   }
 
 }
@@ -169,7 +191,7 @@ extension AppDelegate: CLLocationManagerDelegate {
     print("Entered region: \(region.identifier)")
 
     guard !Checkin.checkedInToday else {
-      Log.trace("Already checked in today, no need for beacon checkin!")
+//      Log.trace("Already checked in today, no need for beacon checkin!")
       return
     }
 
