@@ -32,15 +32,15 @@
                                 <constraint firstAttribute="height" constant="1" id="ZMR-rb-ImE"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollItemsLeft" translatesAutoresizingMaskIntoConstraints="NO" id="j2x-96-a78">
-                            <rect key="frame" x="271" y="27" width="13" height="12"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollVotesLeft" translatesAutoresizingMaskIntoConstraints="NO" id="j2x-96-a78">
+                            <rect key="frame" x="275" y="27" width="9" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="12" id="Qsx-0K-Rf1"/>
-                                <constraint firstAttribute="width" constant="13" id="l0R-F5-Ik1"/>
+                                <constraint firstAttribute="width" constant="9" id="l0R-F5-Ik1"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="آراء باقی مانده شما: ۲ رای" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFp-z2-Gb1">
-                            <rect key="frame" x="143" y="24" width="120" height="18"/>
+                            <rect key="frame" x="147" y="24" width="120" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="hGA-iZ-6li"/>
                                 <constraint firstAttribute="width" constant="120" id="l4u-47-RbB"/>
@@ -52,15 +52,15 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollCastCount" translatesAutoresizingMaskIntoConstraints="NO" id="QzJ-WL-rDL">
-                            <rect key="frame" x="272" y="49" width="11" height="10"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollCountIcon" translatesAutoresizingMaskIntoConstraints="NO" id="QzJ-WL-rDL">
+                            <rect key="frame" x="274" y="49" width="11" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="11" id="PrS-Qd-nx5"/>
-                                <constraint firstAttribute="height" constant="10" id="sNS-t0-KKi"/>
+                                <constraint firstAttribute="height" constant="12" id="sNS-t0-KKi"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="آراء اخذ شده: ۱۲ نفر" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPo-43-Ohx">
-                            <rect key="frame" x="123" y="45" width="140" height="18"/>
+                            <rect key="frame" x="125" y="46" width="140" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="140" id="kvf-9u-PUI"/>
                                 <constraint firstAttribute="height" constant="18" id="v0Z-9e-xQe"/>
@@ -72,11 +72,11 @@
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollExpirationTime" translatesAutoresizingMaskIntoConstraints="NO" id="1I0-9D-34W">
-                            <rect key="frame" x="125" y="28" width="10" height="10"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollExpirationDate" translatesAutoresizingMaskIntoConstraints="NO" id="1I0-9D-34W">
+                            <rect key="frame" x="125" y="27" width="9" height="12"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="10" id="jvJ-zP-PGZ"/>
-                                <constraint firstAttribute="height" constant="10" id="xhN-Gc-Chn"/>
+                                <constraint firstAttribute="width" constant="9" id="jvJ-zP-PGZ"/>
+                                <constraint firstAttribute="height" constant="12" id="xhN-Gc-Chn"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="زمان بقی مانده: ۱۰ ساعت" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0J-SA-y0P">
@@ -130,9 +130,9 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="pollCastCount" width="11" height="10"/>
-        <image name="pollExpirationTime" width="10" height="10"/>
-        <image name="pollItemsLeft" width="13" height="12"/>
+        <image name="pollCountIcon" width="11" height="12"/>
+        <image name="pollExpirationDate" width="9" height="12"/>
+        <image name="pollVotesLeft" width="9" height="12"/>
         <namedColor name="Grey">
             <color red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

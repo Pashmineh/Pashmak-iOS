@@ -22,6 +22,7 @@ enum URLPath {
   case authenticate
   case home
   case checkin
+  case checkins
   case updatePush
   case messages
   case polls
@@ -38,6 +39,8 @@ enum URLPath {
       result = "home"
     case .checkin:
       result = "checkin"
+    case .checkins:
+      result = "checkins"
     case .updatePush:
       result = "token"
     case .messages:

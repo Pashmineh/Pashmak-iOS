@@ -41,7 +41,7 @@ protocol HomeDisplayLogic: AnyObject {
 class HomeViewController: UIViewController {
   var interactor: HomeBusinessLogic?
   var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
-
+  var isPopulated: Bool = false
   var displayedItems: [ListDiffable] = []
 
   // MARK: Object lifecycle
@@ -131,7 +131,7 @@ class HomeViewController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    if self.displayedItems.isEmpty {
+    if !isPopulated {
       self.populate()
     }
 
@@ -320,6 +320,7 @@ extension HomeViewController: HomeDisplayLogic {
   }
 
   func displayPopulateSuccess(viewModel: Home.Populate.ViewModel.Success) {
+    isPopulated = true
     let items = viewModel.items
     let profile = viewModel.profile
     let needsCheckin = viewModel.needsCheckIn

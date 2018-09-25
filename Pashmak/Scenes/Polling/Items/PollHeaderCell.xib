@@ -26,7 +26,7 @@
                     <rect key="frame" x="10" y="8" width="300" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0Vz-3j-9Qa">
-                            <rect key="frame" x="16" y="8" width="240" height="26"/>
+                            <rect key="frame" x="16" y="8" width="236" height="26"/>
                             <fontDescription key="fontDescription" name="IRANSansDNFaNum" family="IRANSansDNFaNum" pointSize="16"/>
                             <color key="textColor" name="DarkText"/>
                             <nil key="highlightedColor"/>
@@ -35,17 +35,17 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollIcon" translatesAutoresizingMaskIntoConstraints="NO" id="a9P-Kr-sqa">
-                            <rect key="frame" x="264" y="12" width="24" height="22"/>
+                            <rect key="frame" x="260" y="8" width="28" height="29"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="24" id="VZt-2A-hFm"/>
-                                <constraint firstAttribute="height" constant="22" id="sg0-J9-Z7N"/>
+                                <constraint firstAttribute="width" constant="28" id="VZt-2A-hFm"/>
+                                <constraint firstAttribute="height" constant="29" id="sg0-J9-Z7N"/>
                             </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="0Vz-3j-9Qa" firstAttribute="leading" secondItem="JxU-FU-LKC" secondAttribute="leading" constant="16" id="0Pi-az-eft"/>
-                        <constraint firstItem="a9P-Kr-sqa" firstAttribute="top" secondItem="JxU-FU-LKC" secondAttribute="top" constant="12" id="BdN-eY-4jc"/>
+                        <constraint firstItem="a9P-Kr-sqa" firstAttribute="top" secondItem="JxU-FU-LKC" secondAttribute="top" constant="8" id="BdN-eY-4jc"/>
                         <constraint firstItem="a9P-Kr-sqa" firstAttribute="leading" secondItem="0Vz-3j-9Qa" secondAttribute="trailing" constant="8" id="TqB-IJ-1UE"/>
                         <constraint firstAttribute="bottom" secondItem="0Vz-3j-9Qa" secondAttribute="bottom" constant="16" id="Wwr-ck-dWg"/>
                         <constraint firstAttribute="trailing" secondItem="a9P-Kr-sqa" secondAttribute="trailing" constant="12" id="yTE-yf-Vqc"/>
@@ -68,7 +68,7 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="pollIcon" width="24" height="22"/>
+        <image name="pollIcon" width="28" height="29"/>
         <namedColor name="DarkText">
             <color red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

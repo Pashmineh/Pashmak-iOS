@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func prepareUI() {
-    UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.farsiFont(.light, size: 11.0)], for: [])
+    UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.farsiFont(.light, size: 10.0)], for: [])
   }
 
   func preparePush(_ application: UIApplication = .shared) {
