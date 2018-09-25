@@ -33,14 +33,14 @@
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollVotesLeft" translatesAutoresizingMaskIntoConstraints="NO" id="j2x-96-a78">
-                            <rect key="frame" x="275" y="27" width="9" height="12"/>
+                            <rect key="frame" x="272" y="25" width="12" height="15"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="12" id="Qsx-0K-Rf1"/>
-                                <constraint firstAttribute="width" constant="9" id="l0R-F5-Ik1"/>
+                                <constraint firstAttribute="height" constant="15" id="Qsx-0K-Rf1"/>
+                                <constraint firstAttribute="width" constant="12" id="l0R-F5-Ik1"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="آراء باقی مانده شما: ۲ رای" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFp-z2-Gb1">
-                            <rect key="frame" x="147" y="24" width="120" height="18"/>
+                            <rect key="frame" x="144" y="23.5" width="120" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="hGA-iZ-6li"/>
                                 <constraint firstAttribute="width" constant="120" id="l4u-47-RbB"/>
@@ -53,14 +53,14 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollCountIcon" translatesAutoresizingMaskIntoConstraints="NO" id="QzJ-WL-rDL">
-                            <rect key="frame" x="274" y="49" width="11" height="12"/>
+                            <rect key="frame" x="271" y="48" width="14" height="15"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="11" id="PrS-Qd-nx5"/>
-                                <constraint firstAttribute="height" constant="12" id="sNS-t0-KKi"/>
+                                <constraint firstAttribute="width" constant="14" id="PrS-Qd-nx5"/>
+                                <constraint firstAttribute="height" constant="15" id="sNS-t0-KKi"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="آراء اخذ شده: ۱۲ نفر" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPo-43-Ohx">
-                            <rect key="frame" x="125" y="46" width="140" height="18"/>
+                            <rect key="frame" x="122" y="46.5" width="140" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="140" id="kvf-9u-PUI"/>
                                 <constraint firstAttribute="height" constant="18" id="v0Z-9e-xQe"/>
@@ -73,14 +73,14 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollExpirationDate" translatesAutoresizingMaskIntoConstraints="NO" id="1I0-9D-34W">
-                            <rect key="frame" x="125" y="27" width="9" height="12"/>
+                            <rect key="frame" x="125" y="25" width="12" height="15"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="9" id="jvJ-zP-PGZ"/>
-                                <constraint firstAttribute="height" constant="12" id="xhN-Gc-Chn"/>
+                                <constraint firstAttribute="width" constant="12" id="jvJ-zP-PGZ"/>
+                                <constraint firstAttribute="height" constant="15" id="xhN-Gc-Chn"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="زمان بقی مانده: ۱۰ ساعت" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0J-SA-y0P">
-                            <rect key="frame" x="12" y="24" width="105" height="18"/>
+                            <rect key="frame" x="12" y="23.5" width="105" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="9id-H3-rc8"/>
                                 <constraint firstAttribute="width" constant="105" id="kjA-Cg-rob"/>
@@ -101,10 +101,10 @@
                         <constraint firstItem="QzJ-WL-rDL" firstAttribute="leading" secondItem="RPo-43-Ohx" secondAttribute="trailing" constant="9" id="9xY-Cw-pwc"/>
                         <constraint firstItem="Ovy-Ox-f1e" firstAttribute="leading" secondItem="FBh-nF-kNs" secondAttribute="leading" constant="12" id="Aeg-UE-3Dv"/>
                         <constraint firstAttribute="trailing" secondItem="Ovy-Ox-f1e" secondAttribute="trailing" constant="12" id="Rlt-4O-ySV"/>
-                        <constraint firstItem="j2x-96-a78" firstAttribute="top" secondItem="Ovy-Ox-f1e" secondAttribute="bottom" constant="12" id="X8G-gO-gAx"/>
+                        <constraint firstItem="j2x-96-a78" firstAttribute="top" secondItem="Ovy-Ox-f1e" secondAttribute="bottom" constant="10" id="X8G-gO-gAx"/>
                         <constraint firstItem="lFp-z2-Gb1" firstAttribute="centerY" secondItem="j2x-96-a78" secondAttribute="centerY" id="YVR-N4-ywC"/>
                         <constraint firstItem="1I0-9D-34W" firstAttribute="centerY" secondItem="q0J-SA-y0P" secondAttribute="centerY" id="bXH-aj-6Tm"/>
-                        <constraint firstItem="QzJ-WL-rDL" firstAttribute="top" secondItem="j2x-96-a78" secondAttribute="bottom" constant="10" id="cbJ-Tn-8iL"/>
+                        <constraint firstItem="QzJ-WL-rDL" firstAttribute="top" secondItem="j2x-96-a78" secondAttribute="bottom" constant="8" id="cbJ-Tn-8iL"/>
                         <constraint firstAttribute="trailing" secondItem="j2x-96-a78" secondAttribute="trailing" constant="16" id="ejz-NR-jgN"/>
                         <constraint firstItem="1I0-9D-34W" firstAttribute="leading" secondItem="q0J-SA-y0P" secondAttribute="trailing" constant="8" id="l5J-Se-890"/>
                         <constraint firstItem="j2x-96-a78" firstAttribute="leading" secondItem="lFp-z2-Gb1" secondAttribute="trailing" constant="8" id="opA-m0-xqA"/>
@@ -130,9 +130,9 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="pollCountIcon" width="11" height="12"/>
-        <image name="pollExpirationDate" width="9" height="12"/>
-        <image name="pollVotesLeft" width="9" height="12"/>
+        <image name="pollCountIcon" width="14" height="15"/>
+        <image name="pollExpirationDate" width="12" height="15"/>
+        <image name="pollVotesLeft" width="12" height="15"/>
         <namedColor name="Grey">
             <color red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -40,6 +40,11 @@ class PollHeaderCell: UICollectionReusableView {
     prepareUI()
   }
 
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    self.card.stopPashmakSkeleton()
+  }
+
   private func prepareUI() {
     prepareCard()
   }

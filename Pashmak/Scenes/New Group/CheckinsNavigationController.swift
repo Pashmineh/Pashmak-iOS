@@ -1,15 +1,16 @@
 //
-//  PollsnavigationController.swift
+//  CheckinsNavigationController.swift
 //  Pashmak
 //
-//  Created by Mohammad Porooshani on 9/17/18.
+//  Created by Mohammad Porooshani on 9/25/18.
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
 import Material
+import SnapKit
 import UIKit
 
-class PollsnavigationController: NavigationController {
+class CheckinsNavigationController: NavigationController {
 
   override func viewDidLoad() {
     super.viewDidLoad()

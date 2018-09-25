@@ -51,10 +51,10 @@
                                         <color key="textColor" name="DarkText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="W3E-SQ-ufK">
-                                        <rect key="frame" x="59" y="11" width="158" height="42"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="W3E-SQ-ufK">
+                                        <rect key="frame" x="59" y="19" width="158" height="26"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="RSI-Bb-Fcp"/>
+                                            <constraint firstAttribute="height" constant="26" id="RSI-Bb-Fcp"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="IRANSansDNFaNum" family="IRANSansDNFaNum" pointSize="16"/>
                                         <color key="textColor" name="DavyGrey"/>

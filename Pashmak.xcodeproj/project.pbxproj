@@ -39,6 +39,15 @@
 		845E4004213104DC0025477A /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4003213104DC0025477A /* Log.swift */; };
 		845E4006213105080025477A /* JSONTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4005213105080025477A /* JSONTypes.swift */; };
 		845E4008213106F00025477A /* FetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4007213106F00025477A /* FetchState.swift */; };
+		84868FAB215A4DBF0053884A /* CheckinsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FA6215A4DBF0053884A /* CheckinsPresenter.swift */; };
+		84868FAC215A4DBF0053884A /* CheckinsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FA7215A4DBF0053884A /* CheckinsRouter.swift */; };
+		84868FAD215A4DBF0053884A /* CheckinsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FA8215A4DBF0053884A /* CheckinsModels.swift */; };
+		84868FAE215A4DBF0053884A /* CheckinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FA9215A4DBF0053884A /* CheckinsViewController.swift */; };
+		84868FAF215A4DBF0053884A /* CheckinsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FAA215A4DBF0053884A /* CheckinsInteractor.swift */; };
+		84868FB2215A4DEA0053884A /* CheckinsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FB1215A4DEA0053884A /* CheckinsNavigationController.swift */; };
+		84868FB4215A52130053884A /* CheckinsSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FB3215A52130053884A /* CheckinsSectionController.swift */; };
+		84868FB7215A526A0053884A /* CheckinsItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FB5215A526A0053884A /* CheckinsItemCell.swift */; };
+		84868FB8215A526A0053884A /* CheckinsItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84868FB6215A526A0053884A /* CheckinsItemCell.xib */; };
 		8498D96F214E3C2B00CEC73F /* MessagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498D96A214E3C2B00CEC73F /* MessagesPresenter.swift */; };
 		8498D970214E3C2B00CEC73F /* MessagesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498D96B214E3C2B00CEC73F /* MessagesRouter.swift */; };
 		8498D971214E3C2B00CEC73F /* MessagesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498D96C214E3C2B00CEC73F /* MessagesModels.swift */; };
@@ -139,6 +148,15 @@
 		845E4003213104DC0025477A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		845E4005213105080025477A /* JSONTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTypes.swift; sourceTree = "<group>"; };
 		845E4007213106F00025477A /* FetchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchState.swift; sourceTree = "<group>"; };
+		84868FA6215A4DBF0053884A /* CheckinsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsPresenter.swift; sourceTree = "<group>"; };
+		84868FA7215A4DBF0053884A /* CheckinsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsRouter.swift; sourceTree = "<group>"; };
+		84868FA8215A4DBF0053884A /* CheckinsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsModels.swift; sourceTree = "<group>"; };
+		84868FA9215A4DBF0053884A /* CheckinsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsViewController.swift; sourceTree = "<group>"; };
+		84868FAA215A4DBF0053884A /* CheckinsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsInteractor.swift; sourceTree = "<group>"; };
+		84868FB1215A4DEA0053884A /* CheckinsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsNavigationController.swift; sourceTree = "<group>"; };
+		84868FB3215A52130053884A /* CheckinsSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsSectionController.swift; sourceTree = "<group>"; };
+		84868FB5215A526A0053884A /* CheckinsItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsItemCell.swift; sourceTree = "<group>"; };
+		84868FB6215A526A0053884A /* CheckinsItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinsItemCell.xib; sourceTree = "<group>"; };
 		8498D96A214E3C2B00CEC73F /* MessagesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesPresenter.swift; sourceTree = "<group>"; };
 		8498D96B214E3C2B00CEC73F /* MessagesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesRouter.swift; sourceTree = "<group>"; };
 		8498D96C214E3C2B00CEC73F /* MessagesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesModels.swift; sourceTree = "<group>"; };
@@ -338,6 +356,31 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
+		84868FA5215A4D9D0053884A /* Checkins */ = {
+			isa = PBXGroup;
+			children = (
+				84868FB0215A4DC80053884A /* items */,
+				84868FAA215A4DBF0053884A /* CheckinsInteractor.swift */,
+				84868FA8215A4DBF0053884A /* CheckinsModels.swift */,
+				84868FA6215A4DBF0053884A /* CheckinsPresenter.swift */,
+				84868FA7215A4DBF0053884A /* CheckinsRouter.swift */,
+				84868FA9215A4DBF0053884A /* CheckinsViewController.swift */,
+				84868FB1215A4DEA0053884A /* CheckinsNavigationController.swift */,
+			);
+			name = Checkins;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		84868FB0215A4DC80053884A /* items */ = {
+			isa = PBXGroup;
+			children = (
+				84868FB3215A52130053884A /* CheckinsSectionController.swift */,
+				84868FB5215A526A0053884A /* CheckinsItemCell.swift */,
+				84868FB6215A526A0053884A /* CheckinsItemCell.xib */,
+			);
+			path = items;
+			sourceTree = "<group>";
+		};
 		8498D969214E3B0E00CEC73F /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +487,7 @@
 		84FC6CB0212BCA0800B4A56A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				84868FA5215A4D9D0053884A /* Checkins */,
 				84EE944B214F931000499D96 /* Polling */,
 				84E805712132B64000BC47CC /* Home */,
 				84FC6CB2212BCA2A00B4A56A /* Login */,
@@ -622,6 +666,7 @@
 				84EC225D213422E50040ECE2 /* HomeEventCell.xib in Resources */,
 				9578F3A0212F446700A667E9 /* IRANSansDN_Fa_Num.ttf in Resources */,
 				843FB33D212AD7CD0047A734 /* Main.storyboard in Resources */,
+				84868FB8215A526A0053884A /* CheckinsItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,6 +801,7 @@
 				845E3FFC213104650025477A /* ServerRequestBase.swift in Sources */,
 				84EE944A214F895D00499D96 /* PollModels.swift in Sources */,
 				84FC6CCD212BCAE900B4A56A /* Storyboards.swift in Sources */,
+				84868FB2215A4DEA0053884A /* CheckinsNavigationController.swift in Sources */,
 				84FC6CBD212BCA4100B4A56A /* LoginViewController.swift in Sources */,
 				8498D96F214E3C2B00CEC73F /* MessagesPresenter.swift in Sources */,
 				84FC6CC8212BCA6B00B4A56A /* SplashPresenter.swift in Sources */,
@@ -765,11 +811,13 @@
 				845E3FF6213104170025477A /* HTTPRequest.swift in Sources */,
 				95BC0080212CA96A001B4375 /* Settings.swift in Sources */,
 				9519AA9621346EA4003AB3ED /* UIView+Extensions.swift in Sources */,
+				84868FAE215A4DBF0053884A /* CheckinsViewController.swift in Sources */,
 				845E4008213106F00025477A /* FetchState.swift in Sources */,
 				845E4000213104910025477A /* ServerModel.swift in Sources */,
 				845CB26E21312A34001957B3 /* UIButton+Extensions.swift in Sources */,
 				8498D975214E3C5000CEC73F /* MessagesNavigationController.swift in Sources */,
 				845E3FF8213104350025477A /* URLPath.swift in Sources */,
+				84868FAC215A4DBF0053884A /* CheckinsRouter.swift in Sources */,
 				95BC0073212CA400001B4375 /* UIColor+Hue.swift in Sources */,
 				84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */,
 				95446D2021333F9F0096E78F /* HomedataModels.swift in Sources */,
@@ -786,11 +834,14 @@
 				84CB274421351ECE00DE59C5 /* CheckinRequests.swift in Sources */,
 				845E3FFE2131047E0025477A /* DiffableBox.swift in Sources */,
 				84EC2259213422D20040ECE2 /* HomeEventItem.swift in Sources */,
+				84868FAB215A4DBF0053884A /* CheckinsPresenter.swift in Sources */,
 				84FC6CBC212BCA4100B4A56A /* LoginRouter.swift in Sources */,
+				84868FB4215A52130053884A /* CheckinsSectionController.swift in Sources */,
 				84DEDED3214D1CFF0021C448 /* MessagesModel.swift in Sources */,
 				95C0DCA4212D722B00A01C4F /* Regex.swift in Sources */,
 				845E4002213104A90025477A /* EmptyServerModel.swift in Sources */,
 				84CB274221351DDA00DE59C5 /* CheckinModels.swift in Sources */,
+				84868FAF215A4DBF0053884A /* CheckinsInteractor.swift in Sources */,
 				845CB27021312A5D001957B3 /* Date+Extensions.swift in Sources */,
 				845CB26A213129E6001957B3 /* BiometricAuthentication.swift in Sources */,
 				84FC6CC7212BCA6B00B4A56A /* SplashModels.swift in Sources */,
@@ -799,6 +850,7 @@
 				841BF3002132B9C3003E7BA7 /* HomePresenter.swift in Sources */,
 				84FC6CC9212BCA6B00B4A56A /* SplashRouter.swift in Sources */,
 				84EE9452214F932900499D96 /* PollsRouter.swift in Sources */,
+				84868FB7215A526A0053884A /* CheckinsItemCell.swift in Sources */,
 				84EC2254213420770040ECE2 /* HomeSkeletonCell.swift in Sources */,
 				84052D4621325EBF0040ABF5 /* PashmakMessages.swift in Sources */,
 				84EE9455214F932900499D96 /* PollsInteractor.swift in Sources */,
@@ -817,6 +869,7 @@
 				8498D978214E450400CEC73F /* MessagesRequests.swift in Sources */,
 				845E4006213105080025477A /* JSONTypes.swift in Sources */,
 				8498D971214E3C2B00CEC73F /* MessagesModels.swift in Sources */,
+				84868FAD215A4DBF0053884A /* CheckinsModels.swift in Sources */,
 				841BF3012132B9C3003E7BA7 /* HomeRouter.swift in Sources */,
 				845E3FF2213103DB0025477A /* APIError.swift in Sources */,
 				845E4004213104DC0025477A /* Log.swift in Sources */,

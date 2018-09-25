@@ -10,6 +10,7 @@ import CoreLocation
 import Hero
 import IQKeyboardManagerSwift
 import KVNProgress
+import SkeletonView
 import UIKit
 import UserNotifications
 
@@ -61,6 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func prepareUI() {
+    SkeletonAppearance.default.multilineHeight = 24.0
+    SkeletonAppearance.default.multilineCornerRadius = 5
     UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.farsiFont(.light, size: 10.0)], for: [])
   }
 

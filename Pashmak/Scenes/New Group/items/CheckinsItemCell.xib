@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="IRANSansDN_FaNum-Bold.ttf">
+            <string>IRANSansDNFaNum-Bold</string>
+        </array>
+        <array key="IRANSansDN_FaNum_Light.ttf">
+            <string>IRANSansDNFaNum-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CheckinsItemCell" customModule="Pashmak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLJ-HL-I3l" customClass="PulseView" customModule="Material">
+                        <rect key="frame" x="10" y="8" width="300" height="54"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OXI-kU-niM">
+                                <rect key="frame" x="254" y="0.0" width="46" height="54"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkinIcon" translatesAutoresizingMaskIntoConstraints="NO" id="JDg-sT-uXx">
+                                        <rect key="frame" x="11" y="15" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="bMW-kR-qor"/>
+                                            <constraint firstAttribute="height" constant="24" id="mNm-3g-Yk0"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" name="Orange"/>
+                                <constraints>
+                                    <constraint firstItem="JDg-sT-uXx" firstAttribute="centerX" secondItem="OXI-kU-niM" secondAttribute="centerX" id="91H-6X-IX2"/>
+                                    <constraint firstItem="JDg-sT-uXx" firstAttribute="centerY" secondItem="OXI-kU-niM" secondAttribute="centerY" id="RmX-C7-aUR"/>
+                                    <constraint firstAttribute="width" constant="46" id="xxp-nP-gsb"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mE-R5-7hs">
+                                <rect key="frame" x="0.0" y="0.0" width="68" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07:56" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdm-HK-bP9">
+                                        <rect key="frame" x="4" y="15" width="60" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="HaI-Qu-grk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="IRANSansDNFaNum-Bold" family="IRANSansDNFaNum" pointSize="17"/>
+                                        <color key="textColor" name="whiteSmoke"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="green"/>
+                                <constraints>
+                                    <constraint firstItem="Kdm-HK-bP9" firstAttribute="leading" secondItem="8mE-R5-7hs" secondAttribute="leading" constant="4" id="K18-dI-ker"/>
+                                    <constraint firstAttribute="width" constant="68" id="SG9-nL-qpH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kdm-HK-bP9" secondAttribute="trailing" constant="4" id="X9K-tD-enN"/>
+                                    <constraint firstItem="Kdm-HK-bP9" firstAttribute="centerY" secondItem="8mE-R5-7hs" secondAttribute="centerY" id="lv5-Z9-e95"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="دونبه، ۱۲ مهر ۹۷" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Xky-aF-mK0">
+                                <rect key="frame" x="76" y="16.5" width="170" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="7yM-HU-WHZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="IRANSansDNFaNum-Light" family="IRANSansDNFaNum" pointSize="15"/>
+                                <color key="textColor" name="DarkText"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Xky-aF-mK0" firstAttribute="centerY" secondItem="kLJ-HL-I3l" secondAttribute="centerY" id="2oF-NS-xHO"/>
+                            <constraint firstItem="8mE-R5-7hs" firstAttribute="top" secondItem="kLJ-HL-I3l" secondAttribute="top" id="6bW-6w-hkl"/>
+                            <constraint firstAttribute="bottom" secondItem="OXI-kU-niM" secondAttribute="bottom" id="8kc-ec-eNe"/>
+                            <constraint firstAttribute="trailing" secondItem="OXI-kU-niM" secondAttribute="trailing" id="CHt-vi-iKE"/>
+                            <constraint firstItem="OXI-kU-niM" firstAttribute="top" secondItem="kLJ-HL-I3l" secondAttribute="top" id="LP3-o1-XhS"/>
+                            <constraint firstItem="8mE-R5-7hs" firstAttribute="leading" secondItem="kLJ-HL-I3l" secondAttribute="leading" id="LdH-nB-OYj"/>
+                            <constraint firstItem="OXI-kU-niM" firstAttribute="leading" secondItem="Xky-aF-mK0" secondAttribute="trailing" constant="8" id="YjZ-Lv-xuR"/>
+                            <constraint firstAttribute="bottom" secondItem="8mE-R5-7hs" secondAttribute="bottom" id="i8M-Hp-Ko1"/>
+                            <constraint firstItem="Xky-aF-mK0" firstAttribute="leading" secondItem="8mE-R5-7hs" secondAttribute="trailing" constant="8" id="ylx-E0-wwB"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="kLJ-HL-I3l" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="b3C-BA-qxc"/>
+                <constraint firstItem="kLJ-HL-I3l" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="elG-ot-zC7"/>
+                <constraint firstAttribute="trailing" secondItem="kLJ-HL-I3l" secondAttribute="trailing" constant="10" id="gjQ-pl-Uay"/>
+                <constraint firstAttribute="bottom" secondItem="kLJ-HL-I3l" secondAttribute="bottom" constant="8" id="ij9-Oa-9Zg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="card" destination="kLJ-HL-I3l" id="gl2-ua-Xk6"/>
+                <outlet property="checkinIcon" destination="JDg-sT-uXx" id="7YS-1c-QQw"/>
+                <outlet property="dateLabel" destination="Xky-aF-mK0" id="jtZ-Xb-tEE"/>
+                <outlet property="timeContainerView" destination="8mE-R5-7hs" id="4TX-LE-Np1"/>
+                <outlet property="timeLabel" destination="Kdm-HK-bP9" id="nhS-jb-0fG"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="checkinIcon" width="24" height="23"/>
+        <namedColor name="DarkText">
+            <color red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Orange">
+            <color red="0.96078431372549022" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="green">
+            <color red="0.32549019607843138" green="0.6470588235294118" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="whiteSmoke">
+            <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

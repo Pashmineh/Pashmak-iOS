@@ -389,7 +389,7 @@
         <!--ترددها-->
         <scene sceneID="zgE-Vd-oOp">
             <objects>
-                <navigationController id="7CW-qB-wzL" sceneMemberID="viewController">
+                <navigationController id="7CW-qB-wzL" customClass="CheckinsNavigationController" customModule="Pashmak" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="ترددها" image="CheckinsTab" id="0sB-Q5-TYj"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="v9x-4O-Mh9" customClass="NavigationBar" customModule="Material">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -404,10 +404,10 @@
             </objects>
             <point key="canvasLocation" x="3700" y="448"/>
         </scene>
-        <!--View Controller-->
+        <!--Checkins View Controller-->
         <scene sceneID="oGm-yW-Rre">
             <objects>
-                <viewController id="Pgz-tf-CQ7" sceneMemberID="viewController">
+                <viewController id="Pgz-tf-CQ7" customClass="CheckinsViewController" customModule="Pashmak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KLv-Rd-O9z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -541,11 +541,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CheckinsTab" width="23" height="23"/>
+        <image name="CheckinsTab" width="22" height="22"/>
         <image name="HomeTab" width="24" height="20"/>
-        <image name="InboxTab" width="23" height="23"/>
+        <image name="InboxTab" width="22" height="22"/>
         <image name="PollTab" width="19" height="24"/>
-        <image name="TransactionTab" width="24" height="24"/>
+        <image name="TransactionTab" width="22" height="22"/>
         <image name="signout" width="19" height="19"/>
         <image name="splashIcon" width="61" height="100.5"/>
         <namedColor name="Black">

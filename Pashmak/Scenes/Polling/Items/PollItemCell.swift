@@ -47,6 +47,7 @@ class PollItemCell: UICollectionViewCell {
     super.prepareForReuse()
     self.itemCard.alpha = 1.0
     self.popularityIndicatorWidthConstraint.constant = 0.0
+    self.itemCard.stopPashmakSkeleton()
   }
 
   private func prepareUI() {

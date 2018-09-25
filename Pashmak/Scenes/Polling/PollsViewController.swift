@@ -16,6 +16,7 @@ import IGListKit
 import KVNProgress
 import Material
 import UIKit
+import VisualEffectView
 
 protocol PollsDisplayLogic: AnyObject {
 
@@ -118,6 +119,12 @@ class PollsViewController: UIViewController {
     navbar.titleLabel.textColor = .white
     navbar.titleLabel.font = UIFont.farsiFont(.bold, size: 16.0)
     self.navigationController?.navigationBar.tintColor = .white
+    let blurView = VisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.regular))
+    blurView.colorTint = #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1)
+    blurView.colorTintAlpha = 0.85
+    blurView.blurRadius = 8.0
+    blurView.scale = 2.0
+    self.view.layout(blurView).top().left().right().height(64.0)
   }
 
   private func prepareCollectionView() {
@@ -140,6 +147,7 @@ class PollsViewController: UIViewController {
     collectionView.frame = containerView.bounds
     containerView.addSubview(collectionView)
     collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    self.view.sendSubviewToBack(collectionView)
   }
 
   @objc

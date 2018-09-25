@@ -17,5 +17,17 @@ class MessagesNavigationController: NavigationController {
   override func viewDidLoad() {
     super.viewDidLoad()
   }
+  override func prepare() {
+    super.prepare()
+    prepareNavbar()
+  }
+
+  private func prepareNavbar() {
+    self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+    self.navigationBar.shadowImage = UIImage()
+    self.navigationBar.barTintColor = .clear
+    self.navigationBar.isTranslucent = true
+
+  }
 
 }
