@@ -31,8 +31,9 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
       return
     }
 
-    viewController?.navigationController?.hero.navigationAnimationType = .zoom
-    viewController?.navigationController?.setViewControllers([loginVC], animated: true)
+    let navController = viewController?.tabBarController?.navigationController
+    navController?.hero.navigationAnimationType = .zoom
+    navController?.setViewControllers([loginVC], animated: true)
 
   }
 

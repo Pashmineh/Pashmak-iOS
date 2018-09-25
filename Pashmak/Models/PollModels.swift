@@ -92,10 +92,10 @@ extension ServerModels {
       var isLoading: Bool = false
       var remainingVotes: UInt {
 
-        let total = UInt(answerLimit)
-        let votes = UInt(answers?.filter { $0.voted == true || $0.isSubmitting == true }.count ?? 0)
+        let total = Int(answerLimit)
+        let votes = Int(answers?.filter { $0.voted == true || $0.isSubmitting == true }.count ?? 0)
 
-        return total - votes
+        return UInt(max(total - votes, 0))
       }
 
       var canVote: Bool {

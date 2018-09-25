@@ -38,13 +38,17 @@ class PollItemSectionConttroller: ListSectionController {
     guard let cell = collectionContext?.dequeueReusableCell(withNibName: "PollItemCell", bundle: nil, for: self, at: index) as? PollItemCell else {
       fatalError("Could nto dequeue [PollItemCell]")
     }
+    cell.totalVotes = item?.totalVote
+
     if item?.isLoading == true {
       cell.isLoading = true
       cell.item = nil
+
     } else {
       let answer = item?.answers?[index]
       cell.item = answer
       cell.isLoading = false
+
     }
 
     return cell

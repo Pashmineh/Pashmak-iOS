@@ -87,9 +87,13 @@ class PollsViewController: UIViewController {
     return refCon
   }()
 
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
   override func viewDidLoad() {
     super.viewDidLoad()
     prepareUI()
+    prepareObservers()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -97,6 +101,10 @@ class PollsViewController: UIViewController {
     if displayedItems.isEmpty {
       populate()
     }
+  }
+
+  private func prepareObservers() {
+    NotificationCenter.default.addObserver(self, selector: #selector(self.populate), name: Notification.Name.Pashmak.voteUpdateReceived, object: nil)
   }
 
   private func prepareUI() {
@@ -180,7 +188,7 @@ extension PollsViewController: PollsDisplayLogic {
   func displayVoteLoading(viewModel: Polls.Vote.ViewModel.Loading) {
     let polls = viewModel.polls
     self.displayedItems = polls
-    self.adapter.performUpdates(animated: true, completion: nil)
+    self.adapter.performUpdates(animated: false, completion: nil)
   }
 
   func displayVoteFailed(viewModel: Polls.Vote.ViewModel.Failed) {
@@ -188,13 +196,13 @@ extension PollsViewController: PollsDisplayLogic {
     KVNProgress.showError(withStatus: message)
     let polls = viewModel.polls
     self.displayedItems = polls
-    self.adapter.performUpdates(animated: true, completion: nil)
+    self.adapter.performUpdates(animated: false, completion: nil)
   }
 
   func displayVoteSuccess(viewModel: Polls.Vote.ViewModel.Success) {
     let polls = viewModel.polls
     self.displayedItems = polls
-    self.adapter.performUpdates(animated: true, completion: nil)
+    self.adapter.performUpdates(animated: false, completion: nil)
   }
 
 }

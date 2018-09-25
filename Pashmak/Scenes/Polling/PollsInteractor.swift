@@ -76,7 +76,7 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
         items.append(item)
       }
 
-      poll.answers = items
+      poll.answers = items.sorted { $0.id < $1.id }
       result.append(poll)
     }
 
@@ -95,8 +95,6 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
       Log.warning("Item is already pending for submit!")
       return
     }
-
-    pendingPollItems.append((poll.id, item.id))
 
     func sendLoading() {
       let polls = self.preparePolls(polls: self.polls)
@@ -119,6 +117,8 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
       Log.warning("Cannot vote at the moment.")
       return
     }
+
+    pendingPollItems.append((poll.id, item.id))
 
     sendLoading()
 
