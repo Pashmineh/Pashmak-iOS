@@ -6,6 +6,7 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
+import Async
 import Material
 import UIKit
 
@@ -51,20 +52,27 @@ class CheckinsItemCell: UICollectionViewCell {
 
   private func update() {
 
-    guard self.item?.isLoading != true else {
-      self.card.startPashmakSkeleton()
-      return
+    let item = self.item
+
+    Async.main {
+      [weak self] in
+      guard let self = self else {
+        return
+      }
+      guard self.item?.isLoading != true else {
+        self.card.startPashmakSkeleton()
+        return
+      }
+
+      self.card.stopSkeletonAnimation()
+
+      self.dateLabel.text = item?.checkinDateString ?? ""
+      self.timeLabel.text = item?.checkinTimeString ?? "--:--"
+
+      let hasPenalty = item?.hasPenalty == true
+      self.timeContainerView.backgroundColor = hasPenalty ? #colorLiteral(red: 1, green: 0, blue: 0.1215686275, alpha: 1) : #colorLiteral(red: 0.3254901961, green: 0.6470588235, blue: 0, alpha: 1)
+      self.checkinIcon.image = hasPenalty ? Constants.delayIcon : Constants.ontimeIcon
     }
-
-    self.card.stopSkeletonAnimation()
-
-    self.dateLabel.text = item?.checkinDateString ?? ""
-    self.timeLabel.text = item?.checkinTimeString ?? "--:--"
-
-    let hasPenalty = item?.hasPenalty == true
-    self.timeContainerView.backgroundColor = hasPenalty ? #colorLiteral(red: 1, green: 0, blue: 0.1215686275, alpha: 1) : #colorLiteral(red: 0.3254901961, green: 0.6470588235, blue: 0, alpha: 1)
-    self.checkinIcon.image = hasPenalty ? Constants.delayIcon : Constants.ontimeIcon
-    
   }
 
 }

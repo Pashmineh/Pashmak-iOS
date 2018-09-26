@@ -19,7 +19,6 @@ private let kTimeFormatterForPenalty: DateFormatter = {
   return formatter
 }()
 
-
 /*
  {
  "checkinTime": "2018-08-28T06:05:19.952Z",

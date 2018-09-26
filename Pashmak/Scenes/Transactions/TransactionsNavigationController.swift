@@ -1,15 +1,15 @@
 //
-//  PollsnavigationController.swift
+//  TransactionsNavigationController.swift
 //  Pashmak
 //
-//  Created by Mohammad Porooshani on 9/17/18.
+//  Created by Mohammad Porooshani on 9/26/18.
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
 import Material
 import UIKit
 
-class PollsnavigationController: NavigationController {
+class TransactionsNavigationController: NavigationController {
 
   override var prefersStatusBarHidden: Bool { return false }
   override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
@@ -28,7 +28,6 @@ class PollsnavigationController: NavigationController {
     self.navigationBar.shadowImage = UIImage()
     self.navigationBar.barTintColor = .clear
     self.navigationBar.isTranslucent = true
-
   }
 
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
+import Async
 import Material
 import SkeletonView
 import UIKit
@@ -62,22 +63,31 @@ class PollFooterCell: UICollectionReusableView {
   }
 
   private func update() {
-    if pollItem?.isLoading == true {
-      self.card.startPashmakSkeleton()
-    } else {
-      self.card.stopPashmakSkeleton()
-      let remainingVotes = pollItem?.remainingVotes ?? 0
-      let totalVoted = pollItem?.totalVote ?? 0
-      let timeRemaining = 10
 
-      let itemsLeftText = combine(title: "آراء باقی‌مانده شما: ", with: "\(remainingVotes)")
-      self.itemsLeftLabel.attributedText = itemsLeftText
+    let pollItem = self.pollItem
 
-      let totalVotesText = combine(title: "آراء اخذ شده: ", with: "\(totalVoted) نفر")
-      self.castedVotesLabel.attributedText = totalVotesText
+    Async.main { [weak self] in
+      guard let self = self else {
+        return
+      }
 
-      let timeRemainingText = combine(title: "زمان باقی‌مانده: ", with: "\(timeRemaining) ساعت")
-      self.expirationDateLabel.attributedText = timeRemainingText
+      if pollItem?.isLoading == true {
+        self.card.startPashmakSkeleton()
+      } else {
+        self.card.stopPashmakSkeleton()
+        let remainingVotes = pollItem?.remainingVotes ?? 0
+        let totalVoted = pollItem?.totalVote ?? 0
+        let timeRemaining = 10
+
+        let itemsLeftText = self.combine(title: "آراء باقی‌مانده شما: ", with: "\(remainingVotes)")
+        self.itemsLeftLabel.attributedText = itemsLeftText
+
+        let totalVotesText = self.combine(title: "آراء اخذ شده: ", with: "\(totalVoted) نفر")
+        self.castedVotesLabel.attributedText = totalVotesText
+
+        let timeRemainingText = self.combine(title: "زمان باقی‌مانده: ", with: "\(timeRemaining) ساعت")
+        self.expirationDateLabel.attributedText = timeRemainingText
+      }
     }
   }
 

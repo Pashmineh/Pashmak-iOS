@@ -39,6 +39,17 @@
 		845E4004213104DC0025477A /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4003213104DC0025477A /* Log.swift */; };
 		845E4006213105080025477A /* JSONTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4005213105080025477A /* JSONTypes.swift */; };
 		845E4008213106F00025477A /* FetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E4007213106F00025477A /* FetchState.swift */; };
+		846529F0215B4C22000D9631 /* TransactionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529EB215B4C22000D9631 /* TransactionsPresenter.swift */; };
+		846529F1215B4C22000D9631 /* TransactionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529EC215B4C22000D9631 /* TransactionsRouter.swift */; };
+		846529F2215B4C22000D9631 /* TransactionsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529ED215B4C22000D9631 /* TransactionsModels.swift */; };
+		846529F3215B4C22000D9631 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529EE215B4C22000D9631 /* TransactionsViewController.swift */; };
+		846529F4215B4C22000D9631 /* TransactionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529EF215B4C22000D9631 /* TransactionsInteractor.swift */; };
+		846529F7215B4C4E000D9631 /* TransactionsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529F6215B4C4E000D9631 /* TransactionsNavigationController.swift */; };
+		846529F9215B629D000D9631 /* TransactionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529F8215B629D000D9631 /* TransactionModels.swift */; };
+		846529FB215B6564000D9631 /* TransactionRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529FA215B6564000D9631 /* TransactionRequests.swift */; };
+		846529FD215B749D000D9631 /* TransactionSectionControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529FC215B749D000D9631 /* TransactionSectionControllers.swift */; };
+		84652A00215B74F1000D9631 /* TransactionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846529FE215B74F1000D9631 /* TransactionItemCell.swift */; };
+		84652A01215B74F1000D9631 /* TransactionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846529FF215B74F1000D9631 /* TransactionItemCell.xib */; };
 		84868FAB215A4DBF0053884A /* CheckinsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FA6215A4DBF0053884A /* CheckinsPresenter.swift */; };
 		84868FAC215A4DBF0053884A /* CheckinsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FA7215A4DBF0053884A /* CheckinsRouter.swift */; };
 		84868FAD215A4DBF0053884A /* CheckinsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84868FA8215A4DBF0053884A /* CheckinsModels.swift */; };
@@ -148,6 +159,17 @@
 		845E4003213104DC0025477A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		845E4005213105080025477A /* JSONTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTypes.swift; sourceTree = "<group>"; };
 		845E4007213106F00025477A /* FetchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchState.swift; sourceTree = "<group>"; };
+		846529EB215B4C22000D9631 /* TransactionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsPresenter.swift; sourceTree = "<group>"; };
+		846529EC215B4C22000D9631 /* TransactionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsRouter.swift; sourceTree = "<group>"; };
+		846529ED215B4C22000D9631 /* TransactionsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsModels.swift; sourceTree = "<group>"; };
+		846529EE215B4C22000D9631 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
+		846529EF215B4C22000D9631 /* TransactionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsInteractor.swift; sourceTree = "<group>"; };
+		846529F6215B4C4E000D9631 /* TransactionsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsNavigationController.swift; sourceTree = "<group>"; };
+		846529F8215B629D000D9631 /* TransactionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModels.swift; sourceTree = "<group>"; };
+		846529FA215B6564000D9631 /* TransactionRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRequests.swift; sourceTree = "<group>"; };
+		846529FC215B749D000D9631 /* TransactionSectionControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSectionControllers.swift; sourceTree = "<group>"; };
+		846529FE215B74F1000D9631 /* TransactionItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItemCell.swift; sourceTree = "<group>"; };
+		846529FF215B74F1000D9631 /* TransactionItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionItemCell.xib; sourceTree = "<group>"; };
 		84868FA6215A4DBF0053884A /* CheckinsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsPresenter.swift; sourceTree = "<group>"; };
 		84868FA7215A4DBF0053884A /* CheckinsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsRouter.swift; sourceTree = "<group>"; };
 		84868FA8215A4DBF0053884A /* CheckinsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinsModels.swift; sourceTree = "<group>"; };
@@ -327,6 +349,7 @@
 				84CB274121351DDA00DE59C5 /* CheckinModels.swift */,
 				84DEDED2214D1CFF0021C448 /* MessagesModel.swift */,
 				84EE9449214F895D00499D96 /* PollModels.swift */,
+				846529F8215B629D000D9631 /* TransactionModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -352,8 +375,33 @@
 				84CB274321351ECE00DE59C5 /* CheckinRequests.swift */,
 				8498D977214E450400CEC73F /* MessagesRequests.swift */,
 				84EE945A214F9BA100499D96 /* PollsRequest.swift */,
+				846529FA215B6564000D9631 /* TransactionRequests.swift */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		846529EA215B4BF7000D9631 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				846529F5215B4C2F000D9631 /* Items */,
+				846529EF215B4C22000D9631 /* TransactionsInteractor.swift */,
+				846529ED215B4C22000D9631 /* TransactionsModels.swift */,
+				846529EB215B4C22000D9631 /* TransactionsPresenter.swift */,
+				846529EC215B4C22000D9631 /* TransactionsRouter.swift */,
+				846529EE215B4C22000D9631 /* TransactionsViewController.swift */,
+				846529F6215B4C4E000D9631 /* TransactionsNavigationController.swift */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		846529F5215B4C2F000D9631 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				846529FC215B749D000D9631 /* TransactionSectionControllers.swift */,
+				846529FE215B74F1000D9631 /* TransactionItemCell.swift */,
+				846529FF215B74F1000D9631 /* TransactionItemCell.xib */,
+			);
+			path = Items;
 			sourceTree = "<group>";
 		};
 		84868FA5215A4D9D0053884A /* Checkins */ = {
@@ -487,6 +535,7 @@
 		84FC6CB0212BCA0800B4A56A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				846529EA215B4BF7000D9631 /* Transactions */,
 				84868FA5215A4D9D0053884A /* Checkins */,
 				84EE944B214F931000499D96 /* Polling */,
 				84E805712132B64000BC47CC /* Home */,
@@ -655,6 +704,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9578F39F212F446700A667E9 /* IRANSansDN_FaNum_Light.ttf in Resources */,
+				84652A01215B74F1000D9631 /* TransactionItemCell.xib in Resources */,
 				95691353215180E70063C8FA /* PollFooterCell.xib in Resources */,
 				84EC2255213420770040ECE2 /* HomeSkeletonCell.xib in Resources */,
 				84E5542D215119EE001A861F /* PollHeaderCell.xib in Resources */,
@@ -809,7 +859,9 @@
 				95BC007C212CA7B0001B4375 /* String+sha512.swift in Sources */,
 				841BF3032132B9C3003E7BA7 /* HomeViewController.swift in Sources */,
 				845E3FF6213104170025477A /* HTTPRequest.swift in Sources */,
+				846529F9215B629D000D9631 /* TransactionModels.swift in Sources */,
 				95BC0080212CA96A001B4375 /* Settings.swift in Sources */,
+				846529F4215B4C22000D9631 /* TransactionsInteractor.swift in Sources */,
 				9519AA9621346EA4003AB3ED /* UIView+Extensions.swift in Sources */,
 				84868FAE215A4DBF0053884A /* CheckinsViewController.swift in Sources */,
 				845E4008213106F00025477A /* FetchState.swift in Sources */,
@@ -819,6 +871,8 @@
 				845E3FF8213104350025477A /* URLPath.swift in Sources */,
 				84868FAC215A4DBF0053884A /* CheckinsRouter.swift in Sources */,
 				95BC0073212CA400001B4375 /* UIColor+Hue.swift in Sources */,
+				846529F3215B4C22000D9631 /* TransactionsViewController.swift in Sources */,
+				84652A00215B74F1000D9631 /* TransactionItemCell.swift in Sources */,
 				84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */,
 				95446D2021333F9F0096E78F /* HomedataModels.swift in Sources */,
 				84EC225C213422E50040ECE2 /* HomeEventCell.swift in Sources */,
@@ -832,6 +886,7 @@
 				8498D97B214E48C000CEC73F /* MessageItemSectionController.swift in Sources */,
 				84EE9454214F932900499D96 /* PollsViewController.swift in Sources */,
 				84CB274421351ECE00DE59C5 /* CheckinRequests.swift in Sources */,
+				846529F7215B4C4E000D9631 /* TransactionsNavigationController.swift in Sources */,
 				845E3FFE2131047E0025477A /* DiffableBox.swift in Sources */,
 				84EC2259213422D20040ECE2 /* HomeEventItem.swift in Sources */,
 				84868FAB215A4DBF0053884A /* CheckinsPresenter.swift in Sources */,
@@ -846,6 +901,7 @@
 				845CB26A213129E6001957B3 /* BiometricAuthentication.swift in Sources */,
 				84FC6CC7212BCA6B00B4A56A /* SplashModels.swift in Sources */,
 				843FB338212AD7CD0047A734 /* AppDelegate.swift in Sources */,
+				846529F0215B4C22000D9631 /* TransactionsPresenter.swift in Sources */,
 				8498D97E214E496D00CEC73F /* MessageItemCell.swift in Sources */,
 				841BF3002132B9C3003E7BA7 /* HomePresenter.swift in Sources */,
 				84FC6CC9212BCA6B00B4A56A /* SplashRouter.swift in Sources */,
@@ -868,13 +924,17 @@
 				95BC0077212CA57B001B4375 /* RealmProvider.swift in Sources */,
 				8498D978214E450400CEC73F /* MessagesRequests.swift in Sources */,
 				845E4006213105080025477A /* JSONTypes.swift in Sources */,
+				846529F2215B4C22000D9631 /* TransactionsModels.swift in Sources */,
 				8498D971214E3C2B00CEC73F /* MessagesModels.swift in Sources */,
 				84868FAD215A4DBF0053884A /* CheckinsModels.swift in Sources */,
+				846529F1215B4C22000D9631 /* TransactionsRouter.swift in Sources */,
+				846529FB215B6564000D9631 /* TransactionRequests.swift in Sources */,
 				841BF3012132B9C3003E7BA7 /* HomeRouter.swift in Sources */,
 				845E3FF2213103DB0025477A /* APIError.swift in Sources */,
 				845E4004213104DC0025477A /* Log.swift in Sources */,
 				845CB27521313246001957B3 /* LocationManager.swift in Sources */,
 				841BF3022132B9C3003E7BA7 /* HomeModels.swift in Sources */,
+				846529FD215B749D000D9631 /* TransactionSectionControllers.swift in Sources */,
 				84EC2249213409740040ECE2 /* HomeSkeletonCard.swift in Sources */,
 				84052D422132510C0040ABF5 /* AuthenticationRequests.swift in Sources */,
 				84DEDED1214D10B60021C448 /* MainTabBarController.swift in Sources */,

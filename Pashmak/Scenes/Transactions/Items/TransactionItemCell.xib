@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="IRANSansDN_FaNum-Bold.ttf">
+            <string>IRANSansDNFaNum-Bold</string>
+        </array>
+        <array key="IRANSansDN_FaNum_Light.ttf">
+            <string>IRANSansDNFaNum-Light</string>
+        </array>
+        <array key="IRANSansDN_Fa_Num.ttf">
+            <string>IRANSansDNFaNum</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TransactionItemCell" customModule="Pashmak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Db-LG-qz4" customClass="PulseView" customModule="Material">
+                        <rect key="frame" x="10" y="8" width="300" height="80"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKS-ov-RUh">
+                                <rect key="frame" x="230" y="10" width="60" height="60"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transPaymentIcon" translatesAutoresizingMaskIntoConstraints="NO" id="jub-HP-dJX">
+                                        <rect key="frame" x="17" y="17" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="pXH-j6-ks4"/>
+                                            <constraint firstAttribute="width" constant="26" id="qbX-bX-ts3"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" name="green"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="6js-Dy-saz"/>
+                                    <constraint firstItem="jub-HP-dJX" firstAttribute="centerY" secondItem="xKS-ov-RUh" secondAttribute="centerY" id="QW4-bD-vhc"/>
+                                    <constraint firstAttribute="height" constant="60" id="eyV-m2-PhK"/>
+                                    <constraint firstItem="jub-HP-dJX" firstAttribute="centerX" secondItem="xKS-ov-RUh" secondAttribute="centerX" id="wo8-l4-BhU"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="پرداخت بدهی" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="j8H-5N-Wxw">
+                                <rect key="frame" x="126" y="23.5" width="96" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="vpl-GE-fbG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="IRANSansDNFaNum" family="IRANSansDNFaNum" pointSize="14"/>
+                                <color key="textColor" name="DarkText"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="۱۰۰٫۰۰۰ ریال" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="suL-Tx-Xc9">
+                                <rect key="frame" x="8" y="20.5" width="110" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="Xfs-rE-EjR"/>
+                                    <constraint firstAttribute="width" constant="110" id="aKl-Lu-284"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="IRANSansDNFaNum-Bold" family="IRANSansDNFaNum" pointSize="18"/>
+                                <color key="textColor" name="Black"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="چهارشنبه ۴ مهر ۱۳۹۷" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="49w-gy-RHy">
+                                <rect key="frame" x="8" y="51" width="214" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Awl-0D-PXI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="IRANSansDNFaNum-Light" family="IRANSansDNFaNum" pointSize="11"/>
+                                <color key="textColor" name="Manatee"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="49w-gy-RHy" secondAttribute="bottom" constant="8" id="5gh-KE-pNj"/>
+                            <constraint firstItem="49w-gy-RHy" firstAttribute="leading" secondItem="0Db-LG-qz4" secondAttribute="leading" constant="8" id="61o-b6-0ra"/>
+                            <constraint firstItem="suL-Tx-Xc9" firstAttribute="leading" secondItem="0Db-LG-qz4" secondAttribute="leading" constant="8" id="LUv-dY-nrv"/>
+                            <constraint firstItem="49w-gy-RHy" firstAttribute="trailing" secondItem="j8H-5N-Wxw" secondAttribute="trailing" id="TlH-uA-R9N"/>
+                            <constraint firstItem="suL-Tx-Xc9" firstAttribute="centerY" secondItem="0Db-LG-qz4" secondAttribute="centerY" constant="-6" id="Y3O-qB-3wb"/>
+                            <constraint firstItem="j8H-5N-Wxw" firstAttribute="centerY" secondItem="0Db-LG-qz4" secondAttribute="centerY" constant="-6" id="gqC-1K-LnQ"/>
+                            <constraint firstItem="xKS-ov-RUh" firstAttribute="leading" secondItem="j8H-5N-Wxw" secondAttribute="trailing" constant="8" id="k8k-b2-8ae"/>
+                            <constraint firstItem="xKS-ov-RUh" firstAttribute="centerY" secondItem="0Db-LG-qz4" secondAttribute="centerY" id="kcE-Xk-6fK"/>
+                            <constraint firstAttribute="trailing" secondItem="xKS-ov-RUh" secondAttribute="trailing" constant="10" id="nhS-bf-Y6w"/>
+                            <constraint firstItem="j8H-5N-Wxw" firstAttribute="leading" secondItem="suL-Tx-Xc9" secondAttribute="trailing" constant="8" id="rJ5-ZQ-s9q"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="0Db-LG-qz4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="5o3-6o-KWO"/>
+                <constraint firstItem="0Db-LG-qz4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="mLO-mp-R9B"/>
+                <constraint firstAttribute="bottom" secondItem="0Db-LG-qz4" secondAttribute="bottom" constant="8" id="rOp-hq-vsN"/>
+                <constraint firstAttribute="trailing" secondItem="0Db-LG-qz4" secondAttribute="trailing" constant="10" id="ybQ-XD-9Sc"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="amountLabel" destination="suL-Tx-Xc9" id="WBp-qe-x6P"/>
+                <outlet property="card" destination="0Db-LG-qz4" id="X9H-Dd-IFO"/>
+                <outlet property="dateLabel" destination="49w-gy-RHy" id="GMG-ob-bmH"/>
+                <outlet property="iconContainer" destination="xKS-ov-RUh" id="ZlD-iO-Xye"/>
+                <outlet property="iconImageView" destination="jub-HP-dJX" id="pcM-Le-4Sk"/>
+                <outlet property="typeLabel" destination="j8H-5N-Wxw" id="02f-9N-DkF"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="153.82308845577214"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="transPaymentIcon" width="25" height="26"/>
+        <namedColor name="Black">
+            <color red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DarkText">
+            <color red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Manatee">
+            <color red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="green">
+            <color red="0.32549019607843138" green="0.6470588235294118" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

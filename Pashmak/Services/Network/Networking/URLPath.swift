@@ -6,6 +6,7 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
+// swiftlint:disable cyclomatic_complexity
 import Foundation
 
 private let kBaseURL: String = {
@@ -27,6 +28,8 @@ enum URLPath {
   case messages
   case polls
   case vote
+  case debts
+  case payments
 
   func toString() -> String {
     var result = ""
@@ -49,6 +52,10 @@ enum URLPath {
       result = "polls"
     case .vote:
       result = "vote"
+    case .debts:
+      result = "debts"
+    case .payments:
+      result = "payments"
     }
 
     return result

@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func prepareUI() {
-    SkeletonAppearance.default.multilineHeight = 24.0
+//    SkeletonAppearance.default.multilineHeight = 24.0
     SkeletonAppearance.default.multilineCornerRadius = 5
     UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.farsiFont(.light, size: 10.0)], for: [])
   }
@@ -152,11 +152,25 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     Settings.current.update(pushToken: token)
     print("Token: [\(token)]")
   }
-//
-//  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//    Log.trace("Got remote norification.\n[\(userInfo)]")
-//    completionHandler(.newData)
-//  }
+
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    Log.trace("Got remote norification.\n[\(userInfo)]")
+
+    guard let type = userInfo["type"] as? String else {
+      completionHandler(.noData)
+      return
+    }
+
+    switch type {
+    case "vote", "Vote":
+      handleVoteNotif()
+    default:
+      Log.trace("Unknown Background Push type: [\(type)]")
+      completionHandler(.failed)
+      return
+    }
+    completionHandler(.newData)
+  }
 
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
