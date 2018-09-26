@@ -11,18 +11,39 @@
 //
 
 import Async
+import CoreLocation
 import UIKit
 
 protocol CheckinsBusinessLogic {
-func populate(request: Checkins.Populate.Request)
+  func populate(request: Checkins.Populate.Request)
+  func checkin(request: Checkins.Checkin.Request)
+  func checkCheckinNeeded(request: Checkins.UpdateCheckinNeeded.Request)
+
 }
 
 protocol CheckinsDataStore {
 
 }
 
-class CheckinsInteractor: CheckinsBusinessLogic, CheckinsDataStore {
+class CheckinsInteractor: NSObject, CheckinsBusinessLogic, CheckinsDataStore {
+
   var presenter: CheckinsPresentationLogic?
+
+  // MARK: iBeacon definistions
+
+  lazy var locationManager: CLLocationManager = {
+    let locMan = CLLocationManager()
+    locMan.activityType = .automotiveNavigation
+    locMan.delegate = self
+    return locMan
+  }()
+
+  lazy var beacon: CLBeaconRegion = {
+    let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: "00001803-494C-4F47-4943-544543480000") ?? UUID(), major: 10_009, minor: 13_846, identifier: "KianDigital")
+    return beacon
+  }()
+
+  var raningTimer: Timer?
 
   func populate(request: Checkins.Populate.Request) {
 
@@ -51,4 +72,137 @@ class CheckinsInteractor: CheckinsBusinessLogic, CheckinsDataStore {
         senfFailed(error)
       }
   }
+
+  func checkCheckinNeeded(request: Checkins.UpdateCheckinNeeded.Request) {
+    let canCheckin = !Checkin.checkedInToday
+    let response = Checkins.UpdateCheckinNeeded.Response(canCheckin: canCheckin)
+    presenter?.presentUpdateCheckinNeeded(response: response)
+  }
+
+  func checkin(request: Checkins.Checkin.Request) {
+    let notRequired = APIError.invalidPrecondition("ورود امروز خود را ثبت کرده‌اید!")
+    func sendChekinLoading(isRanging: Bool) {
+      let response = Checkins.Checkin.Response(state: .loading, isRanging: isRanging)
+      presenter?.presentCheckin(response: response)
+    }
+
+    func sendChekinFailed(_ error: Error, isRanging: Bool) {
+      let response = Checkins.Checkin.Response(state: .failure(error), isRanging: isRanging)
+      presenter?.presentCheckin(response: response)
+    }
+
+    guard !Checkin.checkedInToday else {
+      sendChekinFailed(notRequired, isRanging: false)
+      return
+    }
+
+    func submitCheckin() {
+      Log.trace("Ranged user, lets submit.")
+      beaconRanged = nil
+      sendChekinLoading(isRanging: false)
+
+      Async.main(after: 1.0) {
+        CheckinServices.shared.checkInNow(type: .manual)
+          .done { chekinResponse in
+            guard let checkinResponse = chekinResponse else {
+              sendChekinFailed(notRequired, isRanging: false)
+              return
+            }
+
+            let message = checkinResponse.message ?? ""
+            let response = Checkins.Checkin.Response(state: .success(message), isRanging: false)
+            self.presenter?.presentCheckin(response: response)
+          }
+          .catch { error in
+            sendChekinFailed(error, isRanging: false)
+          }
+      }
+
+    }
+
+    sendChekinLoading(isRanging: true)
+
+    let startedRanging = startRanging { [weak self] ranged in
+      guard let self = self else {
+        return
+      }
+      self.stopRanging()
+      guard ranged else {
+        let error = APIError.invalidParameters("Range")
+        sendChekinFailed(error, isRanging: true)
+        return
+      }
+      submitCheckin()
+    }
+
+    guard startedRanging else {
+      let error = APIError.invalidParameters("StartedRanging")
+      sendChekinFailed(error, isRanging: true)
+      return
+    }
+
+  }
+
+  @objc
+  private func checkinUpdate() {
+    let needsCheckin = !Checkin.checkedInToday
+    let response = Checkins.UpdateCheckinNeeded.Response(canCheckin: needsCheckin)
+    presenter?.presentUpdateCheckinNeeded(response: response)
+  }
+
+  private var beaconRanged: ((Bool) -> Void)?
+
+  private func startRanging(rangedHandler: @escaping (Bool) -> Void) -> Bool {
+    guard [CLAuthorizationStatus.authorizedAlways, CLAuthorizationStatus.authorizedWhenInUse].contains(CLLocationManager.authorizationStatus()) else {
+      Log.trace("user doesn't allow location monitoring. Cannt proceed with location.")
+      return false
+    }
+    Log.trace("Starting to range for beacons!")
+    beaconRanged = rangedHandler
+    raningTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { _ in
+      Async.main {
+        self.stopRanging()
+        self.beaconRanged?(false)
+      }
+
+    }
+
+    iBeacon.Beacons.forEach { locationManager.startMonitoring(for: $0); locationManager.startRangingBeacons(in: $0) }
+    return true
+  }
+
+  private func stopRanging() {
+    raningTimer?.invalidate()
+    raningTimer = nil
+    iBeacon.Beacons.forEach { locationManager.stopRangingBeacons(in: $0) }
+  }
+
+}
+
+extension CheckinsInteractor: CLLocationManagerDelegate {
+
+  func locationManager(_ manager: CLLocationManager, rangingBeaconsDidFailFor region: CLBeaconRegion, withError error: Error) {
+    Log.trace("Failed to range beacon: [\(region.identifier)] because:\n\(error.localizedDescription)")
+  }
+
+  func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+    Log.trace("beacons ranged: \(beacons)")
+    let beaconIDs = iBeacon.Beacons.map { $0.proximityUUID }
+    beacons.forEach {
+      guard beaconIDs.contains($0.proximityUUID) else {
+        Log.trace("Unknown beacon found in ranging: [\($0)]")
+        return
+      }
+
+      guard $0.proximity != .unknown else {
+        Log.trace("Could not determine proximity for beacon [\($0.proximityUUID)]")
+        return
+      }
+      Async.main {
+        self.beaconRanged?(true)
+      }
+
+    }
+  }
+
 }

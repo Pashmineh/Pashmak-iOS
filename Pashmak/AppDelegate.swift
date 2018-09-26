@@ -205,12 +205,12 @@ extension AppDelegate: CLLocationManagerDelegate {
   }
 
   func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-    print("Entered region: \(region.identifier)")
 
     guard !Checkin.checkedInToday else {
 //      Log.trace("Already checked in today, no need for beacon checkin!")
       return
     }
+    print("Entered region: \(region.identifier)")
 
     let beaconIDs = beacons.map { $0.proximityUUID }
     guard let regionID = (region as? CLBeaconRegion)?.proximityUUID, beaconIDs.contains(regionID) else {

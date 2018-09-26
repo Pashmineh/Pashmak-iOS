@@ -15,6 +15,8 @@ import UIKit
 protocol CheckinsPresentationLogic {
 
   func presentPopulate(response: Checkins.Populate.Response)
+  func presentCheckin(response: Checkins.Checkin.Response)
+  func presentUpdateCheckinNeeded(response: Checkins.UpdateCheckinNeeded.Response)
 
 }
 
@@ -47,4 +49,41 @@ class CheckinsPresenter: CheckinsPresentationLogic {
       viewController?.displayPopulateSuccess(viewModel: viewMdoel)
     }
   }
+
+  func presentUpdateCheckinNeeded(response: Checkins.UpdateCheckinNeeded.Response) {
+    let canCheckin = response.canCheckin
+    let viewModel = Checkins.UpdateCheckinNeeded.ViewModel(canCheckin: canCheckin)
+    viewController?.displayUpdateCheckinNeeded(viewModel: viewModel)
+  }
+
+  func presentCheckin(response: Checkins.Checkin.Response) {
+    let state = response.state
+    let isRanging = response.isRanging
+    switch state {
+    case .loading:
+      let message = isRanging ? Texts.Ranging.random : Texts.Loading.random
+      let viewModel = Checkins.Checkin.ViewModel.Loading(message: message)
+      viewController?.displayCheckinLoading(viewModel: viewModel)
+    case .failure(let error):
+
+      var message = "خطا در عملیات!"
+      if isRanging {
+        message = Texts.RangingError.random
+      } else {
+        if case APIError.invalidPrecondition(let msg) = error {
+          message = msg
+        } else if case APIError.invalidResponseCode(let status) = error {
+          message = Texts.ServerErrors.random + "\n(\(status))"
+        }
+      }
+
+      let viewModel = Checkins.Checkin.ViewModel.Failed(message: message)
+      viewController?.displayCheckinFailed(viewModel: viewModel)
+
+    case .success(let message):
+      let viewModel = Checkins.Checkin.ViewModel.Success(message: message)
+      viewController?.displayCheckinSuccess(viewModel: viewModel)
+    }
+  }
+
 }

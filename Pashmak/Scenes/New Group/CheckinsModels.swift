@@ -36,4 +36,43 @@ enum Checkins {
       }
     }
   }
+
+  enum Checkin {
+    typealias CheckinFetchState = FetchState<String, Error>
+    struct Request {
+
+    }
+
+    struct Response {
+      let state: CheckinFetchState
+      let isRanging: Bool
+    }
+
+    enum ViewModel {
+      struct Loading {
+        let message: String
+      }
+
+      struct Failed {
+        let message: String
+      }
+
+      struct Success {
+        let message: String
+      }
+    }
+
+  }
+
+  enum UpdateCheckinNeeded {
+    struct Request {
+
+    }
+    struct Response {
+      let canCheckin: Bool
+    }
+    struct ViewModel {
+      let canCheckin: Bool
+    }
+  }
 }

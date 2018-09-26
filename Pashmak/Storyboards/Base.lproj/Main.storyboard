@@ -266,43 +266,14 @@
                                     <constraint firstAttribute="height" constant="1" id="2J6-bU-aJk"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEP-f2-uYd">
-                                <rect key="frame" x="0.0" y="554" width="375" height="64"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2oS-H1-S6a" customClass="Button" customModule="Material">
-                                        <rect key="frame" x="16" y="10" width="343" height="44"/>
-                                        <color key="backgroundColor" name="DavyGrey"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="W51-rO-U9e"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="IRANSansDNFaNum-Bold" family="IRANSansDNFaNum" pointSize="16"/>
-                                        <state key="normal" title="ثبت ورود">
-                                            <color key="titleColor" name="Grey"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="checkinButtonTapped:" destination="FyZ-sJ-4aE" eventType="touchUpInside" id="d30-Nd-qqp"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="2oS-H1-S6a" firstAttribute="centerY" secondItem="sEP-f2-uYd" secondAttribute="centerY" id="1RX-b1-ch4"/>
-                                    <constraint firstAttribute="trailing" secondItem="2oS-H1-S6a" secondAttribute="trailing" constant="16" id="LDu-l5-cuC"/>
-                                    <constraint firstAttribute="height" constant="64" id="PKb-JO-bFh"/>
-                                    <constraint firstItem="2oS-H1-S6a" firstAttribute="leading" secondItem="sEP-f2-uYd" secondAttribute="leading" constant="16" id="X5l-0Y-p9Q"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" name="Grey"/>
                         <constraints>
-                            <constraint firstItem="8L5-r5-1YD" firstAttribute="trailing" secondItem="sEP-f2-uYd" secondAttribute="trailing" id="7sr-E1-Tsm"/>
-                            <constraint firstItem="sEP-f2-uYd" firstAttribute="leading" secondItem="8L5-r5-1YD" secondAttribute="leading" id="BFb-O5-jVe"/>
                             <constraint firstItem="4bb-sv-TU2" firstAttribute="top" secondItem="ldm-sA-eBA" secondAttribute="top" id="Bzb-8f-sgy"/>
                             <constraint firstItem="fGi-Qn-iQw" firstAttribute="top" secondItem="4bb-sv-TU2" secondAttribute="bottom" id="DY8-mo-jHW"/>
                             <constraint firstItem="DzS-Dm-dk3" firstAttribute="leading" secondItem="8L5-r5-1YD" secondAttribute="leading" id="I8L-FL-3Bn"/>
                             <constraint firstItem="4bb-sv-TU2" firstAttribute="left" secondItem="ldm-sA-eBA" secondAttribute="left" id="Zo5-Dm-svE"/>
                             <constraint firstItem="8L5-r5-1YD" firstAttribute="trailing" secondItem="fGi-Qn-iQw" secondAttribute="trailing" id="ad8-PI-4Nx"/>
-                            <constraint firstItem="sEP-f2-uYd" firstAttribute="bottom" secondItem="8L5-r5-1YD" secondAttribute="bottom" id="dKn-XE-0VX"/>
                             <constraint firstAttribute="right" secondItem="4bb-sv-TU2" secondAttribute="right" id="dz3-y3-C79"/>
                             <constraint firstItem="fGi-Qn-iQw" firstAttribute="leading" secondItem="8L5-r5-1YD" secondAttribute="leading" id="fG7-8I-1sp"/>
                             <constraint firstAttribute="bottom" secondItem="DzS-Dm-dk3" secondAttribute="bottom" id="hUt-jb-dlS"/>
@@ -316,8 +287,6 @@
                         <outlet property="avatarBorderView" destination="wfb-q9-xvF" id="BVJ-6v-KqX"/>
                         <outlet property="avatarImageView" destination="5d7-oz-iw7" id="Ksg-CL-6gZ"/>
                         <outlet property="balanceLabel" destination="uhe-f4-MoA" id="AuS-dB-FxB"/>
-                        <outlet property="bottomContainer" destination="sEP-f2-uYd" id="Utn-Ej-Bs4"/>
-                        <outlet property="checkinButton" destination="2oS-H1-S6a" id="IbM-kf-nu3"/>
                         <outlet property="collectionContainer" destination="DzS-Dm-dk3" id="klP-ya-qLN"/>
                         <outlet property="cycleNameLabel" destination="K9u-Wt-Ppp" id="EGW-Lp-xas"/>
                         <outlet property="fullnameLabel" destination="00l-ro-dfv" id="zls-pb-26V"/>
@@ -411,10 +380,53 @@
                     <view key="view" contentMode="scaleToFill" id="KLv-Rd-O9z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbZ-h6-rb2" customClass="PulseView" customModule="Material">
+                                <rect key="frame" x="16" y="554" width="110" height="48"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkinSubmitIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-Yp-hL7">
+                                        <rect key="frame" x="16" y="12.5" width="24" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="3cQ-ec-4PC"/>
+                                            <constraint firstAttribute="width" constant="24" id="kRo-85-RAa"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ثبت ورود" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1V-Ut-NKZ">
+                                        <rect key="frame" x="41" y="13" width="53" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="0EW-Jd-9Lj"/>
+                                            <constraint firstAttribute="width" constant="53" id="p3W-Xh-Jda"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="IRANSansDNFaNum-Light" family="IRANSansDNFaNum" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="orangeDark"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="ClW-2J-3sD"/>
+                                    <constraint firstAttribute="trailing" secondItem="j1V-Ut-NKZ" secondAttribute="trailing" constant="16" id="WhE-XX-q7D"/>
+                                    <constraint firstAttribute="height" constant="48" id="bc0-pn-pOu"/>
+                                    <constraint firstItem="j1V-Ut-NKZ" firstAttribute="centerY" secondItem="gbZ-h6-rb2" secondAttribute="centerY" id="cnw-KN-zjv"/>
+                                    <constraint firstItem="Yra-Yp-hL7" firstAttribute="centerY" secondItem="gbZ-h6-rb2" secondAttribute="centerY" id="fiD-p7-xI3"/>
+                                    <constraint firstItem="Yra-Yp-hL7" firstAttribute="leading" secondItem="gbZ-h6-rb2" secondAttribute="leading" constant="16" id="xSJ-Ic-71l"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" name="whiteSmoke"/>
+                        <constraints>
+                            <constraint firstItem="gbZ-h6-rb2" firstAttribute="leading" secondItem="5fR-SC-2HB" secondAttribute="leading" constant="16" id="1Zt-HL-dbE"/>
+                            <constraint firstItem="5fR-SC-2HB" firstAttribute="bottom" secondItem="gbZ-h6-rb2" secondAttribute="bottom" constant="16" id="FAR-Pw-5l1"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5fR-SC-2HB"/>
                     </view>
                     <navigationItem key="navigationItem" id="9vG-kf-WLL"/>
+                    <connections>
+                        <outlet property="checkinButton" destination="gbZ-h6-rb2" id="uMn-WV-nWl"/>
+                        <outlet property="checkinButtonWidthConstraint" destination="ClW-2J-3sD" id="gTU-UX-9h1"/>
+                        <outlet property="submitButtonLabel" destination="j1V-Ut-NKZ" id="YoR-x5-QVF"/>
+                        <outlet property="submitButtonLeadingConstraint" destination="xSJ-Ic-71l" id="gTd-q6-jym"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BC4-mL-A7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -546,6 +558,7 @@
         <image name="InboxTab" width="22" height="22"/>
         <image name="PollTab" width="19" height="24"/>
         <image name="TransactionTab" width="22" height="22"/>
+        <image name="checkinSubmitIcon" width="24" height="23"/>
         <image name="signout" width="19" height="19"/>
         <image name="splashIcon" width="61" height="100.5"/>
         <namedColor name="Black">
@@ -571,6 +584,9 @@
         </namedColor>
         <namedColor name="TextDeactive">
             <color red="0.72941176470588232" green="0.72941176470588232" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orangeDark">
+            <color red="0.93725490196078431" green="0.61960784313725492" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="whiteSmoke">
             <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -18,8 +18,6 @@ protocol HomePresentationLogic {
   func presentPopulate(response: Home.Populate.Response)
   func presentRefresh(response: Home.Refresh.Response)
   func presentSignout(response: Home.Signout.Response)
-  func presentCheckin(response: Home.Checkin.Response)
-  func presentCheckinUpdate(response: Home.UpdateChekinButton.Response)
 }
 
 class HomePresenter: HomePresentationLogic {
@@ -90,7 +88,7 @@ class HomePresenter: HomePresentationLogic {
     let viewModel = Home.Signout.ViewModel()
     viewController?.displaySignout(viewModel: viewModel)
   }
-
+/*
   func presentCheckin(response: Home.Checkin.Response) {
     let state = response.state
     let isRanging = response.isRanging
@@ -126,4 +124,6 @@ class HomePresenter: HomePresentationLogic {
     let viewModel = Home.UpdateChekinButton.ViewModel(needsChekin: needsCheckin)
     viewController?.displayCheckinUpdate(viewModel: viewModel)
   }
+
+ */
 }

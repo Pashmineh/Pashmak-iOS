@@ -18,8 +18,7 @@ protocol HomeBusinessLogic {
   func populate(request: Home.Populate.Request)
   func refresh(request: Home.Refresh.Request)
   func signout(request: Home.Signout.Request)
-  func checkin(request: Home.Checkin.Request)
-//  func updateCheckin(request: Home.UpdateChekinButton.Request)
+
 }
 
 protocol HomeDataStore {
@@ -32,7 +31,7 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
     super.init()
 
     NotificationCenter.default.addObserver(self, selector: #selector(self.updateReceived), name: Notification.Name.Pashmak.UpdateReceievd, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(self.checkinUpdate), name: Notification.Name.Pashmak.checkinUpdated, object: nil)
+//    NotificationCenter.default.addObserver(self, selector: #selector(self.checkinUpdate), name: Notification.Name.Pashmak.checkinUpdated, object: nil)
   }
 
   deinit {
@@ -42,6 +41,7 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
   var presenter: HomePresentationLogic?
 
   // MARK: iBeacon definistions
+  /*
   lazy var locationManager: CLLocationManager = {
     let locMan = CLLocationManager()
     locMan.activityType = .automotiveNavigation
@@ -53,8 +53,9 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
     return beacon
   }()
 
-  var raningTimer: Timer?
 
+  var raningTimer: Timer?
+*/
   // MARK: Populate
 
   func populate(request: Home.Populate.Request) {
@@ -118,7 +119,7 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
   }
 
   // MARK: Chekin
-
+/*
   func checkin(request: Home.Checkin.Request) {
     let notRequired = APIError.invalidPrecondition("ورود امروز خود را ثبت کرده‌اید!")
     func sendChekinLoading(isRanging: Bool) {
@@ -215,9 +216,9 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
     raningTimer = nil
     iBeacon.Beacons.forEach { locationManager.stopRangingBeacons(in: $0) }
   }
-
+*/
 }
-
+/*
 extension HomeInteractor: CLLocationManagerDelegate {
 
   func locationManager(_ manager: CLLocationManager, rangingBeaconsDidFailFor region: CLBeaconRegion, withError error: Error) {
@@ -245,3 +246,4 @@ extension HomeInteractor: CLLocationManagerDelegate {
   }
 
 }
+*/

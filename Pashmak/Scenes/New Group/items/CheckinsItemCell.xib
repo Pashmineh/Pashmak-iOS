@@ -45,7 +45,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" name="Orange"/>
+                                <color key="backgroundColor" name="Manatee"/>
                                 <constraints>
                                     <constraint firstItem="JDg-sT-uXx" firstAttribute="centerX" secondItem="OXI-kU-niM" secondAttribute="centerX" id="91H-6X-IX2"/>
                                     <constraint firstItem="JDg-sT-uXx" firstAttribute="centerY" secondItem="OXI-kU-niM" secondAttribute="centerY" id="RmX-C7-aUR"/>
@@ -68,7 +68,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="green"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Kdm-HK-bP9" firstAttribute="leading" secondItem="8mE-R5-7hs" secondAttribute="leading" constant="4" id="K18-dI-ker"/>
                                     <constraint firstAttribute="width" constant="68" id="SG9-nL-qpH"/>
@@ -118,7 +118,7 @@
                 <outlet property="card" destination="kLJ-HL-I3l" id="gl2-ua-Xk6"/>
                 <outlet property="checkinIcon" destination="JDg-sT-uXx" id="7YS-1c-QQw"/>
                 <outlet property="dateLabel" destination="Xky-aF-mK0" id="jtZ-Xb-tEE"/>
-                <outlet property="timeContainerView" destination="8mE-R5-7hs" id="4TX-LE-Np1"/>
+                <outlet property="timeContainerView" destination="OXI-kU-niM" id="gTX-v0-mAv"/>
                 <outlet property="timeLabel" destination="Kdm-HK-bP9" id="nhS-jb-0fG"/>
             </connections>
         </collectionViewCell>
@@ -128,11 +128,8 @@
         <namedColor name="DarkText">
             <color red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Orange">
-            <color red="0.96078431372549022" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="green">
-            <color red="0.32549019607843138" green="0.6470588235294118" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Manatee">
+            <color red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="whiteSmoke">
             <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

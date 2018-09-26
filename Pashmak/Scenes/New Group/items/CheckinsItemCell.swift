@@ -71,6 +71,7 @@ class CheckinsItemCell: UICollectionViewCell {
 
       let hasPenalty = item?.hasPenalty == true
       self.timeContainerView.backgroundColor = hasPenalty ? #colorLiteral(red: 1, green: 0, blue: 0.1215686275, alpha: 1) : #colorLiteral(red: 0.3254901961, green: 0.6470588235, blue: 0, alpha: 1)
+      self.timeLabel.textColor = hasPenalty ? #colorLiteral(red: 1, green: 0, blue: 0.1215686275, alpha: 1) : #colorLiteral(red: 0.3254901961, green: 0.6470588235, blue: 0, alpha: 1)
       self.checkinIcon.image = hasPenalty ? Constants.delayIcon : Constants.ontimeIcon
     }
   }

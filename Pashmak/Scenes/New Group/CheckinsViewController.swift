@@ -22,6 +22,12 @@ protocol CheckinsDisplayLogic: AnyObject {
   func displayPopulateLoading(viewModel: Checkins.Populate.ViewModel.Loading)
   func displayPopulateFailed(viewModel: Checkins.Populate.ViewModel.Failed)
   func displayPopulateSuccess(viewModel: Checkins.Populate.ViewModel.Success)
+
+  func displayCheckinLoading(viewModel: Checkins.Checkin.ViewModel.Loading)
+  func displayCheckinFailed(viewModel: Checkins.Checkin.ViewModel.Failed)
+  func displayCheckinSuccess(viewModel: Checkins.Checkin.ViewModel.Success)
+
+  func displayUpdateCheckinNeeded(viewModel: Checkins.UpdateCheckinNeeded.ViewModel)
 }
 
 class CheckinsViewController: UIViewController {
@@ -68,6 +74,11 @@ class CheckinsViewController: UIViewController {
 
   // MARK: View lifecycle
 
+  @IBOutlet private weak var checkinButton: PulseView!
+  @IBOutlet private weak var checkinButtonWidthConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var submitButtonLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var submitButtonLabel: UILabel!
+
   let updater = ListAdapterUpdater()
   lazy var adapter: ListAdapter = {
     let adapter = ListAdapter(updater: self.updater, viewController: self, workingRangeSize: 5)
@@ -81,9 +92,14 @@ class CheckinsViewController: UIViewController {
     return refCon
   }()
 
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     prepareUI()
+    prepareObservers()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -91,11 +107,18 @@ class CheckinsViewController: UIViewController {
     if displayedItems.isEmpty {
       self.populate()
     }
+    checkinUpdate()
   }
 
   private func prepareUI() {
     prepareNavBar()
     prepareCollectionView()
+    prepareCheckinButton()
+  }
+
+  private func prepareObservers() {
+    NotificationCenter.default.addObserver(self, selector: #selector(self.populate), name: NSNotification.Name.Pashmak.checkinUpdated, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.checkinUpdate), name: NSNotification.Name.Pashmak.checkinUpdated, object: nil)
   }
 
   private func prepareNavBar() {
@@ -120,10 +143,11 @@ class CheckinsViewController: UIViewController {
     collectionView.isScrollEnabled = true
     collectionView.scrollIndicatorInsets.top = topOffset
     collectionView.contentInset.top = topOffset
-    //    collectionView.contentInset.bottom = 8.0
+    collectionView.contentInset.bottom = 64.0
     collectionView.layer.setShadow(opacity: 0.15, radius: 8.0)
     collectionView.refreshControl = self.refreshControl
     adapter.collectionView = collectionView
+    adapter.scrollViewDelegate = self
     adapter.dataSource = self
     guard let containerView = self.view else {
       return
@@ -135,10 +159,60 @@ class CheckinsViewController: UIViewController {
     self.view.sendSubviewToBack(collectionView)
   }
 
+  private func prepareCheckinButton() {
+    guard let button = self.checkinButton else {
+      return
+    }
+    self.view.bringSubviewToFront(button)
+    button.layer.cornerRadius = 24.0
+    button.depthPreset = .depth3
+    button.pulseColor = .white
+    button.isUserInteractionEnabled = true
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.checkIn))
+    button.addGestureRecognizer(tapGesture)
+  }
+
   @objc
   func populate() {
-    let request = Checkins.Populate.Request()
-    interactor?.populate(request: request)
+    Async.main { [weak self] in
+      guard let self = self else {
+        return
+      }
+
+      let request = Checkins.Populate.Request()
+      self.interactor?.populate(request: request)
+    }
+  }
+
+  @objc
+  private func checkIn() {
+    Async.main { [weak self] in
+      guard let self = self else {
+        return
+      }
+
+      let request = Checkins.Checkin.Request()
+      self.interactor?.checkin(request: request)
+    }
+
+  }
+
+  @objc
+  private func checkinUpdate() {
+    Async.main { [weak self] in
+      guard let self = self else {
+        return
+      }
+
+      let request = Checkins.UpdateCheckinNeeded.Request()
+      self.interactor?.checkCheckinNeeded(request: request)
+    }
+
+  }
+
+  private func updateChecckinUpdate(canCheckin: Bool) {
+    self.checkinButton.isUserInteractionEnabled = canCheckin
+    self.checkinButton.backgroundColor = canCheckin ? #colorLiteral(red: 0.937254902, green: 0.6196078431, blue: 0.1019607843, alpha: 1) : #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
   }
 
 }
@@ -169,6 +243,40 @@ extension CheckinsViewController: CheckinsDisplayLogic {
       self.refreshControl.endRefreshing()
     }
   }
+
+  func displayUpdateCheckinNeeded(viewModel: Checkins.UpdateCheckinNeeded.ViewModel) {
+    let checkinNeeded = viewModel.canCheckin
+    updateChecckinUpdate(canCheckin: checkinNeeded)
+  }
+
+  func displayCheckinLoading(viewModel: Checkins.Checkin.ViewModel.Loading) {
+    let message = viewModel.message
+    KVNProgress.show(withStatus: message)
+  }
+
+  func displayCheckinFailed(viewModel: Checkins.Checkin.ViewModel.Failed) {
+    let message = viewModel.message
+    KVNProgress.showError(withStatus: message)
+  }
+
+  func displayCheckinSuccess(viewModel: Checkins.Checkin.ViewModel.Success) {
+    let message = viewModel.message
+
+    func updateForCheckin() {
+      updateChecckinUpdate(canCheckin: false)
+    }
+
+    if !message.isEmpty {
+      KVNProgress.showSuccess(withStatus: message) {
+        updateForCheckin()
+      }
+    } else {
+      KVNProgress.dismiss {
+        updateForCheckin()
+      }
+    }
+
+  }
 }
 
 extension CheckinsViewController: ListAdapterDataSource {
@@ -188,6 +296,27 @@ extension CheckinsViewController: ListAdapterDataSource {
 
   func emptyView(for listAdapter: ListAdapter) -> UIView? {
     return nil
+  }
+
+}
+
+extension CheckinsViewController: UIScrollViewDelegate {
+
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let position = max(0, scrollView.contentOffset.y + scrollView.contentInset.top + 64.0)
+    let maxWidth: CGFloat = 66.0
+    let minWidth: CGFloat = 48.0
+    let maxPosition: CGFloat = 264.0
+
+    let progress = min(max(maxPosition - position, 0.0) / maxPosition, 1.0)
+    let widthDiff = progress * maxWidth
+
+    let width = minWidth + widthDiff
+
+    self.submitButtonLabel.alpha = progress
+    self.submitButtonLabel.font = UIFont.farsiFont(.light, size: 8.0 + (4.0 * progress))
+    self.checkinButtonWidthConstraint.constant = width
+    self.submitButtonLeadingConstraint.constant = 16.0 + (1.0 - progress) * -4.0
   }
 
 }
