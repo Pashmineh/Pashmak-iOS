@@ -211,8 +211,20 @@ class CheckinsViewController: UIViewController {
   }
 
   private func updateChecckinUpdate(canCheckin: Bool) {
+
     self.checkinButton.isUserInteractionEnabled = canCheckin
-    self.checkinButton.backgroundColor = canCheckin ? #colorLiteral(red: 0.937254902, green: 0.6196078431, blue: 0.1019607843, alpha: 1) : #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
+    UIView.animate(withDuration: 0.35,
+                   delay: 0.0,
+                   usingSpringWithDamping: 0.7,
+                   initialSpringVelocity: 6.0,
+                   options: [],
+                   animations: { [weak self] in
+                    guard let self = self else {
+                      return
+                    }
+                    self.checkinButton.transform = canCheckin ? .identity : CGAffineTransform(translationX: -130.0, y: 0.0)
+                    self.checkinButton.backgroundColor = canCheckin ? #colorLiteral(red: 0.937254902, green: 0.6196078431, blue: 0.1019607843, alpha: 1) : #colorLiteral(red: 0.7294117647, green: 0.7294117647, blue: 0.7294117647, alpha: 1)
+      }, completion: nil)
   }
 
 }
