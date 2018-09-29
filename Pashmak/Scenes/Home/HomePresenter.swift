@@ -77,7 +77,9 @@ class HomePresenter: HomePresentationLogic {
       let profile = Home.UserProfile(homeData: homeData, settings: Settings.current)
       var items: [ListDiffable] = []
       if let events = homeData.events?.sorted(by: { ($0.eventTimeEpoch ?? 0) < ($1.eventTimeEpoch ?? 0) }) {
-        events.forEach { items.append($0) }
+        events.filter {
+          $0.eventTimeEpoch?.utcDate.isAfterDate(Date().dateByAdding(-14, Calendar.Component.day).date, granularity: Calendar.Component.day) ?? false
+        }.forEach { items.append($0) }
       }
       let viewModel = Home.Refresh.ViewModel.Success(profile: profile, items: items)
       viewController?.displayRefreshSuccess(viewModel: viewModel)
