@@ -11,6 +11,7 @@
 //
 
 import Async
+import BLTNBoard
 import IGListKit
 import KVNProgress
 import Material
@@ -84,6 +85,37 @@ class TransactionsViewController: UIViewController {
     return refCon
   }()
 
+  lazy var bulletinDataSource: AddPaymentBulletinDataSource = {
+    let dataSource = AddPaymentBulletinDataSource()
+
+    return dataSource
+  }()
+
+  lazy var bulettinManager: BLTNItemManager = {
+    let typeSelection = bulletinDataSource.makeTypeSelection()
+    let manager = BLTNItemManager(rootItem: typeSelection)
+    manager.cardCornerRadius = 16.0
+    manager.backgroundColor = #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
+
+    return manager
+  }()
+
+  lazy var addTransactionButton: Button = {
+    let button = Button()
+    button.setImage(UIImage(named: "addTransactionIcon"), for: [])
+    button.pulseColor = .white
+    button.pulseAnimation = .centerRadialBeyondBounds
+    button.touchUp = { [weak self] in
+      guard let self = self else {
+        return
+      }
+      self.showAddTranssaction()
+
+    }
+
+    return button
+  }()
+
   override func viewDidLoad() {
     super.viewDidLoad()
     prepareUI()
@@ -105,6 +137,7 @@ class TransactionsViewController: UIViewController {
     let navbar = self.navigationItem
     navbar.titleLabel.text = "تراکنش‌ها"
     navbar.titleLabel.textColor = .white
+    navbar.rightViews = [self.addTransactionButton]
     navbar.titleLabel.font = UIFont.farsiFont(.bold, size: 16.0)
     self.navigationController?.navigationBar.tintColor = .white
     let blurView = VisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.regular))
@@ -145,6 +178,12 @@ class TransactionsViewController: UIViewController {
   func populate() {
     let request = Transactions.Populate.Request()
     interactor?.populate(request: request)
+  }
+
+  func showAddTranssaction() {
+//    router?.routeToAddTransaction()
+    let viewController = self.navigationController ?? self
+    self.bulettinManager.showBulletin(above: viewController)
   }
 }
 

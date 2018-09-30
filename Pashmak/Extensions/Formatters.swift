@@ -6,6 +6,7 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
+//swiftlint:disable cyclomatic_complexity
 import UIKit
 
 enum Formatters {
@@ -87,5 +88,39 @@ extension DateFormatter {
     dateFormatter.timeStyle = .none
     dateFormatter.dateFormat = dateFormat
     return dateFormatter
+  }
+}
+
+extension String {
+  var numerals: String {
+    func farsiToEnglish(char: String) -> String {
+      switch char {
+      case "۱":
+        return "1"
+      case "۲":
+        return "2"
+      case "۳":
+        return "3"
+      case "۴":
+        return "4"
+      case "۵":
+        return "5"
+      case "۶":
+        return "6"
+      case "۷":
+        return "7"
+      case "۸":
+        return "8"
+      case "۹":
+        return "9"
+      case "۰":
+        return "0"
+      default:
+        return char
+      }
+    }
+    return self.map {
+      farsiToEnglish(char: "\($0)")
+    }.joined()
   }
 }

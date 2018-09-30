@@ -11,9 +11,11 @@ import Foundation
 
 private let kBaseURL: String = {
   #if DEBUG
-  return "http://178.128.195.55:8080"
+//  return "http://178.128.195.55:8080"
+  return "http://pashmak.kian.digital:8080"
   #else
-  return "http://178.128.195.55:8080"
+//  return "http://178.128.195.55:8080"
+  return "http://pashmak.kian.digital:8080"
   #endif
 }()
 

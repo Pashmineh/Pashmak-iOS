@@ -45,3 +45,10 @@ extension String {
     return result
   }
 }
+
+extension String {
+  var digits: String {
+    return components(separatedBy: CharacterSet.decimalDigits.inverted)
+      .joined()
+  }
+}

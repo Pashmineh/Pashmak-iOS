@@ -232,6 +232,11 @@ extension AppDelegate: CLLocationManagerDelegate {
           Log.trace("Looks like we've already cheked in with server")
         }
       }.catch { error in
+        let content = UNMutableNotificationContent()
+        content.title = "پشمک"
+        content.body = "خطا در ثبت ورود خودکار.\nلطفاً ورودتان را در اپ ثبت کنید."
+        let request = UNNotificationRequest(identifier: "Checkin", content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         Log.trace("Chekin failed!\n\(error.localizedDescription)")
       }
 

@@ -28,12 +28,15 @@ target 'Pashmak' do
   pod 'Kingfisher'
   pod 'SwiftDate'
   pod 'ParticlesLoadingView'
-  pod 'RxSwift'  
+  pod 'BulletinBoard' #, :path => '../BulletinBoard/'
+  pod 'RxKeyboard'
+  pod 'TextImageButton', :git => 'https://github.com/mohpor/TextImageButton.git', :branch => 'material'
+ 
 inhibit_all_warnings!
 
 
 post_install do |installer|
-  oldTargets = ["Hero", "SkeletonView"]
+  oldTargets = ["Hero", "SkeletonView", "BulletinBoard"]
   installer.pods_project.targets.each do |target|
     if oldTargets.include? target.name
       target.build_configurations.each do |config|

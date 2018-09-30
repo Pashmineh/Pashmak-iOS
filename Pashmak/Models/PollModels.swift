@@ -7,7 +7,7 @@
 //
 
 import IGListKit
-import RxSwift
+
 /*
 [
   {

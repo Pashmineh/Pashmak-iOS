@@ -466,6 +466,24 @@
             </objects>
             <point key="canvasLocation" x="4412" y="1218"/>
         </scene>
+        <!--Add Transaction View Controller-->
+        <scene sceneID="qIn-e6-2ak">
+            <objects>
+                <viewController storyboardIdentifier="AddTransactionStoryboardID" modalPresentationStyle="overCurrentContext" id="fda-VX-mPZ" customClass="AddTransactionViewController" customModule="Pashmak" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="fXW-BQ-DIa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="0.20015517979452055" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="y5R-ei-bbq"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h1a-Ei-pC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5241" y="1218"/>
+        </scene>
         <!--نظر سنجی-->
         <scene sceneID="zMi-Li-D5i">
             <objects>

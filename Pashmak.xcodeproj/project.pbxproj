@@ -21,6 +21,7 @@
 		843FB33D212AD7CD0047A734 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33B212AD7CD0047A734 /* Main.storyboard */; };
 		843FB33F212AD7CE0047A734 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843FB33E212AD7CE0047A734 /* Assets.xcassets */; };
 		843FB342212AD7CE0047A734 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843FB340212AD7CE0047A734 /* LaunchScreen.storyboard */; };
+		84497EC2215F7005003ACE11 /* AddTransactionTypeSelectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84497EC1215F7005003ACE11 /* AddTransactionTypeSelectionPage.swift */; };
 		845CB26A213129E6001957B3 /* BiometricAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB269213129E6001957B3 /* BiometricAuthentication.swift */; };
 		845CB26C21312A0E001957B3 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB26B21312A0E001957B3 /* Controls.swift */; };
 		845CB26E21312A34001957B3 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CB26D21312A34001957B3 /* UIButton+Extensions.swift */; };
@@ -69,12 +70,15 @@
 		8498D97B214E48C000CEC73F /* MessageItemSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498D97A214E48C000CEC73F /* MessageItemSectionController.swift */; };
 		8498D97E214E496D00CEC73F /* MessageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498D97C214E496D00CEC73F /* MessageItemCell.swift */; };
 		8498D97F214E496D00CEC73F /* MessageItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8498D97D214E496D00CEC73F /* MessageItemCell.xib */; };
+		84A145E2215F85C5002F9AF3 /* AddPaymentBulletinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A145E1215F85C5002F9AF3 /* AddPaymentBulletinDataSource.swift */; };
+		84A145E4215F9609002F9AF3 /* AddPaymentTextBulletinPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A145E3215F9609002F9AF3 /* AddPaymentTextBulletinPage.swift */; };
 		84CB27402135130600DE59C5 /* Checkins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB273F2135130600DE59C5 /* Checkins.swift */; };
 		84CB274221351DDA00DE59C5 /* CheckinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB274121351DDA00DE59C5 /* CheckinModels.swift */; };
 		84CB274421351ECE00DE59C5 /* CheckinRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB274321351ECE00DE59C5 /* CheckinRequests.swift */; };
 		84CB2747213530EE00DE59C5 /* CheckinServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CB2746213530EE00DE59C5 /* CheckinServices.swift */; };
 		84DEDED1214D10B60021C448 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DEDED0214D10B60021C448 /* MainTabBarController.swift */; };
 		84DEDED3214D1CFF0021C448 /* MessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DEDED2214D1CFF0021C448 /* MessagesModel.swift */; };
+		84DFBE2721608CC400D03727 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBE2621608CC400D03727 /* UITextField+Extensions.swift */; };
 		84E5542C215119EE001A861F /* PollHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5542A215119EE001A861F /* PollHeaderCell.swift */; };
 		84E5542D215119EE001A861F /* PollHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E5542B215119EE001A861F /* PollHeaderCell.xib */; };
 		84EC2249213409740040ECE2 /* HomeSkeletonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC2248213409740040ECE2 /* HomeSkeletonCard.swift */; };
@@ -141,6 +145,7 @@
 		843FB341212AD7CE0047A734 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		843FB343212AD7CE0047A734 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		843FB349212AD7EC0047A734 /* Pashmak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pashmak.entitlements; sourceTree = "<group>"; };
+		84497EC1215F7005003ACE11 /* AddTransactionTypeSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionTypeSelectionPage.swift; sourceTree = "<group>"; };
 		845CB269213129E6001957B3 /* BiometricAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthentication.swift; sourceTree = "<group>"; };
 		845CB26B21312A0E001957B3 /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		845CB26D21312A34001957B3 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -189,12 +194,15 @@
 		8498D97A214E48C000CEC73F /* MessageItemSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItemSectionController.swift; sourceTree = "<group>"; };
 		8498D97C214E496D00CEC73F /* MessageItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItemCell.swift; sourceTree = "<group>"; };
 		8498D97D214E496D00CEC73F /* MessageItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageItemCell.xib; sourceTree = "<group>"; };
+		84A145E1215F85C5002F9AF3 /* AddPaymentBulletinDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPaymentBulletinDataSource.swift; sourceTree = "<group>"; };
+		84A145E3215F9609002F9AF3 /* AddPaymentTextBulletinPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPaymentTextBulletinPage.swift; sourceTree = "<group>"; };
 		84CB273F2135130600DE59C5 /* Checkins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkins.swift; sourceTree = "<group>"; };
 		84CB274121351DDA00DE59C5 /* CheckinModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinModels.swift; sourceTree = "<group>"; };
 		84CB274321351ECE00DE59C5 /* CheckinRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinRequests.swift; sourceTree = "<group>"; };
 		84CB2746213530EE00DE59C5 /* CheckinServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinServices.swift; sourceTree = "<group>"; };
 		84DEDED0214D10B60021C448 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		84DEDED2214D1CFF0021C448 /* MessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesModel.swift; sourceTree = "<group>"; };
+		84DFBE2621608CC400D03727 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		84E5542A215119EE001A861F /* PollHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollHeaderCell.swift; sourceTree = "<group>"; };
 		84E5542B215119EE001A861F /* PollHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PollHeaderCell.xib; sourceTree = "<group>"; };
 		84EC2248213409740040ECE2 /* HomeSkeletonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCard.swift; sourceTree = "<group>"; };
@@ -311,6 +319,16 @@
 			path = Pashmak;
 			sourceTree = "<group>";
 		};
+		84497EC0215F6FE7003ACE11 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				84A145E1215F85C5002F9AF3 /* AddPaymentBulletinDataSource.swift */,
+				84497EC1215F7005003ACE11 /* AddTransactionTypeSelectionPage.swift */,
+				84A145E3215F9609002F9AF3 /* AddPaymentTextBulletinPage.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
 		845CB268213129D2001957B3 /* LocalAuthentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +401,7 @@
 		846529EA215B4BF7000D9631 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				84497EC0215F6FE7003ACE11 /* Pages */,
 				846529F5215B4C2F000D9631 /* Items */,
 				846529EF215B4C22000D9631 /* TransactionsInteractor.swift */,
 				846529ED215B4C22000D9631 /* TransactionsModels.swift */,
@@ -608,6 +627,7 @@
 				8412D0192133C0B400942874 /* Formatters.swift */,
 				9519AA9521346EA4003AB3ED /* UIView+Extensions.swift */,
 				959B0AD32135CF700042B847 /* Notifs.swift */,
+				84DFBE2621608CC400D03727 /* UITextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -733,6 +753,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Pashmak/Pods-Pashmak-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AsyncSwift/Async.framework",
+				"${BUILT_PRODUCTS_DIR}/BulletinBoard/BLTNBoard.framework",
 				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
 				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
@@ -751,12 +772,15 @@
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxKeyboard/RxKeyboard.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/SecureNSUserDefaults/SecureNSUserDefaults.framework",
 				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
+				"${BUILT_PRODUCTS_DIR}/TextImageButton/TextImageButton.framework",
 				"${BUILT_PRODUCTS_DIR}/VisualEffectView/VisualEffectView.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
@@ -765,6 +789,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Async.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BLTNBoard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaSecurity.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
@@ -783,12 +808,15 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxKeyboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SecureNSUserDefaults.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextImageButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VisualEffectView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
@@ -843,8 +871,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84A145E4215F9609002F9AF3 /* AddPaymentTextBulletinPage.swift in Sources */,
 				8498D970214E3C2B00CEC73F /* MessagesRouter.swift in Sources */,
 				84EE945E214FA42800499D96 /* PollItemSectionController.swift in Sources */,
+				84A145E2215F85C5002F9AF3 /* AddPaymentBulletinDataSource.swift in Sources */,
 				84EE9453214F932900499D96 /* PollsModels.swift in Sources */,
 				959B0AD42135CF700042B847 /* Notifs.swift in Sources */,
 				95BC007D212CA7B0001B4375 /* Path.swift in Sources */,
@@ -873,6 +903,7 @@
 				95BC0073212CA400001B4375 /* UIColor+Hue.swift in Sources */,
 				846529F3215B4C22000D9631 /* TransactionsViewController.swift in Sources */,
 				84652A00215B74F1000D9631 /* TransactionItemCell.swift in Sources */,
+				84497EC2215F7005003ACE11 /* AddTransactionTypeSelectionPage.swift in Sources */,
 				84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */,
 				95446D2021333F9F0096E78F /* HomedataModels.swift in Sources */,
 				84EC225C213422E50040ECE2 /* HomeEventCell.swift in Sources */,
@@ -914,6 +945,7 @@
 				8498D972214E3C2B00CEC73F /* MessagesViewController.swift in Sources */,
 				95446D22213342000096E78F /* HomeRequests.swift in Sources */,
 				84EE9451214F932900499D96 /* PollsPresenter.swift in Sources */,
+				84DFBE2721608CC400D03727 /* UITextField+Extensions.swift in Sources */,
 				841BF3042132B9C3003E7BA7 /* HomeInteractor.swift in Sources */,
 				845CB27221312A7C001957B3 /* UIView+Animations.swift in Sources */,
 				845E3FF4213103F10025477A /* HTTPConstants.swift in Sources */,
