@@ -15,6 +15,8 @@ class AddTransactionTextBulletinPage: AddPaymentBaseItemPage {
   enum FieldType {
     case amount
     case date
+    case refID
+    case note
 
     var placeHolder: String {
       switch self {
@@ -22,14 +24,18 @@ class AddTransactionTextBulletinPage: AddPaymentBaseItemPage {
         return "مبلغ (ریال)"
       case .date:
         return "تاریخ"
+      case .refID:
+        return "کد پیگیری"
+      case .note:
+        return "توضیحات"
       }
     }
 
     var keyboardType: UIKeyboardType {
       switch self {
-      case .amount:
+      case .amount, .refID:
         return .asciiCapableNumberPad
-      case .date:
+      case .date, .note:
         return .default
       }
     }
@@ -53,14 +59,26 @@ class AddTransactionTextBulletinPage: AddPaymentBaseItemPage {
 
   override func setUp() {
     super.setUp()
+    textField.valueChanged = { [weak self] _ in
+      guard let self = self else {
+        return
+      }
+      self.refreshAction()
+    }
+    refreshAction()
     self.textField.setUp()
   }
 
   override func tearDown() {
-    super.tearDown()
+    self.textField.valueChanged = nil
     self.textField.tearDown()
-//    self.textField.removeTarget(self, action: #selector(self.textChanged), for: .editingChanged)
-//    self.datePicker.removeTarget(self, action: #selector(self.dateChanged), for: .valueChanged)
+    super.tearDown()
+  }
+
+  private func refreshAction() {
+    let isValid = textField.isValid
+    self.actionButton?.isEnabled = isValid
+    self.actionButton?.alpha = isValid ? 1.0 : 0.5
   }
 
 }

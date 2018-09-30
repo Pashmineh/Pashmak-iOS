@@ -60,6 +60,9 @@ class AddPaymentBulletinDataSource {
 
   var selectedType: PaymentType?
   var amount: UInt64 = 0
+  var date: String = ""
+  var refID: String = ""
+  var note: String = ""
 
   func makeTypeSelection() -> AddTransactionTypeSelectionPage {
 
@@ -102,6 +105,42 @@ class AddPaymentBulletinDataSource {
 
   func makeDatePage() -> AddTransactionTextBulletinPage {
     let item = AddTransactionTextBulletinPage(title: "کی پرداخت کرده‌اید؟", fieldType: .date)
+    item.actionHandler = { _ in
+      let value = item.textField.value
+      guard !value.isEmpty else {
+        KVNProgress.showError(withStatus: "تاریخ پرداخت را وارد کنید!")
+        return
+      }
+      self.date = value
+      item.manager?.displayNextItem()
+    }
+    item.next = makeRefIDPage()
+    return item
+  }
+
+  func makeRefIDPage() -> AddTransactionTextBulletinPage {
+    let item = AddTransactionTextBulletinPage(title: "شماره پیگیری پرداختی چی بود؟", fieldType: .refID)
+    item.actionHandler = { _ in
+      var value = item.textField.value
+      if value.isEmpty {
+        value = "دستی"
+      }
+      self.refID = value
+      item.manager?.displayNextItem()
+    }
+    item.next = makeNotePage()
+    return item
+  }
+
+  func makeNotePage() -> AddTransactionTextBulletinPage {
+    let item = AddTransactionTextBulletinPage(title: "برای این کارت چه توضیحی داری؟", fieldType: .note)
+    item.actionHandler = { _ in
+      let value = item.textField.value
+      self.note = value
+      _ = item.textField.resignFirstResponder()
+      item.isDismissable = false
+      item.manager?.displayActivityIndicator(color: #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1))
+    }
     return item
   }
 

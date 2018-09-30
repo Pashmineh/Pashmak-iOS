@@ -16,6 +16,9 @@ class BulletingTextField: TextField {
     return ""
   }
   var valueChanged: ((String) -> Void)?
+  var isValid: Bool {
+    return false
+  }
   var fieldType: AddTransactionTextBulletinPage.FieldType {
     return .amount
   }
@@ -26,6 +29,10 @@ class BulletingTextField: TextField {
       return BulletinAmountTextField(frame: .zero)
     case .date:
       return BulletinDateTextField(frame: .zero)
+    case .refID:
+      return BulletinRefIDTextField(frame: .zero)
+    case .note:
+      return BulletinNoteTextField(frame: .zero)
     }
   }
 
@@ -67,6 +74,10 @@ class BulletinAmountTextField: BulletingTextField, TextFieldDelegate {
 
   override var value: String {
     return (self.text ?? "").numerals.digits
+  }
+
+  override var isValid: Bool {
+    return (UInt64(value) ?? 0) > 10_000
   }
 
   override init(frame: CGRect) {
@@ -170,6 +181,15 @@ class BulletinDateTextField: BulletingTextField {
     return "\(datePicker.date.timeIntervalSince1970 * 10)"
   }
 
+  override var isValid: Bool {
+
+    guard Double(value) != nil else {
+      return false
+    }
+
+    return true
+  }
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     prepareUI()
@@ -202,4 +222,96 @@ class BulletinDateTextField: BulletingTextField {
     let dateString = kDateFormatter.string(from: date)
     self.text = dateString
   }
+}
+
+class BulletinRefIDTextField: BulletingTextField {
+  override var fieldType: AddTransactionTextBulletinPage.FieldType {
+    return .refID
+  }
+
+  override var value: String {
+    return (self.text ?? "").numerals.digits
+  }
+
+  override var isValid: Bool {
+    return true
+  }
+
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    prepareUI()
+  }
+
+  @available(*, unavailable)
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  private func prepareUI() {
+    prepareTextField()
+  }
+
+  override func setUp() {
+    super.setUp()
+    self.addTarget(self, action: #selector(self.textChanged), for: .editingChanged)
+    self.textChanged()
+  }
+
+  override func tearDown() {
+    self.delegate = nil
+    self.removeTarget(self, action: #selector(self.textChanged), for: .editingChanged)
+    super.tearDown()
+  }
+
+  @objc
+  private func textChanged() {
+    valueChanged?(self.value)
+  }
+
+}
+
+class BulletinNoteTextField: BulletingTextField {
+  override var fieldType: AddTransactionTextBulletinPage.FieldType {
+    return .note
+  }
+
+  override var value: String {
+    return (self.text ?? "")
+  }
+
+  override var isValid: Bool {
+    return true
+  }
+
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    prepareUI()
+  }
+
+  @available(*, unavailable)
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  private func prepareUI() {
+    prepareTextField()
+  }
+
+  override func setUp() {
+    super.setUp()
+    self.addTarget(self, action: #selector(self.textChanged), for: .editingChanged)
+    self.textChanged()
+  }
+
+  override func tearDown() {
+    self.delegate = nil
+    self.removeTarget(self, action: #selector(self.textChanged), for: .editingChanged)
+    super.tearDown()
+  }
+
+  @objc
+  private func textChanged() {
+    valueChanged?(self.value)
+  }
+
 }
