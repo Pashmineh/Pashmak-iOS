@@ -6,6 +6,7 @@
 //  Copyright © 2018 Mohammad Porooshani. All rights reserved.
 //
 
+//swiftlint:disable first_where
 import Foundation
 import RealmSwift
 
@@ -13,7 +14,7 @@ extension RealmProvider {
   private static let settingsConfig: Realm.Configuration = {
     do {
       let path = try Path.inLibary("settings.realm")
-      return Realm.Configuration(fileURL: path, encryptionKey: "242DC31B-D4F9-4C7A-879E-76328D84D692".sha512, readOnly: false, schemaVersion: 1, objectTypes: [Settings.self])
+      return Realm.Configuration(fileURL: path, encryptionKey: "242DC31B-D4F9-4C7A-879E-76328D84D692".sha512, readOnly: false, schemaVersion: 1, objectTypes: [Settings.self, UserAccount.self])
     } catch {
       fatalError(error.localizedDescription)
     }
@@ -198,5 +199,67 @@ extension RealmProvider {
       }
 
     }
+
+}
+
+@objcMembers
+class UserAccount: Object {
+
+  enum Property: String {
+    case userID, userLogin, firstName, lastName, email, imageUrl
+  }
+
+  dynamic var userID: Int = 0
+  dynamic var userLogin: String?
+  dynamic var firstName: String?
+  dynamic var lastName: String?
+  dynamic var email: String?
+  dynamic var imageUrl: String?
+
+  convenience init(model: ServerModels.UserAccount) {
+    self.init()
+    self.userID = Int(model.id)
+    self.userLogin = model.login
+    self.firstName = model.firstName
+    self.lastName = model.lastName
+    self.email = model.email
+    self.imageUrl = model.imageUrl
+  }
+
+  static var current: UserAccount? {
+    let realm = RealmProvider.SettingsProvider.realm
+     return realm.objects(UserAccount.self).first
+  }
+
+  static func update() {
+    let realm = RealmProvider.SettingsProvider.realm
+    PashmakServer.perform(request: ServerRequest.Account.getAccount())
+      .done { (result: ServerData<ServerModels.UserAccount>) in
+        let account = result.model
+        do {
+          try realm.write {
+            let predicate = NSPredicate(format: "%K == %d", UserAccount.Property.userID.rawValue, Int(account.id))
+            if let realmAccount = realm.objects(UserAccount.self).filter(predicate).first {
+              realmAccount.userLogin = account.login
+              realmAccount.firstName = account.firstName
+              realmAccount.lastName = account.lastName
+              realmAccount.imageUrl = account.imageUrl
+              Log.trace("Account updated.")
+            } else {
+              realm.add(UserAccount(model: account))
+              Log.trace("Account created.")
+            }
+          }
+
+        } catch {
+          Log.warning("Error updating account.\n\(error.localizedDescription)")
+          return
+        }
+
+      }
+      .catch { error in
+        Log.warning("Error updating account.\n\(error.localizedDescription)")
+      }
+  }
 
 }

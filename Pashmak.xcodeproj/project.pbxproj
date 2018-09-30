@@ -80,6 +80,8 @@
 		84DEDED3214D1CFF0021C448 /* MessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DEDED2214D1CFF0021C448 /* MessagesModel.swift */; };
 		84DFBE2721608CC400D03727 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBE2621608CC400D03727 /* UITextField+Extensions.swift */; };
 		84DFBE29216099BD00D03727 /* BulettinTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBE28216099BD00D03727 /* BulettinTextFields.swift */; };
+		84DFBE2B2160E2AF00D03727 /* UserAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBE2A2160E2AF00D03727 /* UserAccountModel.swift */; };
+		84DFBE2F2160E56C00D03727 /* AccountRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBE2E2160E56C00D03727 /* AccountRequests.swift */; };
 		84E5542C215119EE001A861F /* PollHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5542A215119EE001A861F /* PollHeaderCell.swift */; };
 		84E5542D215119EE001A861F /* PollHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E5542B215119EE001A861F /* PollHeaderCell.xib */; };
 		84EC2249213409740040ECE2 /* HomeSkeletonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC2248213409740040ECE2 /* HomeSkeletonCard.swift */; };
@@ -205,6 +207,8 @@
 		84DEDED2214D1CFF0021C448 /* MessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesModel.swift; sourceTree = "<group>"; };
 		84DFBE2621608CC400D03727 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		84DFBE28216099BD00D03727 /* BulettinTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulettinTextFields.swift; sourceTree = "<group>"; };
+		84DFBE2A2160E2AF00D03727 /* UserAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountModel.swift; sourceTree = "<group>"; };
+		84DFBE2E2160E56C00D03727 /* AccountRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRequests.swift; sourceTree = "<group>"; };
 		84E5542A215119EE001A861F /* PollHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollHeaderCell.swift; sourceTree = "<group>"; };
 		84E5542B215119EE001A861F /* PollHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PollHeaderCell.xib; sourceTree = "<group>"; };
 		84EC2248213409740040ECE2 /* HomeSkeletonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonCard.swift; sourceTree = "<group>"; };
@@ -371,6 +375,7 @@
 				84DEDED2214D1CFF0021C448 /* MessagesModel.swift */,
 				84EE9449214F895D00499D96 /* PollModels.swift */,
 				846529F8215B629D000D9631 /* TransactionModels.swift */,
+				84DFBE2A2160E2AF00D03727 /* UserAccountModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -397,6 +402,7 @@
 				8498D977214E450400CEC73F /* MessagesRequests.swift */,
 				84EE945A214F9BA100499D96 /* PollsRequest.swift */,
 				846529FA215B6564000D9631 /* TransactionRequests.swift */,
+				84DFBE2E2160E56C00D03727 /* AccountRequests.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -907,6 +913,7 @@
 				846529F3215B4C22000D9631 /* TransactionsViewController.swift in Sources */,
 				84652A00215B74F1000D9631 /* TransactionItemCell.swift in Sources */,
 				84497EC2215F7005003ACE11 /* AddTransactionTypeSelectionPage.swift in Sources */,
+				84DFBE2B2160E2AF00D03727 /* UserAccountModel.swift in Sources */,
 				84FC6CCA212BCA6B00B4A56A /* SplashViewController.swift in Sources */,
 				95446D2021333F9F0096E78F /* HomedataModels.swift in Sources */,
 				84EC225C213422E50040ECE2 /* HomeEventCell.swift in Sources */,
@@ -948,6 +955,7 @@
 				84FC6CC6212BCA6B00B4A56A /* SplashInteractor.swift in Sources */,
 				8498D972214E3C2B00CEC73F /* MessagesViewController.swift in Sources */,
 				95446D22213342000096E78F /* HomeRequests.swift in Sources */,
+				84DFBE2F2160E56C00D03727 /* AccountRequests.swift in Sources */,
 				84EE9451214F932900499D96 /* PollsPresenter.swift in Sources */,
 				84DFBE2721608CC400D03727 /* UITextField+Extensions.swift in Sources */,
 				841BF3042132B9C3003E7BA7 /* HomeInteractor.swift in Sources */,

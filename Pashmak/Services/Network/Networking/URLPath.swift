@@ -22,6 +22,7 @@ private let kBaseURL: String = {
 enum URLPath {
 
   case api
+  case account
   case authenticate
   case home
   case checkin
@@ -38,6 +39,8 @@ enum URLPath {
     switch self {
     case .api:
       result = "api"
+    case .account:
+      result = "account"
     case .authenticate:
       result = "authenticate"
     case .home:

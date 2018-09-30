@@ -59,6 +59,7 @@ class HomeInteractor: NSObject, HomeBusinessLogic, HomeDataStore {
   // MARK: Populate
 
   func populate(request: Home.Populate.Request) {
+    UserAccount.update()
     Log.trace("Push Token: [\(Settings.current.pushToken)]")
     func sendLoading() {
       let response = Home.Populate.Response(state: .loading)
