@@ -86,9 +86,9 @@ class AddPaymentBulletinDataSource {
 
   func makeAmountPage() -> AddTransactionTextBulletinPage {
 
-    let item = AddTransactionTextBulletinPage(title: "چقدر پرداخت کردید؟", fieldTitle: "مبلغ (ریال)", keyboardType: .asciiCapableNumberPad)
+    let item = AddTransactionTextBulletinPage(title: "چقدر پرداخت کردید؟", fieldType: .amount)
     item.actionHandler = { _ in
-      let value = item.value
+      let value = item.textField.value
       guard !value.isEmpty else {
         KVNProgress.showError(withStatus: "ابتدا مبلغ را وارد کنید")
         return
@@ -101,7 +101,7 @@ class AddPaymentBulletinDataSource {
   }
 
   func makeDatePage() -> AddTransactionTextBulletinPage {
-    let item = AddTransactionTextBulletinPage(title: "کی پرداخت کرده‌اید؟", fieldTitle: "تاریخ پرداخت", keyboardType: .twitter)
+    let item = AddTransactionTextBulletinPage(title: "کی پرداخت کرده‌اید؟", fieldType: .date)
     return item
   }
 
