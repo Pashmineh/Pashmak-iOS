@@ -51,13 +51,13 @@ class HomeEventCell: UICollectionViewCell {
       return
     }
 
-    var eventName = event.name
+    var eventName = event.title
     if event.hasPassed {
       eventName = "\(eventName ?? "") - [برگزار شده]"
     }
     self.eventNameLabel.text = eventName
     self.eventDescription.text = event.description
-    self.addressLabel.text = event.location
+    self.addressLabel.text = event.address?.street
     self.eventTimeLabel.text = event.eventDateTime
     self.card.alpha = event.hasPassed ? 0.5 : 1.0
 

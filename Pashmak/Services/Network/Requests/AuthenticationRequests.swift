@@ -12,19 +12,24 @@ extension ServerRequest {
 
   enum Authentication {
 
-    static func authenticate(info: ServerModels.Authentication.Request) -> HTTPRequest {
+    static func authenticate(userName: String, password: String, info: ServerModels.Authentication.Request) -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api, .authenticate])
-      return HTTPRequest(method: .POST, url: url, parameters: nil, bodyMessage: info, headers: nil, timeOut: .normal, acceptType: .json, contentType: .json)
+      url.appendPathComponents([.login])
+      let userPass = "\(userName):\(password)"
+      guard let userPassData = userPass.data(using: .utf8) else {
+        fatalError("Could not make user pass data!")
+      }
+      let base64UserPass = "Basic " + userPassData.base64EncodedString()
+      let headers = [HTTPHeaders.Authorization: base64UserPass]
+      return HTTPRequest(method: .POST, url: url, parameters: nil, bodyMessage: info, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)
 
     }
 
-    static func updateToken(token: String) -> HTTPRequest {
+    static func updateToken(updateInfo: ServerModels.TokenUpdateRequest) -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api, .updatePush])
+      url.appendPathComponents([.updatePush])
       let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
-      let params = ["token": token]
-      return HTTPRequest(method: .PUT, url: url, parameters: params, bodyMessage: nil, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)
+      return HTTPRequest(method: .PUT, url: url, parameters: nil, bodyMessage: updateInfo, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)
     }
 
   }

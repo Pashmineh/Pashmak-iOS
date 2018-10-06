@@ -29,21 +29,15 @@ extension ServerModels {
   enum Authentication {
     class Request: ServerModel {
 
-      let deviceID: String
-      let password: String
+      let installationID: String
       let platform: String
-      let rememberMe: Bool = true
-      let token: String
-      let username: String
+      let pushToken: String
 
-      init(username: String, password: String) {
+      init() {
 
-        self.username = username
-        self.password = password
-
-        self.deviceID = Settings.current.deviceToken
+        self.installationID = Settings.current.deviceToken
         self.platform = "IOS"
-        self.token = Settings.current.pushToken
+        self.pushToken = Settings.current.pushToken
 
       }
 

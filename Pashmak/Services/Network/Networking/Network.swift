@@ -46,7 +46,7 @@ enum PashmakServer {
     return Promise { seal in
 
       func reject(_ error: APIError) {
-        Log.trace("at: \(error.localizedDescription)")
+        Log.trace("[\(request.requestURL.urlString())] at: \(error.localizedDescription)")
         dispatchQueue.async {
           seal.reject(error)
         }

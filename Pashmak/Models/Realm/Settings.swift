@@ -57,7 +57,7 @@ extension RealmProvider {
       }
 
       let settings = Settings()
-      settings.deviceToken = UUID().uuidString
+      settings.deviceToken = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
       do {
         try realm.write {
           realm.add(settings)
@@ -115,7 +115,8 @@ extension RealmProvider {
 //        return
 //      }
 
-      PashmakServer.perform(request: ServerRequest.Authentication.updateToken(token: token), validResponseCodes: [200, 201])
+      let updateInfo = ServerModels.TokenUpdateRequest(token: token, installationID: Settings.current.deviceToken)
+      PashmakServer.perform(request: ServerRequest.Authentication.updateToken(updateInfo: updateInfo), validResponseCodes: [200, 201])
         .done { (result: ServerData<ServerModels.EmptyServerModel>) in
           _ = result.model
           self.updateLastPushToken(token: token)
@@ -209,21 +210,21 @@ class UserAccount: Object {
     case userID, userLogin, firstName, lastName, email, imageUrl
   }
 
-  dynamic var userID: Int = 0
-  dynamic var userLogin: String?
+  dynamic var userID: String = UUID().uuidString
+  dynamic var phoneNumber: String?
   dynamic var firstName: String?
   dynamic var lastName: String?
-  dynamic var email: String?
-  dynamic var imageUrl: String?
+//  dynamic var email: String?
+  dynamic var avatarUrl: String?
 
   convenience init(model: ServerModels.UserAccount) {
     self.init()
-    self.userID = Int(model.id)
-    self.userLogin = model.login
+//    self.userID = Int(model.id)
+    self.phoneNumber = model.phoneNumber
     self.firstName = model.firstName
     self.lastName = model.lastName
-    self.email = model.email
-    self.imageUrl = model.imageUrl
+//    self.email = model.email
+    self.avatarUrl = model.avatarURL
   }
 
   static var current: UserAccount? {
@@ -238,12 +239,12 @@ class UserAccount: Object {
         let account = result.model
         do {
           try realm.write {
-            let predicate = NSPredicate(format: "%K == %d", UserAccount.Property.userID.rawValue, Int(account.id))
+            let predicate = NSPredicate(format: "%K == %@", UserAccount.Property.userID.rawValue, account.id)
             if let realmAccount = realm.objects(UserAccount.self).filter(predicate).first {
-              realmAccount.userLogin = account.login
+              realmAccount.phoneNumber = account.phoneNumber
               realmAccount.firstName = account.firstName
               realmAccount.lastName = account.lastName
-              realmAccount.imageUrl = account.imageUrl
+              realmAccount.avatarUrl = account.avatarURL
               Log.trace("Account updated.")
             } else {
               realm.add(UserAccount(model: account))

@@ -28,17 +28,30 @@ import Foundation
   "ROLE_ADMIN"
   ]
 }
+ {
+ "firstName": "محمد",
+ "lastName": "پروشانی",
+ "avatarURL": "",
+ "totalPaid": 10000,
+ "balance": -20000,
+ "phoneNumber": "09122214063"
+ }
 */
 
 extension ServerModels {
 
   class UserAccount: ServerModel {
-    var id: UInt64 = 0
-    var login: String?
+    var id: String = UUID().uuidString
+    var phoneNumber: String?
     var firstName: String?
     var lastName: String?
-    var email: String?
-    var imageUrl: String?
+//    var email: String?
+    var avatarURL: String?
+  }
+
+  struct TokenUpdateRequest: ServerModel {
+    let token: String
+    let installationID: String
   }
 
 }

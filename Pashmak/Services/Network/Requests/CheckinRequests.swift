@@ -14,16 +14,15 @@ extension ServerRequest {
 
     static func checkin(info: ServerModels.Checkin.Request) -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api, .checkin])
+      url.appendPathComponents([.checkin])
 
-      let params: [String: String] = ["checkinType": info.type.rawValue]
       let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
-      return HTTPRequest(method: .POST, url: url, parameters: params, bodyMessage: info, headers: headers, timeOut: .short, acceptType: .json, contentType: .json)
+      return HTTPRequest(method: .POST, url: url, parameters: nil, bodyMessage: info, headers: headers, timeOut: .short, acceptType: .json, contentType: .json)
     }
 
     static func getCheckins() -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api, .checkins])
+      url.appendPathComponents([.checkin])
 
       let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
       return HTTPRequest(method: .GET, url: url, parameters: nil, bodyMessage: nil, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)

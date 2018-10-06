@@ -9,7 +9,7 @@
 import Foundation
 import IGListKit
 
-private let kDateFormatter = DateFormatter.farsiDateFormatter(with: "EEEE، dd MMMM YYYY")
+private let kDateFormatter = DateFormatter.farsiDateFormatter(with: "EEEE، d MMMM YYYY")
 private let kTimeFormatter = DateFormatter.farsiDateFormatter(with: "HH:mm")
 private let kTimeFormatterForPenalty: DateFormatter = {
   let formatter = DateFormatter()
@@ -39,6 +39,16 @@ private let kTimeFormatterForPenalty: DateFormatter = {
  "userLogin": "09122214063"
  }
  */
+
+/*
+[
+  {
+    "id": "49937D24-F0B3-43C3-9FA5-9CFAA15E4DB9",
+    "checkinType": "MANUAL",
+    "checkinTime": 1538819585.4504981
+  }
+]
+ */
 extension ServerModels {
 
   enum Checkin {
@@ -48,30 +58,30 @@ extension ServerModels {
     }
 
     class Request: ServerModel {
-      let type: CheckinType
+      let checkinType: CheckinType
 
       init(type: CheckinType) {
-        self.type = type
+        self.checkinType = type
       }
     }
 
     class Response: ServerModel {
-      var checkinTime: String?
-      var checkinTimeEpoch: Double?
-      var id: Int?
+      var checkinTime: Double?
+      var checkinDate: Date? { return checkinTime?.utcDate }
+//      var checkinTimeEpoch: Double?
+      var checkinType: CheckinType?
+      var id: String?
       var message: String?
     }
 
     class ListItem: ServerModel {
-      var id: UInt64 = .random(in: 0...100_000)
-      var checkinTimeEpoch: Double?
-      var checkinDate: Date {
-        return checkinTimeEpoch?.utcDate ?? Date()
-      }
-      var message: String?
-      var userId: UInt64?
+
+      var id: String = UUID().uuidString
       var checkinType: CheckinType?
-      var userLogin: String?
+      var checkinTime: Double?
+      var checkinDate: Date {
+        return checkinTime?.utcDate ?? Date()
+      }
 
       var isLoading: Bool = false
       var checkinDateString: String {
@@ -93,7 +103,7 @@ extension ServerModels {
       }
 
       enum CodingKeys: String, CodingKey {
-        case id, checkinTimeEpoch, message, userId, checkinType, userLogin
+        case id, checkinTime, checkinType
       }
     }
 
@@ -113,10 +123,8 @@ extension ServerModels.Checkin.ListItem: ListDiffable {
     }
 
     return object.id == self.id
-    && object.checkinTimeEpoch == self.checkinTimeEpoch
+    && object.checkinTime == self.checkinTime
     && object.checkinType == self.checkinType
-    && object.message == self.message
-    && object.userId == self.userId
   }
 
 }

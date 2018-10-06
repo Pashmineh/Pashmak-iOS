@@ -12,18 +12,20 @@ import Foundation
 private let kBaseURL: String = {
   #if DEBUG
 //  return "http://178.128.195.55:8080"
-  return "http://pashmak.kian.digital:8080"
+//  return "http://pashmak.kian.digital:8080"
+  return "http://192.168.60.3:8080"
   #else
 //  return "http://178.128.195.55:8080"
-  return "http://pashmak.kian.digital:8080"
+//  return "http://pashmak.kian.digital:8080"
+  return "http://192.168.60.3:8080"
   #endif
 }()
 
 enum URLPath {
 
   case api
-  case account
-  case authenticate
+  case profile
+  case login
   case home
   case checkin
   case checkins
@@ -39,10 +41,10 @@ enum URLPath {
     switch self {
     case .api:
       result = "api"
-    case .account:
-      result = "account"
-    case .authenticate:
-      result = "authenticate"
+    case .profile:
+      result = "profile"
+    case .login:
+      result = "login"
     case .home:
       result = "home"
     case .checkin:

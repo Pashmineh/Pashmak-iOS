@@ -12,7 +12,7 @@ extension ServerRequest {
   enum Account {
     static func getAccount() -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api, .account])
+      url.appendPathComponents([.profile])
       let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
       return HTTPRequest(method: .GET, url: url, parameters: nil, bodyMessage: nil, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)
     }

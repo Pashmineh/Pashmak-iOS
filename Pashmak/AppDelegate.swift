@@ -156,18 +156,27 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     Log.trace("Got remote norification.\n[\(userInfo)]")
 
-    guard let type = userInfo["type"] as? String else {
+    guard let typeString = userInfo["type"] as? String, let type = UpdatePushModel.UpdateType(rawValue: typeString) else {
+      Log.trace("Unknown Background Push type: [\(userInfo["type"] ?? "")]")
       completionHandler(.noData)
       return
     }
 
     switch type {
-    case "vote", "Vote":
+    case .poll:
       handleVoteNotif()
-    default:
-      Log.trace("Unknown Background Push type: [\(type)]")
-      completionHandler(.failed)
-      return
+    case .checkin:
+      handleCheckinNotif()
+    case .event:
+      handleEventNotif()
+    case .home:
+      handleHomeNotif()
+    case .messages:
+      handleMessagesNotif()
+    case .profile:
+      handleProfileNotif()
+    case .transaction:
+      handleTransactionNotif()
     }
     completionHandler(.newData)
   }
@@ -193,6 +202,36 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   private func handleVoteNotif() {
     Log.trace("Vote notification received.")
     NotificationCenter.default.post(name: NSNotification.Name.Pashmak.voteUpdateReceived, object: nil)
+  }
+
+  private func handleCheckinNotif() {
+    Log.trace("Checkin notification received.")
+    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.checkinUpdated, object: nil)
+  }
+
+  private func handleEventNotif() {
+    Log.trace("Event notification received.")
+    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.eventUpdateReceived, object: nil)
+  }
+
+  private func handleHomeNotif() {
+    Log.trace("Home notification received.")
+    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.homeUpdateReceived, object: nil)
+  }
+
+  private func handleMessagesNotif() {
+    Log.trace("Messages notification received.")
+    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.messageUpdateReceived, object: nil)
+  }
+
+  private func handleProfileNotif() {
+    Log.trace("Profile notification received.")
+    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.profileUpdateReceived, object: nil)
+  }
+
+  private func handleTransactionNotif() {
+    Log.trace("Transaction notification received.")
+    NotificationCenter.default.post(name: NSNotification.Name.Pashmak.transactionUpdateReceived, object: nil)
   }
 
 }

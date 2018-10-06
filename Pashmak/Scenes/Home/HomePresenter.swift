@@ -43,10 +43,10 @@ class HomePresenter: HomePresentationLogic {
     case .success(let homeData):
       let profile = Home.UserProfile(homeData: homeData, settings: Settings.current)
       var items: [ListDiffable] = []
-      if let events = homeData.events?.sorted(by: { ($0.eventTimeEpoch ?? 0) < ($1.eventTimeEpoch ?? 0) }) {
-        events.filter {
-          $0.eventTimeEpoch?.utcDate.isAfterDate(Date().dateByAdding(-14, Calendar.Component.day).date, granularity: Calendar.Component.day) ?? false
-        }
+      if let events = homeData.events?.sorted(by: { ($0.dateEpoch ?? 0) < ($1.dateEpoch ?? 0) }) {
+        events/*.filter {
+          $0.date?.isAfterDate(Date().dateByAdding(-14, Calendar.Component.day).date, granularity: Calendar.Component.day) ?? false
+        }*/
         .forEach {
           items.append($0)
         }
@@ -76,10 +76,10 @@ class HomePresenter: HomePresentationLogic {
     case .success(let homeData):
       let profile = Home.UserProfile(homeData: homeData, settings: Settings.current)
       var items: [ListDiffable] = []
-      if let events = homeData.events?.sorted(by: { ($0.eventTimeEpoch ?? 0) < ($1.eventTimeEpoch ?? 0) }) {
-        events.filter {
-          $0.eventTimeEpoch?.utcDate.isAfterDate(Date().dateByAdding(-14, Calendar.Component.day).date, granularity: Calendar.Component.day) ?? false
-        }.forEach { items.append($0) }
+      if let events = homeData.events?.sorted(by: { ($0.dateEpoch ?? 0) < ($1.dateEpoch ?? 0) }) {
+        events/*.filter {
+          $0.dateEpoch?.utcDate.isAfterDate(Date().dateByAdding(-14, Calendar.Component.day).date, granularity: Calendar.Component.day) ?? false
+        }*/.forEach { items.append($0) }
       }
       let viewModel = Home.Refresh.ViewModel.Success(profile: profile, items: items)
       viewController?.displayRefreshSuccess(viewModel: viewModel)

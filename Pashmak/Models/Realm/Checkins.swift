@@ -42,15 +42,15 @@ class Checkin: Object {
   }
 
   dynamic var time = Date()
-  dynamic var id: Int = 0
+  dynamic var id: String = UUID().uuidString
   dynamic var type: CheckinType = .manual
   dynamic var message: String = ""
   dynamic var userName: String = ""
 
   convenience init(model: ServerModels.Checkin.Response) {
     self.init()
-    self.time = model.checkinTimeEpoch?.utcDate ?? Date()
-    self.id = model.id ?? 0
+    self.time = model.checkinDate ?? Date()
+    self.id = model.id ?? UUID().uuidString
     self.message = model.message ?? ""
     self.type = .iBeacon
     self.userName = Settings.current.phoneNumber

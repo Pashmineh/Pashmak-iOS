@@ -14,7 +14,7 @@ extension ServerRequest {
 
     static func fetchHome() -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api, .home])
+      url.appendPathComponents([.home])
       let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
 
       return HTTPRequest(method: .GET, url: url, parameters: nil, bodyMessage: nil, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)

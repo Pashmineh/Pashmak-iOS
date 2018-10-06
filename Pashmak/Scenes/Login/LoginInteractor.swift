@@ -111,9 +111,9 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
 
     sendAuthenticationLoading()
 
-    let authInfo = ServerModels.Authentication.Request(username: userName, password: password)
+    let authInfo = ServerModels.Authentication.Request()
 
-    PashmakServer.perform(request: ServerRequest.Authentication.authenticate(info: authInfo), validResponseCodes: [200, 201])
+    PashmakServer.perform(request: ServerRequest.Authentication.authenticate(userName: userName, password: password, info: authInfo), validResponseCodes: [200, 201])
       .done { (ressult: ServerData<ServerModels.Authentication.Response>) in
         let model = ressult.model
         preserveAuthenticationResults(response: model, phoneNumber: userName)

@@ -27,7 +27,32 @@ import SwiftDate
   ]
 }
 */
-
+/*
+{
+  "cycle": "مهر ۹۷",
+  "balance": {
+    "balance": -20000,
+    "totalPaid": 10000
+  },
+  "events": [
+  {
+  "address": {
+  "id": "2BF3D3F8-53E7-4050-91A2-DD3FD5EC62AB",
+  "title": "Room 2",
+  "street": "Alvand St",
+  "lat": 12,
+  "long": 12,
+  "mapImageURL": "http://SomeURL"
+  },
+  "id": "027305EE-44E6-42FA-9017-4627BD8B00FA",
+  "title": "Nahar",
+  "imageURL": "SomeURL",
+  "description": "Nahar Pashmakian",
+  "date": "2018-10-03T13:12:03Z"
+  }
+  ]
+}
+*/
 private let kEventTimeFormatter: DateFormatter = {
   let formatter = DateFormatter()
   formatter.locale = Locale(identifier: "fa_IR")
@@ -46,23 +71,45 @@ extension ServerModels {
       var totalPaid: Int64?
     }
 
-    class Event: ServerModel {
-      var id: Int64?
-      var name: String?
-      var description: String?
-      var eventTime: String?
-      var eventTimeEpoch: Double?
-      var location: String?
+    class Address: ServerModel {
+      var id: String?
+      var title: String
+      var street: String
+      var lat: Double
+      var long: Double
+      var mapImageURL: String
 
-      var eventDateTime: String {
-        guard let epoch = eventTimeEpoch else {
-          return ""
-        }
-        return kEventTimeFormatter.string(from: epoch.utcDate)
+      static func isEqual(_ lhs: Address?, _ rhs: Address?) -> Bool {
+        return lhs?.id == rhs?.id
+        && lhs?.title == rhs?.title
+        && lhs?.street == rhs?.street
+        && lhs?.lat == rhs?.lat
+        && lhs?.long == rhs?.long
+        && lhs?.mapImageURL == rhs?.mapImageURL
       }
 
+    }
+
+    class Event: ServerModel {
+      var id: String?
+      var title: String?
+      var description: String?
+      var imageURL: String?
+      var dateEpoch: Double?
+      var date: Date? { return dateEpoch?.utcDate }
+
+      var eventDateTime: String {
+        guard let date = date else {
+          return ""
+        }
+        return kEventTimeFormatter.string(from: date)
+      }
+//      var location: String?
+
+      var address: Address?
+
       var hasPassed: Bool {
-        guard let epoch = eventTimeEpoch else {
+        guard let epoch = dateEpoch else {
           return false
         }
         return epoch.utcDate.isBeforeDate(Date(), granularity: Calendar.Component.hour)
@@ -91,7 +138,11 @@ extension ServerModels.Home.Event: ListDiffable {
       return false
     }
 
-    return object.id == self.id && object.name == self.name && object.description == self.description && object.eventTime == self.eventTime && object.location == self.location
+    return object.id == self.id
+      && object.title == self.title
+      && object.description == self.description
+      && object.date == self.date
+      &&  ServerModels.Home.Address.isEqual(object.address, self.address)
   }
 
 }

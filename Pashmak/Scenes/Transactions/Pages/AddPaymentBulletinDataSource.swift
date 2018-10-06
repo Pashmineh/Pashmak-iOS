@@ -169,7 +169,7 @@ class AddPaymentBulletinDataSource {
   private func generatePaymentItem() -> ServerModels.Transactions.Item? {
 
     let account = UserAccount.current
-    guard let userID = account?.userID, let userLogin = account?.userLogin else {
+    guard let userID = account?.userID, let userLogin = account?.phoneNumber else {
       return nil
     }
 
