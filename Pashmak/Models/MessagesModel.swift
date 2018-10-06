@@ -28,22 +28,30 @@ private let kDateFormatter: DateFormatter = {
 }
 */
 
+/*
+"body": "پسغام جدید دارید. برید بخونید",
+"id": "FFFCD884-CE0A-47A0-8FBE-094307F0F522",
+"title": "سلام",
+"date": 1538821732.3796301
+*/
 extension ServerModels {
   enum Messages {
     enum MessageType: String, Codable {
       case PUSH, SMS, EMAIL
     }
     class ListItem: ServerModel {
-      var id: UInt64 = .random(in: 0...100_000)
-      var sendTime: String?
-      var eventTimeEpoch: Double?
+      var id: String = UUID().uuidString
+      var dateEpoch: Double?
       var sendDate: Date {
-        return eventTimeEpoch?.utcDate ?? Date()
+        return dateEpoch?.utcDate ?? Date()
       }
-      var messageType: MessageType?
-      var message: String?
-      var userId: UInt64?
-      var userLogin: String?
+
+      var sendTime: String {
+        return kDateFormatter.string(from: sendDate)
+      }
+
+      var body: String?
+      var title: String?
       var isLoading: Bool? = false
 
       init() {
@@ -64,10 +72,9 @@ extension ServerModels.Messages.ListItem: ListDiffable {
     }
 
     return object.id == self.id
-    && object.sendTime == self.sendTime
-    && object.messageType == self.messageType
-    && object.message == self.message
-    && object.userId == self.userId
-    && object.userLogin == self.userLogin
+    && object.dateEpoch == self.dateEpoch
+    && object.title == self.title
+    && object.body == self.body
+
   }
 }

@@ -29,6 +29,16 @@ import IGListKit
 },
 */
 
+/*
+  "amount": -50000,
+  "id": "9CA3D502-88B9-4572-8A96-1341A1489607",
+  "message": "جریمه تاخیر ورود در شنبه ۱۴ مهر ۱۳۹۷ ساعت ۱۴:۱۴ به مبلغ \u200f۵۰٬۰۰۰ ﷼  ثبت شد.",
+  "reason": "TAKHIR",
+  "isValid": true,
+  "date": 1538822663.5309041
+
+  */
+
 private let kDateFormatter = DateFormatter.farsiDateFormatter(with: "EEEE، dd MMMM YYYY | HH:mm:ss")
 
 extension ServerModels {
@@ -38,7 +48,7 @@ extension ServerModels {
       case takhir = "TAKHIR"
       case shirini = "SHIRINI"
       case jalase = "JALASE"
-      case payment
+      case payment = "Payment"
 
       var title: String {
         switch self {
@@ -83,15 +93,16 @@ extension ServerModels {
 
     class Item: ServerModel {
 
-      var id: UInt64 = .random(in: 0...100_000)
+      var id: String = UUID().uuidString
       var amount: Int64 = 0
-      var paymentTime: String?
+      var dateEpoch: Double?
+      var date: Date? { return dateEpoch?.utcDate }
       var reason: Reason?
-      var userId: UInt64?
-      var userLogin: String?
+      var isValid: Bool?
+      var message: String?
 
       var paymentDateString: String {
-        let date = Date()
+        let date = self.date ?? Date()
         return kDateFormatter.string(from: date)
       }
 
@@ -104,7 +115,7 @@ extension ServerModels {
       }
 
       enum CodingKeys: String, CodingKey {
-        case id, amount, paymentTime, reason, userId, userLogin
+        case id, amount, dateEpoch, reason, isValid, message
       }
 
     }
@@ -124,13 +135,13 @@ extension ServerModels.Transactions.Item: ListDiffable {
     }
 
     return object.id == self.id
-    && object.amount == self.amount
-    && object.paymentTime == self.paymentTime
-    && object.reason == self.reason
-    && object.userId == self.userId
-    && object.userLogin == self.userLogin
-    && object.isLoading == self.isLoading
-    && object.isPenalty == self.isPenalty
+      && object.amount == self.amount
+      && object.dateEpoch == self.dateEpoch
+      && object.reason == self.reason
+      && object.isValid == self.isValid
+      && object.message == self.message
+      && object.isLoading == self.isLoading
+      && object.isPenalty == self.isPenalty
   }
 
 }

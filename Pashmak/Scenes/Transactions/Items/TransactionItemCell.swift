@@ -74,10 +74,7 @@ class TransactionItemCell: UICollectionViewCell {
     self.card.stopPashmakSkeleton()
     self.iconContainer.stopPashmakSkeleton()
 
-    var reason: ServerModels.Transactions.Reason = item?.reason ?? .takhir
-    if item?.isPenalty == false {
-      reason = .payment
-    }
+    let reason: ServerModels.Transactions.Reason = item?.reason ?? .takhir
     self.typeLabel.text = reason.title
     self.iconContainer.backgroundColor = reason.color
     self.iconImageView.image = reason.icon

@@ -52,7 +52,7 @@ class MessageItemCell: UICollectionViewCell {
     }
     self.messageLabel.transform = .identity
     self.card.stopPashmakSkeleton()
-    self.messageLabel.text = item?.message
+    self.messageLabel.text = item?.body
     if let date = item?.sendDate {
       self.dateLabel.text = kDateFormatter.string(from: date)
     } else {

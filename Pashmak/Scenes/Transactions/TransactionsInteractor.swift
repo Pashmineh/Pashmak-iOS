@@ -51,18 +51,33 @@ class TransactionsInteractor: TransactionsBusinessLogic, TransactionsDataStore {
 
     sendLoading()
 
-    var items: [ServerModels.Transactions.Item] = []
+    PashmakServer.perform(request: ServerRequest.Transactions.getTransactions())
+      .done { [weak self] (result: ServerData<[ServerModels.Transactions.Item]>) in
+        guard let self = self else {
+          return
+        }
+        let items = result.model.sorted { $0.dateEpoch ?? 0 > $1.dateEpoch ?? 0 }
+        let response = Transactions.Populate.Response(state: .success(items))
+        self.presenter?.presentPopulate(response: response)
+
+      }
+      .catch { error in
+        sendFailed(error)
+      }
+    /*
+         var items: [ServerModels.Transactions.Item] = []
 
     func sendResult() {
       Async.main { [weak self] in
         guard let self = self else {
           return
         }
-        items.sort { $0.paymentTime ?? "" > $1.paymentTime ?? "" }
+        items.sort { $0.dateEpoch ?? 0 > $1.dateEpoch ?? 0 }
         let response = Transactions.Populate.Response(state: .success(items))
         self.presenter?.presentPopulate(response: response)
       }
     }
+
 
     func getPayments() {
       PashmakServer.perform(request: ServerRequest.Transactions.getPayments())
@@ -91,7 +106,7 @@ class TransactionsInteractor: TransactionsBusinessLogic, TransactionsDataStore {
     }
 
     getDebts()
-
+*/
   }
 
 }

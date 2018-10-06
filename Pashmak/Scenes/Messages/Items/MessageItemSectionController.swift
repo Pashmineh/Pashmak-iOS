@@ -27,7 +27,7 @@ class MessageItemSectionController: ListSectionController {
       return 130.0
     }
 
-    let text = item?.message ?? ""
+    let text = item?.body ?? ""
     let maxWidth = cellWidth - (16 + 16 + 8 + 24)
     let maxSize = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
     let textHeight = text.size(with: kFont, in: maxSize).height.rounded(.up)

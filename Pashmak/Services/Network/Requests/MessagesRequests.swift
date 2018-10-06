@@ -14,7 +14,7 @@ extension ServerRequest {
 
     static func getMessages() -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api, .messages])
+      url.appendPathComponents([.messages])
       let params: [String: String] = ["sort": "sendTime,desc"]
       let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
       return HTTPRequest(method: .GET, url: url, parameters: params, bodyMessage: nil, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)

@@ -12,23 +12,16 @@ extension ServerRequest {
 
   enum Transactions {
 
-    static func getDebts() -> HTTPRequest {
+    static func getTransactions() -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api, .debts])
-      let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
-      return HTTPRequest(method: .GET, url: url, parameters: nil, bodyMessage: nil, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)
-    }
-
-    static func getPayments() -> HTTPRequest {
-      var url = RequestURL()
-      url.appendPathComponents([.api, .payments])
+      url.appendPathComponents([.transaction])
       let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
       return HTTPRequest(method: .GET, url: url, parameters: nil, bodyMessage: nil, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)
     }
 
     static func addPayment(payment: ServerModels.Transactions.Item) -> HTTPRequest {
       var url = RequestURL()
-      url.appendPathComponents([.api, .payments])
+      url.appendPathComponents([.transaction])
       let headers: [String: String] =  [HTTPHeaders.Authorization: HTTPHeaderValues.OauthToken].merging(baseRequestHeaders) { current, _ in current }
       return HTTPRequest(method: .POST, url: url, parameters: nil, bodyMessage: payment, headers: headers, timeOut: .normal, acceptType: .json, contentType: .json)
     }

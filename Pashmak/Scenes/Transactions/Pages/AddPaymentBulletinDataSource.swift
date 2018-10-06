@@ -146,7 +146,7 @@ class AddPaymentBulletinDataSource {
       item.isDismissable = false
       item.manager?.displayActivityIndicator(color: #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1))
       PashmakServer.perform(request: ServerRequest.Transactions.addPayment(payment: paymentItem), validResponseCodes: [200, 201])
-        .done { [weak self] (result: ServerData<ServerModels.EmptyServerModel>) in
+        .done { [weak self] (_: ServerData<ServerModels.EmptyServerModel>) in
           guard let self = self else {
             return
           }
@@ -174,8 +174,6 @@ class AddPaymentBulletinDataSource {
     }
 
     let payment = ServerModels.Transactions.Item()
-    payment.userLogin = userLogin
-    payment.userId = UInt64(userID)
     payment.amount = Int64(self.amount)
 //    payment.paymentTime = nil
     payment.reason = .shirini

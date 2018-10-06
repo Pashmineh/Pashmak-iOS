@@ -23,8 +23,6 @@ extension Notification.Name {
 
 }
 
-
-
 struct UpdatePushModel: Codable {
   enum UpdateType: String, Codable {
     case profile = "PROFILE"

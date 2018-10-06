@@ -33,8 +33,7 @@ enum URLPath {
   case messages
   case polls
   case vote
-  case debts
-  case payments
+  case transaction
 
   func toString() -> String {
     var result = ""
@@ -54,15 +53,13 @@ enum URLPath {
     case .updatePush:
       result = "token"
     case .messages:
-      result = "messages"
+      result = "message"
     case .polls:
       result = "polls"
     case .vote:
       result = "vote"
-    case .debts:
-      result = "debts"
-    case .payments:
-      result = "payments"
+    case .transaction:
+      result = "transaction"
     }
 
     return result
