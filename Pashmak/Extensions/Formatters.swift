@@ -7,7 +7,7 @@
 //
 
 //swiftlint:disable cyclomatic_complexity
-import UIKit
+import Foundation
 
 enum Formatters {
   static let RialFormatter: NumberFormatter = {

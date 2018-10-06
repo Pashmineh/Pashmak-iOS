@@ -133,15 +133,53 @@ class AddPaymentBulletinDataSource {
   }
 
   func makeNotePage() -> AddTransactionTextBulletinPage {
-    let item = AddTransactionTextBulletinPage(title: "برای این کارت چه توضیحی داری؟", fieldType: .note)
+    let item = AddTransactionTextBulletinPage(title: "برای این کارِت چه توضیحی داری؟", fieldType: .note)
     item.actionHandler = { _ in
       let value = item.textField.value
       self.note = value
       _ = item.textField.resignFirstResponder()
+
+      guard let paymentItem = self.generatePaymentItem() else {
+        KVNProgress.showError(withStatus: "امکان ثبت این مورد وجود ندارد")
+        return
+      }
       item.isDismissable = false
       item.manager?.displayActivityIndicator(color: #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1))
+      PashmakServer.perform(request: ServerRequest.Transactions.addPayment(payment: paymentItem), validResponseCodes: [200, 201])
+        .done { [weak self] (result: ServerData<ServerModels.EmptyServerModel>) in
+          guard let self = self else {
+            return
+          }
+          Log.trace("Successfully added payment.")
+          item.manager?.dismissBulletin()
+        }
+        .catch { error in
+          var message = "خطا درp عملیات!"
+          if case APIError.invalidResponseCode(let statusCode) = error {
+            message = Texts.ServerErrors.random + "\n(\(statusCode))"
+          }
+          KVNProgress.showError(withStatus: message)
+          item.manager?.hideActivityIndicator()
+          return
+        }
     }
     return item
+  }
+
+  private func generatePaymentItem() -> ServerModels.Transactions.Item? {
+
+    let account = UserAccount.current
+    guard let userID = account?.userID, let userLogin = account?.userLogin else {
+      return nil
+    }
+
+    let payment = ServerModels.Transactions.Item()
+    payment.userLogin = userLogin
+    payment.userId = UInt64(userID)
+    payment.amount = Int64(self.amount)
+//    payment.paymentTime = nil
+    payment.reason = .shirini
+    return payment
   }
 
 }

@@ -36,7 +36,7 @@ inhibit_all_warnings!
 
 
 post_install do |installer|
-  oldTargets = ["Hero", "SkeletonView", "BulletinBoard"]
+  oldTargets = ["Hero", "BulletinBoard"]
   installer.pods_project.targets.each do |target|
     if oldTargets.include? target.name
       target.build_configurations.each do |config|
