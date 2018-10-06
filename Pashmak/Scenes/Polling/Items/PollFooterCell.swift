@@ -76,7 +76,7 @@ class PollFooterCell: UICollectionReusableView {
       } else {
         self.card.stopPashmakSkeleton()
         let remainingVotes = pollItem?.remainingVotes ?? 0
-        let totalVoted = pollItem?.totalVote ?? 0
+        let totalVoted = pollItem?.totalVotes ?? 0
         let timeRemaining = 10
 
         let itemsLeftText = self.combine(title: "آراء باقی‌مانده شما: ", with: "\(remainingVotes)")

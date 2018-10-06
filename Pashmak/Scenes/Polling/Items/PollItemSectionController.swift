@@ -19,7 +19,7 @@ class PollItemSectionConttroller: ListSectionController {
   }
 
   override func numberOfItems() -> Int {
-    return item?.isLoading != true ? item?.answers?.count ?? 0 : 3
+    return item?.isLoading != true ? item?.pollItems?.count ?? 0 : 3
   }
 
   override func sizeForItem(at index: Int) -> CGSize {
@@ -38,14 +38,14 @@ class PollItemSectionConttroller: ListSectionController {
     guard let cell = collectionContext?.dequeueReusableCell(withNibName: "PollItemCell", bundle: nil, for: self, at: index) as? PollItemCell else {
       fatalError("Could nto dequeue [PollItemCell]")
     }
-    cell.totalVotes = item?.totalVote
+    cell.totalVotes = item?.totalVotes
 
     if item?.isLoading == true {
       cell.isLoading = true
       cell.item = nil
 
     } else {
-      let answer = item?.answers?[index]
+      let answer = item?.pollItems?[index]
       cell.item = answer
       cell.isLoading = false
 
@@ -63,7 +63,7 @@ class PollItemSectionConttroller: ListSectionController {
   }
 
   override func didSelectItem(at index: Int) {
-    guard let poll = self.item, let item = poll.answers?[index], poll.isLoading != true, item.isSubmitting != true else {
+    guard let poll = self.item, let item = poll.pollItems?[index], poll.isLoading != true, item.isSubmitting != true else {
       Log.warning("Could not find poll item or item is loading!")
       return
     }
@@ -87,7 +87,7 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
       let width = self.cellWidth
       let hPadding: CGFloat = 10.0 + 10.0 + 16.0 + 8 + 24.0 + 12.0
       let maxWidth = width - hPadding
-      let question = item?.question ?? ""
+      let question = item?.description ?? ""
       let questionHeight = question.size(with: UIFont.farsiFont(.regular, size: 16.0), in: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)).height
       let height = max(50.0, (questionHeight + 8.0 + 16.0))
       return CGSize(width: width, height: height)
@@ -105,7 +105,7 @@ extension PollItemSectionConttroller: ListSupplementaryViewSource {
       guard let header = collectionContext?.dequeueReusableSupplementaryView(ofKind: elementKind, for: self, nibName: "PollHeaderCell", bundle: nil, at: index) as? PollHeaderCell else {
         fatalError("Coould not deque header cell!")
       }
-      let question = item?.question ?? ""
+      let question = item?.description ?? ""
       header.isLoading = item?.isLoading ?? false
       header.question = question
       return header

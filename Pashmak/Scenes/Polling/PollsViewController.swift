@@ -157,7 +157,7 @@ class PollsViewController: UIViewController {
   }
 
   func userSelected(_ item: ServerModels.Poll.PollItem.PollAnswer, on poll: ServerModels.Poll.PollItem) {
-    let isUnvote = (item.voted == true)
+    let isUnvote = (item.isVoted == true)
     let request = Polls.Vote.Request(isUnvote: isUnvote, item: item, poll: poll)
     interactor?.vote(request: request)
   }

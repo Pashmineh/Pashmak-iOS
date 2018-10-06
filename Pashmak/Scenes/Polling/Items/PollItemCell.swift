@@ -96,7 +96,7 @@ class PollItemCell: UICollectionViewCell {
         self.itemCard.alpha = 1.0
       }
 
-      let isVoted = self.item?.voted == true
+      let isVoted = self.item?.isVoted == true
 
       self.itemCard.layer.borderColor = isVoted ? #colorLiteral(red: 0.9607843137, green: 0.6509803922, blue: 0.137254902, alpha: 1) : #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
       self.itemCard.layer.borderWidth = isVoted ? 2.0 : 1.0 / Screen.scale
@@ -106,7 +106,7 @@ class PollItemCell: UICollectionViewCell {
       self.itemImageView.alpha = isVoted ? 1.0 : 0.75
       self.itemTitleLabel.textColor = isVoted ? #colorLiteral(red: 0.2509803922, green: 0.2509803922, blue: 0.2509803922, alpha: 1) : #colorLiteral(red: 0.3725490196, green: 0.3725490196, blue: 0.3725490196, alpha: 1)
 
-      if let voteCount = item?.number {
+      if let voteCount = item?.votesCount {
         let voteText = "\(voteCount) نفر"
         self.votesCountLabel.text = voteText
       } else {
@@ -116,7 +116,7 @@ class PollItemCell: UICollectionViewCell {
       self.votesCountLabel.isHidden = !isVoted
       self.popularityIndicatorView.isHidden = !isVoted
 
-      if let imgSrc = item?.imgsrc, let imgURL = URL(string: imgSrc) {
+      if let imgSrc = item?.imageSrc, let imgURL = URL(string: imgSrc) {
         self.itemImageView.kf.setImage(with: imgURL, placeholder: kImagePH, options: nil, progressBlock: nil, completionHandler: nil)
       } else {
         self.itemImageView.image = kImagePH
@@ -129,7 +129,7 @@ class PollItemCell: UICollectionViewCell {
 
   private func calculatePopularityWidth() -> CGFloat {
 
-    guard let numbers = item?.number, let total = totalVotes, totalVotes != 0 else {
+    guard let numbers = item?.votesCount, let total = totalVotes, totalVotes != 0 else {
       return 0
     }
     let totalWidth = self.itemCard.bounds.width

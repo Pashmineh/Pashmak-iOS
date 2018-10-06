@@ -24,7 +24,7 @@ protocol PollsDataStore {
 class PollsInteractor: PollsBusinessLogic, PollsDataStore {
   var presenter: PollsPresentationLogic?
   var polls: [ServerModels.Poll.PollItem] = []
-  var pendingPollItems: [(UInt64, UInt64)] = []
+  var pendingPollItems: [(String, String)] = []
 
   func populate(request: Polls.Populate.Request) {
     func sendLoading() {
@@ -61,7 +61,7 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
 
     for poll in polls {
       var poll = poll
-      let pendingItems: [UInt64] = pendingPollItems.compactMap {
+      let pendingItems: [String] = pendingPollItems.compactMap {
         guard $0.0 == poll.id else {
           return nil
         }
@@ -70,13 +70,13 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
 
       var items: [ServerModels.Poll.PollItem.PollAnswer] = []
 
-      poll.answers?.forEach {
+      poll.pollItems?.forEach {
         var item = $0
         item.isSubmitting = pendingItems.contains($0.id)
         items.append(item)
       }
 
-      poll.answers = items.sorted { $0.id < $1.id }
+      poll.pollItems = items.sorted { $0.id < $1.id }
       result.append(poll)
     }
 
@@ -125,7 +125,6 @@ class PollsInteractor: PollsBusinessLogic, PollsDataStore {
     let vote = ServerModels.Poll.Vote(pollID: poll.id, itemID: item.id)
     PashmakServer.perform(request: ServerRequest.Polls.vote(vote, isUnvote: isUnvote), validResponseCodes: [200, 201])
       .done { [weak self] (result: ServerData<[ServerModels.Poll.PollItem]>) in
-        _ = result
         guard let self = self else {
           return
         }
